@@ -1,11 +1,9 @@
-import _ from "lodash";
+/*
+ * @Date: 2020-05-29 11:05:46
+ * @LastEditTime: 2020-05-29 15:38:53
+ */
 
-function component() {
-  var element = document.createElement("div");
+import React from "react";
+import ReactDOM from "react-dom";
 
-  element.innerHTML = _.join(["Hello", "webpack"], " ");
-
-  return element;
-}
-
-document.body.appendChild(component());
+ReactDOM.render(<div>hello react</div>, document.querySelector("#app"));
