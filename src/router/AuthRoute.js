@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-06-20 17:03:19
  * @LastEditTime: 2020-06-20 17:28:55
- */ 
+ */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { getToken } from '@/utils/auth';

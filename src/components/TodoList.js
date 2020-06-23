@@ -3,9 +3,9 @@
  * @LastEditTime: 2020-06-19 20:17:22
  */
 
-import React from "react";
-import PropTypes from "prop-types";
-import Todo from "./Todo";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Todo from './Todo';
 
 const TodoList = ({ todos = [], onTodoClick }) => (
   <ul>

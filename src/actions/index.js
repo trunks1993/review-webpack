@@ -6,7 +6,7 @@
 /*
  * action 类型
  */
-import { guid } from "../utils";
+import { guid } from '../utils';
 
 export const ADD_TODO = Symbol();
 export const TOGGLE_TODO = Symbol();

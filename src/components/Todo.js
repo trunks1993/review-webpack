@@ -3,14 +3,14 @@
  * @LastEditTime: 2020-06-19 17:14:10
  */
 
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Todo = ({ onClick, completed, text }) => (
   <li
     onClick={onClick}
     style={{
-      textDecoration: completed ? "line-through" : "none",
+      textDecoration: completed ? 'line-through' : 'none',
     }}
   >
     {text}

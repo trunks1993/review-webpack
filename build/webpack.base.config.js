@@ -1,10 +1,10 @@
 /*
  * @Date: 2020-05-29 14:30:28
- * @LastEditTime: 2020-05-29 16:55:29
+ * @LastEditTime: 2020-06-23 17:14:04
  */
 
 const utils = require("./utils");
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   // 入口
@@ -18,7 +18,7 @@ module.exports = {
     publicPath: "/", // 打包后的资源的访问路径前缀
   },
   resolve: {
-    extensions: [".js", ".json"], // 解析扩展。（当我们通过路导入文件，找不到改文件时，会尝试加入这些后缀继续寻找文件）
+    extensions: [".js", ".jsx", ".json"], // 解析扩展。（当我们通过路导入文件，找不到改文件时，会尝试加入这些后缀继续寻找文件）
     alias: {
       "@": path.join(__dirname, "..", "src"), // 在项目中使用@符号代替src路径，导入文件路径更方便
     },
@@ -43,7 +43,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.less$/,
+        test: /\.scss$/,
         use: [
           {
             loader: "style-loader",
@@ -52,7 +52,7 @@ module.exports = {
             loader: "css-loader",
           },
           {
-            loader: "less-loader", // 编译 Less -> CSS
+            loader: "sass-loader", // 编译 Less -> CSS
           },
         ],
       },
@@ -70,6 +70,16 @@ module.exports = {
         options: {
           limit: 10000, // 小于10000B的图片base64的方式引入，大于10000B的图片以路径的方式导入
           name: "static/fonts/[name].[hash:7].[ext]",
+        },
+      },
+      {
+        test: /\.(js|jsx)$/,
+        loader: "eslint-loader",
+        enforce: "pre",
+        include: [path.resolve(__dirname, "src")], // 指定检查的目录
+        options: {
+          // 这里的配置项参数将会被传递到 eslint 的 CLIEngine
+          formatter: require("eslint-friendly-formatter"), // 指定错误报告的格式规范
         },
       },
     ],

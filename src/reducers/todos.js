@@ -3,7 +3,7 @@
  * @LastEditTime: 2020-06-19 21:09:30
  */
 
-import { ADD_TODO, TOGGLE_TODO } from "../actions";
+import { ADD_TODO, TOGGLE_TODO } from '../actions';
 
 const todos = (state = [], action) => {
   switch (action.type) {
@@ -17,8 +17,7 @@ const todos = (state = [], action) => {
         },
       ];
     case TOGGLE_TODO:
-      return state.map((todo) =>
-        todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
+      return state.map((todo) => todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
       );
     default:
       return state;
