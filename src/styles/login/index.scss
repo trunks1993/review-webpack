@@ -1,0 +1,110 @@
+.login {
+  width: 900px;
+  height: 600px;
+  background: $white;
+
+  box-shadow: 0px 20px 30px 0px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  &_img-box {
+    display: inline-block;
+    height: 100%;
+    vertical-align: top;
+    width: 430px;
+    text-align: center;
+    padding-top: 108px;
+    position: relative;
+    &:after {
+      content: " ";
+      display: block;
+      width: 1px;
+      height: 200px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      background: $border-color;
+      transform: translate(0, -50%);
+    }
+  }
+
+  &_login-title {
+    position: absolute;
+    top: -63px;
+    left: 261px;
+    color: $black;
+    font-weight: bold;
+    @extend .f24;
+  }
+
+  &_login-img {
+    width: 359px;
+    height: 353px;
+    &--logo {
+      position: absolute;
+      left: 49px;
+      top: -108px;
+    }
+    &--leftDown {
+      position: absolute;
+      left: -254px;
+      bottom: -74px;
+    }
+    &--rightDown {
+      position: absolute;
+      right: -203px;
+      bottom: -92px;
+    }
+    &--rightTop {
+      position: absolute;
+      right: -318px;
+      top: -103px;
+    }
+  }
+
+  &_login-box {
+    display: inline-block;
+    height: 100%;
+    width: 470px;
+  }
+  .byMessage_cst-input {
+    input {
+      border-right: none;
+    }
+    .ant-input-group-addon {
+      border-left: none;
+      background-color: $white;
+      position: relative;
+      &::before {
+        content: " ";
+        display: block;
+        width: 1px;
+        height: 18px;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        background: $border-color;
+        transform: translate(0, -50%);
+      }
+      .ant-btn {
+        @extend .f12;
+      }
+    }
+  }
+}
+
+.sign-in {
+  padding: 52px 20px 0 40px;
+}
+
+.sign-up {
+  padding: 60px 20px;
+  .signUp_title {
+    @extend .f24;
+    color: $blue;
+    text-align: center;
+  }
+}

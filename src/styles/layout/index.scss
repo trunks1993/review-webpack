@@ -1,0 +1,44 @@
+.layout_header-main {
+  width: $blockWidth;
+  margin: auto;
+  @extend .fb;
+  .ant-badge-dot {
+    box-shadow: none;
+    background: #f14546;
+    top: 2px;
+    right: 5px;
+  }
+}
+
+.layout_header-logo {
+  @extend .f14;
+  margin-left: 20px;
+  color: $white;
+  position: relative;
+  top: 15px;
+}
+
+.layout_header-icon {
+  vertical-align: sub;
+  margin-right: 5px;
+}
+
+.layout_header-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.layout_drop-menu {
+  width: 100px;
+  ul > li {
+    @extend .f12;
+    line-height: 12px;
+    cursor: pointer;
+    text-align: center;
+    padding: 6px 0;
+    &:hover {
+      background: $border-color;
+    }
+  }
+}

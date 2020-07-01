@@ -1,26 +1,24 @@
 /*
  * @Date: 2020-05-29 11:05:46
- * @LastEditTime: 2020-06-23 16:42:05
+ * @LastEditTime: 2020-06-30 16:11:04
  */
 
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import todoApp from './reducers';
-import App from '@/router';
+// import React from "react";
+import router from "@/router";
+import dva from "dva";
+import createLoading from 'dva-loading';
 
-import '@/styles/base.scss';
+import _ from "lodash";
+import models from "@/models";
 
-const reduxDevtools = window.devToolsExtension
-  ? window.devToolsExtension()
-  : () => {};
+import "@/styles/base.scss";
 
-const store = createStore(todoApp, reduxDevtools);
+const app = dva();
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('app')
-);
+app.use(createLoading());
+
+_.map(_.values(models), (item) => app.model(item));
+
+app.router(router);
+
+app.start("#app");

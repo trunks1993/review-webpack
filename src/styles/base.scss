@@ -1,6 +1,8 @@
 @charset "utf-8";
-@import './var.scss';
-
+@import "./var.scss";
+@import "./antd.scss";
+@import "./layout/index.scss";
+@import "./login/index.scss";
 /*!
  * @名称：base.css
  * @功能：1、重设浏览器默认样式
@@ -9,6 +11,7 @@
 /* 防止用户自定义背景颜色对网页的影响，添加让用户可以自定义字体 */
 body {
   height: 100%;
+  background: $gray;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -20,7 +23,6 @@ html {
   height: 100%;
   box-sizing: border-box;
   color: $black;
-  background: $gray;
 }
 /* 内外边距通常让各个浏览器样式的表现位置不同 */
 body,
@@ -127,4 +129,25 @@ div:focus {
 
 #app {
   height: 100%;
+}
+
+.f24 {
+  font-size: 24px;
+}
+.f12 {
+  font-size: 12px;
+}
+.f14 {
+  font-size: 14px;
+}
+
+.fbc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fb {
+  display: flex;
+  justify-content: space-between;
 }

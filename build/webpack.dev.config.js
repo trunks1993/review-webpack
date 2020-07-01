@@ -1,18 +1,25 @@
 /*
  * @Date: 2020-05-29 14:31:03
- * @LastEditTime: 2020-06-23 21:23:35
+ * @LastEditTime: 2020-07-01 15:57:19
  */
 
 const webpackMerge = require("webpack-merge");
 const baseWebpackConfig = require("./webpack.base.config");
 const utils = require("./utils");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = webpackMerge(baseWebpackConfig, {
   // 指定构建环境
   mode: "development",
   // 插件
   plugins: [
+    new webpack.DefinePlugin({
+      "process.env": {
+        BASE_API: '"/api"',
+        FILE_URL: '"/file"',
+      },
+    }),
     new HtmlWebpackPlugin({
       filename: utils.resolve("./../dist/index.html"), // html模板的生成路径
       template: "index.html", //html模板
@@ -29,6 +36,18 @@ module.exports = webpackMerge(baseWebpackConfig, {
     publicPath: "/", // 访问资源加前缀
     proxy: {
       // 接口请求代理
+      "/api": {
+        target: "http://101.132.39.136:9001/",
+        changeOrigin: true,
+        pathRewrite: { "^/api": "" },
+      },
+      "/file": {
+        target: "http://101.132.39.136:9080/",
+        changeOrigin: true,
+        pathRewrite: {
+          "^/file": "",
+        },
+      },
     },
   },
 });
