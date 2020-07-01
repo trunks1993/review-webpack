@@ -1,8 +1,8 @@
-import { Form, Input, Select, Cascader, Radio, InputNumber } from "antd";
-import React, { Component } from "react";
-import ItemMap from "./map";
-import FormContext from "./FormContext";
-import TextArea from "antd/lib/input/TextArea";
+import { Form, Input, Select, Cascader, Radio, InputNumber } from 'antd';
+import React, { Component } from 'react';
+import ItemMap from './map';
+import FormContext from './FormContext';
+import TextArea from 'antd/lib/input/TextArea';
 // import TreeCheck from "@/pages/sys/manager/role/components/TreeCheck";
 // import GlobalUpLoad from "../GlobalUpload";
 // import BlockCheckbox from "../BlockCheckbox";
@@ -15,11 +15,12 @@ import TextArea from "antd/lib/input/TextArea";
 const FormItem = Form.Item;
 
 class WrapFormItem extends Component {
-  getFormItemOptions = ({ onChange, defaultValue, rules }) => {
+  getFormItemOptions = ({ onChange, defaultValue, rules, validateTrigger }) => {
     const options = {};
     rules && (options.rules = rules);
     onChange && (options.onChange = onChange);
-    defaultValue && (options.defaultValue = defaultValue);
+    defaultValue && (options.initialValue = defaultValue);
+    validateTrigger && (options.validateTrigger = validateTrigger);
     return options;
   };
 
@@ -120,32 +121,30 @@ class WrapFormItem extends Component {
       )(<InputNumber {...customProps} />),
     };
 
-    if (wrapperCol && labelCol)
-      return (
-        <FormItem
-          className={className}
-          colon={false}
-          label={label}
-          help={help}
-          wrapperCol={wrapperCol}
-          labelCol={labelCol}
-          style={style}
-        >
-          {Map[type || ""]}
-        </FormItem>
-      );
-    else
-      return (
-        <FormItem
-          className={className}
-          colon={false}
-          label={label}
-          help={help}
-          style={style}
-        >
-          {Map[type || ""]}
-        </FormItem>
-      );
+    if (wrapperCol && labelCol) return (
+      <FormItem
+        className={className}
+        colon={false}
+        label={label}
+        help={help}
+        wrapperCol={wrapperCol}
+        labelCol={labelCol}
+        style={style}
+      >
+        {Map[type || '']}
+      </FormItem>
+    );
+    return (
+      <FormItem
+        className={className}
+        colon={false}
+        label={label}
+        help={help}
+        style={style}
+      >
+        {Map[type || '']}
+      </FormItem>
+    );
   }
 }
 

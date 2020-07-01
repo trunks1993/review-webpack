@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-05-29 14:30:28
- * @LastEditTime: 2020-06-23 23:02:49
+ * @LastEditTime: 2020-07-01 17:17:10
  */
 
 const utils = require("./utils");
@@ -17,6 +17,7 @@ module.exports = {
     filename: "js/[name].[hash].js",
     publicPath: "/", // 打包后的资源的访问路径前缀
   },
+  devtool: "inline-source-map",
   resolve: {
     extensions: [".js", ".jsx", ".json"], // 解析扩展。（当我们通过路导入文件，找不到改文件时，会尝试加入这些后缀继续寻找文件）
     alias: {
@@ -33,32 +34,45 @@ module.exports = {
         query: {
           // presets: ["env", "react"],
           plugins: [
-            ["import", { libraryName: "antd", style: "css" }], // antd按需加载
+            ["import", { libraryName: "antd", style: true }], // antd按需加载
           ],
         },
       },
       {
         test: /\.css$/,
         use: [
-          {
-            loader: "style-loader", // 创建 <style></style>
-          },
-          {
-            loader: "css-loader", // 转换css
-          },
+          "style-loader", // 创建 <style></style>
+          "css-loader", // 转换css
         ],
       },
       {
         test: /\.scss$/,
         use: [
+          "style-loader", // 创建 <style></style>
+          "css-loader", // 转换css
+          "sass-loader", // 编译 Less -> CSS
+        ],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          "style-loader",
+          "css-loader",
           {
-            loader: "style-loader",
-          },
-          {
-            loader: "css-loader",
-          },
-          {
-            loader: "sass-loader", // 编译 Less -> CSS
+            loader: "less-loader",
+            options: {
+              lessOptions: {
+                modifyVars: {
+                  "primary-color": "#1A61DC",
+                  "border-radius-base": "2px",
+                  "layout-header-height": "60px",
+                  "layout-header-background": "#1A61DC",
+                  "menu-dark-item-active-bg": "#1859CB",
+                  "menu-dark-color": "#FFFFFF",
+                },
+                javascriptEnabled: true,
+              },
+            },
           },
         ],
       },

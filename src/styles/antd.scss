@@ -1,0 +1,40 @@
+.sign-in {
+  .ant-tabs-nav {
+    width: 100%;
+  }
+  .ant-tabs-bar {
+    margin: 0 0 50px 0;
+  }
+  .ant-tabs-tab {
+    width: 50%;
+    text-align: center;
+    line-height: 24px;
+    // color: $darkGray;
+    @extend .f24;
+  }
+  .ant-tabs-large-bar {
+    .ant-tabs-tab {
+      padding: 28px;
+    }
+  }
+
+  .ant-form-item {
+    margin-bottom: 40px;
+  }
+  .ant-form-item-with-help {
+    margin-bottom: 21px !important;
+  }
+}
+
+.ant-input {
+  &::-webkit-input-placeholder {
+    @extend .f12;
+  }
+}
+
+.ant-popover-inner-content {
+  padding: 12px 0;
+}
+.ant-popover-arrow {
+  display: none;
+}

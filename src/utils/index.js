@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-19 20:47:15
- * @LastEditTime: 2020-06-23 17:29:49
+ * @LastEditTime: 2020-07-01 21:07:28
  */
 
 export function guid() {
@@ -22,4 +22,17 @@ function func(tree, arr) {
   tree.map(
     (item) => item.children && item.children.length && func(item.children, arr)
   );
+}
+
+export function getQueryVariable(variable) {
+  const query = window.location.hash.split('?')[1];
+  if (!query) return;
+  const vars = query.split('&');
+  for (let i = 0; i < vars.length; i++) {
+    const pair = vars[i].split('=');
+    if (pair[0] === variable) {
+      return pair[1];
+    }
+  }
+  return false;
 }

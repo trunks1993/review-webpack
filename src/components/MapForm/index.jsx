@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-06-23 21:38:43
- * @LastEditTime: 2020-06-23 22:47:44
- */ 
+ * @LastEditTime: 2020-06-24 16:13:50
+ */
 import { Form } from 'antd';
 import React, { Component } from 'react';
 import FormContext from './FormContext';
@@ -45,11 +45,11 @@ class MapForm extends Component {
   };
 
   render() {
-    const { children, className, layout, layColWrapper } = this.props;
+    const { children, className, layout, layColWrapper, labelAlign } = this.props;
     return (
       <FormContext.Provider value={this.getContext()}>
         <div>
-          <Form layout={layout} {...layColWrapper} className={className}>{children}</Form>
+          <Form layout={layout} labelAlign={labelAlign} {...layColWrapper} className={className}>{children}</Form>
         </div>
       </FormContext.Provider>
     );
