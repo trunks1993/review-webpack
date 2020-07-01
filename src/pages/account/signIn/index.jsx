@@ -3,15 +3,15 @@
  * @LastEditTime: 2020-06-28 19:32:33
  */
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import ByAccount from "./ByAccount";
+import ByAccount from './ByAccount';
 
-import ByMessage from "./ByMessage";
+import ByMessage from './ByMessage';
 
-import Container from "../Container";
+import Container from '../Container';
 
-import { Tabs } from "antd";
+import { Tabs } from 'antd';
 
 const { TabPane } = Tabs;
 

@@ -3,9 +3,9 @@
  * @LastEditTime: 2020-06-30 14:27:53
  */
 
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie';
 
-const TokenKey = "USERTOKEN";
+const TokenKey = 'USERTOKEN';
 
 export const getToken = () => Cookies.get(TokenKey);
 

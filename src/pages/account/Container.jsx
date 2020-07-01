@@ -3,15 +3,15 @@
  * @LastEditTime: 2020-06-30 18:15:59
  */
 
-import React, { useState, useEffect } from "react";
-import { connect } from "dva";
-import { Context, SignInLoadingContext } from "./Context";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'dva';
+import { Context, SignInLoadingContext } from './Context';
 
-import icon1 from "@/assets/images/login/icon1.png";
-import icon2 from "@/assets/images/login/icon2.png";
-import icon3 from "@/assets/images/login/icon3.png";
-import icon4 from "@/assets/images/login/icon4.png";
-import logo from "@/assets/images/login/logo.png";
+import icon1 from '@/assets/images/login/icon1.png';
+import icon2 from '@/assets/images/login/icon2.png';
+import icon3 from '@/assets/images/login/icon3.png';
+import icon4 from '@/assets/images/login/icon4.png';
+import logo from '@/assets/images/login/logo.png';
 
 const Login = ({ signInLoading, dispatch, children }) => {
   /**
@@ -23,7 +23,7 @@ const Login = ({ signInLoading, dispatch, children }) => {
       if (!err) {
         // console.log("setSignUpVisible -> value", value);
         dispatch({
-          type: "account/login",
+          type: 'account/login',
           payload: value,
           callback,
         });
@@ -52,5 +52,5 @@ const Login = ({ signInLoading, dispatch, children }) => {
 };
 
 export default connect(({ account, loading }) => ({
-  signInLoading: loading.effects["account/login"],
+  signInLoading: loading.effects['account/login'],
 }))(Login);

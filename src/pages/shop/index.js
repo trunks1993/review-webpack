@@ -3,6 +3,6 @@
  * @LastEditTime: 2020-07-01 15:08:34
  */
 
-import React from "react";
+import React from 'react';
 
 export default () => <div>shop</div>;

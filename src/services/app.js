@@ -8,7 +8,7 @@
  * @param {}
  */
 export async function getCountOfCar() {
-  return request("/cart/countCartItem", {
-    method: "POST",
+  return request('/cart/countCartItem', {
+    method: 'POST',
   });
 }

@@ -1,12 +1,12 @@
 /*
  * @Date: 2020-06-19 20:47:15
- * @LastEditTime: 2020-07-01 15:18:37
+ * @LastEditTime: 2020-07-01 21:07:28
  */
 
 export function guid() {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     const r = (Math.random() * 16) | 0,
-      v = c === "x" ? r : (r & 0x3) | 0x8;
+      v = c === 'x' ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 }
@@ -25,12 +25,12 @@ function func(tree, arr) {
 }
 
 export function getQueryVariable(variable) {
-  const query = window.location.hash.split("?")[1];
+  const query = window.location.hash.split('?')[1];
   if (!query) return;
-  const vars = query.split("&");
+  const vars = query.split('&');
   for (let i = 0; i < vars.length; i++) {
-    const pair = vars[i].split("=");
-    if (pair[0] == variable) {
+    const pair = vars[i].split('=');
+    if (pair[0] === variable) {
       return pair[1];
     }
   }

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import MapForm from "@/components/MapForm";
-import { Context, SignInLoadingContext } from "../Context";
-import { Form, Button, Checkbox } from "antd";
-import { createHashHistory } from "history";
+import React, { useState, useEffect } from 'react';
+import MapForm from '@/components/MapForm';
+import { Context, SignInLoadingContext } from '../Context';
+import { Form, Button, Checkbox } from 'antd';
+import { createHashHistory } from 'history';
 const history = createHashHistory();
 
 const { CstInput, CstPassword } = MapForm;
@@ -30,18 +30,18 @@ export default () => {
       labelAlign="left"
       onCreate={(form) => setForm(form)}
     >
-      <CstInput name="type" defaultValue={1} style={{ display: "none" }} />
+      <CstInput name="type" defaultValue={1} style={{ display: 'none' }} />
       <CstInput
         label="账号"
         name="telephone"
         customProps={{
-          placeholder: "请输入账号/手机号",
-          size: "large",
+          placeholder: '请输入账号/手机号',
+          size: 'large',
         }}
         rules={[
           {
             required: true,
-            message: "账号/手机号不能为空",
+            message: '账号/手机号不能为空',
             whitespace: true,
           },
         ]}
@@ -50,13 +50,13 @@ export default () => {
         label="密码"
         name="password"
         customProps={{
-          placeholder: "请输入密码",
-          size: "large",
+          placeholder: '请输入密码',
+          size: 'large',
         }}
         rules={[
           {
             required: true,
-            message: "密码不能为空",
+            message: '密码不能为空',
             whitespace: true,
           },
         ]}
@@ -64,7 +64,7 @@ export default () => {
       <Form.Item label=" " colon={false}>
         <div className="fbc">
           <Checkbox>自动登录</Checkbox>
-          <Button type="link" onClick={() => history.push("./resetPassword")}>
+          <Button type="link" onClick={() => history.push('./resetPassword')}>
             忘记密码?
           </Button>
         </div>
@@ -77,10 +77,9 @@ export default () => {
                   block
                   loading={loading}
                   size="large"
-                  onClick={() =>
-                    handleLogin(form, () => {
-                      history.push("/");
-                    })
+                  onClick={() => handleLogin(form, () => {
+                    history.push('/');
+                  })
                   }
                 >
                   登录
@@ -90,8 +89,8 @@ export default () => {
           )}
         </Context.Consumer>
         <div className="fbc">
-          <span></span>
-          <Button type="link" onClick={() => history.push("./signUp")}>
+          <span />
+          <Button type="link" onClick={() => history.push('./signUp')}>
             立即注册
           </Button>
         </div>

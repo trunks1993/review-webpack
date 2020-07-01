@@ -3,14 +3,14 @@
  * @LastEditTime: 2020-06-28 20:39:49
  */
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import MapForm from "@/components/MapForm";
-import Container from "../Container";
+import MapForm from '@/components/MapForm';
+import Container from '../Container';
 
-import { Form, Button, Checkbox } from "antd";
-import { createHashHistory } from "history";
-import { patternPhone } from "@/rules";
+import { Form, Button, Checkbox } from 'antd';
+import { createHashHistory } from 'history';
+import { patternPhone } from '@/rules';
 
 const history = createHashHistory();
 
@@ -40,18 +40,18 @@ export default () => {
             label="手机号"
             name="username"
             customProps={{
-              placeholder: "请输入手机号",
-              size: "large",
+              placeholder: '请输入手机号',
+              size: 'large',
             }}
             validateTrigger="onBlur"
             rules={[
               {
                 required: true,
-                message: "用户名不能为空",
+                message: '用户名不能为空',
               },
               {
                 pattern: patternPhone,
-                message: "手机号格式有误",
+                message: '手机号格式有误',
               },
             ]}
           />
@@ -59,13 +59,13 @@ export default () => {
             label="新密码"
             name="password"
             customProps={{
-              placeholder: "请输入新密码",
-              size: "large",
+              placeholder: '请输入新密码',
+              size: 'large',
             }}
             rules={[
               {
                 required: true,
-                message: "密码不能为空",
+                message: '密码不能为空',
               },
             ]}
           />
@@ -73,13 +73,13 @@ export default () => {
             label="确认密码"
             name="password"
             customProps={{
-              placeholder: "再次输入新密码",
-              size: "large",
+              placeholder: '再次输入新密码',
+              size: 'large',
             }}
             rules={[
               {
                 required: true,
-                message: "密码不能为空",
+                message: '密码不能为空',
               },
             ]}
           />
@@ -87,19 +87,18 @@ export default () => {
             label="验证码"
             name="passwordfff"
             customProps={{
-              placeholder: "请输入密码",
+              placeholder: '请输入密码',
               addonAfter: <Button type="link">获取验证码</Button>,
-              className: "byMessage_cst-input",
-              size: "large",
+              className: 'byMessage_cst-input',
+              size: 'large',
             }}
             rules={[
               {
                 required: true,
-                transform: (value) =>
-                  value % 1 === 0 ? parseInt(value) : false,
-                type: "number",
+                transform: (value) => value % 1 === 0 ? parseInt(value) : false,
+                type: 'number',
                 whitespace: true,
-                message: "请输入正确验证码",
+                message: '请输入正确验证码',
               },
             ]}
           />
@@ -108,8 +107,8 @@ export default () => {
               确认修改
             </Button>
             <div className="fbc">
-              <span></span>
-              <Button type="link" onClick={() => history.push("./signIn")}>
+              <span />
+              <Button type="link" onClick={() => history.push('./signIn')}>
                 已有账号，立即登录
               </Button>
             </div>

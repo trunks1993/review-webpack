@@ -4,14 +4,14 @@
  */
 
 // import React from "react";
-import router from "@/router";
-import dva from "dva";
+import router from '@/router';
+import dva from 'dva';
 import createLoading from 'dva-loading';
 
-import _ from "lodash";
-import models from "@/models";
+import _ from 'lodash';
+import models from '@/models';
 
-import "@/styles/base.scss";
+import '@/styles/base.scss';
 
 const app = dva();
 
@@ -21,4 +21,4 @@ _.map(_.values(models), (item) => app.model(item));
 
 app.router(router);
 
-app.start("#app");
+app.start('#app');

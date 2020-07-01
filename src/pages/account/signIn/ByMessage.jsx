@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import MapForm from "@/components/MapForm";
-import { Context } from "../Context";
-import { Form, Button, Checkbox } from "antd";
-import { createHashHistory } from "history";
-import { patternPhone } from "@/rules";
+import React, { useState } from 'react';
+import MapForm from '@/components/MapForm';
+import { Context } from '../Context';
+import { Form, Button, Checkbox } from 'antd';
+import { createHashHistory } from 'history';
+import { patternPhone } from '@/rules';
 
 const history = createHashHistory();
 
@@ -26,23 +26,23 @@ export default () => {
       labelAlign="left"
       onCreate={(form) => setForm(form)}
     >
-      <CstInput name="type" defaultValue={2} style={{ display: "none" }} />
+      <CstInput name="type" defaultValue={2} style={{ display: 'none' }} />
       <CstInput
         label="手机号"
         name="telephone"
         customProps={{
-          placeholder: "请输入手机号",
-          size: "large",
+          placeholder: '请输入手机号',
+          size: 'large',
         }}
         validateTrigger="onBlur"
         rules={[
           {
             required: true,
-            message: "手机号不能为空",
+            message: '手机号不能为空',
           },
           {
             pattern: patternPhone,
-            message: "手机号格式有误",
+            message: '手机号格式有误',
           },
         ]}
       />
@@ -50,25 +50,25 @@ export default () => {
         label="验证码"
         name="code"
         customProps={{
-          placeholder: "请输入密码",
+          placeholder: '请输入密码',
           addonAfter: <Button type="link">获取验证码</Button>,
-          className: "byMessage_cst-input",
-          size: "large",
+          className: 'byMessage_cst-input',
+          size: 'large',
         }}
         rules={[
           {
             required: true,
             transform: (value) => (value % 1 === 0 ? parseInt(value) : false),
-            type: "number",
+            type: 'number',
             whitespace: true,
-            message: "请输入正确验证码",
+            message: '请输入正确验证码',
           },
         ]}
       />
       <Form.Item label=" " colon={false}>
         <div className="fbc">
           <Checkbox>自动登录</Checkbox>
-          <Button type="link" onClick={() => history.push("./resetPassword")}>
+          <Button type="link" onClick={() => history.push('./resetPassword')}>
             忘记密码?
           </Button>
         </div>
@@ -85,8 +85,8 @@ export default () => {
           )}
         </Context.Consumer>
         <div className="fbc">
-          <span></span>
-          <Button type="link" onClick={() => history.push("./signUp")}>
+          <span />
+          <Button type="link" onClick={() => history.push('./signUp')}>
             立即注册
           </Button>
         </div>
