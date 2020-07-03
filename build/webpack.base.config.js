@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-05-29 14:30:28
- * @LastEditTime: 2020-07-01 17:17:10
+ * @LastEditTime: 2020-07-02 21:43:56
  */
 
 const utils = require("./utils");
@@ -69,6 +69,9 @@ module.exports = {
                   "layout-header-background": "#1A61DC",
                   "menu-dark-item-active-bg": "#1859CB",
                   "menu-dark-color": "#FFFFFF",
+                  "menu-highlight-color": "#39A1FD",
+                  "menu-item-active-border-width": "2px",
+                  "layout-sider-background": "#ffffff",
                 },
                 javascriptEnabled: true,
               },

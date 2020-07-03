@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-28 16:36:16
- * @LastEditTime: 2020-07-01 21:04:17
+ * @LastEditTime: 2020-07-02 11:42:16
  */
 import produce from 'immer';
 import md5 from 'js-md5';
@@ -8,8 +8,10 @@ import { setToken } from '@/utils/auth';
 import { getQueryVariable } from '@/utils';
 import { fakeAccountLogin, getUserInfo } from '@/services/account';
 import { message } from 'antd';
-import { createHashHistory } from 'history';
-const history = createHashHistory();
+import { routerRedux } from 'dva/router';
+
+// import { createHashHistory } from 'history';
+// const history = createHashHistory();
 
 export default {
   namespace: 'account',
@@ -25,9 +27,11 @@ export default {
           setToken(data.token);
           const redirect = decodeURIComponent(getQueryVariable('redirect'));
           if (redirect) {
-            history.push(redirect);
+            // history.push(redirect);
+            yield put(routerRedux.push(redirect));
           } else {
-            window.location.href = '/';
+            // window.location.href = '/';
+            yield put(routerRedux.push('/'));
           }
         } else message.error(msg);
       } catch (error) {}

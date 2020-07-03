@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-23 17:04:19
- * @LastEditTime: 2020-06-23 17:31:42
+ * @LastEditTime: 2020-07-03 18:41:18
  */
 
 module.exports = {
@@ -22,7 +22,7 @@ module.exports = {
     "no-extra-boolean-cast": 2, // 禁止不必要的布尔转换
     "use-isnan": 2, // 要求使用 isNaN() 检查 NaN
     "block-scoped-var": 2, // 强制把变量的使用限制在其定义的作用域范围内
-    complexity: ["warn", 5], // 限制圈复杂度
+    complexity: ["warn", 10], // 限制圈复杂度
     eqeqeq: ["error", "always"], // 强制使用=== !==
     "no-alert": 2,
     "no-caller": 2,
@@ -35,10 +35,10 @@ module.exports = {
     // "no-magic-numbers": "warn", // 禁用魔术数字
     "no-mixed-spaces-and-tabs": "error", // 禁止使用 空格 和 tab 混合缩进
     "block-spacing": "error", // 禁止或强制在代码块中开括号前和闭括号后有空格
-    camelcase: [
-      "error",
-      { ignoreDestructuring: true, allow: ["UNSAFE_componentWillMount"] },
-    ], // 要求使用骆驼拼写法
+    // camelcase: [
+    //   "error",
+    //   { ignoreDestructuring: true, allow: ["UNSAFE_componentWillMount"] },
+    // ], // 要求使用骆驼拼写法
     "eol-last": ["error", "always"], // 要求或禁止文件末尾保留一行空行
     "func-call-spacing": "error", // 禁止在函数标识符和其调用之间有空格
     "implicit-arrow-linebreak": ["error", "beside"], // 箭头函数返回位置

@@ -1,10 +1,12 @@
 /*
  * @Date: 2020-06-20 17:03:19
- * @LastEditTime: 2020-06-30 21:08:19
+ * @LastEditTime: 2020-07-02 16:35:42
  */
 import React from 'react';
 import { connect } from 'dva';
-import { Route, Redirect } from 'react-router-dom';
+// import { Route, Redirect } from 'react-router-dom';
+import { routerRedux, Route, Redirect } from 'dva/router';
+
 import { getToken } from '@/utils/auth';
 
 const AuthRoute = ({ Component, authTo, user, dispatch, ...rest }) => (
@@ -26,6 +28,7 @@ const AuthRoute = ({ Component, authTo, user, dispatch, ...rest }) => (
       }
       return isLogin ? c : r;
     }}
+
 
   />
 );
