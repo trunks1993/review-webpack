@@ -3,5 +3,13 @@
  * @LastEditTime: 2020-07-01 15:09:39
  */
 import React from 'react';
+import { Layout } from 'antd';
+import PageContainer from '@/components/PageContainer';
 
-export default () => <div>fund</div>;
+const { Header, Sider } = Layout;
+
+export default (props) => {
+  return (
+    <PageContainer {...props} configId={props.configId} />
+  );
+};

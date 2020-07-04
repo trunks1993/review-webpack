@@ -1,0 +1,40 @@
+.page-container_menu-title {
+  height: 158px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  div {
+    color: #39a0fd;
+    font-size: 16px;
+    position: relative;
+    top: -20px;
+  }
+}
+
+.shop-home {
+  &_sku-box {
+    margin-top: 10px;
+    background: $white;
+    padding: 0 20px;
+  }
+  &_sku-title {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  &_sku-1 {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px dashed #e5e5e5;
+  }
+  &_sku-2 {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px dashed #e5e5e5;
+  }
+  &_sku-selected {
+    line-height: 50px;
+    height: 50px;
+  }
+}

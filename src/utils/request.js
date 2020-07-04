@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-30 09:20:46
- * @LastEditTime: 2020-07-01 21:07:49
+ * @LastEditTime: 2020-07-02 09:27:42
  */
 
 import { extend } from 'umi-request';
@@ -78,7 +78,7 @@ request.use(async(ctx, next) => {
   await next();
   const { res } = ctx;
   const { success, result, resultMsg, code } = res;
-  if (code === -2) {
+  if (code === '-2') {
     removeToken();
     const redirect = location.href.split('#')[1];
     window.location.href = `/#/signIn?redirect=${encodeURIComponent(redirect)}`;

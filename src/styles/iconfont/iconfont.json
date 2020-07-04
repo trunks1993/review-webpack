@@ -1,0 +1,65 @@
+{
+  "id": "1831685",
+  "name": "新权益",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "7821176",
+      "name": "刷新",
+      "font_class": "shuaxin",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "1687157",
+      "name": "购物车",
+      "font_class": "ziyuan",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "9626870",
+      "name": "购物车",
+      "font_class": "gouwuche",
+      "unicode": "e86e",
+      "unicode_decimal": 59502
+    },
+    {
+      "icon_id": "5429636",
+      "name": "申请管理",
+      "font_class": "shenqingguanli",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "807967",
+      "name": "统计",
+      "font_class": "tongji",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "845825",
+      "name": "钱袋",
+      "font_class": "qiandai",
+      "unicode": "e665",
+      "unicode_decimal": 58981
+    },
+    {
+      "icon_id": "5064085",
+      "name": "管理",
+      "font_class": "guanli",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "10496921",
+      "name": "数据管理",
+      "font_class": "shujuguanli",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    }
+  ]
+}
