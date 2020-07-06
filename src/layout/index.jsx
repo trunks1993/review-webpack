@@ -1,18 +1,18 @@
-import React from 'react';
-import { Layout, Menu, Badge, Popover } from 'antd';
-import { RouteList } from '@/router';
-import { asyncRoutes } from '@/router/config';
+import React from "react";
+import { Layout, Menu, Badge, Popover } from "antd";
+import { RouteList } from "@/router";
+import { asyncRoutes } from "@/router/config";
 
-import { createHashHistory } from 'history';
+import { createHashHistory } from "history";
 const history = createHashHistory();
-import { connect } from 'dva';
-import { removeToken } from '@/utils/auth';
+import { connect } from "dva";
+import { removeToken } from "@/utils/auth";
 
 const { Header, Footer } = Layout;
 
-import icon1 from '@/assets/images/layout/icon1.png';
-import icon2 from '@/assets/images/layout/icon2.png';
-import noImg from '@/assets/images/global/no-img.png';
+import icon1 from "@/assets/images/layout/icon1.png";
+import icon2 from "@/assets/images/layout/icon2.png";
+import noImg from "@/assets/images/global/no-img.png";
 
 const FuncContext = React.createContext(() => {});
 
@@ -21,12 +21,12 @@ const DropMenu = () => (
     {(dispatch) => (
       <div className="layout_drop-menu">
         <ul>
-          <li onClick={() => history.push('/changeUser')}>修改资料</li>
-          <li onClick={() => history.push('/changePassword')}>修改密码</li>
+          <li onClick={() => history.push("/changeUser")}>修改资料</li>
+          <li onClick={() => history.push("/changePassword")}>修改密码</li>
           <li
             onClick={() => {
               removeToken();
-              window.location.href = '/';
+              window.location.href = "/";
             }}
           >
             退出登录
@@ -48,7 +48,7 @@ const Name = ({ user, loading }) => (
   </Popover>
 );
 
-const Comp = ({ match, carCount, user, dispatch }) => {
+const Comp = ({ carCount, user, dispatch, ...rest }) => {
   return (
     <Layout className="layout">
       <Header>
@@ -57,32 +57,33 @@ const Comp = ({ match, carCount, user, dispatch }) => {
             <img
               width="81px"
               height="37px"
-              src={process.env.FILE_URL + '/data/static/img/100001.png'}
+              src={process.env.FILE_URL + "/data/static/img/100001.png"}
             />
             <span className="layout_header-logo">助力企业数字化转型</span>
           </div>
-          <Menu theme="dark" mode="horizontal" style={{ lineHeight: '60px' }}>
+          <Menu theme="dark" mode="horizontal" style={{ lineHeight: "60px" }}>
             {_.map(
               asyncRoutes,
-              (item) => !item.hidden && (
-                <Menu.Item
-                  key={item.id}
-                  onClick={(e) => history.push(`${match.url + item.path}`)}
-                >
-                  {item.title}
-                </Menu.Item>
-              )
+              (item) =>
+                !item.hidden && (
+                  <Menu.Item
+                    key={item.id}
+                    onClick={(e) => history.push(`${item.path}`)}
+                  >
+                    {item.title}
+                  </Menu.Item>
+                )
             )}
-            <Menu.Item onClick={(e) => window.open('')}>文档中心</Menu.Item>
+            <Menu.Item onClick={(e) => window.open("")}>文档中心</Menu.Item>
           </Menu>
 
-          <Menu theme="dark" mode="horizontal" style={{ lineHeight: '60px' }}>
-            <Menu.Item onClick={(e) => history.push(`${match.url}/message`)}>
+          <Menu theme="dark" mode="horizontal" style={{ lineHeight: "60px" }}>
+            <Menu.Item onClick={(e) => history.push(`/admin/message`)}>
               <img className="layout_header-icon" src={icon2} />
               <span>消息(2)</span>
             </Menu.Item>
-            <Menu.Item onClick={(e) => history.push(`${match.url}/car`)}>
-              <Badge dot={carCount}>
+            <Menu.Item onClick={(e) => history.push(`/admin/car`)}>
+              <Badge dot={!!carCount}>
                 <img className="layout_header-icon" src={icon1} />
               </Badge>
               <span>购物车</span>
@@ -93,11 +94,11 @@ const Comp = ({ match, carCount, user, dispatch }) => {
           </Menu>
         </div>
       </Header>
-      <Layout style={{ width: '1200px', margin: 'auto' }}>
-        <RouteList match={match} />
+      <Layout style={{ width: "1200px", margin: "auto" }}>
+        <RouteList path={rest.location.pathname}/>
       </Layout>
       <Footer
-        style={{ textAlign: 'center', fontSize: '14px', color: '#CCCCCC' }}
+        style={{ textAlign: "center", fontSize: "14px", color: "#CCCCCC" }}
       >
         <div>Copyright © XJF All Rights Reserved</div>
         <div>领先的数字权益营销服务提供商</div>

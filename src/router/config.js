@@ -1,12 +1,10 @@
 /*
  * @Date: 2020-07-02 16:24:34
- * @LastEditTime: 2020-07-02 22:03:35
+ * @LastEditTime: 2020-07-04 11:25:17
  */
 // layout下的子模块
+import ChildLayout from '@/pages';
 import Dashboard from '@/pages/dashboard';
-import Shop from '@/pages/shop';
-import Operations from '@/pages/operations';
-import Fund from '@/pages/fund';
 
 import ShopHome from '@/pages/shop/home';
 import PurchaseOrder from '@/pages/shop/purchaseOrder';
@@ -21,22 +19,23 @@ export const asyncRoutes = [
   {
     id: 0,
     title: '首页',
-    path: '/dashboard',
+    path: '/admin/dashboard',
     component: Dashboard,
   },
   {
     id: 1,
     title: '权益商城',
-    component: Shop,
-    path: '/shop',
+    component: ChildLayout,
+    path: '/admin/shop',
     icon: module_shop_menu_icon,
     children: [
       {
         id: 11,
         title: '权益商城',
-        path: '/home',
+        path: '/admin/shop/home',
         icon: 'icon-gouwuche',
         component: ShopHome,
+        isLeaf: true,
       },
       {
         id: 12,
@@ -46,14 +45,16 @@ export const asyncRoutes = [
           {
             id: 121,
             title: '采购订单',
-            path: '/purchaseOrder',
+            path: '/admin/shop/purchaseOrder',
             component: PurchaseOrder,
+            isLeaf: true,
           },
           {
             id: 122,
             title: '售后订单',
-            path: '/serviceOrder',
+            path: '/admin/shop/serviceOrder',
             component: ServiceOrder,
+            isLeaf: true,
           },
         ],
       },
@@ -62,27 +63,28 @@ export const asyncRoutes = [
   {
     id: 2,
     title: '运营管理',
-    component: Operations,
+    component: ChildLayout,
     icon: module_operations_menu_icon,
-    path: '/operations',
+    path: '/admin/operations',
     children: [
       {
         id: 21,
         title: '交易管理',
-        path: '/dashboard',
         icon: 'icon-tongji',
         children: [
           {
             id: 211,
             title: '交易订单',
-            path: '/dashboard',
+            path: '/admin/operations/dashboard',
             component: Dashboard,
+            isLeaf: true,
           },
           {
             id: 212,
             title: '交易对账',
-            path: '/dashboard',
+            path: '/admin/operations/dashboard',
             component: Dashboard,
+            isLeaf: true,
           },
         ],
       },
@@ -97,18 +99,21 @@ export const asyncRoutes = [
             title: '应用信息',
             path: '/dashboard',
             component: Dashboard,
+            isLeaf: true,
           },
           {
             id: 222,
             title: '实名认证',
             path: '/dashboard',
             component: Dashboard,
+            isLeaf: true,
           },
           {
             id: 223,
             title: '账号信息',
             path: '/dashboard',
             component: Dashboard,
+            isLeaf: true,
           },
         ],
       },
@@ -117,9 +122,9 @@ export const asyncRoutes = [
   {
     id: 3,
     title: '资金管理',
-    component: Fund,
+    component: ChildLayout,
     icon: module_fund_menu_icon,
-    path: '/fund',
+    path: '/admin/fund',
     children: [
       {
         id: 31,
@@ -127,6 +132,7 @@ export const asyncRoutes = [
         path: '/dashboard',
         icon: 'icon-tongji',
         component: Dashboard,
+        isLeaf: true,
       },
       {
         id: 32,
@@ -139,18 +145,21 @@ export const asyncRoutes = [
             title: '充值',
             path: '/dashboard',
             component: Dashboard,
+            isLeaf: true,
           },
           {
             id: 322,
             title: '提现',
             path: '/dashboard',
             component: Dashboard,
+            isLeaf: true,
           },
           {
             id: 323,
             title: '资金流水',
             path: '/dashboard',
             component: Dashboard,
+            isLeaf: true,
           },
         ],
       },
@@ -165,12 +174,14 @@ export const asyncRoutes = [
             title: '财务流水',
             path: '/dashboard',
             component: Dashboard,
+            isLeaf: true,
           },
           {
             id: 332,
             title: '财务对账',
             path: '/dashboard',
             component: Dashboard,
+            isLeaf: true,
           },
         ],
       },
@@ -179,14 +190,14 @@ export const asyncRoutes = [
   {
     id: 4,
     title: '消息',
-    path: '/message',
+    path: '/admin/message',
     hidden: true,
     component: Dashboard,
   },
   {
     id: 5,
     title: '购物车',
-    path: '/car',
+    path: '/admin/car',
     hidden: true,
     component: Dashboard,
   },

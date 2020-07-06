@@ -12,29 +12,39 @@
   }
 }
 
+$filterItemHeight: 42 40 50;
 .shop-home {
-  &_sku-box {
+  &_filter-wrapper {
     margin-top: 10px;
     background: $white;
     padding: 0 20px;
   }
-  &_sku-title {
-    height: 40px;
-    line-height: 40px;
-    border-bottom: 1px solid #e5e5e5;
+  @each $number in ($filterItemHeight) {
+    .shop-home_filter-item--#{$number} {
+      min-height: $number + px;
+      line-height: $number + px;
+      @if $number == 42 {
+        border-bottom: 1px solid #e5e5e5;
+      } @else if $number == 40 {
+        border-bottom: 1px dashed #e5e5e5;
+      }
+    }
   }
-  &_sku-1 {
-    height: 40px;
-    line-height: 40px;
-    border-bottom: 1px dashed #e5e5e5;
+  &_filter-item-title {
+    vertical-align: top;
   }
-  &_sku-2 {
-    height: 40px;
-    line-height: 40px;
-    border-bottom: 1px dashed #e5e5e5;
-  }
-  &_sku-selected {
-    line-height: 50px;
-    height: 50px;
+  &_filter-category {
+    display: inline-block;
+    width: 800px;
+    margin-left: 42px;
+    li {
+      display: inline-block;
+      margin-right: 48px;
+      background: #39a1fd;
+      height: 26px;
+      color: #fff;
+      line-height: 26px;
+      text-align: center;
+    }
   }
 }
