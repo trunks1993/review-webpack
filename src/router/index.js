@@ -2,28 +2,28 @@
  * @Date: 2020-06-20 17:03:03
  * @LastEditTime: 2020-07-04 13:42:58
  */
-import React from "react";
-import { routerRedux, Route, Redirect, Switch } from "dva/router";
-import _ from "lodash";
+import React from 'react';
+import { routerRedux, Route, Redirect, Switch } from 'dva/router';
+import _ from 'lodash';
 
-import { flatTree } from "@/utils";
-import { getToken } from "@/utils/auth";
+import { flatTree } from '@/utils';
+import { getToken } from '@/utils/auth';
 const { ConnectedRouter } = routerRedux;
 
-import { asyncRoutes } from "./config";
+import { asyncRoutes } from './config';
 
-import AuthRoute from "./AuthRoute";
+import AuthRoute from './AuthRoute';
 
-import SignIn from "@/pages/account/signIn";
-import SignUp from "@/pages/account/SignUp";
-import ResetPassword from "@/pages/account/resetPassword";
+import SignIn from '@/pages/account/signIn';
+import SignUp from '@/pages/account/SignUp';
+import ResetPassword from '@/pages/account/resetPassword';
 
-import Layout from "@/layout";
-import Page404 from "@/pages/page404";
+import Layout from '@/layout';
+import Page404 from '@/pages/page404';
 
 // layout下的子模块
-import Dashboard from "@/pages/dashboard";
-import ShopHome from "@/pages/shop/home";
+import Dashboard from '@/pages/dashboard';
+import ShopHome from '@/pages/shop/home';
 
 export default ({ history }) => {
   return (

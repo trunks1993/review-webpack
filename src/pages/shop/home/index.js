@@ -3,17 +3,17 @@
  * @LastEditTime: 2020-07-04 14:06:39
  */
 
-import React, { useEffect, useState } from "react";
-import FilterPanel from "./FilterPanel";
+import React, { useEffect, useState } from 'react';
+import FilterPanel from './FilterPanel';
 
-import shopHomeBg from "@/assets/images/shop/shopHomeBg.png";
+import shopHomeBg from '@/assets/images/shop/shopHomeBg.png';
 import {
   getCategoryList,
   getProductTypeList,
   getBrandList,
   getProductMap,
-} from "@/services/shop";
-import { message } from "antd";
+} from '@/services/shop';
+import { message } from 'antd';
 
 export default (props) => {
   const [categoryList, setCategoryList] = useState([]);
@@ -29,7 +29,7 @@ export default (props) => {
   // getBrandList
   // getProductMap
 
-  const initCategoryList = async () => {
+  const initCategoryList = async() => {
     try {
       const [err, data, msg] = await getCategoryList();
       if (!err) {
@@ -39,18 +39,18 @@ export default (props) => {
       }
     } catch (error) {}
   };
-  const initProductTypeList = async () => {
+  const initProductTypeList = async() => {
     try {
       const [err, data, msg] = await getProductTypeList();
     } catch (error) {}
   };
 
-  const initBrandList = async () => {
+  const initBrandList = async() => {
     try {
       const [err, data, msg] = await getBrandList();
     } catch (error) {}
   };
-  const initProductMap = async () => {
+  const initProductMap = async() => {
     try {
       const [err, data, msg] = await getProductMap();
     } catch (error) {}

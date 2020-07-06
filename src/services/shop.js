@@ -10,8 +10,8 @@ import request from '@/utils/request';
  * @param {}
  */
 export async function getCategoryList() {
-  return request("/search/searchCategoryList", {
-    method: "POST",
+  return request('/search/searchCategoryList', {
+    method: 'POST',
     data: {
       currPage: 1,
       level: 1,
@@ -21,21 +21,21 @@ export async function getCategoryList() {
 }
 
 export async function getProductTypeList() {
-  return request("/search/loadProductTypeList", {
-    method: "POST",
+  return request('/search/loadProductTypeList', {
+    method: 'POST',
   });
 }
 
 export async function getBrandList(data) {
-  return request("/search/searchBrandList", {
-    method: "POST",
+  return request('/search/searchBrandList', {
+    method: 'POST',
     data,
   });
 }
 
 export async function getProductMap(data) {
-  return request("/search/searchProductMap", {
-    method: "POST",
+  return request('/search/searchProductMap', {
+    method: 'POST',
     data,
   });
 }

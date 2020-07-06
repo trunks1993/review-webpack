@@ -3,11 +3,11 @@
  * @LastEditTime: 2020-07-04 14:38:01
  */
 
-import React from "react";
+import React from 'react';
 
 export default (props) => {
   const { categoryList, productTypeList } = props;
-  console.log("categoryList", categoryList);
+  console.log('categoryList', categoryList);
   return (
     <div className="shop-home_filter-wrapper">
       <ul>
