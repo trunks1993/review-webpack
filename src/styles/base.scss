@@ -5,7 +5,8 @@
 @import "./login/index.scss";
 @import "./shop/index.scss";
 @import "./iconfont/iconfont.css";
-
+@import "./dashboard/index.scss";
+@import "./transaction/index.scss";
 /*!
  * @名称：base.css
  * @功能：1、重设浏览器默认样式
@@ -142,6 +143,9 @@ div:focus {
 }
 .f14 {
   font-size: 14px;
+}
+.f16 {
+  font-size: 16px;
 }
 
 .fbc {

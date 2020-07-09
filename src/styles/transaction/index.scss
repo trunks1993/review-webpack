@@ -1,0 +1,9 @@
+.transaction{
+    width: 1010px;
+    margin: auto;
+    &_condition{
+        background-color: $white;
+        height: 160px;
+        padding: 30px 50px;
+    }
+}

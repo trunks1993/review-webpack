@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-23 21:38:43
- * @LastEditTime: 2020-06-24 16:13:50
+ * @LastEditTime: 2020-07-03 20:20:55
  */
 import { Form } from 'antd';
 import React, { Component } from 'react';
@@ -24,6 +24,7 @@ class MapForm extends Component {
   static CstProductSubPanel;
   static CstCascader;
   static CstInputNumber;
+  static CstRangePicker;
 
   static defaultProps = {
     className: '',

@@ -1,0 +1,294 @@
+.dashboard{
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    align-content: flex-start;
+    margin-top: 10px;
+    &_context--left {
+        width: 870px;
+        margin-right: 10px;
+    }
+    &_context--right {
+        width: 320px;
+    }
+    &_Content{
+        display: flex;
+        flex-direction: row;
+        &--left{
+            width: 360px;
+            height: 340px;
+            margin-top: 10px;
+            margin-right: 10px;
+            border:1px solid $white;
+            border-radius:2px;
+            background-color: $white;
+        }
+        &--right{
+            width:500px;
+            height:340px;
+            margin-top: 10px;
+            border:1px solid $white;
+            border-radius:2px;
+            background-color: $white;
+        }
+    }
+}
+.unNotice{
+    width:870px;
+    height:40px;
+    background-color: $white;
+    padding: 14px 20px;
+    border:1px solid $white;
+    border-radius:2px;
+
+    @extend .f12;
+    font-weight:400;
+    color: $black;
+    &_notice-img{
+        margin-right: 10px;
+        margin-top: -5px;
+        width: 16px;
+        height: 16px;
+    }
+    &_notice-right{
+        display: flex;
+        align-items: center;
+        float: right;
+        color: $blue;
+        cursor:pointer;
+        &--text{
+            margin-right: 5px;
+        }
+    }
+    
+}
+.myBalance{
+    padding: 18px 20px;
+    &_title{
+        border-bottom: 1px solid $underline-color;
+        padding-bottom: 18px;
+        @extend .f16;
+        font-family:Microsoft YaHei;
+        font-weight:bold;
+        color:$black;
+        &--text{
+            margin-right: 5px;
+        }
+        &--img{
+            width:17px;
+            height:10px;
+            cursor:pointer;
+        }
+        &--jump{
+            display: flex;
+            align-items: center;
+            float: right;
+            color: $blue;
+            @extend .f14;
+            margin-top: 2px;
+            cursor:pointer;
+        }
+        &--jumpText{
+            font-family:Microsoft YaHei;
+            font-weight:500;
+            margin-right: 5px;
+        }
+    }
+    &_context{
+        padding: 30px 0px 10px 16px;
+    }
+    &_contextLeft{
+        display: inline-block;
+        margin-right: 20px;
+        &--getImg{
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+        }
+    }
+    &_contextRight{
+        display: inline-block;
+        &--text{
+            @extend .f14;
+            color: $lightBlack;
+        }
+        &--number{
+            @extend .f24;
+            color: $black;
+            font-family:Microsoft YaHei;
+            font-weight:bold;
+        }
+    }
+    &_footer{
+        margin-top: 40px;
+        font-size: 16px;
+        &--addBut{
+            width: 120px;
+            height: 36px;
+            border-radius: 4px;
+            background-color: $blue;
+            margin-right: 40px;
+            margin-left: 16px;
+        }
+        &--cutBut{
+            width: 120px;
+            height: 36px;
+            border-radius: 4px;
+            color: $blue;
+            border:1px solid $blue;
+        }
+    }
+}
+.trading{
+    padding: 12px 20px;
+    &_tabSize{
+        font-size:16px;
+        font-family:Microsoft YaHei;
+        font-weight:bold;
+    }
+    &_title{
+        @extend .f14;
+        font-family:Microsoft YaHei;
+        font-weight:400;
+        color:$lightBlack;
+        text-align: center;
+    }
+    &_border{
+        border-left: 1px solid $gray2;
+        border-right: 1px solid $gray2;
+        height: 38px;
+    }
+    &_borderLeft{
+        border-left: 1px solid $gray2;
+        height: 38px;
+    }
+    &_money{
+        @extend .f24;
+        font-family:DIN;
+        font-weight:bold;
+        color:$black;
+        text-align: center;
+    }
+}
+.footer{
+    width: 870px;
+    height: 175px;
+    background-color: $white;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    &_leftImg--name{
+        position: relative;
+        left: -8px;
+    }
+    &_leftImg{
+        width: 50px;
+        cursor:pointer;
+        height: 57px;
+    }
+    &_leftImg--desc{
+        @extend .f14;
+        cursor:pointer;
+        font-family:Microsoft YaHei;
+        font-weight:400;
+        color:$black;
+        line-height:24px;
+    }
+}
+.user{
+    width: 320px;
+    height: 330px;
+    background-color: $white;
+    padding: 28px 20px;
+    border:1px solid $white;
+    border-radius:2px;
+    &_head{
+        border-bottom: 1px solid $underline-color;
+        display: flex;
+        flex-direction: row;
+        &--img{
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        &--text{
+            font-size:16px;
+            margin-bottom: 20px;
+            font-family:Microsoft YaHei;
+            font-weight:bold;
+            color:$black;
+            width: 160px;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+    }
+    &_context{
+        margin-left: 20px;
+        font-size:14px;
+        font-family:Microsoft YaHei;
+        font-weight:400;
+        color:$black;
+        line-height:24px;
+        &--desc{
+            margin-top: 6px;
+        }
+        &--title{
+            display: inline-block;
+            width: 70px;
+        }
+    }
+    &_footer{
+        margin-left: 20px;
+        margin-top: 20px;
+        &--addBut{
+            width:90px;
+            height:30px;
+            background: $blue;
+            border-radius:4px;
+            margin-right: 30px;
+        }
+        &--cutBut{
+            width:90px;
+            height:30px;
+            color: $blue;
+            border:1px solid $blue;
+            border-radius:4px;
+        }
+    }
+}
+.platformNotice{
+    width: 320px;
+    background-color: $white;
+    border: 1px solid $white;
+    margin-top: 10px;
+    padding: 17px 20px;
+    &_head{
+        border-bottom: 1px solid $underline-color;
+        &--left{
+            display: inline-block;
+            width: 70px;
+            font-size:16px;
+            font-family:Microsoft YaHei;
+            font-weight:bold;
+            color:$black;
+            margin-bottom: 20px;
+        }
+        &--right{
+            float: right;
+            margin-top: 4px;
+            font-size: 14px;
+            color: $blue;
+            cursor:pointer;
+            font-family:Microsoft YaHei;
+            font-weight:400;
+        }
+    }
+    &_context{
+        &--img{
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

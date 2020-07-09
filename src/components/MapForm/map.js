@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-23 22:22:28
- * @LastEditTime: 2020-06-23 22:22:28
+ * @LastEditTime: 2020-07-03 20:21:02
  */
 
 export default {
@@ -20,4 +20,5 @@ export default {
   CstProductSubPanel: {},
   CstCascader: {},
   CstInputNumber: {},
+  CstRangePicker: {},
 };

@@ -1,4 +1,4 @@
-import { Form, Input, Select, Cascader, Radio, InputNumber } from 'antd';
+import { Form, Input, Select, Cascader, Radio, InputNumber, DatePicker } from 'antd';
 import React, { Component } from 'react';
 import ItemMap from './map';
 import FormContext from './FormContext';
@@ -119,6 +119,10 @@ class WrapFormItem extends Component {
         name,
         options
       )(<InputNumber {...customProps} />),
+      CstRangePicker: getFieldDecorator(
+        name,
+        options
+      )(<DatePicker.RangePicker {...customProps} />),
     };
 
     if (wrapperCol && labelCol) return (
