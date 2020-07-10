@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-01 15:06:53
- * @LastEditTime: 2020-07-04 10:13:24
+ * @LastEditTime: 2020-07-10 15:44:31
  */
 import React, { useState } from 'react';
 import MapForm from '@/components/MapForm';
@@ -10,7 +10,7 @@ import _ from 'lodash';
 import { Select, Table, Pagination, Button, Form, Row, Col } from 'antd';
 import { connect } from 'dva';
 
-const transaction = () => {
+const order = () => {
   const [form, setForm] = useState({});
   const [currPage, setCurrPage] = useState({});
   /** 表头 */
@@ -70,12 +70,11 @@ const transaction = () => {
   return (
     <div className="transaction">
       <div className="transaction_condition">
-        <MapForm onCreate={(form) => setForm(form)} layout={'inline'}>
-          <Row>
-            <Col span={8}>
+        <MapForm onCreate={(form) => setForm(form)} layout='inline'>
               <CstInput
                 label="交易订单号"
                 name="telephone"
+                className='form-item'
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 customProps={{
@@ -89,12 +88,11 @@ const transaction = () => {
                   }
                 ]}
               />
-            </Col>
-            <Col span={8}>
               <CstSelect
                 label="交易类型"
                 name="bizType"
-                style={{ width: 290 }}
+                className='form-item'
+                style={{ width: 340 }}
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 customProps={{
@@ -107,11 +105,10 @@ const transaction = () => {
                   </Select.Option>
                 ))}
               </CstSelect>
-            </Col>
-            <Col span={8}>
               <CstInput
                 label="商品"
                 name="goodsName"
+                className='form-item'
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 customProps={{
@@ -119,11 +116,10 @@ const transaction = () => {
                   size: 'large',
                 }}
               />
-            </Col>
-            <Col span={8}>
               <CstInput
                 label="外部订单号"
                 name="customerOrderNo"
+                className='form-item'
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 customProps={{
@@ -131,11 +127,11 @@ const transaction = () => {
                   size: 'large',
                 }}
               />
-            </Col>
-            <Col span={8}>
               <CstRangePicker
                 label="交易时间"
                 name="CreateTime"
+                className='form-item'
+                style={{ width: 340 }}
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 customProps={{
@@ -143,9 +139,7 @@ const transaction = () => {
                   size: 'large',
                 }}
               />
-            </Col>
-            <Col span={6} offset={1}>
-              <Form.Item>
+              <Form.Item className='form-item transaction_but'>
                 <Button type="primary" icon="search" onClick={() => dispatchInit()}>
                   {'查询'}
                 </Button>
@@ -153,8 +147,6 @@ const transaction = () => {
                   {'重置'}
                 </Button>
               </Form.Item>
-            </Col>
-          </Row>
         </MapForm>
       </div>
       <Table columns={columns} scroll={{ x: 1100 }} pagination={false} />
@@ -172,4 +164,4 @@ const transaction = () => {
 };
 export default connect(({ }) => ({
 
-}))(transaction);
+}))(order);

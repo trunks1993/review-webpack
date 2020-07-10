@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 16:24:34
- * @LastEditTime: 2020-07-02 22:03:35
+ * @LastEditTime: 2020-07-10 15:26:23
  */
 // layout下的子模块
 import Dashboard from '@/pages/dashboard';
@@ -11,6 +11,8 @@ import Fund from '@/pages/fund';
 import ShopHome from '@/pages/shop/home';
 import PurchaseOrder from '@/pages/shop/purchaseOrder';
 import ServiceOrder from '@/pages/shop/serviceOrder';
+
+import Order from '@/pages/operations/transaction/order';
 
 import module_shop_menu_icon from '@/assets/images/global/module_shop_menu_icon.png';
 import module_fund_menu_icon from '@/assets/images/global/module_fund_menu_icon.png';
@@ -69,14 +71,14 @@ export const asyncRoutes = [
       {
         id: 21,
         title: '交易管理',
-        path: '/dashboard',
+        path: '/operations/transaction',
         icon: 'icon-tongji',
         children: [
           {
             id: 211,
             title: '交易订单',
-            path: '/dashboard',
-            component: Dashboard,
+            path: '/operations/transaction/order',
+            component: Order,
           },
           {
             id: 212,
