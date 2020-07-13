@@ -3,7 +3,7 @@
  * @LastEditTime: 2020-07-10 17:37:34
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 export default (props) => {
   const { item } = props;

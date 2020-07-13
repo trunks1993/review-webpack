@@ -3,12 +3,12 @@
  * @LastEditTime: 2020-07-13 11:14:04
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 export default (props) => {
   const { categoryList, productTypeList, onFilterChange } = props;
-  const [categorySelect, setCategorySelect] = useState("");
-  const [productTypeSelect, setProductTypeSelect] = useState("");
+  const [categorySelect, setCategorySelect] = useState('');
+  const [productTypeSelect, setProductTypeSelect] = useState('');
 
   useEffect(() => {
     if (categoryList.length) {
@@ -40,7 +40,7 @@ export default (props) => {
           <ul className="shop-home_filter-category">
             {_.map(categoryList, (item) => (
               <li
-                className={categorySelect === item.id ? "active" : ""}
+                className={categorySelect === item.id ? 'active' : ''}
                 onClick={() => {
                   setCategorySelect(item.id);
                   onFilterChange(item.id, productTypeSelect);
@@ -57,7 +57,7 @@ export default (props) => {
           <ul className="shop-home_filter-category">
             {_.map(productTypeList, (item) => (
               <li
-                className={productTypeSelect === item.id ? "active" : ""}
+                className={productTypeSelect === item.id ? 'active' : ''}
                 key={item.id}
                 onClick={() => {
                   setProductTypeSelect(item.id);

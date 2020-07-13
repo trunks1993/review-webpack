@@ -3,18 +3,18 @@
  * @LastEditTime: 2020-07-13 11:13:45
  */
 
-import React, { useEffect, useState } from "react";
-import FilterPanel from "./FilterPanel";
+import React, { useEffect, useState } from 'react';
+import FilterPanel from './FilterPanel';
 
-import shopHomeBg from "@/assets/images/shop/shopHomeBg.png";
+import shopHomeBg from '@/assets/images/shop/shopHomeBg.png';
 import {
   getCategoryList,
   getProductTypeList,
   getBrandList,
   getProductMap,
-} from "@/services/shop";
-import { message, Pagination } from "antd";
-import BrandItem from "./BrandItem";
+} from '@/services/shop';
+import { message, Pagination } from 'antd';
+import BrandItem from './BrandItem';
 
 export default (props) => {
   const [categoryList, setCategoryList] = useState([]);
@@ -23,8 +23,8 @@ export default (props) => {
   const [total, setTotal] = useState(0);
   const [currPage, setCurrPage] = useState(1);
 
-  const [category, setCategory] = useState("");
-  const [productType, setProductType] = useState("");
+  const [category, setCategory] = useState('');
+  const [productType, setProductType] = useState('');
 
   useEffect(() => {
     initCategoryList();
@@ -44,7 +44,7 @@ export default (props) => {
     setCategory(category);
   };
 
-  const initCategoryList = async () => {
+  const initCategoryList = async() => {
     try {
       const [err, data, msg] = await getCategoryList();
       if (!err) {
@@ -55,7 +55,7 @@ export default (props) => {
     } catch (error) {}
   };
 
-  const initProductTypeList = async () => {
+  const initProductTypeList = async() => {
     try {
       const [err, data, msg] = await getProductTypeList();
       if (!err) {
@@ -66,7 +66,7 @@ export default (props) => {
     } catch (error) {}
   };
 
-  const initList = async () => {
+  const initList = async() => {
     try {
       const [err, data, msg] = await getBrandList();
       if (!err) {
@@ -78,7 +78,7 @@ export default (props) => {
     } catch (error) {}
   };
 
-  const initProductMap = async () => {
+  const initProductMap = async() => {
     try {
       const [err, data, msg] = await getProductMap();
     } catch (error) {}
