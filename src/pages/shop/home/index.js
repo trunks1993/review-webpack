@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 19:14:16
- * @LastEditTime: 2020-07-13 11:13:45
+ * @LastEditTime: 2020-07-13 11:21:18
  */
 
 import React, { useEffect, useState } from 'react';
@@ -54,7 +54,6 @@ export default (props) => {
       }
     } catch (error) {}
   };
-
   const initProductTypeList = async() => {
     try {
       const [err, data, msg] = await getProductTypeList();
@@ -77,7 +76,6 @@ export default (props) => {
       }
     } catch (error) {}
   };
-
   const initProductMap = async() => {
     try {
       const [err, data, msg] = await getProductMap();
