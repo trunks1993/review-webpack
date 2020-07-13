@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 19:14:16
- * @LastEditTime: 2020-07-13 11:21:18
+ * @LastEditTime: 2020-07-13 17:02:02
  */
 
 import React, { useEffect, useState } from 'react';
@@ -13,18 +13,28 @@ import {
   getBrandList,
   getProductMap,
 } from '@/services/shop';
-import { message, Pagination } from 'antd';
-import BrandItem from './BrandItem';
+import { message, Pagination, List, Avatar, Card, Skeleton } from 'antd';
+import ProductWrapper from './ProductWrapper';
 
 export default (props) => {
+  const [loading, setLoading] = useState(false);
+  const [categoryLoading, setCategoryLoading] = useState(false);
+  const [productTypeLoading, setProductTypeLoading] = useState(false);
+
   const [categoryList, setCategoryList] = useState([]);
   const [productTypeList, setProductTypeList] = useState([]);
+
   const [brandList, setBrandList] = useState([]);
   const [total, setTotal] = useState(0);
-  const [currPage, setCurrPage] = useState(1);
 
-  const [category, setCategory] = useState('');
-  const [productType, setProductType] = useState('');
+  const [list, setList] = useState([]);
+
+  const [filterParams, setFilterParams] = useState({
+    categoryCode: '',
+    productTypeCode: '',
+    currPage: 1,
+    pageSize: 6,
+  });
 
   useEffect(() => {
     initCategoryList();
@@ -32,21 +42,29 @@ export default (props) => {
   }, []);
 
   useEffect(() => {
-    // initList();
-  }, [currPage]);
+    if (filterParams.categoryCode && filterParams.productTypeCode) initList();
+  }, [filterParams]);
 
-  // getCategoryList
-  // getProductTypeList
-  // getBrandList
-  // getProductMap
+  useEffect(() => {
+    if (brandList.length) initProductMap();
+  }, [brandList]);
 
-  const onFilterChange = (category, productType) => {
-    setCategory(category);
+  const onFilterChange = (categoryCode, productTypeCode) => {
+    if (categoryCode && productTypeCode) {
+      setFilterParams({
+        ...filterParams,
+        currPage: 1,
+        categoryCode,
+        productTypeCode,
+      });
+    }
   };
 
   const initCategoryList = async() => {
     try {
+      setCategoryLoading(true);
       const [err, data, msg] = await getCategoryList();
+      setCategoryLoading(false);
       if (!err) {
         setCategoryList(data);
       } else {
@@ -54,9 +72,12 @@ export default (props) => {
       }
     } catch (error) {}
   };
+
   const initProductTypeList = async() => {
     try {
+      setProductTypeLoading(true);
       const [err, data, msg] = await getProductTypeList();
+      setProductTypeLoading(false);
       if (!err) {
         setProductTypeList(data);
       } else {
@@ -67,7 +88,9 @@ export default (props) => {
 
   const initList = async() => {
     try {
-      const [err, data, msg] = await getBrandList();
+      setLoading(true);
+      const [err, data, msg] = await getBrandList(filterParams);
+      +setLoading(false);
       if (!err) {
         setBrandList(data.list);
         setTotal(data.totalRecords);
@@ -76,9 +99,25 @@ export default (props) => {
       }
     } catch (error) {}
   };
+
   const initProductMap = async() => {
     try {
-      const [err, data, msg] = await getProductMap();
+      setLoading(true);
+      const [err, data, msg] = await getProductMap({
+        productTypeCode: filterParams.productTypeCode,
+        brandCodes: _.map(brandList, (item) => item.brandCode).toString(),
+      });
+      setLoading(false);
+      if (!err) {
+        setList(
+          _.map(brandList, (item) => {
+            item.productList = data[item.brandCode];
+            return item;
+          })
+        );
+      } else {
+        message.error(msg);
+      }
     } catch (error) {}
   };
 
@@ -86,24 +125,66 @@ export default (props) => {
     <div className="shop-home">
       <img width="1010px" height="180px" src={shopHomeBg} />
       <FilterPanel
+        categoryLoading={categoryLoading}
+        productTypeLoading={productTypeLoading}
         categoryList={categoryList}
         productTypeList={productTypeList}
         onFilterChange={onFilterChange}
       />
-      <div className="shop-home_product-wrapper">
-        {_.map(brandList, (item) => (
-          <BrandItem key={item.id} item={item} />
-        ))}
-      </div>
+      <List
+        grid={{
+          column: 3,
+          gutter: 10,
+        }}
+        dataSource={list}
+        renderItem={(item) => (
+          <List.Item
+            key={item.brandCode}
+            style={{ marginBottom: '10px' }}
+            onClick={() => {
+              console.log(11);
+            }}
+          >
+            <Card>
+              <Skeleton loading={loading} active avatar paragraph={{ rows: 1 }}>
+                <List.Item.Meta
+                  avatar={<Avatar size={60} src={`/file${item.iconUrl}`} />}
+                  title={item.brandName}
+                  description={<span title={item.resume}>{item.resume}</span>}
+                />
+              </Skeleton>
 
-      <div>
+              <ProductWrapper
+                loading={loading}
+                productList={item.productList}
+              />
+            </Card>
+          </List.Item>
+        )}
+      />
+
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: '40px',
+        }}
+      >
         <Pagination
-          current={currPage}
-          onChange={() => setCurrPage(currPage)}
+          disabled={loading}
+          current={filterParams.currPage}
+          onChange={(currPage) => setFilterParams({
+            ...filterParams,
+            currPage,
+          })
+          }
           defaultPageSize={6}
           total={total}
         />
-        <span>共{total}条</span>
+        <span style={{ color: '#CCCCCC', marginLeft: '10px' }}>
+          共{total}条
+        </span>
       </div>
     </div>
   );
