@@ -1,0 +1,27 @@
+.reconciliation{
+    &-Info{
+        padding: 30px 30px;
+        height: 100px;
+        background-color: $white;
+    }
+    &-table{
+        background-color: $white;
+        height:calc(100vh - 280px);
+        margin-top: 20px;
+        &--title{
+            margin-left: 20px;
+            padding: 10px;
+        }
+        &--desc{
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        &--name{
+            float: right;
+            font-size: 13px;
+            color: $blue;
+            font-weight: 600;
+        }
+    }
+}

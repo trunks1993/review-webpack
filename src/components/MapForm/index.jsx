@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-23 21:38:43
- * @LastEditTime: 2020-06-24 16:13:50
+ * @LastEditTime: 2020-07-13 14:40:42
  */
 import { Form } from 'antd';
 import React, { Component } from 'react';
@@ -19,6 +19,7 @@ class MapForm extends Component {
   static CstRadio;
   static CstCheckbox;
   static CstDatePicker;
+  static CstRangePicker;
   static CstEditor;
   static CstTreeSelect;
   static CstProductSubPanel;
