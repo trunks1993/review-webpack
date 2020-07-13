@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-20 17:03:03
- * @LastEditTime: 2020-07-04 13:42:58
+ * @LastEditTime: 2020-07-10 16:08:13
  */
 import React from "react";
 import { routerRedux, Route, Redirect, Switch } from "dva/router";
@@ -34,9 +34,9 @@ export default ({ history }) => {
           exact
           path="/resetPassword"
           authTo="/"
-          component={ResetPassword}
+          Component={ResetPassword}
         />
-        <AuthRoute exact path="/signUp" authTo="/" component={SignUp} />
+        <AuthRoute exact path="/signUp" authTo="/" Component={SignUp} />
         <AuthRoute path="/admin" authTo="/signIn" Component={Layout} />
         <Redirect from="/" to="/admin" />
         <Route component={Page404} />
