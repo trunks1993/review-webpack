@@ -3,8 +3,8 @@
  * @LastEditTime: 2020-07-13 16:25:17
  */
 
-import React, { useState, useEffect } from "react";
-import { Skeleton } from "antd";
+import React, { useState, useEffect } from 'react';
+import { Skeleton } from 'antd';
 
 export default (props) => {
   const {
@@ -14,8 +14,8 @@ export default (props) => {
     categoryLoading,
     productTypeLoading,
   } = props;
-  const [categorySelect, setCategorySelect] = useState("");
-  const [productTypeSelect, setProductTypeSelect] = useState("");
+  const [categorySelect, setCategorySelect] = useState('');
+  const [productTypeSelect, setProductTypeSelect] = useState('');
 
   useEffect(() => {
     if (categoryList.length) {
@@ -48,7 +48,7 @@ export default (props) => {
             >
               {_.map(categoryList, (item) => (
                 <li
-                  className={categorySelect === item.code ? "active" : ""}
+                  className={categorySelect === item.code ? 'active' : ''}
                   onClick={() => {
                     setCategorySelect(item.code);
                     onFilterChange(item.code, productTypeSelect);
@@ -72,7 +72,7 @@ export default (props) => {
             >
               {_.map(productTypeList, (item) => (
                 <li
-                  className={productTypeSelect === item.code ? "active" : ""}
+                  className={productTypeSelect === item.code ? 'active' : ''}
                   key={item.code}
                   onClick={() => {
                     setProductTypeSelect(item.code);
