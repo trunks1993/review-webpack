@@ -42,3 +42,50 @@
 .ant-menu-inline {
   border-right: none;
 }
+
+.ant-list-item-meta {
+  align-items: center;
+  &-content {
+    width: 204px;
+  }
+  &-title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  &-description {
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.ant-pagination-item {
+  &:focus,
+  &:hover {
+    border: none;
+    background: #39a1fd;
+    a {
+      color: #ffffff;
+    }
+  }
+  &-active {
+    background: #39a1fd;
+    border: none;
+    a {
+      color: #ffffff;
+    }
+  }
+}
+
+.ant-pagination-next,
+.ant-pagination-prev {
+  &:focus,
+  &:hover .ant-pagination-item-link {
+    border: none;
+    background: #39a1fd;
+    i {
+      color: #ffffff;
+    }
+  }
+}
