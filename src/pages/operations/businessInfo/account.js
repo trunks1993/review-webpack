@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 19:32:18
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-13 21:40:51
+ * @LastEditTime: 2020-07-14 09:05:04
  */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
@@ -20,15 +20,13 @@ const account = ({ dispatch, reconList, reconTotal, loading }) => {
   const [pageSize, setPageSize] = useState(10);
 
   useEffect(() => {
-    (async() => {
-      initList();
-    })();
-  }, []);
+    if (_.isEmpty(form)) return;
+    initList();
+  }, [form]);
 
   useEffect(() => {
-    (async() => {
-      initList();
-    })();
+    if (_.isEmpty(form)) return;
+    initList();
   }, [currPage]);
 
   const dispatchInit = (callback) => {

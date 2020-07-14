@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 14:20:06
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-13 21:05:43
+ * @LastEditTime: 2020-07-14 09:04:39
  */
 import React, { useState, useEffect } from 'react';
 import MapForm from '@/components/MapForm';
@@ -20,13 +20,12 @@ const Order = ({ dispatch, list, total, loading }) => {
   const [pageSize, setPageSize] = useState(10);
 
   useEffect(() => {
-    (async() => {
-      initList();
-    })();
-  }, []);
+    if (_.isEmpty(form)) return;
+    initList();
+  }, [form]);
 
   useEffect(() => {
-    if (currPage === 1) return;
+    if (_.isEmpty(form)) return;
     initList();
   }, [currPage]);
 
