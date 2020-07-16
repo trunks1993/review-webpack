@@ -1,14 +1,14 @@
 /*
  * @Date: 2020-07-01 17:40:26
- * @LastEditTime: 2020-07-01 17:47:51
+ * @LastEditTime: 2020-07-14 21:13:37
  */
 
-import produce from 'immer';
-import { getCountOfCar } from '@/services/app';
-import { message } from 'antd';
+import produce from "immer";
+import { getCountOfCar } from "@/services/app";
+import { message } from "antd";
 
 export default {
-  namespace: 'app',
+  namespace: "app",
   state: {
     carCount: 0,
   },
@@ -19,7 +19,7 @@ export default {
         const [err, data, msg] = yield call(getCountOfCar);
         if (!err) {
           yield put({
-            type: '_setCountOfCar',
+            type: "_setCountOfCar",
             payload: data,
           });
         } else message.error(msg);

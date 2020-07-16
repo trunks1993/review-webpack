@@ -70,28 +70,28 @@
     height: 100%;
     width: 470px;
   }
-  .byMessage_cst-input {
-    input {
-      border-right: none;
+}
+.byMessage_cst-input {
+  input {
+    border-right: none;
+  }
+  .ant-input-group-addon {
+    border-left: none;
+    background-color: $white;
+    position: relative;
+    &::before {
+      content: " ";
+      display: block;
+      width: 1px;
+      height: 18px;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      background: $border-color;
+      transform: translate(0, -50%);
     }
-    .ant-input-group-addon {
-      border-left: none;
-      background-color: $white;
-      position: relative;
-      &::before {
-        content: " ";
-        display: block;
-        width: 1px;
-        height: 18px;
-        position: absolute;
-        left: 0;
-        top: 50%;
-        background: $border-color;
-        transform: translate(0, -50%);
-      }
-      .ant-btn {
-        @extend .f12;
-      }
+    .ant-btn {
+      @extend .f12;
     }
   }
 }
