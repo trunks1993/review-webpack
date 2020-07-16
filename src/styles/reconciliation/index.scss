@@ -24,4 +24,15 @@
             font-weight: 600;
         }
     }
+    &-download{
+        border: 1px solid #1a61dc;
+        padding: 2px 4px;
+        color: $blue;
+    }
+    &-delete{
+        color: #999999;
+        img{
+            margin-right: 6px;
+        }
+    }
 }

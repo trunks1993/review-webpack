@@ -2,15 +2,16 @@
  * @Author: Dad
  * @Date: 2020-07-13 19:32:18
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-14 09:04:17
+ * @LastEditTime: 2020-07-15 09:23:50
  */
 import React, { useState, useEffect } from 'react';
+import { Form, Button, Table, Pagination, Icon } from 'antd';
 import { connect } from 'dva';
 import { RECONCILIATION_STATUS_ALL } from '@/const';
 import MapForm from '@/components/MapForm';
 import moment from 'moment';
 import _ from 'lodash';
-import { Form, Button, Table, Pagination, Icon } from 'antd';
+import Delete from '@/assets/images/operations/delete.png';
 
 const { CstInput, CstRangePicker } = MapForm;
 
@@ -52,62 +53,68 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
   const columns = [
     {
       title: '日期',
-      align: 'left',
-      className: 'jiaoyiTime',
+      align: 'center',
+      width: 200,
       dataIndex: 'modifyTime',
-      width: '16%',
-      render: modifyTime => { moment(modifyTime).format('YYYY-MM-DD HH:mm:ss'); },
+      render: modifyTime => moment(modifyTime).format('YYYY-MM-DD HH:mm:ss'),
     },
     {
       title: '标题',
+      width: 200,
       align: 'center',
-      width: '20%',
       dataIndex: 'title',
     },
     {
       title: '交易笔数',
+      width: 100,
       align: 'center',
       dataIndex: 'tradeCount',
     },
     {
       title: '交易金额(元)',
       align: 'center',
+      width: 120,
       dataIndex: 'tradeAmount',
+      render: tradeAmount => tradeAmount
     },
     {
       title: '状态',
       align: 'center',
+      width: 120,
       dataIndex: 'status',
       render: status => RECONCILIATION_STATUS_ALL[status]
     },
     {
       title: '创建时间',
       align: 'center',
+      width: 200,
       dataIndex: 'createTime',
       render: createTime => moment(createTime).format('YYYY-MM-DD HH:mm:ss'),
     },
     {
       title: '操作',
+      width: 200,
       align: 'center',
+      fixed: 'right',
       render: (item) => {
         if (item.status === 2) {
           return (
             <>
-              <a href={process.env.IMG_PREFIX + item.checkFileList[0].fileUrl} className={styles.button} style={{ border: '1px solid #1a61dc', padding: '2px 4px', color: '#1a61dc' }}>
+              <a href={process.env.FILE_URL + item.checkFileList[0].fileUrl} className="reconciliation-download" >
                 <Icon type="download" />
-                                下载
+                  下载
               </a>
-              <Button type="link" className={styles.button} style={{ color: '#999999' }}>
-                <img src={Delete} alt="" style={{ marginRight: 6 }} />
-                                删除
+              <Button type="link" className="reconciliation-delete">
+                <img src={Delete} alt="" />
+                  删除
               </Button>
             </>
           );
         }
         return (
-          <Button className={styles.refresh} onClick={initList}>
+          <Button onClick={initList}>
             <Icon type="reload" />
-                        刷新
+              刷新
           </Button>
         );
       },
@@ -165,7 +172,7 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
             <Icon type="setting" style={{ color: '#999' }} />
           </Button>
         </div>
-        <Table dataSource={reconList} columns={columns} pagination={false} scroll={{ x: 1000 }} />
+        <Table dataSource={reconList} columns={columns} pagination={false} scroll={{ x: 1100 , y: 'calc(100vh - 450px)' }} loading={loading} />
         <div
           style={{
             display: 'flex',

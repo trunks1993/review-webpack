@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 14:20:06
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-14 09:04:39
+ * @LastEditTime: 2020-07-15 09:24:57
  */
 import React, { useState, useEffect } from 'react';
 import MapForm from '@/components/MapForm';
@@ -35,13 +35,16 @@ const Order = ({ dispatch, list, total, loading }) => {
 
   const initList = () => {
     const data = form?.getFieldsValue();
+    const time = {
+      beginCreateTime: data.CreateTime?.[0] ? moment(data.CreateTime?.[0]).format('YYYY-MM-DD HH:MM:SS') : undefined,
+      endCreateTime: data.CreateTime?.[0] ? moment(data.CreateTime?.[1]).format('YYYY-MM-DD HH:MM:SS') : undefined
+    };
     dispatch({
       type: 'transaction/fetchList',
       queryParams: {
         currPage,
         pageSize,
-        beginCreateTime: moment(data.CreateTime?.[0]).format('YYYY-MM-DD HH:MM:SS'),
-        endCreateTime: moment(data.CreateTime?.[1]).format('YYYY-MM-DD HH:MM:SS'),
+        ...time,
         ...data,
       },
     });
@@ -51,10 +54,10 @@ const Order = ({ dispatch, list, total, loading }) => {
   const columns = [
     {
       title: '交易时间',
-      align: 'left',
+      align: 'center',
       className: 'jiaoyiTime',
       dataIndex: 'createTime',
-      width: 180,
+      width: 200,
       render: createTime => <div>{moment(createTime).format('YYYY-MM-DD hh:mm:ss')}</div>,
     },
     {
@@ -72,7 +75,7 @@ const Order = ({ dispatch, list, total, loading }) => {
     {
       title: '交易金额(元)',
       align: 'center',
-      width: 120,
+      width: 140,
       dataIndex: 'totalPay',
       render: totalPay => totalPay / 10000,
     },
@@ -97,6 +100,7 @@ const Order = ({ dispatch, list, total, loading }) => {
     },
     {
       title: '状态',
+      fixed: 'right',
       dataIndex: 'status',
       width: 100,
       render: (status) => {
@@ -130,6 +134,7 @@ const Order = ({ dispatch, list, total, loading }) => {
             style={{ width: 260 }}
             customProps={{
               placeholder: '请输入交易类型',
+              size: 'large',
             }}
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
@@ -172,7 +177,7 @@ const Order = ({ dispatch, list, total, loading }) => {
             }}
           />
           <Form.Item>
-            <Button icon="search" className="filter_button--blue" onClick={() => initList()}>
+            <Button icon="search" className="filter_button--blue" onClick={() => dispatchInit()}>
                   查询
             </Button>
             <Button
@@ -185,7 +190,7 @@ const Order = ({ dispatch, list, total, loading }) => {
           </Form.Item>
         </MapForm>
       </div>
-      <Table dataSource={list} columns={columns} pagination={false} scroll={{ x: 1400 }} />
+      <Table loading={loading} dataSource={list} columns={columns} pagination={false} scroll={{ x: 1300,y: 'calc(100vh - 480px)' }} />
       <div
         style={{
           display: 'flex',

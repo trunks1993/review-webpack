@@ -1,0 +1,143 @@
+.app{
+    width: 1010px;
+    height: 100vh;
+    background-color: $white;
+    padding: 30px;
+    &-title{
+        @extend .f16;
+        font-family:Microsoft YaHei;
+        font-weight:bold;
+        color:$black;
+    }
+    &-desc{
+        @extend .f12;
+        font-family:Microsoft YaHei;
+        font-weight:400;
+        color: $blue;
+        margin-left: 10px;
+    }
+    &-content{
+        margin: 14px 0px;
+        min-height: 450px;
+        border: 1px solid $border-color1;
+    }
+    &-list{
+        width: 290px;
+        height: 180px;
+        float: left;
+        margin: 20px 10px;
+        border: 1px solid $border-color2;
+        cursor: pointer;
+        &--head{
+            height: 53px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0px 10px;
+            background-color: $border-color1;
+            .app-list--headImg{
+                img{
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                }
+            }
+            .app-list--headInfo{
+                width: 210px;
+                padding: 0px 10px;
+            }
+            .app-list--headTitle{
+                @extend .f14;
+                font-family:Microsoft YaHei;
+                font-weight:bold;
+                color:$black;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .app-list--headDesc{
+                @extend .f12;
+                font-family:Microsoft YaHei;
+                font-weight:400;
+                color:$black1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .app-list--headIcon{
+                img{
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+        &--content{
+            width: 100%;
+            padding: 10px 4px;
+            margin-top: 10px;
+            background-color: $white;
+            .app-list--keyVal{
+                @extend .f12;
+                font-family:Microsoft YaHei;
+                font-weight:400;
+                color:$black;
+                margin-bottom: 10px;
+                .app-list-key{
+                    display: inline-block;
+                    text-align: right;
+                    width: 60px;
+                }
+                .app-list-val{
+                    margin: 0px 6px;
+                    word-wrap:break-word; 
+                    word-break:break-all;
+                }
+                .app-list-visible{
+                    display: inline-flex;
+                    align-items: center;
+                    width: 20px;
+                    height: 20px;
+                    img{
+                        width: 17px;
+                        height: 8px;
+                    }
+                }
+            }
+        }
+        &--footer{
+            padding: 0 20px;
+            .app-list--leftBut{
+              width: 100px;
+              height: 28px;
+              background-color: $blue;
+              color: $white;
+            }
+            .app-list--rightBut{
+                width: 100px;
+                height: 28px;
+                color: $blue;
+                margin-left: 30px;
+                border: 1px solid $blue;
+            }
+        }
+    }
+    &-newlist{
+        width: 290px;
+        height: 180px;
+        float: left;
+        margin: 20px 10px;
+        background-color: $border-color;
+        border: 1px dashed $black1;
+        font-weight: 400;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all .3s cubic-bezier(.645,.045,.355,1);
+    }
+    &-newlist:hover{
+        background-color: $white;
+        border-color: $blue;
+        color: $blue;
+    }
+}

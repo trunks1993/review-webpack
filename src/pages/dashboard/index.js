@@ -1,11 +1,11 @@
 /*
  * @Date: 2020-07-01 11:32:59
- * @LastEditTime: 2020-07-14 18:38:48
+ * @LastEditTime: 2020-07-15 10:16:55
  */
 import React, { useEffect, useState } from 'react';
 import { connect } from 'dva';
 import Title from './title';
-import Context from './context';
+import Content from './content';
 import Footer from './footer';
 import User from './user';
 import Platform from './platform';
@@ -30,7 +30,7 @@ const dashboard = ({ list }) => {
     <div className="dashboard">
       <div className="dashboard-left">
         <Title />
-        <Context list={amountList} />
+        <Content list={amountList} />
         <Footer />
       </div>
       <div className="dashboard-right">

@@ -34,7 +34,7 @@
         }
         &--text{
             cursor: pointer;
-            color: #999999;
+            color: $black1;
         }
     }
 }
@@ -57,7 +57,7 @@
         display: inline-block;
     }
 }
-.context{
+.content{
     height: 340px;
     margin-top: 10px;
     &-left{
@@ -69,7 +69,7 @@
         float: left;
         &--title{
             color: $black;
-            font-size: 16px;
+            @extend .f16;
             font-family: MicrosoftYaHei-Bold;
             font-weight: 600;
             padding-bottom: 16px;
@@ -82,7 +82,7 @@
             font-weight: 600;
             color: $blue;
         }
-        &--context{
+        &--content{
             padding: 20px 0px 0px 10px;
         }
     }
@@ -104,7 +104,7 @@
         @extend .f12;
     }
     &-title{
-        font-size: 16px;
+        @extend .f16;
         font-weight: bold;
     }
     &-balance{
@@ -121,7 +121,7 @@
         }
         &--text{
             @extend .f14;
-            color: #999;
+            color: $black1;
         }
         &--money{
             font-size: 28px;
@@ -154,7 +154,7 @@
             height: 105px;
         }
         div{
-            color: #DADCE6;
+            color: $gray1;
             margin-top: 10px;
         }
     }
@@ -166,7 +166,7 @@
     padding: 20px 30px;
     &-title{
         padding: 0px 10px 20px 10px;
-        border-bottom: 1px solid #e6e6e6;
+        border-bottom: 1px solid $border-color1;
         &--name{
             font-size:16px;
             font-family:Microsoft YaHei;
@@ -198,7 +198,7 @@
         &--right{
             background-color: $white;
             color: $blue;
-            border: 1px solid #1a61dc;
+            border: 1px solid $blue;
             @extend .f12;
             margin-top: 30px;
             margin-left: 30px;
@@ -213,11 +213,11 @@
     background-color: $white;
     padding: 17px 22px;
     &-title{
-        font-size: 16px;
+        @extend .f16;
         font-weight: bold;
         color: $black;
         padding: 0px 10px 17px 10px;
-        border-bottom: 1px solid #DADCE6;
+        border-bottom: 1px solid $gray1;
         margin-top: 5px;
     }
 }

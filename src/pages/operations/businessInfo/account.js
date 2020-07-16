@@ -2,11 +2,11 @@
  * @Author: Dad
  * @Date: 2020-07-13 19:32:18
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-14 09:05:04
+ * @LastEditTime: 2020-07-16 15:09:20
  */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
-import { RECONCILIATION_STATUS_ALL, ACCOUNT_INFO_ALL } from '@/const';
+import { ACCOUNT_INFO_ALL } from '@/const';
 import MapForm from '@/components/MapForm';
 import moment from 'moment';
 import _ from 'lodash';
@@ -14,7 +14,7 @@ import { Form, Button, Table, Pagination, Icon, Select } from 'antd';
 
 const { CstInput, CstSelect } = MapForm;
 
-const account = ({ dispatch, reconList, reconTotal, loading }) => {
+const account = ({ dispatch, list, total, loading }) => {
   const [form, setForm] = useState({});
   const [currPage, setCurrPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -37,7 +37,7 @@ const account = ({ dispatch, reconList, reconTotal, loading }) => {
   const initList = () => {
     const data = form?.getFieldsValue();
     dispatch({
-      type: 'transaction/fetchReconList',
+      type: 'businessInfo/fetchActList',
       queryParams: {
         currPage,
         pageSize,
@@ -90,37 +90,6 @@ const account = ({ dispatch, reconList, reconTotal, loading }) => {
     {
       title: '操作',
       dataIndex: 'operation',
-      render: (text, record) => {
-        const { editingKey } = this.state;
-        const editable = this.isEditing(record);
-        return editable ? (
-          <span>
-            <EditableContext.Consumer>
-              {form => (
-                <Button
-                  onClick={() => this.save(form, record.key)}
-                  style={{ marginRight: 8 }}
-                  type="link"
-                >
-                  {'保存'}
-                </Button>
-              )}
-            </EditableContext.Consumer>
-            <Popconfirm title="是否取消更改?" onConfirm={() => this.cancel(record.key)}>
-              <Button type="link">取消</Button>
-            </Popconfirm>
-          </span>
-        ) : (
-          <>
-            <Button type="link" disabled={editingKey !== ''} onClick={() => this.edit(record.key)}>
-              {'编辑'}
-            </Button>
-            <Button type="link" disabled={editingKey !== ''} onClick={() => this.delete(record.key)}>
-              {'删除'}
-            </Button>
-          </>
-        );
-      },
     },
   ];
 
@@ -180,7 +149,7 @@ const account = ({ dispatch, reconList, reconTotal, loading }) => {
                 添加账号
           </Button>
         </div>
-        <Table dataSource={reconList} columns={columns} pagination={false} scroll={{ x: 1000 }} />
+        <Table dataSource={list} columns={columns} pagination={false} scroll={{ x: 1300,y: 'calc(100vh - 480px)' }} />
         <div
           style={{
             display: 'flex',
@@ -193,10 +162,10 @@ const account = ({ dispatch, reconList, reconTotal, loading }) => {
             disabled={loading}
             current={currPage}
             defaultPageSize={pageSize}
-            total={reconTotal}
+            total={total}
           />
           <span style={{ color: '#CCCCCC', marginLeft: '10px' }}>
-            共{reconTotal}条
+            共{total}条
           </span>
         </div>
       </div>
@@ -204,8 +173,8 @@ const account = ({ dispatch, reconList, reconTotal, loading }) => {
   );
 };
 
-export default connect(({ transaction: { reconList, reconTotal } = {}, loading }) => ({
-  reconList,
-  reconTotal,
-  loading: loading.effects['transaction/fetchReconList']
+export default connect(({ transaction: { list, total } = {}, loading }) => ({
+  list,
+  total,
+  loading: loading.effects['businessInfo/fetchActList']
 }))(account);
