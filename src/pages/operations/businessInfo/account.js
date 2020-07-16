@@ -6,7 +6,7 @@
  */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
-import { ACCOUNT_INFO_ALL } from '@/const';
+import { AccountInfo } from '@/const';
 import MapForm from '@/components/MapForm';
 import moment from 'moment';
 import _ from 'lodash';
@@ -121,7 +121,7 @@ const account = ({ dispatch, list, total, loading }) => {
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
           >
-            {_.map(ACCOUNT_INFO_ALL, (item, key) => (
+            {_.map(AccountInfo, (item, key) => (
               <Select.Option key={key} value={parseInt(key)}>
                 {item}
               </Select.Option>

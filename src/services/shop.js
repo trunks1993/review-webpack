@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-04 09:49:04
- * @LastEditTime: 2020-07-04 10:10:12
+ * @LastEditTime: 2020-07-14 16:39:21
  */
 import request from '@/utils/request';
 
@@ -35,6 +35,29 @@ export async function getBrandList(data) {
 
 export async function getProductMap(data) {
   return request('/search/searchProductMap', {
+    method: 'POST',
+    data,
+  });
+}
+
+export async function getPurchaseOrder(data) {
+  return request('/order/searchOrderList', {
+    method: 'POST',
+    data,
+  });
+}
+
+export async function cancelOrder(orderId) {
+  return request('/order/cancelOrder', {
+    method: 'POST',
+    data: {
+      orderId,
+    },
+  });
+}
+
+export async function queryListTrace(data) {
+  return request('/order/searchOrderChargeTraceList', {
     method: 'POST',
     data,
   });

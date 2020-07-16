@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-20 17:03:19
- * @LastEditTime: 2020-07-13 11:20:08
+ * @LastEditTime: 2020-07-15 19:55:56
  */
 import React from 'react';
 import { connect } from 'dva';
@@ -9,7 +9,7 @@ import { routerRedux, Route, Redirect } from 'dva/router';
 
 import { getToken } from '@/utils/auth';
 
-const AuthRoute = ({ Component, authTo, user, dispatch }) => {
+const AuthRoute = ({ Component, authTo, user, dispatch, ...rest }) => {
   return (
     <Route
       render={(props) => {
@@ -23,14 +23,19 @@ const AuthRoute = ({ Component, authTo, user, dispatch }) => {
         );
         if (token) {
           // 如果有token 判断有没有用户信息没有就去拉取
-          if (!user.id) dispatch({
-            type: 'account/setUser',
-          });
+          if (!user.id) {
+            dispatch({
+              type: 'account/setUser',
+            });
+            dispatch({
+              type: 'account/setAmount',
+            });
+          }
+
           return !isLogin ? c : r;
         }
         return isLogin ? c : r;
       }}
-
     />
   );
 };

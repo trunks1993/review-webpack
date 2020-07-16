@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 11:29:45
- * @LastEditTime: 2020-07-04 13:38:13
+ * @LastEditTime: 2020-07-16 19:22:40
  */
 
 import React from 'react';
@@ -32,7 +32,7 @@ const recursion = (dataSource) => {
         </SubMenu>
       );
     }
-    return (
+    return !menu.hidden ? (
       <Menu.Item key={menu.id} onClick={(e) => history.push(`${menu.path}`)}>
         <span style={{ position: 'relative', left: '20px' }}>
           <i className={`iconfont ${menu.icon}`} />
@@ -41,7 +41,7 @@ const recursion = (dataSource) => {
           </span>
         </span>
       </Menu.Item>
-    );
+    ) : null;
   });
 };
 

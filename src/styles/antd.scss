@@ -89,3 +89,56 @@
     }
   }
 }
+
+/* 全局table样式 */
+.global-table {
+  td {
+    padding: 4px 16px !important;
+    min-height: 40px;
+  }
+  th {
+    background: #e6e6e6 !important;
+    font-size: 12px;
+    border-top: 1px solid #e6e6e6;
+    padding: 4px 16px !important;
+    min-height: 40px;
+  }
+  &--none {
+    display: none;
+  }
+}
+
+/* 全局弹窗样式 */
+.global-modal {
+  .ant-modal {
+    &-header {
+      padding: 13px 24px;
+      background: #f2f2f2;
+    }
+
+    &-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    &-close-x {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+    }
+
+    &-footer {
+      padding: 8px 40px;
+      background: #f2f2f2;
+    }
+  }
+  &-btn-ok {
+    width: 80px;
+    height: 30px !important;
+    margin-left: 20px !important;
+  }
+  &-btn-cancel {
+    width: 80px;
+    height: 30px !important;
+  }
+}

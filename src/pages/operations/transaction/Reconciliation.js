@@ -7,7 +7,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Table, Pagination, Icon } from 'antd';
 import { connect } from 'dva';
-import { RECONCILIATION_STATUS_ALL } from '@/const';
+import { ReconStatus } from '@/const';
 import MapForm from '@/components/MapForm';
 import moment from 'moment';
 import _ from 'lodash';
@@ -82,7 +82,7 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
       align: 'center',
       width: 120,
       dataIndex: 'status',
-      render: status => RECONCILIATION_STATUS_ALL[status]
+      render: status => ReconStatus[status]
     },
     {
       title: '创建时间',

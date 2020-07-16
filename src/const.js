@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-30 11:17:03
- * @LastEditTime: 2020-07-16 19:38:33
+ * @LastEditTime: 2020-07-16 20:00:08
  */
 
 export const METHOD_POST = 'POST'; // post
@@ -53,61 +53,58 @@ export const TraceStatus = {
   [TRACE_STATUS_7]: '取消',
 };
 
-export const ORDER_TYPE_0 = 0;
-export const ORDER_TYPE_1 = 1;
-export const ORDER_TYPE_2 = 2;
-/** 订单类型 */
-export const ORDER_TYPE_ALL = {
-  [ORDER_TYPE_0]: '全部',
-  [ORDER_TYPE_1]: '批采',
-  [ORDER_TYPE_2]: '直充',
+export const TRANSACTION_TYPE_1 = 1;
+export const TRANSACTION_TYPE_2 = 2;
+
+export const TransactionTypes = {
+  [TRANSACTION_TYPE_1]: '批采',
+  [TRANSACTION_TYPE_2]: '直充',
 };
 
 export const RECONCILIATION_STATUS_0 = 0;
 export const RECONCILIATION_STATUS_1 = 1;
 export const RECONCILIATION_STATUS_2 = 2;
 
-/** 对账状态 */
-export const RECONCILIATION_STATUS_ALL = {
+// 对账状态
+export const ReconStatus = {
   [RECONCILIATION_STATUS_0]: '待生成',
   [RECONCILIATION_STATUS_1]: '生成中',
   [RECONCILIATION_STATUS_2]: '已生成',
 };
 
-/** 信息 */
+// 信息 
 export const ACCOUNT_INFO_1 = 1;
 export const ACCOUNT_INFO_2 = 2;
 export const ACCOUNT_INFO_3 = 3;
 
-export const ACCOUNT_INFO_ALL = {
+export const AccountInfo = {
   [ACCOUNT_INFO_1]: '管理员',
   [ACCOUNT_INFO_2]: '运营',
   [ACCOUNT_INFO_3]: '财务',
-
 };
 
-/** 用户类型 */
+// 用户类型 
 export const USER_TYPE_0 = 0;
 export const USER_TYPE_1 = 1;
 export const USER_TYPE_2 = 2;
 export const USER_TYPE_3 = 3;
 
-export const USER_TYPE_ALL = {
+export const UserTypes = {
   [USER_TYPE_0]: '未知',
   [USER_TYPE_1]: '个体工商户/个人',
   [USER_TYPE_2]: '企业',
   [USER_TYPE_3]: '政府',
 };
 
-/** 用户状态 */
-export const USER_STATUS_0 = 0;
-export const USER_STATUS_1 = 1;
-export const USER_STATUS_2 = 2;
-export const USER_STATUS_3 = 3;
+// 商户资料
+export const MERCHANT_STATUS_0 = 0; // 未认证
+export const MERCHANT_STATUS_1 = 1; // 待审核
+export const MERCHANT_STATUS_2 = 2; // 驳回
+export const MERCHANT_STATUS_3 = 3; // 已认证
 
-export const USER_STATUS_ALL = {
-  [USER_STATUS_0]: '未认证',
-  [USER_STATUS_1]: '待审核',
-  [USER_STATUS_2]: '驳回',
-  [USER_STATUS_3]: '已认证',
+export const MerchantStatus = {
+  [MERCHANT_STATUS_0]: '未认证',
+  [MERCHANT_STATUS_1]: '待审核',
+  [MERCHANT_STATUS_2]: '驳回',
+  [MERCHANT_STATUS_3]: '已认证',
 };

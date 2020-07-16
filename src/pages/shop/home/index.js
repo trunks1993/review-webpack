@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 19:14:16
- * @LastEditTime: 2020-07-13 17:02:02
+ * @LastEditTime: 2020-07-16 19:26:24
  */
 
 import React, { useEffect, useState } from 'react';
@@ -17,6 +17,8 @@ import { message, Pagination, List, Avatar, Card, Skeleton } from 'antd';
 import ProductWrapper from './ProductWrapper';
 
 export default (props) => {
+  const { history } = props;
+
   const [loading, setLoading] = useState(false);
   const [categoryLoading, setCategoryLoading] = useState(false);
   const [productTypeLoading, setProductTypeLoading] = useState(false);
@@ -132,6 +134,8 @@ export default (props) => {
         onFilterChange={onFilterChange}
       />
       <List
+        loading={categoryLoading || productTypeLoading}
+        locale={{ emptyText: '暂无数据' }}
         grid={{
           column: 3,
           gutter: 10,
@@ -142,7 +146,7 @@ export default (props) => {
             key={item.brandCode}
             style={{ marginBottom: '10px' }}
             onClick={() => {
-              console.log(11);
+              history.push('/admin/shop/item');
             }}
           >
             <Card>
@@ -157,6 +161,7 @@ export default (props) => {
               <ProductWrapper
                 loading={loading}
                 productList={item.productList}
+                history={history}
               />
             </Card>
           </List.Item>

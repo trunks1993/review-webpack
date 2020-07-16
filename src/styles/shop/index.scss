@@ -71,7 +71,6 @@ $filterItemHeight: 42 40 50;
       border: 1px dashed #39a1fd;
     }
   }
-
   &_product-wrapper {
     margin-top: 20px;
     border-top: 1px solid #e6e6e6;
@@ -97,6 +96,92 @@ $filterItemHeight: 42 40 50;
           margin-right: 12px;
         }
       }
+    }
+  }
+}
+
+.purchase-order {
+  border: 1px solid rgba(230, 230, 230, 1);
+  border-radius: 2px;
+  height: 100%;
+  background: #fff;
+  overflow-y: scroll;
+  .ant-tabs-bar {
+    margin: 0;
+  }
+  &_product-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+    display: inline-block;
+  }
+  &_trace-btn {
+    color: #1a61dc;
+    border: 1px solid #1a61dc;
+    font-size: 12px;
+    vertical-align: top;
+    cursor: pointer;
+    padding: 2px 5px;
+    font-weight: 500;
+    margin-left: 10px;
+  }
+  &_header {
+    background: #e6e6e6;
+    color: #999999;
+    padding: 13px 20px;
+    font-size: 12px;
+  }
+
+  &_table-header {
+    background: #f2f2f2;
+    border: 1px solid #e6e6e6;
+    text-align: center;
+    font-size: 12px;
+    padding: 6px 0;
+    &--fixed {
+      background: #f2f2f2;
+      border: 1px solid #e6e6e6;
+      text-align: center;
+      font-size: 12px;
+      padding: 6px 0;
+      position: fixed;
+      top: 70px;
+      z-index: 1;
+      width: 1008px;
+    }
+  }
+
+  &_table-title {
+    color: #333333;
+    font-size: 12px;
+    line-height: 30px;
+    padding-left: 50px;
+    height: 30px;
+    background: rgba(238, 238, 238, 1);
+    border: 1px solid rgba(230, 230, 230, 1);
+  }
+
+  &_table-item {
+    // text-align: center;
+    .ant-col {
+      height: 87px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .ant-btn-link {
+        color: #999999;
+      }
+      .ant-list-item-meta-title {
+        white-space: nowrap;
+      }
+    }
+    .ant-col:nth-child(4) {
+      border-right: 1px solid #e6e6e6;
+    }
+  }
+  &_table-item:not(:last-child) {
+    .ant-col:nth-child(-n + 4) {
+      border-bottom: 1px solid #e6e6e6;
     }
   }
 }
