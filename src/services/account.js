@@ -3,15 +3,15 @@
  * @LastEditTime: 2020-07-15 19:54:54
  */
 
-import request from "@/utils/request";
+import request from '@/utils/request';
 
 /**
  * @name: 登录
  * @param {data}
  */
 export async function fakeAccountLogin(data) {
-  return request("/user/login", {
-    method: "POST",
+  return request('/user/login', {
+    method: 'POST',
     data,
   });
 }
@@ -21,8 +21,8 @@ export async function fakeAccountLogin(data) {
  * @param {type}
  */
 export async function getUserInfo() {
-  return request("/user/getUserInfo", {
-    method: "POST",
+  return request('/user/getUserInfo', {
+    method: 'POST',
   });
 }
 
@@ -31,7 +31,7 @@ export async function getUserInfo() {
  * @param {type}
  */
 export async function getAccountInfo() {
-  return request("/account/getAccount", {
-    method: "POST",
+  return request('/account/getAccount', {
+    method: 'POST',
   });
 }

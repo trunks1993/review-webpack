@@ -3,17 +3,17 @@
  * @LastEditTime: 2020-07-16 15:08:25
  */
 
-import React, { useEffect, useState } from "react";
-import { getQueryVariable } from "@/utils";
-import { getStepCookie, setStepCookie } from "@/utils/auth";
+import React, { useEffect, useState } from 'react';
+import { getQueryVariable } from '@/utils';
+import { getStepCookie, setStepCookie } from '@/utils/auth';
 
-import { getOrderInfo } from "@/services/pay";
-import { message, Button } from "antd";
-import Step from "./Step";
-import ConfirmOrder from "./ConfirmOrder";
-import ConfirmPay from "./ConfirmPay";
-import PaySuccess from "./PaySuccess";
-import { connect } from "dva";
+import { getOrderInfo } from '@/services/pay';
+import { message, Button } from 'antd';
+import Step from './Step';
+import ConfirmOrder from './ConfirmOrder';
+import ConfirmPay from './ConfirmPay';
+import PaySuccess from './PaySuccess';
+import { connect } from 'dva';
 
 const Pay = (props) => {
   const { location, amount, telephone, history } = props;
@@ -34,8 +34,8 @@ const Pay = (props) => {
     }
   };
 
-  const initOrderInfo = async () => {
-    const orderId = getQueryVariable("orderId");
+  const initOrderInfo = async() => {
+    const orderId = getQueryVariable('orderId');
     try {
       const [err, data, msg] = await getOrderInfo(orderId);
       if (!err) {
@@ -58,7 +58,7 @@ const Pay = (props) => {
         telephone={telephone}
       />
     ),
-    4: () => <PaySuccess history={history}/>,
+    4: () => <PaySuccess history={history} />,
   };
 
   return (

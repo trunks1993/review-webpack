@@ -17,7 +17,7 @@ export default {
   namespace: 'account',
   state: {
     user: {},
-    amountInfo: {}, 
+    amountInfo: {},
   },
   effects: {
     *login({ payload, callback }, { call, put }) {

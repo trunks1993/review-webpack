@@ -3,9 +3,9 @@
  * @LastEditTime: 2020-07-14 21:27:23
  */
 
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie';
 
-const TokenKey = "USERTOKEN";
+const TokenKey = 'USERTOKEN';
 
 export const getToken = () => Cookies.get(TokenKey);
 
@@ -13,7 +13,7 @@ export const setToken = (token) => Cookies.set(TokenKey, token);
 
 export const removeToken = () => Cookies.remove(TokenKey);
 
-const StepKey = "STEPTOKEN";
+const StepKey = 'STEPTOKEN';
 
 export const getStepCookie = () => Cookies.get(StepKey);
 

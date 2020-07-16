@@ -3,9 +3,9 @@
  * @LastEditTime: 2020-07-16 15:09:36
  */
 
-import React from "react";
-import { Button } from "antd";
-import success from "@/assets/images/pay/success.png";
+import React from 'react';
+import { Button } from 'antd';
+import success from '@/assets/images/pay/success.png';
 
 export default (props) => {
   const { history } = props;
@@ -19,7 +19,7 @@ export default (props) => {
       <Button
         type="primary"
         ghost
-        onClick={() => history.push({ pathname: "/admin/shop/purchaseOrder" })}
+        onClick={() => history.push({ pathname: '/admin/shop/purchaseOrder' })}
       >
         去查看
       </Button>

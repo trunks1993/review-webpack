@@ -3,9 +3,9 @@
  * @LastEditTime: 2020-07-16 17:25:10
  */
 
-import React, { useState, useEffect } from "react";
-import { Button, Input, message } from "antd";
-import { sendAuthCode, pay } from "@/services/pay";
+import React, { useState, useEffect } from 'react';
+import { Button, Input, message } from 'antd';
+import { sendAuthCode, pay } from '@/services/pay';
 
 export default (props) => {
   const { amount, telephone, orderInfo, changeStep } = props;
@@ -16,7 +16,7 @@ export default (props) => {
 
   let timer = null;
 
-  const handleSendAuthCode = async () => {
+  const handleSendAuthCode = async() => {
     try {
       setLoading(true);
       const [err, data, msg] = await sendAuthCode(telephone);
@@ -47,9 +47,9 @@ export default (props) => {
     }, 1000);
   };
 
-  const handlePay = async () => {
+  const handlePay = async() => {
     const code = inputRef.current.state.value;
-    if (!code) return message.error("请输入手机验证码");
+    if (!code) return message.error('请输入手机验证码');
     try {
       const [err, data, msg] = await pay({
         orderId: orderInfo.order.orderId,
@@ -94,7 +94,7 @@ export default (props) => {
           </span>
           <Input
             ref={inputRef}
-            style={{ width: "180px" }}
+            style={{ width: '180px' }}
             size="large"
             className="byMessage_cst-input"
             addonAfter={
@@ -104,7 +104,7 @@ export default (props) => {
                 type="link"
                 onClick={handleSendAuthCode}
               >
-                {timing ? time + "s" : !loading && "发送验证码"}
+                {timing ? time + 's' : !loading && '发送验证码'}
               </Button>
             }
           />
@@ -115,7 +115,7 @@ export default (props) => {
           确认付款
         </Button>
         <Button
-          style={{ marginLeft: "10px" }}
+          style={{ marginLeft: '10px' }}
           onClick={() => {
             changeStep(2);
           }}
