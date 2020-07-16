@@ -72,7 +72,7 @@ export const ReconStatus = {
   [RECONCILIATION_STATUS_2]: '已生成',
 };
 
-// 信息 
+// 信息
 export const ACCOUNT_INFO_1 = 1;
 export const ACCOUNT_INFO_2 = 2;
 export const ACCOUNT_INFO_3 = 3;
@@ -83,7 +83,7 @@ export const AccountInfo = {
   [ACCOUNT_INFO_3]: '财务',
 };
 
-// 用户类型 
+// 用户类型
 export const USER_TYPE_0 = 0;
 export const USER_TYPE_1 = 1;
 export const USER_TYPE_2 = 2;
