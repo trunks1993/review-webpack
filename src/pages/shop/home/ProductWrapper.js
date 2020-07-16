@@ -13,7 +13,7 @@ export default (props) => {
 
   const itemClick = (e, productCode) => {
     e.stopPropagation();
-    history.push('/admin/shop/item')
+    history.push('/admin/shop/item');
   };
 
   return (
