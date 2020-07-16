@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 16:24:34
- * @LastEditTime: 2020-07-13 21:33:21
+ * @LastEditTime: 2020-07-16 19:14:47
  */
 // layout下的子模块
 import ChildLayout from '@/pages';
@@ -9,10 +9,6 @@ import Dashboard from '@/pages/dashboard';
 import ShopHome from '@/pages/shop/home';
 import PurchaseOrder from '@/pages/shop/purchaseOrder';
 import ServiceOrder from '@/pages/shop/serviceOrder';
-
-import Order from '@/pages/operations/transaction/Order';
-import Reconciliation from '@/pages/operations/transaction/Reconciliation';
-import Account from '@/pages/operations/businessInfo/account';
 
 import module_shop_menu_icon from '@/assets/images/global/module_shop_menu_icon.png';
 import module_fund_menu_icon from '@/assets/images/global/module_fund_menu_icon.png';
@@ -101,8 +97,15 @@ export const asyncRoutes = [
           {
             id: 221,
             title: '应用信息',
-            path: '/dashboard',
-            component: Dashboard,
+            path: '/admin/operations/businessInfo/application',
+            component: Application,
+            isLeaf: true,
+          },
+          {
+            id: 221,
+            title: '修改应用',
+            path: '/admin/operations/businessInfo/modifyApp',
+            component: ModifyApp,
             isLeaf: true,
           },
           {
