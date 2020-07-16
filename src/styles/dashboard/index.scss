@@ -1,0 +1,223 @@
+.dashboard{
+    width: 1200px;
+    height: 100%;
+    margin-top: 10px;
+    @extend .f12;
+    &-left{
+        width: 870px;
+        margin-right: 10px;
+        float: left;
+    }
+    &-right{
+        width: 320px;
+        float: left;
+    }
+    &-footer{
+        width: 870px;
+        height: 180px;
+        margin-top: 10px;
+        background-color: $white;
+        display: flex;
+        align-items: center;
+        &--leftImg{
+            margin-left: -6px;
+            margin-top: -16px;
+            margin-right: 20px;
+        }
+        &--rightImg{
+            padding: 0px 30px;
+        }
+        &--Img{
+            height: 57px;
+            cursor: pointer;
+            width: 50px;
+        }
+        &--text{
+            cursor: pointer;
+            color: $black1;
+        }
+    }
+}
+.title{
+    background-color: $white;
+    height: 40px;
+    padding: 13px 20px;
+    &-img{
+        margin-right: 10px;
+        margin-top: -3px;
+        width: 16px;
+        height: 16px;
+    }
+    &-right{
+        float: right;
+        color: $blue;
+        cursor: pointer;
+    }
+    &-desc{
+        display: inline-block;
+    }
+}
+.content{
+    height: 340px;
+    margin-top: 10px;
+    &-left{
+        width: 360px;
+        height: 100%;
+        margin-right: 10px;
+        background-color: $white;
+        padding: 20px 18px;
+        float: left;
+        &--title{
+            color: $black;
+            @extend .f16;
+            font-family: MicrosoftYaHei-Bold;
+            font-weight: 600;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #DADCE6;
+        }
+        &--right{
+            float: right;
+            cursor: pointer;
+            @extend .f14;
+            font-weight: 600;
+            color: $blue;
+        }
+        &--content{
+            padding: 20px 0px 0px 10px;
+        }
+    }
+
+    &-right{
+        width: 500px;
+        height: 100%;
+        background-color: $white;
+        float: right;
+        padding: 14px 22px;
+    }
+    
+    &-clean{
+        clear:both
+    }
+    &-text{
+        color: $white;
+        padding: 15px;
+        @extend .f12;
+    }
+    &-title{
+        @extend .f16;
+        font-weight: bold;
+    }
+    &-balance{
+        margin: 10px 0px;
+        height: 60px;
+        &--left{
+            float: left;
+            width: 30px;
+            height: 30px;
+            margin: 10px 20px;
+        }
+        &--right{
+            float: left;
+        }
+        &--text{
+            @extend .f14;
+            color: $black1;
+        }
+        &--money{
+            font-size: 28px;
+            font-weight: 600;
+            color: $black;
+        }
+    }
+    &-but--left{
+        width: 120px;
+        height: 36px;
+        border-radius: 4px;
+        margin-left: 10px;
+        background-color: $blue;
+    }
+    &-but--right{
+        width: 120px;
+        height: 36px;
+        margin-top: 30px;
+        margin-left: 30px;
+        border-radius: 4px;
+        border: 1px solid $blue;
+        color: $blue;
+    }
+    &-sj{
+        text-align: center;
+        margin-top: 30px;
+        font-size: 13px;
+        img{
+            width: 120px;
+            height: 105px;
+        }
+        div{
+            color: $gray1;
+            margin-top: 10px;
+        }
+    }
+}
+.user{
+    width: 320px;
+    height: 328px;
+    background-color: $white;
+    padding: 20px 30px;
+    &-title{
+        padding: 0px 10px 20px 10px;
+        border-bottom: 1px solid $border-color1;
+        &--name{
+            font-size:16px;
+            font-family:Microsoft YaHei;
+            font-weight:bold;
+            color:$black;
+            margin-top: 10px;
+        }
+        img{
+            width: 60px;
+            height: 60px;
+        }
+    }
+    &-desc{
+        .ant-row{
+            margin-left: 20px;
+            color: $black;
+            @extend .f12;
+        }
+        .ant-col{
+            margin-top: 10px;
+        }
+        &--left{
+            background-color: $blue;
+            @extend .f12;
+            margin-top: 30px;
+            width: 90px;
+            margin-left: 20px;
+        }
+        &--right{
+            background-color: $white;
+            color: $blue;
+            border: 1px solid $blue;
+            @extend .f12;
+            margin-top: 30px;
+            margin-left: 30px;
+            width: 90px;
+        }
+    }
+}
+.platform{
+    margin-top: 10px;
+    width: 320px;
+    height: 240px;
+    background-color: $white;
+    padding: 17px 22px;
+    &-title{
+        @extend .f16;
+        font-weight: bold;
+        color: $black;
+        padding: 0px 10px 17px 10px;
+        border-bottom: 1px solid $gray1;
+        margin-top: 5px;
+    }
+}

@@ -6,6 +6,10 @@
 @import "./shop/index.scss";
 @import "./pay/index.scss";
 @import "./iconfont/iconfont.css";
+@import "./dashboard/index.scss";
+@import "./order/index.scss";
+@import "./reconciliation/index.scss";
+@import "./application/index.scss";
 
 /*!
  * @名称：base.css
@@ -164,6 +168,9 @@ div:focus {
 .f14 {
   font-size: 14px;
 }
+.f16 {
+  font-size: 16px;
+}
 
 .fbc {
   display: flex;
@@ -174,4 +181,34 @@ div:focus {
 .fb {
   display: flex;
   justify-content: space-between;
+}
+
+.filter-form{
+  .ant-form-item{
+    padding-bottom: 10px;
+  }
+  .filter_button--white{
+    width: 90px;
+    height: 32px;
+    margin-left: 20px;
+  }
+  .filter_button--blue{
+    background-color: $blue;
+    color: $white;
+    width: 90px;
+    height: 32px;
+  }
+}
+.app-modal{
+  .ant-modal-header{
+    background-color: #f2f2f2 !important;
+  }
+  .ant-modal-footer{
+    background-color: #f2f2f2 !important;
+  }
+  .ant-modal-title{
+    font-size: 16px;
+    color: $black;
+    font-weight: 600;
+  }
 }

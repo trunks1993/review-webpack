@@ -1,0 +1,38 @@
+.reconciliation{
+    &-Info{
+        padding: 30px 30px;
+        height: 100px;
+        background-color: $white;
+    }
+    &-table{
+        background-color: $white;
+        height:calc(100vh - 280px);
+        margin-top: 20px;
+        &--title{
+            margin-left: 20px;
+            padding: 10px;
+        }
+        &--desc{
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        &--name{
+            float: right;
+            font-size: 13px;
+            color: $blue;
+            font-weight: 600;
+        }
+    }
+    &-download{
+        border: 1px solid #1a61dc;
+        padding: 2px 4px;
+        color: $blue;
+    }
+    &-delete{
+        color: #999999;
+        img{
+            margin-right: 6px;
+        }
+    }
+}
