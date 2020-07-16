@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 16:24:34
- * @LastEditTime: 2020-07-14 19:38:27
+ * @LastEditTime: 2020-07-16 19:19:30
  */
 // layout下的子模块
 import ChildLayout from '@/pages';
@@ -8,6 +8,7 @@ import Dashboard from '@/pages/dashboard';
 import Pay from '@/pages/pay';
 
 import ShopHome from '@/pages/shop/home';
+import ShopItem from '@/pages/shop/item';
 import PurchaseOrder from '@/pages/shop/purchaseOrder';
 import ServiceOrder from '@/pages/shop/serviceOrder';
 
@@ -58,6 +59,15 @@ export const asyncRoutes = [
             isLeaf: true,
           },
         ],
+      },
+      {
+        id: 13,
+        title: '品牌详情页',
+        path: '/admin/shop/item',
+        icon: 'icon-gouwuche',
+        component: ShopItem,
+        isLeaf: true,
+        hidden: true,
       },
     ],
   },
