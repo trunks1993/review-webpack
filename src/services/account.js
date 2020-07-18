@@ -38,7 +38,7 @@ export async function getAccountInfo() {
 
 /**
  * @name: 获取购物车
- * @param {type} 
+ * @param {type}
  */
 export async function getCarData() {
   return request('/cart/loadCart', {

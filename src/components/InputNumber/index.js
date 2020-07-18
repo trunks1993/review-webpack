@@ -3,12 +3,12 @@
  * @LastEditTime: 2020-07-17 21:02:43
  */
 
-import React, { useState } from "react";
-import { Icon } from "antd";
+import React, { useState } from 'react';
+import { Icon } from 'antd';
 const InputNumber = (props) => {
   const { min, max, defaultValue, onChange } = props;
   const ref = React.createRef();
-  const [currentValue, setCurrentValue] = useState(defaultValue || "");
+  const [currentValue, setCurrentValue] = useState(defaultValue || '');
 
   const handleBlur = (e) => {
     let value = parseInt(e.target.value);
@@ -20,7 +20,7 @@ const InputNumber = (props) => {
       } else if (max && max % 1 === 0) {
         value = max;
       } else {
-        value = "";
+        value = '';
       }
     } else {
       if (min && value < min) {
@@ -50,7 +50,7 @@ const InputNumber = (props) => {
     <div className="input-number">
       <span
         className={`input-number-minus ${
-          currentValue === min ? "disabled" : ""
+          currentValue === min ? 'disabled' : ''
         }`}
         onClick={currentValue === min ? () => {} : () => handleChange(-1)}
       >
@@ -64,7 +64,7 @@ const InputNumber = (props) => {
       />
       <span
         className={`input-number-plus ${
-          currentValue === max ? "disabled" : ""
+          currentValue === max ? 'disabled' : ''
         }`}
         onClick={currentValue === max ? () => {} : () => handleChange(1)}
       >

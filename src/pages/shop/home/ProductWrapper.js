@@ -3,10 +3,10 @@
  * @LastEditTime: 2020-07-17 10:27:46
  */
 
-import React, { useState, useEffect } from "react";
-import { Skeleton } from "antd";
+import React, { useState, useEffect } from 'react';
+import { Skeleton } from 'antd';
 
-import _ from "lodash";
+import _ from 'lodash';
 
 export default (props) => {
   const { productList, loading, history, productTypeCode } = props;
