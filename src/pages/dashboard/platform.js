@@ -12,8 +12,11 @@ const platform = () => {
   return (
     <div className="platform">
       <div className="platform-title">
-                平台公告
-        <span className="content-left--right">更多消息<Icon type="right-circle" style={{ marginLeft: 5 }} /></span>
+        平台公告
+        <span className="content-left--right">
+          更多消息
+          <Icon type="right-circle" style={{ marginLeft: 5 }} />
+        </span>
       </div>
       <div className="content-sj">
         <img src={UNXX} alt="" />

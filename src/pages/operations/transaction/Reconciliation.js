@@ -56,7 +56,7 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
       align: 'center',
       width: 200,
       dataIndex: 'modifyTime',
-      render: modifyTime => moment(modifyTime).format('YYYY-MM-DD HH:mm:ss'),
+      render: (modifyTime) => moment(modifyTime).format('YYYY-MM-DD HH:mm:ss'),
     },
     {
       title: '标题',
@@ -75,21 +75,21 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
       align: 'center',
       width: 120,
       dataIndex: 'tradeAmount',
-      render: tradeAmount => tradeAmount
+      render: (tradeAmount) => tradeAmount,
     },
     {
       title: '状态',
       align: 'center',
       width: 120,
       dataIndex: 'status',
-      render: status => ReconStatus[status]
+      render: (status) => ReconStatus[status],
     },
     {
       title: '创建时间',
       align: 'center',
       width: 200,
       dataIndex: 'createTime',
-      render: createTime => moment(createTime).format('YYYY-MM-DD HH:mm:ss'),
+      render: (createTime) => moment(createTime).format('YYYY-MM-DD HH:mm:ss'),
     },
     {
       title: '操作',
@@ -100,13 +100,16 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
         if (item.status === 2) {
           return (
             <>
-              <a href={process.env.FILE_URL + item.checkFileList[0].fileUrl} className="reconciliation-download" >
+              <a
+                href={process.env.FILE_URL + item.checkFileList[0].fileUrl}
+                className="reconciliation-download"
+              >
                 <Icon type="download" />
-                  下载
+                下载
               </a>
               <Button type="link" className="reconciliation-delete">
                 <img src={Delete} alt="" />
-                  删除
+                删除
               </Button>
             </>
           );
@@ -114,7 +117,7 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
         return (
           <Button onClick={initList}>
             <Icon type="reload" />
-              刷新
+            刷新
           </Button>
         );
       },
@@ -146,33 +149,43 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
             labelCol={{ span: 6 }}
             wrapperCol={{ span: 18 }}
             customProps={{
-              placeholder: ['开始时间','结束时间'],
+              placeholder: ['开始时间', '结束时间'],
               size: 'large',
             }}
           />
           <Form.Item>
-            <Button icon="search" className="filter_button--blue" onClick={() => dispatchInit()}>
-                  查询
+            <Button
+              icon="search"
+              className="filter_button--blue"
+              onClick={() => dispatchInit()}
+            >
+              查询
             </Button>
             <Button
               icon="undo"
               className="filter_button--white"
               onClick={() => form?.resetFields()}
             >
-                  重置
+              重置
             </Button>
           </Form.Item>
         </MapForm>
       </div>
       <div className="reconciliation-table">
         <div className="reconciliation-table--title">
-          <span className="reconciliation-table--desc" >对账单列表</span>
+          <span className="reconciliation-table--desc">对账单列表</span>
           <Button type="link" className="reconciliation-table--name">
-                +申请对账单
+            +申请对账单
             <Icon type="setting" style={{ color: '#999' }} />
           </Button>
         </div>
-        <Table dataSource={reconList} columns={columns} pagination={false} scroll={{ x: 1100 , y: 'calc(100vh - 450px)' }} loading={loading} />
+        <Table
+          dataSource={reconList}
+          columns={columns}
+          pagination={false}
+          scroll={{ x: 1100, y: 'calc(100vh - 450px)' }}
+          loading={loading}
+        />
         <div
           style={{
             display: 'flex',
@@ -196,8 +209,10 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
   );
 };
 
-export default connect(({ transaction: { reconList, reconTotal } = {}, loading }) => ({
-  reconList,
-  reconTotal,
-  loading: loading.effects['transaction/fetchReconList']
-}))(Reconciliation);
+export default connect(
+  ({ transaction: { reconList, reconTotal } = {}, loading }) => ({
+    reconList,
+    reconTotal,
+    loading: loading.effects['transaction/fetchReconList'],
+  })
+)(Reconciliation);

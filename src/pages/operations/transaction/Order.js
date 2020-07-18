@@ -2,12 +2,12 @@
  * @Author: Dad
  * @Date: 2020-07-13 14:20:06
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-15 09:24:57
+ * @LastEditTime: 2020-07-17 14:54:50
  */
 import React, { useState, useEffect } from 'react';
 import MapForm from '@/components/MapForm';
 import { connect } from 'dva';
-import { ORDER_TYPE_ALL, ORDER_STATUS_ALL } from '@/const';
+import { TransactionTypes, TransaStatus, TRANSA_STATUS_5 } from '@/const';
 import moment from 'moment';
 import _ from 'lodash';
 import { Select, Form, Button, Table, Pagination } from 'antd';
@@ -36,8 +36,12 @@ const Order = ({ dispatch, list, total, loading }) => {
   const initList = () => {
     const data = form?.getFieldsValue();
     const time = {
-      beginCreateTime: data.CreateTime?.[0] ? moment(data.CreateTime?.[0]).format('YYYY-MM-DD HH:MM:SS') : undefined,
-      endCreateTime: data.CreateTime?.[0] ? moment(data.CreateTime?.[1]).format('YYYY-MM-DD HH:MM:SS') : undefined
+      beginCreateTime: data.CreateTime?.[0]
+        ? moment(data.CreateTime?.[0]).format('YYYY-MM-DD HH:MM:SS')
+        : undefined,
+      endCreateTime: data.CreateTime?.[0]
+        ? moment(data.CreateTime?.[1]).format('YYYY-MM-DD HH:MM:SS')
+        : undefined,
     };
     dispatch({
       type: 'transaction/fetchList',
@@ -58,7 +62,9 @@ const Order = ({ dispatch, list, total, loading }) => {
       className: 'jiaoyiTime',
       dataIndex: 'createTime',
       width: 200,
-      render: createTime => <div>{moment(createTime).format('YYYY-MM-DD hh:mm:ss')}</div>,
+      render: (createTime) => (
+        <div>{moment(createTime).format('YYYY-MM-DD hh:mm:ss')}</div>
+      ),
     },
     {
       title: '交易订单号',
@@ -77,14 +83,14 @@ const Order = ({ dispatch, list, total, loading }) => {
       align: 'center',
       width: 140,
       dataIndex: 'totalPay',
-      render: totalPay => totalPay / 10000,
+      render: (totalPay) => totalPay / 10000,
     },
     {
       title: '交易类型',
       align: 'center',
       dataIndex: 'bizType',
       width: 100,
-      render: bizTypes => ORDER_TYPE_ALL[bizTypes]
+      render: (bizTypes) => ORDER_TYPE_ALL[bizTypes],
     },
     {
       title: '商品',
@@ -104,8 +110,9 @@ const Order = ({ dispatch, list, total, loading }) => {
       dataIndex: 'status',
       width: 100,
       render: (status) => {
-        if (status === 5) return <div style={{ color: 'red' }}>失败</div>;
-        return ORDER_STATUS_ALL[status];
+        if (status === TRANSA_STATUS_5)
+          return <div style={{ color: 'red' }}>失败</div>;
+        return TransaStatus[status];
       },
     },
   ];
@@ -139,7 +146,7 @@ const Order = ({ dispatch, list, total, loading }) => {
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
           >
-            {_.map(ORDER_TYPE_ALL, (item, key) => (
+            {_.map(TransactionTypes, (item, key) => (
               <Select.Option key={key} value={parseInt(key)}>
                 {item}
               </Select.Option>
@@ -172,25 +179,35 @@ const Order = ({ dispatch, list, total, loading }) => {
             labelCol={{ span: 6 }}
             wrapperCol={{ span: 18 }}
             customProps={{
-              placeholder: ['开始时间','结束时间'],
+              placeholder: ['开始时间', '结束时间'],
               size: 'large',
             }}
           />
           <Form.Item>
-            <Button icon="search" className="filter_button--blue" onClick={() => dispatchInit()}>
-                  查询
+            <Button
+              icon="search"
+              className="filter_button--blue"
+              onClick={() => dispatchInit()}
+            >
+              查询
             </Button>
             <Button
               icon="undo"
               className="filter_button--white"
               onClick={() => form?.resetFields()}
             >
-                  重置
+              重置
             </Button>
           </Form.Item>
         </MapForm>
       </div>
-      <Table loading={loading} dataSource={list} columns={columns} pagination={false} scroll={{ x: 1300,y: 'calc(100vh - 480px)' }} />
+      <Table
+        loading={loading}
+        dataSource={list}
+        columns={columns}
+        pagination={false}
+        scroll={{ x: 1300, y: 'calc(100vh - 480px)' }}
+      />
       <div
         style={{
           display: 'flex',
@@ -216,5 +233,5 @@ const Order = ({ dispatch, list, total, loading }) => {
 export default connect(({ transaction: { list, total } = {}, loading }) => ({
   list,
   total,
-  loading: loading.effects['transaction/fetchList']
+  loading: loading.effects['transaction/fetchList'],
 }))(Order);

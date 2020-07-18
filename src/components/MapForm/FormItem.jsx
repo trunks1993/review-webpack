@@ -94,10 +94,10 @@ class WrapFormItem extends Component {
       //   name,
       //   options
       // )(<GlobalCheckbox {...customProps} />),
-      // CstDatePicker: getFieldDecorator(
-      //   name,
-      //   options
-      // )(<GlobalDatePicker {...customProps} />),
+      CstDatePicker: getFieldDecorator(
+        name,
+        options
+      )(<DatePicker {...customProps} />),
       CstRangePicker: getFieldDecorator(
         name,
         options

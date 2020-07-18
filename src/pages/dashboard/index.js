@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-01 11:32:59
- * @LastEditTime: 2020-07-15 10:16:55
+ * @LastEditTime: 2020-07-17 14:55:06
  */
 import React, { useEffect, useState } from 'react';
 import { connect } from 'dva';
@@ -16,12 +16,12 @@ const dashboard = ({ list }) => {
 
   useEffect(() => {
     getNumber();
-  },[]);
+  }, []);
 
   /** 获取用户账号余额 */
-  const getNumber = async() => {
+  const getNumber = async () => {
     const [err, data, msg] = await getAccount();
-    if (!err){
+    if (!err) {
       setAmountList(data);
     }
   };

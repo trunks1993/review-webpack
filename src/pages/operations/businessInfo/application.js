@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-15 09:57:12
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-16 16:47:05
+ * @LastEditTime: 2020-07-17 14:54:18
  */
 import React, { useState, useEffect } from 'react';
 import List from './List';
@@ -11,6 +11,8 @@ import MapForm from '@/components/MapForm';
 import { Icon, Modal, message, Button } from 'antd';
 import { connect } from 'dva';
 import _ from 'lodash';
+import { createHashHistory } from 'history';
+const history = createHashHistory();
 
 const { CstInput } = MapForm;
 const formItemLayout = {
@@ -31,32 +33,31 @@ const application = ({ user }) => {
 
   useEffect(() => {
     getAppInfo();
-  },[]);
+  }, []);
 
   useEffect(() => {
     if (_.isEmpty(form)) return;
     form.setFieldsValue({ ['telephone']: user?.telephone });
-  },[form]);
+  }, [form]);
 
   /** SecretKey显示隐藏 */
   const setVisible = (id) => {
-    if (!appVisible[id]){
+    if (!appVisible[id]) {
       setAppId(id);
       setModalVisible(!modalVisible);
     } else {
-      setAppVisible({ appVisible: { ...appVisible,[id]: !appVisible[id] } });
+      setAppVisible({ appVisible: { ...appVisible, [id]: !appVisible[id] } });
     }
   };
 
   /** 获取app */
-  const getAppInfo = async() => {
+  const getAppInfo = async () => {
     const [err, data, msg] = await getApp();
-    if (!err){
+    if (!err) {
       const visible = {};
       const secret = {};
-      _.map(data.list, item => {
-        visible[item.id] = false,
-        secret[item.id] = '';
+      _.map(data.list, (item) => {
+        (visible[item.id] = false), (secret[item.id] = '');
       });
       setAppVisible(visible);
       setArrSecret(secret);
@@ -72,7 +73,7 @@ const application = ({ user }) => {
       okType: 'danger',
       cancelText: '取消',
       centered: true,
-      onOk: async() => {
+      onOk: async () => {
         const [err, data, msg] = await deleteApp({ appId });
         getAppInfo();
         if (!err) message.success('删除成功!');
@@ -82,12 +83,12 @@ const application = ({ user }) => {
 
   /** Modal确认按钮 */
   const handleOk = () => {
-    form.validateFields(async(errs, value) => {
+    form.validateFields(async (errs, value) => {
       if (!errs) {
         const datas = { ...value, appId };
         const [err, data, msg] = await getSecret(datas);
-        if (!err){
-          setAppVisible({ ...appVisible,[appId]: !appVisible[appId] });
+        if (!err) {
+          setAppVisible({ ...appVisible, [appId]: !appVisible[appId] });
         }
       }
     });
@@ -96,7 +97,12 @@ const application = ({ user }) => {
 
   return (
     <div className="app">
-      <div className="app-title">应用信息<span className="app-desc">已添加 {list?.totalRecords ? list?.totalRecords : 0} 个应用</span></div>
+      <div className="app-title">
+        应用信息
+        <span className="app-desc">
+          已添加 {list?.totalRecords ? list?.totalRecords : 0} 个应用
+        </span>
+      </div>
       <div className="app-content">
         {_.map(list.list, (item) => (
           <List
@@ -107,16 +113,24 @@ const application = ({ user }) => {
             list={item}
           />
         ))}
-        <div className="app-newlist">
+
+        <div
+          className="app-newlist"
+          onClick={() =>
+            history.push('/admin/operations/businessInfo/modifyapp')
+          }
+        >
           <Icon type="plus" />
-                    创建应用
+          创建应用
         </div>
       </div>
       <Modal
         title="显示应用密钥"
         visible={modalVisible}
         onOk={handleOk}
-        onCancel={() => { setModalVisible(!modalVisible); }}
+        onCancel={() => {
+          setModalVisible(!modalVisible);
+        }}
         style={{ height: 300 }}
         className="app-modal"
         okText="确认"
@@ -146,7 +160,8 @@ const application = ({ user }) => {
             rules={[
               {
                 required: true,
-                transform: (value) => (value % 1 === 0 ? parseInt(value) : false),
+                transform: (value) =>
+                  value % 1 === 0 ? parseInt(value) : false,
                 type: 'number',
                 whitespace: true,
                 message: '请输入正确验证码',
@@ -160,5 +175,5 @@ const application = ({ user }) => {
 };
 
 export default connect(({ account: { user } = {} }) => ({
-  user
+  user,
 }))(application);

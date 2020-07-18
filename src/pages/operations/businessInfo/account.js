@@ -128,28 +128,37 @@ const account = ({ dispatch, list, total, loading }) => {
             ))}
           </CstSelect>
           <Form.Item>
-            <Button icon="search" className="filter_button--blue" onClick={() => dispatchInit()}>
-                  查询
+            <Button
+              icon="search"
+              className="filter_button--blue"
+              onClick={() => dispatchInit()}
+            >
+              查询
             </Button>
             <Button
               icon="undo"
               className="filter_button--white"
               onClick={() => form?.resetFields()}
             >
-                  重置
+              重置
             </Button>
           </Form.Item>
         </MapForm>
       </div>
       <div className="reconciliation-table">
         <div className="reconciliation-table--title">
-          <span className="reconciliation-table--desc" >账号列表</span>
+          <span className="reconciliation-table--desc">账号列表</span>
           <Button type="link" className="reconciliation-table--name">
             <Icon type="plus" style={{ fontWeight: 600 }} />
-                添加账号
+            添加账号
           </Button>
         </div>
-        <Table dataSource={list} columns={columns} pagination={false} scroll={{ x: 1300,y: 'calc(100vh - 480px)' }} />
+        <Table
+          dataSource={list}
+          columns={columns}
+          pagination={false}
+          scroll={{ x: 1300, y: 'calc(100vh - 480px)' }}
+        />
         <div
           style={{
             display: 'flex',
@@ -176,5 +185,5 @@ const account = ({ dispatch, list, total, loading }) => {
 export default connect(({ transaction: { list, total } = {}, loading }) => ({
   list,
   total,
-  loading: loading.effects['businessInfo/fetchActList']
+  loading: loading.effects['businessInfo/fetchActList'],
 }))(account);
