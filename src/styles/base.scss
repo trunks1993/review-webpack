@@ -6,6 +6,7 @@
 @import "./shop/index.scss";
 @import "./pay/index.scss";
 @import "./iconfont/iconfont.css";
+@import "./inputNumber/index.scss";
 
 /*!
  * @名称：base.css
@@ -26,7 +27,6 @@ body {
 html {
   height: 100%;
   box-sizing: border-box;
-  color: $black;
 }
 
 *::-webkit-scrollbar {

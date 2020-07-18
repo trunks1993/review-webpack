@@ -1,20 +1,20 @@
 /*
  * @Date: 2020-07-02 19:14:16
- * @LastEditTime: 2020-07-16 19:26:24
+ * @LastEditTime: 2020-07-17 10:34:45
  */
 
-import React, { useEffect, useState } from 'react';
-import FilterPanel from './FilterPanel';
+import React, { useEffect, useState } from "react";
+import FilterPanel from "./FilterPanel";
 
-import shopHomeBg from '@/assets/images/shop/shopHomeBg.png';
+import shopHomeBg from "@/assets/images/shop/shopHomeBg.png";
 import {
   getCategoryList,
   getProductTypeList,
   getBrandList,
   getProductMap,
-} from '@/services/shop';
-import { message, Pagination, List, Avatar, Card, Skeleton } from 'antd';
-import ProductWrapper from './ProductWrapper';
+} from "@/services/shop";
+import { message, Pagination, List, Avatar, Card, Skeleton } from "antd";
+import ProductWrapper from "./ProductWrapper";
 
 export default (props) => {
   const { history } = props;
@@ -32,8 +32,8 @@ export default (props) => {
   const [list, setList] = useState([]);
 
   const [filterParams, setFilterParams] = useState({
-    categoryCode: '',
-    productTypeCode: '',
+    categoryCode: "",
+    productTypeCode: "",
     currPage: 1,
     pageSize: 6,
   });
@@ -62,7 +62,7 @@ export default (props) => {
     }
   };
 
-  const initCategoryList = async() => {
+  const initCategoryList = async () => {
     try {
       setCategoryLoading(true);
       const [err, data, msg] = await getCategoryList();
@@ -75,7 +75,7 @@ export default (props) => {
     } catch (error) {}
   };
 
-  const initProductTypeList = async() => {
+  const initProductTypeList = async () => {
     try {
       setProductTypeLoading(true);
       const [err, data, msg] = await getProductTypeList();
@@ -88,11 +88,11 @@ export default (props) => {
     } catch (error) {}
   };
 
-  const initList = async() => {
+  const initList = async () => {
     try {
       setLoading(true);
       const [err, data, msg] = await getBrandList(filterParams);
-      +setLoading(false);
+      setLoading(false);
       if (!err) {
         setBrandList(data.list);
         setTotal(data.totalRecords);
@@ -102,7 +102,7 @@ export default (props) => {
     } catch (error) {}
   };
 
-  const initProductMap = async() => {
+  const initProductMap = async () => {
     try {
       setLoading(true);
       const [err, data, msg] = await getProductMap({
@@ -135,7 +135,7 @@ export default (props) => {
       />
       <List
         loading={categoryLoading || productTypeLoading}
-        locale={{ emptyText: '暂无数据' }}
+        locale={{ emptyText: "暂无数据" }}
         grid={{
           column: 3,
           gutter: 10,
@@ -144,9 +144,11 @@ export default (props) => {
         renderItem={(item) => (
           <List.Item
             key={item.brandCode}
-            style={{ marginBottom: '10px' }}
+            style={{ marginBottom: "10px" }}
             onClick={() => {
-              history.push('/admin/shop/item');
+              history.push(
+                `/admin/shop/item?productTypeCode=${filterParams.productTypeCode}&brandCode=${item.brandCode}`
+              );
             }}
           >
             <Card>
@@ -161,6 +163,7 @@ export default (props) => {
               <ProductWrapper
                 loading={loading}
                 productList={item.productList}
+                productTypeCode={filterParams.productTypeCode}
                 history={history}
               />
             </Card>
@@ -170,24 +173,25 @@ export default (props) => {
 
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginTop: '40px',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: "40px",
         }}
       >
         <Pagination
           disabled={loading}
           current={filterParams.currPage}
-          onChange={(currPage) => setFilterParams({
-            ...filterParams,
-            currPage,
-          })
+          onChange={(currPage) =>
+            setFilterParams({
+              ...filterParams,
+              currPage,
+            })
           }
           defaultPageSize={6}
           total={total}
         />
-        <span style={{ color: '#CCCCCC', marginLeft: '10px' }}>
+        <span style={{ color: "#CCCCCC", marginLeft: "10px" }}>
           共{total}条
         </span>
       </div>

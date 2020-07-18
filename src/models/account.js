@@ -1,12 +1,12 @@
 /*
  * @Date: 2020-06-28 16:36:16
- * @LastEditTime: 2020-07-15 19:56:24
+ * @LastEditTime: 2020-07-16 21:14:51
  */
 import produce from 'immer';
 import md5 from 'js-md5';
 import { setToken } from '@/utils/auth';
 import { getQueryVariable } from '@/utils';
-import { fakeAccountLogin, getUserInfo, getAccountInfo } from '@/services/account';
+import { fakeAccountLogin, getUserInfo, getAccountInfo, getCarData } from '@/services/account';
 import { message } from 'antd';
 import { routerRedux } from 'dva/router';
 
@@ -18,6 +18,7 @@ export default {
   state: {
     user: {},
     amountInfo: {},
+    carData: {},
   },
   effects: {
     *login({ payload, callback }, { call, put }) {
@@ -59,6 +60,17 @@ export default {
         } else message.error(msg);
       } catch (error) {}
     },
+    *setCarData({}, { call, put }) {
+      try {
+        const [err, data, msg] = yield call(getCarData);
+        if (!err) {
+          yield put({
+            type: '_setCarData',
+            payload: data,
+          });
+        } else message.error(msg);
+      } catch (error) {}
+    },
     *setSignUpVisible(_, { put }) {
       yield put({
         type: '_setSignUpVisible',
@@ -79,6 +91,9 @@ export default {
     }),
     _setAmount: produce((draft, { payload }) => {
       draft.amountInfo = payload;
+    }),
+    _setCarData: produce((draft, { payload }) => {
+      draft.carData = payload;
     }),
   },
 };
