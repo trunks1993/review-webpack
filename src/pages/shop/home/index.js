@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 19:14:16
- * @LastEditTime: 2020-07-16 19:26:24
+ * @LastEditTime: 2020-07-17 10:34:45
  */
 
 import React, { useEffect, useState } from 'react';
@@ -92,7 +92,7 @@ export default (props) => {
     try {
       setLoading(true);
       const [err, data, msg] = await getBrandList(filterParams);
-      +setLoading(false);
+      setLoading(false);
       if (!err) {
         setBrandList(data.list);
         setTotal(data.totalRecords);
@@ -146,7 +146,9 @@ export default (props) => {
             key={item.brandCode}
             style={{ marginBottom: '10px' }}
             onClick={() => {
-              history.push('/admin/shop/item');
+              history.push(
+                `/admin/shop/item?productTypeCode=${filterParams.productTypeCode}&brandCode=${item.brandCode}`
+              );
             }}
           >
             <Card>
@@ -161,6 +163,7 @@ export default (props) => {
               <ProductWrapper
                 loading={loading}
                 productList={item.productList}
+                productTypeCode={filterParams.productTypeCode}
                 history={history}
               />
             </Card>

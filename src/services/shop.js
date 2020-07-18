@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-04 09:49:04
- * @LastEditTime: 2020-07-14 16:39:21
+ * @LastEditTime: 2020-07-18 13:53:53
  */
 import request from '@/utils/request';
 
@@ -58,6 +58,36 @@ export async function cancelOrder(orderId) {
 
 export async function queryListTrace(data) {
   return request('/order/searchOrderChargeTraceList', {
+    method: 'POST',
+    data,
+  });
+}
+
+// productSubCode: 100000252
+// productTypeCode: 101
+export async function getGoodsInfo(data) {
+  return request('/search/getGoods', {
+    method: 'POST',
+    data,
+  });
+}
+
+export async function getGoodsSku(productCode) {
+  return request('/search/searchProductSubList', {
+    method: 'POST',
+    data: { productCode },
+  });
+}
+
+export async function submitOrder(data) {
+  return request('/cart/buyImmediately', {
+    method: 'POST',
+    data,
+  });
+}
+
+export async function addToCart(data) {
+  return request('/cart/addToCart', {
     method: 'POST',
     data,
   });

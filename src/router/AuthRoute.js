@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-20 17:03:19
- * @LastEditTime: 2020-07-15 19:55:56
+ * @LastEditTime: 2020-07-16 21:18:45
  */
 import React from 'react';
 import { connect } from 'dva';
@@ -29,6 +29,9 @@ const AuthRoute = ({ Component, authTo, user, dispatch, ...rest }) => {
             });
             dispatch({
               type: 'account/setAmount',
+            });
+            dispatch({
+              type: 'account/setCarData',
             });
           }
 

@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-05-29 14:30:28
- * @LastEditTime: 2020-07-02 21:43:56
+ * @LastEditTime: 2020-07-17 17:19:09
  */
 
 const utils = require("./utils");
@@ -50,7 +50,11 @@ module.exports = {
         use: [
           "style-loader", // 创建 <style></style>
           "css-loader", // 转换css
-          "sass-loader", // 编译 Less -> CSS
+          "resolve-url-loader", // 处理scss中url()文件
+          {
+            loader: "sass-loader",
+            options: { sourceMap: true },
+          }, // 编译 Less -> CSS
         ],
       },
       {
