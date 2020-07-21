@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-23 21:38:43
- * @LastEditTime: 2020-07-13 14:40:42
+ * @LastEditTime: 2020-07-21 21:45:14
  */
 import { Form } from 'antd';
 import React, { Component } from 'react';
@@ -15,6 +15,7 @@ class MapForm extends Component {
   static CstTreeCheck;
   static CstSelect;
   static CstUpload;
+  static CstGlobalUpload;
   static CstBlockCheckbox;
   static CstRadio;
   static CstCheckbox;
@@ -46,18 +47,31 @@ class MapForm extends Component {
   };
 
   render() {
-    const { children, className, layout, layColWrapper, labelAlign } = this.props;
+    const {
+      children,
+      className,
+      layout,
+      layColWrapper,
+      labelAlign,
+    } = this.props;
     return (
       <FormContext.Provider value={this.getContext()}>
         <div>
-          <Form layout={layout} labelAlign={labelAlign} {...layColWrapper} className={className}>{children}</Form>
+          <Form
+            layout={layout}
+            labelAlign={labelAlign}
+            {...layColWrapper}
+            className={className}
+          >
+            {children}
+          </Form>
         </div>
       </FormContext.Provider>
     );
   }
 }
 
-Object.keys(FormItem).forEach(item => {
+Object.keys(FormItem).forEach((item) => {
   MapForm[item] = FormItem[item];
 });
 

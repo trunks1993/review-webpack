@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 19:14:16
- * @LastEditTime: 2020-07-17 10:34:45
+ * @LastEditTime: 2020-07-18 16:55:56
  */
 
 import React, { useEffect, useState } from 'react';
@@ -15,6 +15,7 @@ import {
 } from '@/services/shop';
 import { message, Pagination, List, Avatar, Card, Skeleton } from 'antd';
 import ProductWrapper from './ProductWrapper';
+import Car from '../components/Car';
 
 export default (props) => {
   const { history } = props;
@@ -194,6 +195,8 @@ export default (props) => {
           共{total}条
         </span>
       </div>
+
+      <Car />
     </div>
   );
 };

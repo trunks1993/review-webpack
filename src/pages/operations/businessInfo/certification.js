@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-17 20:59:45
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-21 21:28:03
+ * @LastEditTime: 2020-07-21 21:51:20
  */
 
 import React, { useState, useEffect } from 'react';
@@ -27,7 +27,7 @@ import {
   MERCHANT_STATUS_3,
 } from '@/const';
 
-const { CstInput, CstUpload } = MapForm;
+const { CstInput, CstGlobalUpload } = MapForm;
 
 const certification = () => {
   const [tabKey, setTabKey] = useState('1');
@@ -222,7 +222,7 @@ const certification = () => {
                       { required: true, message: '统一社会信用代码不能为空' },
                     ]}
                   />
-                  <CstUpload
+                  <CstGlobalUpload
                     name="img"
                     label="企业证件图片:"
                     help={helpMsg}
@@ -342,7 +342,7 @@ const certification = () => {
                   />
                   <Row>
                     <Col span={10} push={2}>
-                      <CstUpload
+                      <CstGlobalUpload
                         name="idCardFront"
                         label="应用logo:"
                         help={helpMsg}
@@ -389,7 +389,7 @@ const certification = () => {
                   </Row>
                   <Row>
                     <Col span={10} push={2}>
-                      <CstUpload
+                      <CstGlobalUpload
                         name="idCardBack"
                         help={helpMsag}
                         className=""

@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-16 17:01:12
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-21 21:16:20
+ * @LastEditTime: 2020-07-21 21:46:42
  */
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
@@ -11,9 +11,17 @@ import { Upload, Icon } from 'antd';
 export const FILE_ERROR_TYPE = '0';
 export const FILE_ERROR_SIZE = '1';
 
-const GlobalUpload = ({ multiple, onChange, disabled, value, action, method, data, uploadName }) => {
-  const [ loading, setloading ] = useState(false);
-
+const GlobalUpload = ({
+  multiple,
+  onChange,
+  disabled,
+  value,
+  action,
+  method,
+  data,
+  uploadName,
+}) => {
+  const [loading, setloading] = useState(false);
   const handleChangeChecked = (info) => {
     setloading(true);
     if (info.file.status === 'done') {
@@ -25,7 +33,9 @@ const GlobalUpload = ({ multiple, onChange, disabled, value, action, method, dat
   const uploadButton = (
     <div>
       <Icon type={loading ? 'loading' : 'plus'} />
-      <div className="ant-upload-text">{uploadName ? uploadName : '上传图片'}</div>
+      <div className="ant-upload-text">
+        {uploadName ? uploadName : '上传图片'}
+      </div>
     </div>
   );
 
@@ -45,7 +55,7 @@ const GlobalUpload = ({ multiple, onChange, disabled, value, action, method, dat
     e.stopPropagation();
     onChange && onChange('');
   };
-
+  console.log(disabled);
   return (
     <div>
       {!disabled ? (
@@ -77,10 +87,7 @@ const GlobalUpload = ({ multiple, onChange, disabled, value, action, method, dat
           )}
         </Upload>
       ) : (
-        <img
-          style={{ maxHeight: 110 }}
-          src={process.env.FILE_URL + value}
-        />
+        <img style={{ maxHeight: 110 }} src={process.env.FILE_URL + value} />
       )}
     </div>
   );

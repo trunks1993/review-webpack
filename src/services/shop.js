@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-04 09:49:04
- * @LastEditTime: 2020-07-18 13:53:53
+ * @LastEditTime: 2020-07-21 12:08:52
  */
 import request from '@/utils/request';
 
@@ -63,8 +63,6 @@ export async function queryListTrace(data) {
   });
 }
 
-// productSubCode: 100000252
-// productTypeCode: 101
 export async function getGoodsInfo(data) {
   return request('/search/getGoods', {
     method: 'POST',
@@ -90,5 +88,51 @@ export async function addToCart(data) {
   return request('/cart/addToCart', {
     method: 'POST',
     data,
+  });
+}
+
+export async function removeCarItem(itemCode) {
+  return request('/cart/deleteCartItem', {
+    method: 'POST',
+    data: {
+      itemCode,
+    },
+  });
+}
+
+export async function updateCarItem(data) {
+  return request('/cart/updateCartItem', {
+    method: 'POST',
+    data,
+  });
+}
+
+export async function checkedAll(checked) {
+  return request('/cart/checkedAll', {
+    method: 'POST',
+    data: {
+      checked,
+    },
+  });
+}
+
+export async function removeAll() {
+  return request('/cart/batchDeleteCartItem', {
+    method: 'POST',
+  });
+}
+
+export async function getCartDetail(itemCode) {
+  return request('/cart/loadCartDetailList', {
+    method: 'POST',
+    data: {
+      itemCode,
+    },
+  });
+}
+
+export async function addOrder() {
+  return request('/order/addOrder', {
+    method: 'POST',
   });
 }

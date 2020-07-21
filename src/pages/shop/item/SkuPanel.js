@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-17 14:57:09
- * @LastEditTime: 2020-07-18 15:48:16
+ * @LastEditTime: 2020-07-21 11:09:04
  */
 
 import React, { useState, useEffect } from 'react';
@@ -43,7 +43,7 @@ export default (props) => {
       fileList = fileList.map((file) => {
         if (file.response) {
           // Component will show file.url as link
-          file.url = file.response.url;
+          file.url = file.response.result.fileList[0].url;
         }
         return file;
       });

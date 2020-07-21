@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-23 22:22:28
- * @LastEditTime: 2020-07-13 14:43:17
+ * @LastEditTime: 2020-07-21 21:45:23
  */
 
 export default {
@@ -11,6 +11,7 @@ export default {
   CstTreeCheck: {},
   CstSelect: {},
   CstUpload: {},
+  CstGlobalUpload: {},
   CstBlockCheckbox: {},
   CstRadio: {},
   CstCheckbox: {},
