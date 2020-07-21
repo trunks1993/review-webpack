@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-17 15:52:50
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-17 20:26:00
+ * @LastEditTime: 2020-07-20 20:40:42
  */
 
 import React, { useState, useEffect } from 'react';
@@ -50,7 +50,7 @@ const interfaceConfig = ({ jumpMonitor, loading }) => {
 
   /** 保存配置 */
   const handleSubmit = () => {
-    form.validateFields(async (err, value) => {
+    form.validateFields(async(err, value) => {
       if (!err) {
         try {
           const [err, values, msg] = await modifyApplication(value);
@@ -63,11 +63,10 @@ const interfaceConfig = ({ jumpMonitor, loading }) => {
   };
 
   /** 获取配置 */
-  const getApp = async () => {
+  const getApp = async() => {
     try {
       const [err, data, msg] = await getApplication({ appId });
       if (!err) {
-          console.log(data.callbackUrl)
         form.setFieldsValue({
           ['callbackUrl']: data.callbackUrl,
           ['nologinUrl']: data.nologinUrl,
@@ -76,7 +75,7 @@ const interfaceConfig = ({ jumpMonitor, loading }) => {
       }
     } catch (error) {}
   };
-  
+
   return (
     <div className="interfaceConfig">
       <div className="interfaceConfig-title">
@@ -125,7 +124,7 @@ const interfaceConfig = ({ jumpMonitor, loading }) => {
               },
             ]}
           />
-          <div className="interfaceConfig-content--border"></div>
+          <div className="interfaceConfig-content--border" />
           <CstInput
             label="结果通知:"
             placeholder="http://"
@@ -161,7 +160,7 @@ const interfaceConfig = ({ jumpMonitor, loading }) => {
             ]}
             help={helpMsg.callbackUrl}
           />
-          <div className="interfaceConfig-content--border"></div>
+          <div className="interfaceConfig-content--border" />
           <CstInput
             label="虚拟商品充值："
             defaultValue="http://"

@@ -35,7 +35,7 @@ const columns = [
 const monitor = () => {
   const [form, setForm] = useState({});
   return (
-    <div style={{ padding: '0 30px', marginTop:20 }}>
+    <div style={{ padding: '0 30px', marginTop: 20 }}>
       <div className="interfaceConfig-title">
         您的开发人员可以关注这里的异常订单情况，监控自己的接口状态是否健康。
       </div>
@@ -88,7 +88,7 @@ const monitor = () => {
           </Row>
         </MapForm>
       </div>
-      <Table columns={columns} pagination={false} bordered/>
+      <Table columns={columns} pagination={false} bordered />
     </div>
   );
 };

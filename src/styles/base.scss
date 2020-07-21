@@ -10,10 +10,11 @@
 @import "./order/index.scss";
 @import "./reconciliation/index.scss";
 @import "./application/index.scss";
+@import "./inputNumber/index.scss";
 @import "./configApp/index.scss";
 @import "./modify/index.scss";
 @import "./certification/index.scss";
-
+@import "./success/index.scss";
 /*!
  * @名称：base.css
  * @功能：1、重设浏览器默认样式
@@ -33,7 +34,6 @@ body {
 html {
   height: 100%;
   box-sizing: border-box;
-  color: $black;
 }
 
 *::-webkit-scrollbar {
@@ -186,30 +186,30 @@ div:focus {
   justify-content: space-between;
 }
 
-.filter-form{
-  .ant-form-item{
+.filter-form {
+  .ant-form-item {
     padding-bottom: 10px;
   }
-  .filter_button--white{
+  .filter_button--white {
     width: 90px;
     height: 32px;
     margin-left: 20px;
   }
-  .filter_button--blue{
+  .filter_button--blue {
     background-color: $blue;
     color: $white;
     width: 90px;
     height: 32px;
   }
 }
-.app-modal{
-  .ant-modal-header{
+.app-modal {
+  .ant-modal-header {
     background-color: #f2f2f2 !important;
   }
-  .ant-modal-footer{
+  .ant-modal-footer {
     background-color: #f2f2f2 !important;
   }
-  .ant-modal-title{
+  .ant-modal-title {
     font-size: 16px;
     color: $black;
     font-weight: 600;

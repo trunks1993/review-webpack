@@ -19,7 +19,7 @@ const dashboard = ({ list }) => {
   }, []);
 
   /** 获取用户账号余额 */
-  const getNumber = async () => {
+  const getNumber = async() => {
     const [err, data, msg] = await getAccount();
     if (!err) {
       setAmountList(data);

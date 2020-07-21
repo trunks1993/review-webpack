@@ -46,7 +46,7 @@ const modifyApp = () => {
     iconUrl: HELP_MSG_ICONURL,
   });
 
-  //判断页面是创建应用还是修改应用
+  // 判断页面是创建应用还是修改应用
   useEffect(() => {
     if (_.isEmpty(getQueryVariable('appId'))) return;
     setAppId(getQueryVariable('appId'));
@@ -60,7 +60,7 @@ const modifyApp = () => {
 
   // 设置应用
   const modifyApp = () => {
-    form.validateFields(async (err, value) => {
+    form.validateFields(async(err, value) => {
       if (!err) {
         let [errs, data, msg] = '';
         try {
@@ -80,7 +80,7 @@ const modifyApp = () => {
   };
 
   /** 获取应用信息 */
-  const getAppInfo = async () => {
+  const getAppInfo = async() => {
     try {
       const [err, data, msg] = await getApplication({ appId });
       form.setFieldsValue({

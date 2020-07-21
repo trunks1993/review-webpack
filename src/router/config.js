@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 16:24:34
- * @LastEditTime: 2020-07-17 21:01:18
+ * @LastEditTime: 2020-07-21 15:32:27
  */
 // layout下的子模块
 import ChildLayout from '@/pages';
@@ -25,6 +25,8 @@ import ModifyApp from '@/pages/operations/businessInfo/modifyApp';
 import ConfigApp from '@/pages/operations/businessInfo/configApp';
 /** 运营管理-业务管理--实名认证 */
 import Certification from '@/pages/operations/businessInfo/certification';
+/** 运营管理-业务管理--实名认证提交成功 */
+import Success from '@/pages/operations/businessInfo/success';
 /** 运营管理-业务管理--账号信息 */
 import Account from '@/pages/operations/businessInfo/account';
 
@@ -151,6 +153,13 @@ export const asyncRoutes = [
             isLeaf: true,
           },
           {
+            id: 2221,
+            title: '提交成功',
+            path: '/admin/operations/businessInfo/success',
+            component: Success,
+            isLeaf: true,
+          },
+          {
             id: 223,
             title: '账号信息',
             path: '/admin/operations/businessInfo/account',
@@ -248,5 +257,6 @@ export const asyncRoutes = [
     title: '支付',
     path: '/admin/pay',
     component: Pay,
+    hidden: true,
   },
 ];

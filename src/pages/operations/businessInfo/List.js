@@ -57,20 +57,18 @@ const List = ({ setVisible, appVisible, showDeleteConfirm, list }) => {
       <div className="app-list--footer">
         <Button
           className="app-list--leftBut"
-          onClick={() =>
-            history.push(
-              `/admin/operations/businessInfo/configapp?appId=${list?.id}`
-            )
+          onClick={() => history.push(
+            `/admin/operations/businessInfo/configapp?appId=${list?.id}`
+          )
           }
         >
           应用配置
         </Button>
         <Button
           className="app-list--rightBut"
-          onClick={() =>
-            history.push(
-              `/admin/operations/businessInfo/modifyapp?appId=${list?.id}`
-            )
+          onClick={() => history.push(
+            `/admin/operations/businessInfo/modifyapp?appId=${list?.id}`
+          )
           }
         >
           修改

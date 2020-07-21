@@ -142,3 +142,46 @@
     height: 30px !important;
   }
 }
+
+/* tabs */
+.global-tabs {
+  .ant-tabs-bar {
+    margin: 0;
+    position: relative;
+    border-bottom: none;
+    background: #f2f2f2;
+    border-bottom: 1px solid #e6e6e6;
+  }
+  .ant-tabs-content {
+    padding: 30px 50px;
+  }
+
+  .ant-tabs-tab {
+    border-radius: 0 !important;
+    margin-right: 0 !important;
+    min-width: 160px;
+    text-align: center;
+    color: #666666;
+    font-size: 14px;
+    height: 40px !important;
+    line-height: 40px !important;
+    background: #f2f2f2 !important;
+    border-top: none !important;
+    &:first-child {
+      border-right: none !important;
+      border-left: none !important;
+    }
+    &:last-child:not(.ant-tabs-tab-active) {
+      border-right: 1px solid #f2f2f2 !important;
+    }
+
+    &:hover {
+      color: #333333 !important;
+    }
+    &-active {
+      font-weight: bold;
+      color: #333333 !important;
+      background: #ffffff !important;
+    }
+  }
+}

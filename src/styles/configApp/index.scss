@@ -1,34 +1,41 @@
-.configApp{
+.configApp {
     height: 100vh;
     background-color: $white;
     padding: 30px 50px;
 }
-.interfaceConfig{
+
+.interfaceConfig {
     margin-top: 20px;
     padding: 0 30px;
-    &-title{
+
+    &-title {
         background-color: #FFF9F2;
         color: #F6BB66;
         padding: 10px 20px;
         border: 1px solid #FFDFB5;
-        &--but{
+
+        &--but {
             color: #f6bb66;
-            padding:0 4px;
+            padding: 0 4px;
             font-weight: 600;
         }
-        &--but:hover{
+
+        &--but:hover {
             color: #eb9f34
         }
     }
-    &-content{
+
+    &-content {
         padding: 0px 30px;
-        &--border{
+
+        &--border {
             height: 1px;
             width: 100%;
             margin: 30px 0px;
             background-color: $border-color1;
         }
-        &--testBtn{
+
+        &--testBtn {
             padding: 0;
             width: 60px;
             height: 30px;
@@ -39,53 +46,3 @@
         }
     }
 }
-.global-tabs{
-    .ant-tabs-bar {
-        margin: 0;
-        position: relative;
-        top: 1px;
-    }
-    
-    .ant-tabs-content {
-        border: 1px solid #e5e5e5;
-        padding-bottom: 40px;
-        border-radius: 0 0 4px 4px;
-    }
-    
-    .ant-tabs-tab {
-        border-radius: 0 !important;
-        margin-right: 0 !important;
-        min-width: 110px;
-        text-align: center;
-        color: #cccccc;
-        height: 34px !important;
-        line-height: 34px !important;
-    }
-    
-    .ant-tabs-tab:first-child {
-        border-radius: 4px 0 0 0 !important;
-    }
-    
-    .ant-tabs-tab:last-child {
-        border-radius: 0 4px 0 0 !important;
-    }
-    
-    .ant-tabs-tab:not(:last-child) {
-        border-right: none !important;
-    }
-    
-    .ant-tabs-tab:hover {
-        color: #333333 !important;
-    }
-    
-    .ant-tabs-nav-container {
-        height: 34px !important;
-    }
-    
-    .ant-tabs-tab-active {
-        color: #333333 !important;
-    }
-}
- 
-   
-  

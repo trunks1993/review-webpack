@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-15 09:41:09
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-17 20:01:52
+ * @LastEditTime: 2020-07-21 20:30:47
  */
 import request from '@/utils/request';
 
@@ -80,5 +80,35 @@ export async function modifyApp(data) {
   return request('/application/modifyApplication', {
     method: 'POST',
     data,
+  });
+}
+
+/**
+ * @name: 申请提交实名认证
+ * @param {data}
+ */
+export async function addIdentifyWorkorder(data) {
+  return request('/user/addIdentifyWorkorder', {
+    method: 'POST',
+    data,
+  });
+}
+
+/**
+ * @name: 获取实名认证状态
+ * @param {data}
+ */
+export async function getMerchantBaseInfo() {
+  return request('/user/getMerchantBaseInfo', {
+    method: 'POST',
+  });
+}
+/**
+ * @name: 获取实名认证状态
+ * @param {data}
+ */
+export async function getLatestIdentifyWorkorder() {
+  return request('/user/getLatestIdentifyWorkorder', {
+    method: 'POST',
   });
 }

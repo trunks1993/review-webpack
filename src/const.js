@@ -123,13 +123,13 @@ export const MerchantStatus = {
   [MERCHANT_STATUS_3]: '已认证',
 };
 
-//异常原因
-export const JIEGUO_STATUS_0 = 0; //开发者订单重复
-export const JIEGUO_STATUS_1 = 1; //json解析失败
-export const JIEGUO_STATUS_2 = 2; //其他
+// 异常原因
+export const JIEGUO_STATUS_0 = 0; // 开发者订单重复
+export const JIEGUO_STATUS_1 = 1; // json解析失败
+export const JIEGUO_STATUS_2 = 2; // 其他
 
 export const JieGuoStatus = {
   [JIEGUO_STATUS_0]: '开发者订单重复',
   [JIEGUO_STATUS_1]: 'json解析失败',
   [JIEGUO_STATUS_2]: '其他',
-}
+};

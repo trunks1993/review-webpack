@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-14 16:26:54
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-17 14:55:13
+ * @LastEditTime: 2020-07-21 14:50:06
  */
 import React from 'react';
 
@@ -11,7 +11,6 @@ import { Row, Col, Button } from 'antd';
 import { MerchantStatus, UserTypes } from '@/const';
 
 const user = ({ list }) => {
-  console.log(list);
   return (
     <div className="user">
       <div className="user-title">
