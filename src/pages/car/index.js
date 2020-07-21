@@ -3,7 +3,7 @@
  * @LastEditTime: 2020-07-21 15:55:03
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Table,
@@ -13,9 +13,9 @@ import {
   Modal,
   Checkbox,
   message,
-} from "antd";
-import { connect } from "dva";
-import { ProductTypes, PRODUCT_TYPE_4 } from "@/const";
+} from 'antd';
+import { connect } from 'dva';
+import { ProductTypes, PRODUCT_TYPE_4 } from '@/const';
 import {
   removeCarItem,
   updateCarItem,
@@ -23,11 +23,11 @@ import {
   removeAll,
   getCartDetail,
   addOrder,
-} from "@/services/shop";
-import car from "@/assets/images/shop/big-car.png";
-import InputNumber from "@/components/InputNumber";
-import _ from "lodash";
-import GlobalModal from "@/components/GlobalModal";
+} from '@/services/shop';
+import car from '@/assets/images/shop/big-car.png';
+import InputNumber from '@/components/InputNumber';
+import _ from 'lodash';
+import GlobalModal from '@/components/GlobalModal';
 
 const { confirm } = Modal;
 
@@ -36,9 +36,9 @@ const CarPage = (props) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const [itemCode, setItemCode] = useState("");
+  const [itemCode, setItemCode] = useState('');
   const [traceList, setTraceList] = useState([]);
-  const [modalTitle, setModalTitle] = useState("");
+  const [modalTitle, setModalTitle] = useState('');
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   useEffect(() => {
@@ -59,19 +59,19 @@ const CarPage = (props) => {
    */
   const showConfirm = (itemCode) => {
     confirm({
-      title: "提示",
-      content: "是否删除",
-      okText: "确定",
-      cancelText: "取消",
-      onOk: async () => {
+      title: '提示',
+      content: '是否删除',
+      okText: '确定',
+      cancelText: '取消',
+      onOk: async() => {
         try {
           setLoading(true);
           const [err, data, msg] = await removeCarItem(itemCode);
           setLoading(false);
           if (!err) {
-            message.success("操作成功");
+            message.success('操作成功');
             dispatch({
-              type: "account/setCarData",
+              type: 'account/setCarData',
             });
           } else message.error(msg);
         } catch (error) {}
@@ -86,19 +86,19 @@ const CarPage = (props) => {
    */
   const removeCarSelection = () => {
     confirm({
-      title: "提示",
-      content: "是否删除",
-      okText: "确定",
-      cancelText: "取消",
-      onOk: async () => {
+      title: '提示',
+      content: '是否删除',
+      okText: '确定',
+      cancelText: '取消',
+      onOk: async() => {
         try {
           setLoading(true);
           const [err, data, msg] = await removeAll();
           setLoading(false);
           if (!err) {
-            message.success("操作成功");
+            message.success('操作成功');
             dispatch({
-              type: "account/setCarData",
+              type: 'account/setCarData',
             });
           } else message.error(msg);
         } catch (error) {}
@@ -111,16 +111,16 @@ const CarPage = (props) => {
    * @name: checkbox onChange 事件
    * @param {CheckboxChangeEvent} e
    */
-  const handleSelectAll = async (e) => {
+  const handleSelectAll = async(e) => {
     const checked =
-      carData.cartItemList.length === selectedRowKeys.length ? "N" : "Y";
+      carData.cartItemList.length === selectedRowKeys.length ? 'N' : 'Y';
     setLoading(true);
     try {
       const [err, data, msg] = await checkedAll(checked);
       setLoading(false);
       if (!err) {
         dispatch({
-          type: "account/setCarData",
+          type: 'account/setCarData',
         });
       } else {
         message.error(msg);
@@ -132,7 +132,7 @@ const CarPage = (props) => {
    * @name: 更新购物车数量
    * @param
    */
-  const updateCount = async (amount, itemCode) => {
+  const updateCount = async(amount, itemCode) => {
     try {
       setLoading(true);
       const paramsData = {
@@ -143,7 +143,7 @@ const CarPage = (props) => {
       setLoading(false);
       if (!err) {
         dispatch({
-          type: "account/setCarData",
+          type: 'account/setCarData',
         });
       } else {
         message.error(msg);
@@ -154,7 +154,7 @@ const CarPage = (props) => {
   /**
    * @name: 列表加载
    */
-  const initTraceList = async () => {
+  const initTraceList = async() => {
     try {
       setConfirmLoading(true);
       const [err, data, msg] = await getCartDetail(itemCode);
@@ -168,18 +168,18 @@ const CarPage = (props) => {
    * @name: 提交订单
    * @param {type}
    */
-  const submitOrder = async () => {
+  const submitOrder = async() => {
     try {
       setLoading(true);
       const [err, data, msg] = await addOrder();
       setLoading(false);
       if (!err) {
         dispatch({
-          type: "account/setCarData",
+          type: 'account/setCarData',
         });
         // history.push(`/admin/pay?orderId=${data}`);
         history.push({
-          pathname: "/admin/pay",
+          pathname: '/admin/pay',
           search: `?orderId=${data}`,
           state: { from: location.pathname },
         });
@@ -191,10 +191,10 @@ const CarPage = (props) => {
 
   const columns = [
     {
-      title: "商品信息",
-      key: "id",
+      title: '商品信息',
+      key: 'id',
       render: (record) => (
-        <div style={{ padding: "26px 0" }}>
+        <div style={{ padding: '26px 0' }}>
           <List.Item.Meta
             avatar={
               <Avatar
@@ -208,23 +208,23 @@ const CarPage = (props) => {
           />
         </div>
       ),
-      width: "25%",
+      width: '25%',
     },
     {
-      title: "类型",
-      align: "center",
+      title: '类型',
+      align: 'center',
       render: (record) => ProductTypes[record.productType],
-      width: "10%",
+      width: '10%',
     },
     {
-      title: "单价",
-      align: "center",
+      title: '单价',
+      align: 'center',
       render: (record) => <span>￥{record.goods.price}</span>,
-      width: "10%",
+      width: '10%',
     },
     {
-      title: "数量",
-      align: "center",
+      title: '数量',
+      align: 'center',
       render: (record) => (
         <span>
           <InputNumber
@@ -235,27 +235,27 @@ const CarPage = (props) => {
           />
         </span>
       ),
-      width: "25%",
+      width: '25%',
     },
     {
-      title: "总价",
-      align: "center",
+      title: '总价',
+      align: 'center',
       render: (record) => <span>￥{record.goods.price * record.amount}</span>,
-      width: "10%",
+      width: '10%',
     },
     {
-      title: "操作",
-      align: "center",
+      title: '操作',
+      align: 'center',
       render: (record) => (
         <span className="car_table-tool">
           <Button
-            style={{ color: "#999999" }}
+            style={{ color: '#999999' }}
             type="link"
             onClick={() => showConfirm(record.code)}
           >
             <span>
               <Icon
-                style={{ position: "relative", top: "1px" }}
+                style={{ position: 'relative', top: '1px' }}
                 type="delete"
               />
               <span>删除</span>
@@ -263,7 +263,7 @@ const CarPage = (props) => {
           </Button>
           {record.productType === PRODUCT_TYPE_4 ? (
             <>
-              <span className="car_table-tool-line"></span>
+              <span className="car_table-tool-line" />
               <Button
                 type="link"
                 onClick={() => {
@@ -277,15 +277,15 @@ const CarPage = (props) => {
           ) : null}
         </span>
       ),
-      width: "20%",
+      width: '20%',
     },
   ];
 
   const rowSelection = {
     selectedRowKeys,
-    columnWidth: "76px",
+    columnWidth: '76px',
     columnTitle: (
-      <span style={{ whiteSpace: "nowrap" }}>
+      <span style={{ whiteSpace: 'nowrap' }}>
         <Checkbox
           indeterminate={
             carData?.cartItemList?.length !== selectedRowKeys.length &&
@@ -299,18 +299,18 @@ const CarPage = (props) => {
       </span>
     ),
     hideDefaultSelections: true,
-    onSelect: async (record, selected) => {
+    onSelect: async(record, selected) => {
       try {
         setLoading(true);
         const paramsData = {
           itemCode: record.code,
-          checked: selected ? "Y" : "N",
+          checked: selected ? 'Y' : 'N',
         };
         const [err, data, msg] = await updateCarItem(paramsData);
         setLoading(false);
         if (!err) {
           dispatch({
-            type: "account/setCarData",
+            type: 'account/setCarData',
           });
         } else {
           message.error(msg);
@@ -321,32 +321,32 @@ const CarPage = (props) => {
 
   const columns_trace = [
     {
-      className: "global-table--none",
-      dataIndex: "id",
+      className: 'global-table--none',
+      dataIndex: 'id',
     },
     {
-      title: "序号",
-      align: "center",
+      title: '序号',
+      align: 'center',
       render: (record, arr, index) => index + 1,
-      width: "25%",
+      width: '25%',
     },
     {
-      title: "充值账号",
-      align: "center",
-      dataIndex: "objNo",
-      width: "29%",
+      title: '充值账号',
+      align: 'center',
+      dataIndex: 'objNo',
+      width: '29%',
     },
     {
-      title: "充值数量（件）",
-      align: "center",
-      dataIndex: "amount",
-      width: "21%",
+      title: '充值数量（件）',
+      align: 'center',
+      dataIndex: 'amount',
+      width: '21%',
     },
     {
-      title: "备注",
-      align: "center",
-      dataIndex: "extraInfo",
-      width: "25%",
+      title: '备注',
+      align: 'center',
+      dataIndex: 'extraInfo',
+      width: '25%',
     },
   ];
 
@@ -354,8 +354,8 @@ const CarPage = (props) => {
     <div className="car">
       <div className="car-header">
         <span className="car-header_title">购物车</span>
-        <Button type="link" onClick={() => history.push("/admin/shop")}>
-          {"添加更多商品>"}
+        <Button type="link" onClick={() => history.push('/admin/shop')}>
+          {'添加更多商品>'}
         </Button>
       </div>
       <div>
@@ -374,7 +374,7 @@ const CarPage = (props) => {
                 <p className="car_empty-text-title">您目前还没有任何商品</p>
                 <Button
                   size="small"
-                  onClick={() => history.push("/admin/shop")}
+                  onClick={() => history.push('/admin/shop')}
                 >
                   返回购买
                 </Button>
@@ -406,7 +406,7 @@ const CarPage = (props) => {
             <span className="car-footer_detail-item">
               已选择商品 <span>{carData?.sumInfo?.checkedCount}</span> 个
             </span>
-            {carData?.sumInfo?.hasZhiChong === "Y" && (
+            {carData?.sumInfo?.hasZhiChong === 'Y' && (
               <>
                 <span className="car-footer_detail-item">
                   充值账号 <span>{carData?.sumInfo?.accountNums}</span> 个
@@ -433,31 +433,31 @@ const CarPage = (props) => {
         modalVisible={!!itemCode}
         title={
           <div
-            style={{ textAlign: "center", fontWeight: "bold" }}
+            style={{ textAlign: 'center', fontWeight: 'bold' }}
           >{`${modalTitle}-直充明细`}</div>
         }
         cancelText={
           <>
-            <span style={{ color: "#333333" }}>
+            <span style={{ color: '#333333' }}>
               充值账号
               <span
                 style={{
-                  color: "#1A61DC",
-                  fontWeight: "bold",
-                  margin: "0 5px",
+                  color: '#1A61DC',
+                  fontWeight: 'bold',
+                  margin: '0 5px',
                 }}
               >
                 {traceList.length}
               </span>
               个
             </span>
-            <span style={{ color: "#333333", marginLeft: "10px" }}>
+            <span style={{ color: '#333333', marginLeft: '10px' }}>
               充值数量
               <span
                 style={{
-                  color: "#1A61DC",
-                  fontWeight: "bold",
-                  margin: "0 5px",
+                  color: '#1A61DC',
+                  fontWeight: 'bold',
+                  margin: '0 5px',
                 }}
               >
                 {_.map(traceList, (item) => item.amount).reduce(
@@ -469,12 +469,12 @@ const CarPage = (props) => {
             </span>
           </>
         }
-        onOk={() => setItemCode("")}
-        onCancel={() => setItemCode("")}
+        onOk={() => setItemCode('')}
+        onCancel={() => setItemCode('')}
         cancelButtonProps={{
-          className: "global-modal-btn-cancel",
-          type: "link",
-          style: { position: "absolute", left: 0 },
+          className: 'global-modal-btn-cancel',
+          type: 'link',
+          style: { position: 'absolute', left: 0 },
           disabled: true,
         }}
         okText="确认"

@@ -2,10 +2,10 @@
  * @Date: 2020-06-23 21:38:43
  * @LastEditTime: 2020-07-21 16:18:08
  */
-import { Form } from "antd";
-import React, { Component } from "react";
-import FormContext from "./FormContext";
-import FormItem from "./FormItem";
+import { Form } from 'antd';
+import React, { Component } from 'react';
+import FormContext from './FormContext';
+import FormItem from './FormItem';
 
 class MapForm extends Component {
   static CstInput;
@@ -24,9 +24,9 @@ class MapForm extends Component {
   static CstProductSubPanel;
   static CstCascader;
   static CstInputNumber;
-  
+
   static defaultProps = {
-    className: "",
+    className: '',
     onSubmit: () => {},
   };
 

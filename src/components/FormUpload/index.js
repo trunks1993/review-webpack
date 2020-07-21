@@ -3,12 +3,12 @@
  * @LastEditTime: 2020-07-21 19:20:09
  */
 
-import React, { useState } from "react";
-import _ from "lodash";
-import { Upload, Icon } from "antd";
-import noHead from "@/assets/images/global/no-head.png";
-export const FILE_ERROR_TYPE = "0";
-export const FILE_ERROR_SIZE = "1";
+import React, { useState } from 'react';
+import _ from 'lodash';
+import { Upload, Icon } from 'antd';
+import noHead from '@/assets/images/global/no-head.png';
+export const FILE_ERROR_TYPE = '0';
+export const FILE_ERROR_SIZE = '1';
 
 const FormUpLoad = (props) => {
   const { onChange, value, action, data, method } = props;
@@ -21,7 +21,7 @@ const FormUpLoad = (props) => {
    */
   const handleChangeChecked = (info) => {
     setLoading(true);
-    if (info.file.status === "done") {
+    if (info.file.status === 'done') {
       setLoading(false);
       const { result } = info.file.response;
       onChange && onChange(result.fileList[0].url);
@@ -29,7 +29,7 @@ const FormUpLoad = (props) => {
   };
 
   const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
       onChange && onChange(FILE_ERROR_TYPE);
     }
@@ -42,12 +42,12 @@ const FormUpLoad = (props) => {
 
   const handleDelete = (e) => {
     e.stopPropagation();
-    onChange && onChange("");
+    onChange && onChange('');
   };
 
   const uploadButton = (
     <div>
-      <Icon type={loading ? "loading" : "plus"} />
+      <Icon type={loading ? 'loading' : 'plus'} />
       <div className="ant-upload-text">上传</div>
     </div>
   );
@@ -78,7 +78,7 @@ const FormUpLoad = (props) => {
       <img
         src={value ? process.env.FILE_URL + value : noHead}
         alt="avatar"
-        style={{ width: "60px", height: "60px" }}
+        style={{ width: '60px', height: '60px' }}
       />
     </Upload>
   );

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ItemMap from './map';
 import FormContext from './FormContext';
 import TextArea from 'antd/lib/input/TextArea';
-import FormUpLoad from "../FormUpLoad";
+import FormUpLoad from '../FormUpLoad';
 // import TreeCheck from "@/pages/sys/manager/role/components/TreeCheck";
 // import BlockCheckbox from "../BlockCheckbox";
 // import GlobalCheckbox from "../GlobCheckbox";
