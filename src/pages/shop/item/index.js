@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-16 19:17:35
- * @LastEditTime: 2020-07-18 15:41:23
+ * @LastEditTime: 2020-07-21 11:27:19
  */
 
 import React, { useEffect, useState } from 'react';
@@ -17,6 +17,8 @@ import { ProductTypes, PRODUCT_TYPE_4 } from '@/const';
 import SkuPanel from './SkuPanel';
 import { connect } from 'dva';
 const { TabPane } = Tabs;
+import _ from 'lodash';
+import Car from '../components/Car';
 
 const ShopItem = (props) => {
   const { history, dispatch } = props;
@@ -90,7 +92,7 @@ const ShopItem = (props) => {
    */
   const _getGoodsSku = async(productCode) => {
     const cacheObj = skuCaches[productCode];
-    if (cacheObj) return setSkuList(cacheObj);
+    if (!_.isUndefined(cacheObj)) return setSkuList(cacheObj);
     try {
       setSkuLoading(true);
       const [err, data, msg] = await getGoodsSku(productCode);
@@ -112,9 +114,10 @@ const ShopItem = (props) => {
    * @param {type}
    */
   const _getGoodsInfo = async(productSubCode) => {
-    const cacheObj = goodsInfoCaches[productSubCode];
-    if (cacheObj) return setGoodsInfo(cacheObj);
     try {
+      const cacheObj = goodsInfoCaches[productSubCode];
+      if (!_.isUndefined(cacheObj)) return setGoodsInfo(cacheObj);
+      setGoodsLoading(true);
       const [err, data, msg] = await getGoodsInfo({
         productSubCode,
         productTypeCode,
@@ -138,25 +141,26 @@ const ShopItem = (props) => {
    */
   const _submitOrder = async(isBuy) => {
     try {
-      const productType = goodsInfo?.productTypeCode;
+      const productType = parseInt(goodsInfo?.productTypeCode);
       if (productType === PRODUCT_TYPE_4 && !fileList.length) return message.error('请上传充值账号');
+
       const paramsObj = {
         goodsCode: goodsInfo?.code,
         productType,
-        amount: productTypeCode === PRODUCT_TYPE_4 ? undefined : count,
+        amount: productType === PRODUCT_TYPE_4 ? undefined : count,
         batchFileUrl:
-          productTypeCode === PRODUCT_TYPE_4 ? fileList[0].url : undefined,
+          productType === PRODUCT_TYPE_4 ? fileList[0].url : undefined,
       };
 
       const api = isBuy ? submitOrder : addToCart;
       setSubmitOrderLoading(true);
       const [err, data, msg] = await api(paramsObj);
       setSubmitOrderLoading(false);
-      if (isBuy) history.push(`/admin/pay?orderId=${data.orderId}`);
-      else dispatch({
-        type: 'account/setCarData',
-      });
       if (!err) {
+        if (isBuy) history.push(`/admin/pay?orderId=${data.orderId}`);
+        else dispatch({
+          type: 'account/setCarData',
+        });
       } else message.error(msg);
     } catch (error) {}
   };
@@ -268,6 +272,8 @@ const ShopItem = (props) => {
           </TabPane>
         </Tabs>
       </div>
+
+      <Car />
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Layout, Menu, Badge, Popover } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Layout, Menu, Badge, Popover, message } from 'antd';
 import { RouteList } from '@/router';
 import { asyncRoutes } from '@/router/config';
 
@@ -7,38 +7,282 @@ import { createHashHistory } from 'history';
 const history = createHashHistory();
 import { connect } from 'dva';
 import { removeToken } from '@/utils/auth';
+import MapForm from '@/components/MapForm';
 
 const { Header, Footer } = Layout;
 
 import icon1 from '@/assets/images/layout/icon1.png';
 import icon2 from '@/assets/images/layout/icon2.png';
 import noImg from '@/assets/images/global/no-img.png';
+import GlobalModal from '@/components/GlobalModal';
+import { updatePassword, updateInfo } from '@/services/account';
+
+const { CstInput, CstPassword, CstUpload } = MapForm;
 
 const FuncContext = React.createContext(() => {});
+const formItemLayout = {
+  labelCol: {
+    span: 7,
+  },
+  wrapperCol: {
+    span: 12,
+    offset: 1,
+  },
+};
+const DropMenu = ({ user }) => {
+  const [infoVisible, setInfoVisible] = useState(false);
+  const [pwdVisible, setPwdVisible] = useState(false);
 
-const DropMenu = () => (
-  <FuncContext.Consumer>
-    {(dispatch) => (
-      <div className="layout_drop-menu">
-        <ul>
-          <li onClick={() => history.push('/changeUser')}>修改资料</li>
-          <li onClick={() => history.push('/changePassword')}>修改密码</li>
-          <li
-            onClick={() => {
-              removeToken();
-              window.location.href = '/';
-            }}
+  const [pwdForm, setPwdForm] = useState({});
+  const [pwdLoading, setPwdLoading] = useState(false);
+
+  const [infoForm, setInfoForm] = useState({});
+  const [infoLoading, setInfoLoading] = useState(false);
+
+  /**
+   * @name: 修改密码
+   * @param {type}
+   */
+  const handlePwdSubmit = () => {
+    pwdForm.validateFields(async(err, value) => {
+      if (!err) {
+        try {
+          setPwdLoading(true);
+          const [err, data, msg] = await updatePassword(value);
+          setPwdLoading(false);
+          if (!err) {
+            message.success('修改成功');
+            setPwdVisible(false);
+          } else message.error(msg);
+        } catch (error) {}
+      }
+    });
+  };
+
+  /**
+   * @name: 修改资料
+   * @param {type}
+   */
+  const handleInfoSubmit = (dispatch) => {
+    infoForm.validateFields(async(err, value) => {
+      if (!err) {
+        try {
+          setInfoLoading(true);
+          const [err, data, msg] = await updateInfo(value);
+          setInfoLoading(false);
+          if (!err) {
+            message.success('修改成功');
+            setInfoVisible(false);
+            dispatch({
+              type: 'account/setUser',
+            });
+          } else message.error(msg);
+        } catch (error) {}
+      }
+    });
+  };
+
+  return (
+    <>
+      <FuncContext.Consumer>
+        {(dispatch) => (
+          <div className="layout_drop-menu">
+            <ul>
+              <li onClick={() => setInfoVisible(true)}>修改资料</li>
+              <li onClick={() => setPwdVisible(true)}>修改密码</li>
+              <li
+                onClick={() => {
+                  removeToken();
+                  window.location.href = '/';
+                }}
+              >
+                退出登录
+              </li>
+            </ul>
+          </div>
+        )}
+      </FuncContext.Consumer>
+
+      <FuncContext.Consumer>
+        {(dispatch) => (
+          <GlobalModal
+            modalVisible={infoVisible}
+            confirmLoading={infoLoading}
+            title={
+              <div style={{ textAlign: 'center', fontWeight: 'bold' }}>
+                个人信息
+              </div>
+            }
+            cancelText="取消"
+            onOk={() => handleInfoSubmit(dispatch)}
+            onCancel={() => setInfoVisible(false)}
+            okText="确认"
+            width={560}
           >
-            退出登录
-          </li>
-        </ul>
-      </div>
-    )}
-  </FuncContext.Consumer>
-);
+            <MapForm
+              layColWrapper={formItemLayout}
+              labelAlign="right"
+              onCreate={(form) => setInfoForm(form)}
+            >
+              <CstUpload
+                label="头像"
+                name="headIcon"
+                defaultValue={user.headIcon}
+                customProps={{
+                  action: `${process.env.FILE_URL}/upload`,
+                  method: 'post',
+                  data: {
+                    userName: 'yunjin_file_upload',
+                    password: 'yunjin_upload_password',
+                    secret: 'N',
+                    domain: 'headicon',
+                  },
+                }}
+              />
+              <CstInput
+                label="真实姓名"
+                name="realname"
+                defaultValue={user.realname}
+                customProps={{
+                  placeholder: '请输入账号/手机号',
+                  size: 'large',
+                }}
+                rules={[
+                  {
+                    required: true,
+                    message: '账号/手机号不能为空',
+                    whitespace: true,
+                  },
+                ]}
+              />
+              <CstInput
+                label="昵称"
+                name="aliasName"
+                defaultValue={user.aliasName}
+                customProps={{
+                  placeholder: '请输入企业名称或昵称',
+                  size: 'large',
+                }}
+                rules={[
+                  {
+                    required: true,
+                    message: '请输入企业名称或昵称不能为空',
+                    whitespace: true,
+                  },
+                ]}
+              />
+              <CstInput
+                label="手机号"
+                name="telephone"
+                defaultValue={user.telephone}
+                customProps={{
+                  placeholder: '请输入账号/手机号',
+                  size: 'large',
+                  disabled: true,
+                }}
+                rules={[
+                  {
+                    required: true,
+                    message: '账号/手机号不能为空',
+                    whitespace: true,
+                  },
+                ]}
+              />
+            </MapForm>
+          </GlobalModal>
+        )}
+      </FuncContext.Consumer>
+
+      <GlobalModal
+        modalVisible={pwdVisible}
+        confirmLoading={pwdLoading}
+        title={
+          <div style={{ textAlign: 'center', fontWeight: 'bold' }}>
+            修改密码
+          </div>
+        }
+        cancelText="取消"
+        onOk={handlePwdSubmit}
+        onCancel={() => setPwdVisible(false)}
+        okText="确认"
+        width={560}
+      >
+        <MapForm
+          layColWrapper={formItemLayout}
+          labelAlign="right"
+          onCreate={(form) => setPwdForm(form)}
+        >
+          <CstPassword
+            label="原密码"
+            name="oldPassword"
+            customProps={{
+              placeholder: '请输入原密码',
+              size: 'large',
+            }}
+            rules={[
+              {
+                required: true,
+                message: '原密码不能为空',
+                whitespace: true,
+              },
+            ]}
+          />
+          <CstPassword
+            label="新密码"
+            name="newPassword"
+            customProps={{
+              placeholder: '请输入6~20位字符',
+              size: 'large',
+            }}
+            rules={[
+              {
+                required: true,
+                message: '新密码不能为空',
+                whitespace: true,
+              },
+              {
+                min: 6,
+                max: 20,
+                message: '请输入6~20位字符',
+              },
+            ]}
+          />
+          <CstPassword
+            label="确认新密码"
+            name="newPasswordSure"
+            customProps={{
+              placeholder: '再次输入新密码',
+              size: 'large',
+            }}
+            rules={[
+              {
+                required: true,
+                message: '确认新密码不能为空',
+                whitespace: true,
+              },
+              {
+                validator: (rule, value, callback) => {
+                  if (value && value !== pwdForm.getFieldValue('newPassword')) {
+                    callback('确认新密码输入错误');
+                  } else {
+                    callback();
+                  }
+                },
+              },
+            ]}
+          />
+        </MapForm>
+      </GlobalModal>
+    </>
+  );
+};
 
 const Name = ({ user, loading }) => (
-  <Popover placement="bottom" content={<DropMenu />} trigger="hover">
+  <Popover
+    placement="bottom"
+    content={<DropMenu user={user} />}
+    trigger="hover"
+  >
     <span>
       <img
         className="layout_header-img"

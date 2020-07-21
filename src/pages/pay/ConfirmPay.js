@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-15 16:39:54
- * @LastEditTime: 2020-07-16 17:25:10
+ * @LastEditTime: 2020-07-21 20:23:09
  */
 
 import React, { useState, useEffect } from 'react';
@@ -83,6 +83,20 @@ export default (props) => {
         <li className="confirm-pay-content_item">
           <span className="confirm-pay-content_item-title">账户余额：</span>
           <span>￥{amount}</span>
+          <span style={{ marginLeft: '15px' }}>
+            {amount < orderInfo?.sumInfo?.totalMoney ? (
+              <>
+                余额不足，
+                <Button type="link" style={{ padding: 0 }}>
+                  立即充值
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button type="link" style={{ padding: 0 }}>充值</Button>
+              </>
+            )}
+          </span>
         </li>
         <li className="confirm-pay-content_item">
           <span className="confirm-pay-content_item-title">手机号码：</span>

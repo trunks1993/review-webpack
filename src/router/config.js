@@ -1,11 +1,12 @@
 /*
  * @Date: 2020-07-02 16:24:34
- * @LastEditTime: 2020-07-18 15:58:34
+ * @LastEditTime: 2020-07-21 20:27:04
  */
 // layout下的子模块
 import ChildLayout from '@/pages';
 import Dashboard from '@/pages/dashboard';
 import Pay from '@/pages/pay';
+import Car from '@/pages/car';
 
 import ShopHome from '@/pages/shop/home';
 import ShopItem from '@/pages/shop/item';
@@ -228,7 +229,7 @@ export const asyncRoutes = [
     title: '购物车',
     path: '/admin/car',
     hidden: true,
-    component: Dashboard,
+    component: Car,
   },
   {
     id: 6,
