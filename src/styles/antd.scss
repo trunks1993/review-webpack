@@ -106,6 +106,9 @@
   &--none {
     display: none;
   }
+  .ant-checkbox-inner {
+    border-radius: 50%;
+  }
 }
 
 /* 全局弹窗样式 */
@@ -182,6 +185,20 @@
       font-weight: bold;
       color: #333333 !important;
       background: #ffffff !important;
+    }
+  }
+}
+
+// 上传图片
+.avatar-uploader {
+  .ant-upload.ant-upload-select-picture-card {
+    width: 60px;
+    height: 60px;
+    margin-right: 0;
+    margin-bottom: 0;
+    border: 1px solid #f2f2f2;
+    & > .ant-upload {
+      padding: 0;
     }
   }
 }

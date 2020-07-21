@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import ItemMap from './map';
 import FormContext from './FormContext';
 import TextArea from 'antd/lib/input/TextArea';
+import FormUpLoad from "../FormUpLoad";
 // import TreeCheck from "@/pages/sys/manager/role/components/TreeCheck";
-// import GlobalUpLoad from "../GlobalUpload";
 // import BlockCheckbox from "../BlockCheckbox";
 // import GlobalCheckbox from "../GlobCheckbox";
 // import GlobalEditor from "../GlobalEditor";
@@ -38,6 +38,7 @@ class WrapFormItem extends Component {
       className,
       style,
       customProps,
+      defaultValue,
     } = this.props;
 
     if (!name) {
@@ -78,10 +79,10 @@ class WrapFormItem extends Component {
           {children}
         </Select>
       ),
-      // CstUpload: getFieldDecorator(
-      //   name,
-      //   options
-      // )(<GlobalUpLoad {...customProps}>{children}</GlobalUpLoad>),
+      CstUpload: getFieldDecorator(
+        name,
+        options
+      )(<FormUpLoad {...customProps}>{children}</FormUpLoad>),
       // CstBlockCheckbox: getFieldDecorator(
       //   name,
       //   options

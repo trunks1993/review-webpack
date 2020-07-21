@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 20:14:20
- * @LastEditTime: 2020-07-16 10:09:29
+ * @LastEditTime: 2020-07-20 09:23:33
  */
 import React, { useState, useEffect } from 'react';
 import {
@@ -160,7 +160,7 @@ export default (props) => {
         >
           立即付款
         </Button>
-        <Button type="link" onClick={() => showConfirm(item.id)}>
+        <Button type="link" onClick={() => showConfirm(item.orderId)}>
           <span>
             <Icon type="delete" />
             删除

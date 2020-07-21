@@ -1,12 +1,12 @@
 /*
  * @Date: 2020-07-17 14:57:09
- * @LastEditTime: 2020-07-18 15:48:16
+ * @LastEditTime: 2020-07-21 11:09:04
  */
 
-import React, { useState, useEffect } from 'react';
-import { Skeleton, Upload, Button, Icon, message } from 'antd';
-import InputNumber from '@/components/InputNumber';
-import { PRODUCT_TYPE_4 } from '@/const';
+import React, { useState, useEffect } from "react";
+import { Skeleton, Upload, Button, Icon, message } from "antd";
+import InputNumber from "@/components/InputNumber";
+import { PRODUCT_TYPE_4 } from "@/const";
 
 export default (props) => {
   const {
@@ -24,14 +24,14 @@ export default (props) => {
   } = props;
 
   const uploadProps = {
-    name: 'file',
+    name: "file",
     action: `${process.env.FILE_URL}/upload`,
-    methods: 'post',
+    methods: "post",
     data: {
-      userName: 'yunjin_file_upload',
-      password: 'yunjin_upload_password',
-      secret: 'Y',
-      domain: 'cart',
+      userName: "yunjin_file_upload",
+      password: "yunjin_upload_password",
+      secret: "Y",
+      domain: "cart",
     },
     multiple: false,
     onChange(info) {
@@ -43,7 +43,7 @@ export default (props) => {
       fileList = fileList.map((file) => {
         if (file.response) {
           // Component will show file.url as link
-          file.url = file.response.url;
+          file.url = file.response.result.fileList[0].url;
         }
         return file;
       });
@@ -66,9 +66,10 @@ export default (props) => {
               {_.map(productList, (item) => (
                 <li
                   className={
-                    productCodeSelect === item.productCode ? 'active' : ''
+                    productCodeSelect === item.productCode ? "active" : ""
                   }
-                  onClick={() => onFilterChange({ productCodeSelect: item.productCode })
+                  onClick={() =>
+                    onFilterChange({ productCodeSelect: item.productCode })
                   }
                   key={item.productCode}
                 >
@@ -89,7 +90,7 @@ export default (props) => {
             >
               {_.map(skuList, (item) => (
                 <li
-                  className={skuSelect === item.code ? 'active-no-img' : ''}
+                  className={skuSelect === item.code ? "active-no-img" : ""}
                   onClick={() => onFilterChange({ skuSelect: item.code })}
                   key={item.code}
                 >
@@ -104,13 +105,13 @@ export default (props) => {
             <div className="count-line" />
             <span
               className="sku-panel-item_title"
-              style={{ lineHeight: '30px' }}
+              style={{ lineHeight: "30px" }}
             >
               商品数量
             </span>
-            <span style={{ marginLeft: '30px' }}>
+            <span style={{ marginLeft: "30px" }}>
               <InputNumber
-                style={{ marginLeft: '30px' }}
+                style={{ marginLeft: "30px" }}
                 min={1}
                 max={goodsInfo?.singleBuyLimit}
                 defaultValue={1}
@@ -122,12 +123,12 @@ export default (props) => {
           <li className="shop-item_sku-panel-item border-t-b">
             <span
               className="sku-panel-item_title"
-              style={{ lineHeight: '30px' }}
+              style={{ lineHeight: "30px" }}
             >
-              <span style={{ color: '#CC0000' }}>*</span>批量文件
+              <span style={{ color: "#CC0000" }}>*</span>批量文件
             </span>
-            <span style={{ marginLeft: '26px' }}>
-              <span style={{ display: 'inline-block' }}>
+            <span style={{ marginLeft: "26px" }}>
+              <span style={{ display: "inline-block" }}>
                 <Upload {...uploadProps} fileList={fileList}>
                   <Button>
                     <Icon type="upload" />
@@ -139,7 +140,7 @@ export default (props) => {
                 请下载导入模板
                 <Button
                   type="link"
-                  style={{ padding: '0 5px', fontSize: '12px' }}
+                  style={{ padding: "0 5px", fontSize: "12px" }}
                   onClick={() => {
                     window.open(
                       `${process.env.FILE_URL}/data/static/template/recharge.xlsx`

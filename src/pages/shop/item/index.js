@@ -1,29 +1,31 @@
 /*
  * @Date: 2020-07-16 19:17:35
- * @LastEditTime: 2020-07-18 15:41:23
+ * @LastEditTime: 2020-07-21 11:27:19
  */
 
-import React, { useEffect, useState } from 'react';
-import { getQueryVariable } from '@/utils';
+import React, { useEffect, useState } from "react";
+import { getQueryVariable } from "@/utils";
 import {
   getProductMap,
   getGoodsSku,
   getGoodsInfo,
   submitOrder,
   addToCart,
-} from '@/services/shop';
-import { message, List, Avatar, Skeleton, Button, Tabs } from 'antd';
-import { ProductTypes, PRODUCT_TYPE_4 } from '@/const';
-import SkuPanel from './SkuPanel';
-import { connect } from 'dva';
+} from "@/services/shop";
+import { message, List, Avatar, Skeleton, Button, Tabs } from "antd";
+import { ProductTypes, PRODUCT_TYPE_4 } from "@/const";
+import SkuPanel from "./SkuPanel";
+import { connect } from "dva";
 const { TabPane } = Tabs;
+import _ from "lodash";
+import Car from "../components/Car";
 
 const ShopItem = (props) => {
   const { history, dispatch } = props;
 
-  const productTypeCode = getQueryVariable('productTypeCode');
-  const brandCode = getQueryVariable('brandCode');
-  const productCode = parseInt(getQueryVariable('productCode'));
+  const productTypeCode = getQueryVariable("productTypeCode");
+  const brandCode = getQueryVariable("brandCode");
+  const productCode = parseInt(getQueryVariable("productCode"));
 
   const [goodsLoading, setGoodsLoading] = useState(false);
   const [productListLoading, setProductListLoading] = useState(false);
@@ -34,8 +36,8 @@ const ShopItem = (props) => {
   const [skuList, setSkuList] = useState([]);
   const [goodsInfo, setGoodsInfo] = useState({});
 
-  const [productCodeSelect, setProductCodeSelect] = useState('');
-  const [skuSelect, setSkuSelect] = useState('');
+  const [productCodeSelect, setProductCodeSelect] = useState("");
+  const [skuSelect, setSkuSelect] = useState("");
   const [count, setCount] = useState(1);
 
   const [skuCaches, setSkuCaches] = useState({});
@@ -47,7 +49,8 @@ const ShopItem = (props) => {
   }, []);
 
   useEffect(() => {
-    if (productList.length) setProductCodeSelect(productCode || productList[0].productCode);
+    if (productList.length)
+      setProductCodeSelect(productCode || productList[0].productCode);
   }, [productList]);
 
   useEffect(() => {
@@ -66,7 +69,7 @@ const ShopItem = (props) => {
    * @name: 获取品牌下对应的商品列表
    * @param {type}
    */
-  const _getProductList = async() => {
+  const _getProductList = async () => {
     try {
       setGoodsLoading(true);
       setProductListLoading(true);
@@ -88,9 +91,9 @@ const ShopItem = (props) => {
    * @name: 获取sku
    * @param {type}
    */
-  const _getGoodsSku = async(productCode) => {
+  const _getGoodsSku = async (productCode) => {
     const cacheObj = skuCaches[productCode];
-    if (cacheObj) return setSkuList(cacheObj);
+    if (!_.isUndefined(cacheObj)) return setSkuList(cacheObj);
     try {
       setSkuLoading(true);
       const [err, data, msg] = await getGoodsSku(productCode);
@@ -111,10 +114,11 @@ const ShopItem = (props) => {
    * @name: 通过sku code 获取商品信息
    * @param {type}
    */
-  const _getGoodsInfo = async(productSubCode) => {
-    const cacheObj = goodsInfoCaches[productSubCode];
-    if (cacheObj) return setGoodsInfo(cacheObj);
+  const _getGoodsInfo = async (productSubCode) => {
     try {
+      const cacheObj = goodsInfoCaches[productSubCode];
+      if (!_.isUndefined(cacheObj)) return setGoodsInfo(cacheObj);
+      setGoodsLoading(true);
       const [err, data, msg] = await getGoodsInfo({
         productSubCode,
         productTypeCode,
@@ -136,27 +140,30 @@ const ShopItem = (props) => {
    * @name: 立即购买 | 加入购物车
    * @param {type}
    */
-  const _submitOrder = async(isBuy) => {
+  const _submitOrder = async (isBuy) => {
     try {
-      const productType = goodsInfo?.productTypeCode;
-      if (productType === PRODUCT_TYPE_4 && !fileList.length) return message.error('请上传充值账号');
+      const productType = parseInt(goodsInfo?.productTypeCode);
+      if (productType === PRODUCT_TYPE_4 && !fileList.length)
+        return message.error("请上传充值账号");
+
       const paramsObj = {
         goodsCode: goodsInfo?.code,
         productType,
-        amount: productTypeCode === PRODUCT_TYPE_4 ? undefined : count,
+        amount: productType === PRODUCT_TYPE_4 ? undefined : count,
         batchFileUrl:
-          productTypeCode === PRODUCT_TYPE_4 ? fileList[0].url : undefined,
+          productType === PRODUCT_TYPE_4 ? fileList[0].url : undefined,
       };
 
       const api = isBuy ? submitOrder : addToCart;
       setSubmitOrderLoading(true);
       const [err, data, msg] = await api(paramsObj);
       setSubmitOrderLoading(false);
-      if (isBuy) history.push(`/admin/pay?orderId=${data.orderId}`);
-      else dispatch({
-        type: 'account/setCarData',
-      });
       if (!err) {
+        if (isBuy) history.push(`/admin/pay?orderId=${data.orderId}`);
+        else
+          dispatch({
+            type: "account/setCarData",
+          });
       } else message.error(msg);
     } catch (error) {}
   };
@@ -167,9 +174,9 @@ const ShopItem = (props) => {
         <div className="shop-item_header">权益商城 / 商品详情</div>
         <div
           style={{
-            marginLeft: '50px',
-            marginRight: '218px',
-            marginTop: '30px',
+            marginLeft: "50px",
+            marginRight: "218px",
+            marginTop: "30px",
           }}
         >
           <Skeleton
@@ -191,9 +198,9 @@ const ShopItem = (props) => {
                 <div className="shop-item_description">
                   <div className="shop-item_description-title">
                     <span>{goodsInfo?.productSub?.product?.brand?.resume}</span>
-                    <span style={{ position: 'relative' }}>
+                    <span style={{ position: "relative" }}>
                       <span className="shop-item_description-price">
-                        <span style={{ fontSize: '16px' }}>￥</span>
+                        <span style={{ fontSize: "16px" }}>￥</span>
                         {goodsInfo?.price}
                       </span>
                       <span className="shop-item_description-price--old">
@@ -231,15 +238,15 @@ const ShopItem = (props) => {
         {count > goodsInfo?.singleBuyLimit && (
           <div
             style={{
-              margin: '20px 180px',
-              lineHeight: '14px',
-              color: '#CC0000',
+              margin: "20px 180px",
+              lineHeight: "14px",
+              color: "#CC0000",
             }}
           >
             您所填写的商品数量超过库存！
           </div>
         )}
-        <div style={{ margin: '30px 0 0 180px' }}>
+        <div style={{ margin: "30px 0 0 180px" }}>
           <Button
             type="primary"
             disabled={count > goodsInfo?.singleBuyLimit}
@@ -249,7 +256,7 @@ const ShopItem = (props) => {
             立即购买
           </Button>
           <Button
-            style={{ marginLeft: '30px' }}
+            style={{ marginLeft: "30px" }}
             disabled={count > goodsInfo?.singleBuyLimit}
             onClick={() => _submitOrder(false)}
             loading={submitOrderLoading}
@@ -268,6 +275,8 @@ const ShopItem = (props) => {
           </TabPane>
         </Tabs>
       </div>
+
+      <Car />
     </div>
   );
 };
