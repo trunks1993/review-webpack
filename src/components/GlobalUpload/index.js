@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-16 17:01:12
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-21 21:46:42
+ * @LastEditTime: 2020-07-22 09:44:17
  */
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
@@ -55,7 +55,6 @@ const GlobalUpload = ({
     e.stopPropagation();
     onChange && onChange('');
   };
-  console.log(disabled);
   return (
     <div>
       {!disabled ? (

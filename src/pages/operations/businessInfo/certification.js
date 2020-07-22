@@ -2,11 +2,11 @@
  * @Author: Dad
  * @Date: 2020-07-17 20:59:45
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-21 21:51:20
+ * @LastEditTime: 2020-07-22 16:23:57
  */
 
 import React, { useState, useEffect } from 'react';
-import { Tabs, Form, Button, Row, Col, message, Icon } from 'antd';
+import { Tabs, Form, Button, Row, Col, Icon, Spin } from 'antd';
 import MapForm from '@/components/MapForm';
 import Head from '@/assets/images/operations/head.png';
 import Mian from '@/assets/images/operations/mian.png';
@@ -18,6 +18,7 @@ import {
   getLatestIdentifyWorkorder,
 } from '@/services/businessInfo';
 import Success from './success';
+import _ from 'lodash';
 import {
   USER_TYPE_1,
   USER_TYPE_2,
@@ -30,11 +31,12 @@ import {
 const { CstInput, CstGlobalUpload } = MapForm;
 
 const certification = () => {
-  const [tabKey, setTabKey] = useState('1');
+  const [tabKey, setTabKey] = useState();
   const [type, setType] = useState(false);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const [Inputdisabled, setInputdisabled] = useState(false);
   const [butVisible, setButVisible] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({});
   const [helpMsg, setHelpMsg] = useState(
     '需清晰展示五官和文字信息， 支持2M以内的PNG、JPEG、GIF格式'
@@ -42,13 +44,23 @@ const certification = () => {
   const [rejectText, setRejectText] = useState(
     '您尚未完成实名认证，请根据实际情况选择填写。'
   );
-  const [rejectTextType, setRejectTextType] = useState(true);
+  const [rejectTextType, setRejectTextType] = useState(false);
   const [helpMsag, setHelpMsag] = useState();
   const [typeData, setTypeData] = useState({});
   const [stateData, setStateData] = useState({});
 
   useEffect(() => {
     if (_.isEmpty(form)) return;
+    if (!loading) {
+      const data = JSON.parse(stateData.data);
+      form.setFieldsValue({ ...data });
+      return;
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    if (_.isEmpty(form)) return;
+    if (typeData?.identityState === 0) form.setFieldsValue();
     form.resetFields();
   }, [tabKey]);
 
@@ -63,75 +75,60 @@ const certification = () => {
 
   useEffect(() => {
     if (_.isEmpty(stateData)) return;
+    setTabKey(stateData?.identifyType.toString());
     ToolMap[typeData.identityState](stateData);
+    setInterval(() => {
+      setLoading(false);
+    }, 2000);
   }, [stateData]);
 
   // 提交
   const handleSubmit = () => {
-    form.validateFields(async(err, value) => {
+    form.validateFields(async (err, value) => {
+      console.log(value);
       if (!err) {
-        const [err, datas, msg] = await addIdentifyWorkorder({
+        const [errs, datas, msg] = await addIdentifyWorkorder({
           ...value,
           data: {
             ...value,
           },
         });
-        if (!err) {
-          message.success('实名认证信息已提交成功');
-        }
+        message.success('实名认证信息已提交成功');
+        setType(true);
+        setRejectTextType(false);
       }
     });
   };
 
   // 获取用户身份
-  const getMerchantBase = async() => {
+  const getMerchantBase = async () => {
     const [err, data, msg] = await getMerchantBaseInfo();
     if (!err) setTypeData(data);
   };
 
   // 获取用户状态
-  const getLatestIdentify = async() => {
+  const getLatestIdentify = async () => {
     const [err, data, msg] = await getLatestIdentifyWorkorder();
     if (!err) setStateData(data);
   };
 
   const ToolMap = {
-    [MERCHANT_STATUS_0]: () => {},
-    [MERCHANT_STATUS_1]: (state) => {
-      if (USER_TYPE_1 === state?.identifyType) {
-        setTabKey('1');
-      } else if (USER_TYPE_2 === state?.identifyType) {
-        setTabKey('2');
-      }
-      setRejectTextType(1);
-      setDisabled(true);
+    [MERCHANT_STATUS_0]: () => {
+      setRejectTextType(0);
+      setDisabled(false);
+      setTabKey('2');
+    },
+    [MERCHANT_STATUS_1]: () => {
+      setRejectTextType(false);
       setType(true);
     },
     [MERCHANT_STATUS_2]: (state) => {
-      const data = JSON.parse(state.data);
-      if (USER_TYPE_1 === state?.identifyType) {
-        setTabKey('1');
-      } else if (USER_TYPE_2 === state?.identifyType) {
-        setTabKey('2');
-        if (!_.isEmpty(reject)) {
-          setRejectText(reject);
-        }
-      }
-      form.setFieldsValue({ ...data });
-      setDisabled(true);
+      setRejectText(state?.rejectText);
       setRejectTextType(2);
     },
-    [MERCHANT_STATUS_3]: (state) => {
-      const data = JSON.parse(state.data);
-      if (USER_TYPE_1 === state?.identifyType) {
-        setTabKey('1');
-      } else if (USER_TYPE_2 === state?.identifyType) {
-        setTabKey('2');
-      }
+    [MERCHANT_STATUS_3]: () => {
       setRejectTextType(0);
-      form.setFieldsValue({ ...data });
       setRejectText('您已完成实名认证。');
-      setDisabled(true);
       setInputdisabled(true);
       setButVisible(false);
     },
@@ -140,10 +137,7 @@ const certification = () => {
   return (
     <div className="certification">
       {rejectTextType === 0 ? (
-        <div
-          className="certification-title"
-          style={{ color: '#fbbb66' }}
-        >
+        <div className="certification-title" style={{ color: '#fbbb66' }}>
           <div>
             <Icon type="info-circle" theme="filled" />
             {'温馨提示： '}
@@ -151,10 +145,7 @@ const certification = () => {
           </div>
         </div>
       ) : rejectTextType === 2 ? (
-        <div
-          className="certification-title"
-          style={{ color: '#ea0000' }}
-        >
+        <div className="certification-title" style={{ color: '#ea0000' }}>
           <div>
             <Icon type="close-circle" theme="filled" />
             {'认证未通过： '}
@@ -169,7 +160,10 @@ const certification = () => {
           className="configApp-content global-tabs"
           type="card"
           activeKey={tabKey}
-          onChange={(activeKey) => setTabKey(activeKey)}
+          onChange={(Key) => {
+            setTabKey(Key.toString());
+            console.log('tabKey', tabKey, 'Key', Key);
+          }}
         >
           <Tabs.TabPane tab={'企业认证'} disabled={disabled} key="2">
             <div style={{ margin: '30px 0px' }}>
@@ -186,7 +180,7 @@ const certification = () => {
                 >
                   <CstInput
                     name="identifyType"
-                    defaultValue={2}
+                    defaultValue={tabKey}
                     style={{ display: 'none' }}
                   />
                   <CstInput
@@ -337,7 +331,7 @@ const certification = () => {
                 >
                   <CstInput
                     name="identifyType"
-                    defaultValue={1}
+                    defaultValue={tabKey}
                     style={{ display: 'none' }}
                   />
                   <Row>
@@ -366,7 +360,10 @@ const certification = () => {
                               }
                             },
                           },
-                          { required: true, message: '身份证正面照片不能为空' },
+                          {
+                            required: true,
+                            message: '身份证正面照片不能为空',
+                          },
                         ]}
                         customProps={{
                           action: `${process.env.FILE_URL}/upload`,
@@ -409,7 +406,10 @@ const certification = () => {
                               }
                             },
                           },
-                          { required: true, message: '身份证正面照片不能为空' },
+                          {
+                            required: true,
+                            message: '身份证正面照片不能为空',
+                          },
                         ]}
                         customProps={{
                           action: `${process.env.FILE_URL}/upload`,

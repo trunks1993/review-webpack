@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 16:24:34
- * @LastEditTime: 2020-07-21 21:30:11
+ * @LastEditTime: 2020-07-22 14:57:43
  */
 // layout下的子模块
 import ChildLayout from '@/pages';
@@ -159,6 +159,7 @@ export const asyncRoutes = [
             path: '/admin/operations/businessInfo/success',
             component: Success,
             isLeaf: true,
+            hidden: true,
           },
           {
             id: 223,
