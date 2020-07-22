@@ -82,7 +82,7 @@ class WrapFormItem extends Component {
       CstUpload: getFieldDecorator(
         name,
         options
-      )(<FormUpLoad {...customProps}>{children}</FormUpLoad>),
+      )(<FormUpLoad {...customProps} />),
       // CstBlockCheckbox: getFieldDecorator(
       //   name,
       //   options

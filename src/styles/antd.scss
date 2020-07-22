@@ -31,6 +31,9 @@
     @extend .f12;
   }
 }
+.ant-select-selection__placeholder {
+  font-size: 12px;
+}
 
 .ant-popover-inner-content {
   padding: 12px 0;
@@ -92,16 +95,30 @@
 
 /* 全局table样式 */
 .global-table {
-  td {
-    padding: 4px 16px !important;
-    min-height: 40px;
+  &_head-tr {
+    & > th {
+      background: #eeeeee !important;
+      font-size: 12px;
+      padding: 0 16px !important;
+      height: 30px;
+      color: #333333 !important;
+    }
   }
+  &_row-tr {
+    & > td {
+      color: #333333;
+    }
+  }
+  // td {
+  //   padding: 4px 16px !important;
+  //   min-height: 40px;
+  // }
   th {
-    background: #e6e6e6 !important;
-    font-size: 12px;
-    border-top: 1px solid #e6e6e6;
-    padding: 4px 16px !important;
-    min-height: 40px;
+    // background: #e6e6e6 !important;
+    // font-size: 12px;
+    // border-top: 1px solid #e6e6e6;
+    // padding: 4px 16px !important;
+    // min-height: 40px;
   }
   &--none {
     display: none;
@@ -189,16 +206,16 @@
   }
 }
 
-// 上传图片
-.avatar-uploader {
-  .ant-upload.ant-upload-select-picture-card {
-    width: 60px;
-    height: 60px;
-    margin-right: 0;
-    margin-bottom: 0;
-    border: 1px solid #f2f2f2;
-    & > .ant-upload {
-      padding: 0;
-    }
-  }
-}
+// // 上传图片
+// .avatar-uploader {
+//   .ant-upload.ant-upload-select-picture-card {
+//     width: 60px;
+//     height: 60px;
+//     margin-right: 0;
+//     margin-bottom: 0;
+//     border: 1px solid #f2f2f2;
+//     & > .ant-upload {
+//       padding: 0;
+//     }
+//   }
+// }

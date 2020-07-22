@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 16:24:34
- * @LastEditTime: 2020-07-21 20:27:04
+ * @LastEditTime: 2020-07-22 17:18:39
  */
 // layout下的子模块
 import ChildLayout from '@/pages';
@@ -24,6 +24,9 @@ import Application from '@/pages/operations/businessInfo/application';
 import ModifyApp from '@/pages/operations/businessInfo/modifyApp';
 /** 运营管理-业务管理--账号信息 */
 import Account from '@/pages/operations/businessInfo/account';
+
+import CashFlow from '@/pages/fund/cashFlow';
+import FinancialFlow from '@/pages/fund/financialFlow';
 
 import module_shop_menu_icon from '@/assets/images/global/module_shop_menu_icon.png';
 import module_fund_menu_icon from '@/assets/images/global/module_fund_menu_icon.png';
@@ -159,7 +162,7 @@ export const asyncRoutes = [
       {
         id: 31,
         title: '资金总览',
-        path: '/dashboard',
+        // path: '/dashboard',
         icon: 'icon-tongji',
         component: Dashboard,
         isLeaf: true,
@@ -187,8 +190,8 @@ export const asyncRoutes = [
           {
             id: 323,
             title: '资金流水',
-            path: '/dashboard',
-            component: Dashboard,
+            path: '/admin/fund/cashFlow',
+            component: CashFlow,
             isLeaf: true,
           },
         ],
@@ -196,14 +199,14 @@ export const asyncRoutes = [
       {
         id: 33,
         title: '财务管理',
-        path: '/dashboard',
+        // path: '/dashboard',
         icon: 'icon-guanli',
         children: [
           {
             id: 331,
             title: '财务流水',
-            path: '/dashboard',
-            component: Dashboard,
+            path: '/admin/fund/financialFlow',
+            component: FinancialFlow,
             isLeaf: true,
           },
           {

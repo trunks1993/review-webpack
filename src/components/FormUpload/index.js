@@ -1,17 +1,16 @@
 /*
  * @Date: 2020-07-21 16:03:40
- * @LastEditTime: 2020-07-21 19:20:09
+ * @LastEditTime: 2020-07-22 17:08:21
  */
 
 import React, { useState } from 'react';
 import _ from 'lodash';
 import { Upload, Icon } from 'antd';
-import noHead from '@/assets/images/global/no-head.png';
 export const FILE_ERROR_TYPE = '0';
 export const FILE_ERROR_SIZE = '1';
 
 const FormUpLoad = (props) => {
-  const { onChange, value, action, data, method } = props;
+  const { onChange, value, action, data, method, Content, className } = props;
 
   const [loading, setLoading] = useState(false);
 
@@ -56,7 +55,7 @@ const FormUpLoad = (props) => {
     <Upload
       name="avatar"
       listType="picture-card"
-      className="avatar-uploader"
+      className={className}
       showUploadList={false}
       action={action}
       method={method}
@@ -64,22 +63,7 @@ const FormUpLoad = (props) => {
       beforeUpload={beforeUpload}
       onChange={handleChangeChecked}
     >
-      {/* {value ? (
-        <div>
-          <img
-            src={process.env.FILE_URL + value}
-            alt="avatar"
-            style={{ width: "60px", height: "60px" }}
-          />
-        </div>
-      ) : (
-        uploadButton
-      )} */}
-      <img
-        src={value ? process.env.FILE_URL + value : noHead}
-        alt="avatar"
-        style={{ width: '60px', height: '60px' }}
-      />
+      <Content value={value} />
     </Upload>
   );
 };

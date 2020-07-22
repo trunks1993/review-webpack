@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-05-29 14:30:28
- * @LastEditTime: 2020-07-17 17:19:09
+ * @LastEditTime: 2020-07-22 13:06:40
  */
 
 const utils = require("./utils");
@@ -76,6 +76,10 @@ module.exports = {
                   "menu-highlight-color": "#39A1FD",
                   "menu-item-active-border-width": "2px",
                   "layout-sider-background": "#ffffff",
+                  "input-height-lg": "34px",
+                  "select-single-item-height-lg": "34px",
+                  "table-border-radius-base": "0",
+                  "table-font-size": "12px",
                 },
                 javascriptEnabled: true,
               },

@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-23 10:24:25
- * @LastEditTime: 2020-06-30 18:15:59
+ * @LastEditTime: 2020-07-21 20:54:48
  */
 
 import React, { useState, useEffect } from 'react';
@@ -21,7 +21,6 @@ const Login = ({ signInLoading, dispatch, children }) => {
   const handleLogin = (form, callback) => {
     form.validateFields((err, value) => {
       if (!err) {
-        // console.log("setSignUpVisible -> value", value);
         dispatch({
           type: 'account/login',
           payload: value,

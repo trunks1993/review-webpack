@@ -16,6 +16,7 @@ import icon2 from '@/assets/images/layout/icon2.png';
 import noImg from '@/assets/images/global/no-img.png';
 import GlobalModal from '@/components/GlobalModal';
 import { updatePassword, updateInfo } from '@/services/account';
+import noHead from '@/assets/images/global/no-head.png';
 
 const { CstInput, CstPassword, CstUpload } = MapForm;
 
@@ -29,6 +30,17 @@ const formItemLayout = {
     offset: 1,
   },
 };
+
+const Content = ({ value }) => {
+  return (
+    <img
+      src={value ? process.env.FILE_URL + value : noHead}
+      alt="avatar"
+      style={{ width: '100%' }}
+    />
+  );
+};
+
 const DropMenu = ({ user }) => {
   const [infoVisible, setInfoVisible] = useState(false);
   const [pwdVisible, setPwdVisible] = useState(false);
@@ -137,6 +149,8 @@ const DropMenu = ({ user }) => {
                     secret: 'N',
                     domain: 'headicon',
                   },
+                  className: 'layout_uploader',
+                  Content,
                 }}
               />
               <CstInput
