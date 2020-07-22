@@ -1,10 +1,10 @@
 /*
  * @Date: 2020-07-14 16:36:47
- * @LastEditTime: 2020-07-14 17:47:20
+ * @LastEditTime: 2020-07-22 15:15:19
  */
 
-import React from 'react';
-import { Modal } from 'antd';
+import React from "react";
+import { Modal } from "antd";
 
 const GlobalModal = (props) => {
   const {
@@ -17,6 +17,7 @@ const GlobalModal = (props) => {
     cancelText,
     cancelButtonProps,
     okText,
+    footer,
   } = props;
 
   return (
@@ -30,12 +31,13 @@ const GlobalModal = (props) => {
       width={width || 600}
       onCancel={() => onCancel && onCancel()}
       onOk={() => onOk && onOk()}
-      okButtonProps={{ className: 'global-modal-btn-ok' }}
+      okButtonProps={{ className: "global-modal-btn-ok" }}
       cancelButtonProps={
-        cancelButtonProps || { className: 'global-modal-btn-cancel' }
+        cancelButtonProps || { className: "global-modal-btn-cancel" }
       }
       cancelText={cancelText}
       okText={okText}
+      footer={footer}
     >
       {props.children}
     </Modal>

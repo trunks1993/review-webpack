@@ -8,6 +8,7 @@
 @import "./iconfont/iconfont.css";
 @import "./inputNumber/index.scss";
 @import "./car/index.scss";
+@import "./fund/cashFlow.scss";
 
 /*!
  * @名称：base.css
@@ -175,4 +176,19 @@ div:focus {
 .fb {
   display: flex;
   justify-content: space-between;
+}
+
+.breadCrumb {
+  border: 1px solid #e6e6e6;
+  color: #999999;
+  font-size: 12px;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 20px;
+}
+
+.filter-form {
+  .ant-col > .ant-form-item {
+    margin-bottom: 0;
+  }
 }

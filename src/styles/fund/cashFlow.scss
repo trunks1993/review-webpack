@@ -1,0 +1,54 @@
+.cash-flow {
+  //   height: auto;
+  border: 1px solid #f2f2f2;
+
+  background: #ffffff;
+  &_header {
+    @extend .breadCrumb;
+    background: #f2f2f2;
+  }
+  &_filter {
+    padding: 30px 0;
+  }
+  &_empty {
+    padding-top: 127px;
+    padding-bottom: 200px;
+  }
+  &_pagination {
+    padding: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    &-data {
+      font-size: 12px;
+      color: #cccccc;
+      margin-left: 28px;
+    }
+  }
+  &_item-info {
+    width: 320px;
+    margin: auto;
+    & > li {
+      font-size: 16px;
+      color: #333333;
+      margin-bottom: 30px;
+    }
+    &-title {
+      display: inline-block;
+      width: 80px;
+      text-align: right;
+    }
+  }
+  &_uploader {
+    .ant-upload.ant-upload-select-picture-card {
+      width: 100px;
+      height: 100px;
+      margin-right: 0;
+      margin-bottom: 0;
+      border: 1px solid #e6e6e6;
+      & > .ant-upload {
+        padding: 0;
+      }
+    }
+  }
+}
