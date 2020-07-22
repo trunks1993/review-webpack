@@ -3,7 +3,7 @@
  * @LastEditTime: 2020-07-22 20:25:08
  */
 
-import React from "react";
+import React from 'react';
 
 export default (props) => {
   return <>serviceOrder</>;

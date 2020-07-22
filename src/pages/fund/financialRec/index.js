@@ -3,8 +3,8 @@
  * @LastEditTime: 2020-07-22 21:27:50
  */
 
-import React, { useState, useEffect } from "react";
-import MapForm from "@/components/MapForm";
+import React, { useState, useEffect } from 'react';
+import MapForm from '@/components/MapForm';
 import {
   Form,
   Button,
@@ -15,8 +15,8 @@ import {
   Select,
   Pagination,
   Icon,
-} from "antd";
-import { fetchList } from "@/services/financialRec";
+} from 'antd';
+import { fetchList } from '@/services/financialRec';
 
 const { CstInput, CstSelect, CstUpload } = MapForm;
 
@@ -28,11 +28,11 @@ import {
   FINANCIAL_REC_STATUS_2,
   TRANSTEMP,
   PRECISION,
-} from "@/const";
+} from '@/const';
 
-import noCashFlow from "@/assets/images/fund/no-cash-flow.png";
-import _ from "lodash";
-import { formateTime, getFloat } from "@/utils";
+import noCashFlow from '@/assets/images/fund/no-cash-flow.png';
+import _ from 'lodash';
+import { formateTime, getFloat } from '@/utils';
 
 const FinancialFlow = (props) => {
   const [filterForm, setFilterForm] = React.useState(null);
@@ -51,7 +51,7 @@ const FinancialFlow = (props) => {
   /**
    * @name: 列表加载
    */
-  const initList = async () => {
+  const initList = async() => {
     try {
       const filterData = filterForm?.getFieldsValue();
       const queryParams = {
@@ -80,51 +80,51 @@ const FinancialFlow = (props) => {
 
   const columns = [
     {
-      title: "标题",
-      dataIndex: "title",
-      width: "25%",
-      align: "center",
+      title: '标题',
+      dataIndex: 'title',
+      width: '25%',
+      align: 'center',
     },
 
     {
-      title: "账单类型",
-      align: "center",
+      title: '账单类型',
+      align: 'center',
       render: (record) => financialRecBillTypes[record.billType],
-      width: "10%",
+      width: '10%',
     },
     {
-      title: "交易笔数(笔)",
-      align: "center",
-      dataIndex: "tradeCount",
-      width: "10%",
+      title: '交易笔数(笔)',
+      align: 'center',
+      dataIndex: 'tradeCount',
+      width: '10%',
     },
     {
-      title: "交易金额(元)",
-      align: "center",
+      title: '交易金额(元)',
+      align: 'center',
       render: (record) => (
-        <span style={{ fontWeight: "bold" }}>
+        <span style={{ fontWeight: 'bold' }}>
           {getFloat(record.tradeAmount / TRANSTEMP, PRECISION)}
         </span>
       ),
-      width: "10%",
+      width: '10%',
     },
     {
-      title: "状态",
-      align: "center",
+      title: '状态',
+      align: 'center',
       render: (record) => <span>{financialRecStatus[record.status]}</span>,
-      width: "10%",
+      width: '10%',
     },
 
     {
-      title: "创建时间",
-      key: "id",
-      align: "center",
-      render: (record) => formateTime(record.createTime, "MM/DD HH:mm:ss"),
-      width: "15%",
+      title: '创建时间',
+      key: 'id',
+      align: 'center',
+      render: (record) => formateTime(record.createTime, 'MM/DD HH:mm:ss'),
+      width: '15%',
     },
     {
-      title: "操作",
-      align: "left",
+      title: '操作',
+      align: 'left',
       render: (record) => (
         <>
           <Button
@@ -137,14 +137,13 @@ const FinancialFlow = (props) => {
           </Button>
           {record.status === FINANCIAL_REC_STATUS_2 ? (
             <Button
-              style={{ marginLeft: "10px" }}
+              style={{ marginLeft: '10px' }}
               size="small"
               type="primary"
               ghost
-              onClick={() =>
-                window.open(
-                  `${process.env.FILE_URL + record.checkFileList[0].fileUrl}`
-                )
+              onClick={() => window.open(
+                `${process.env.FILE_URL + record.checkFileList[0].fileUrl}`
+              )
               }
             >
               <Icon type="vertical-align-bottom" />
@@ -153,13 +152,13 @@ const FinancialFlow = (props) => {
           ) : null}
         </>
       ),
-      width: "20%",
+      width: '20%',
     },
   ];
 
   return (
     <div className="financial-rec">
-      <div className="financial-rec_header">{"财务管理 > 财务对账"}</div>
+      <div className="financial-rec_header">{'财务管理 > 财务对账'}</div>
       <div className="financial-rec_filter">
         <MapForm
           className="filter-form"
@@ -174,8 +173,8 @@ const FinancialFlow = (props) => {
                 name="title"
                 label="标题"
                 customProps={{
-                  placeholder: "输入标题/关键字",
-                  size: "large",
+                  placeholder: '输入标题/关键字',
+                  size: 'large',
                 }}
               />
             </Col>
@@ -186,8 +185,8 @@ const FinancialFlow = (props) => {
                 name="billType"
                 label="账单类型"
                 customProps={{
-                  placeholder: "选择账单类型",
-                  size: "large",
+                  placeholder: '选择账单类型',
+                  size: 'large',
                 }}
               >
                 {_.map(financialRecBillTypes, (item, key) => (
@@ -208,7 +207,7 @@ const FinancialFlow = (props) => {
                 </Button>
                 <Button
                   icon="undo"
-                  style={{ marginLeft: "10px" }}
+                  style={{ marginLeft: '10px' }}
                   onClick={() => filterForm?.resetFields()}
                 >
                   重置
@@ -229,9 +228,9 @@ const FinancialFlow = (props) => {
           columns={columns}
           pagination={false}
           dataSource={list}
-          rowClassName={() => "global-table_row-tr"}
+          rowClassName={() => 'global-table_row-tr'}
           onHeaderRow={() => ({
-            className: "global-table_head-tr",
+            className: 'global-table_head-tr',
           })}
           rowKey={(record, index) => record.id}
           locale={{
