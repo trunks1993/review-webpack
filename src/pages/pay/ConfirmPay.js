@@ -1,11 +1,13 @@
 /*
  * @Date: 2020-07-15 16:39:54
- * @LastEditTime: 2020-07-21 20:23:09
+ * @LastEditTime: 2020-07-22 21:41:21
  */
 
-import React, { useState, useEffect } from 'react';
-import { Button, Input, message } from 'antd';
-import { sendAuthCode, pay } from '@/services/pay';
+import React, { useState, useEffect } from "react";
+import { Button, Input, message } from "antd";
+import { sendAuthCode, pay } from "@/services/pay";
+import { TRANSTEMP, PRECISION } from "@/const";
+import { getFloat } from "@/utils";
 
 export default (props) => {
   const { amount, telephone, orderInfo, changeStep } = props;
@@ -16,7 +18,7 @@ export default (props) => {
 
   let timer = null;
 
-  const handleSendAuthCode = async() => {
+  const handleSendAuthCode = async () => {
     try {
       setLoading(true);
       const [err, data, msg] = await sendAuthCode(telephone);
@@ -47,9 +49,9 @@ export default (props) => {
     }, 1000);
   };
 
-  const handlePay = async() => {
+  const handlePay = async () => {
     const code = inputRef.current.state.value;
-    if (!code) return message.error('请输入手机验证码');
+    if (!code) return message.error("请输入手机验证码");
     try {
       const [err, data, msg] = await pay({
         orderId: orderInfo.order.orderId,
@@ -78,12 +80,14 @@ export default (props) => {
         </li>
         <li className="confirm-pay-content_item">
           <span className="confirm-pay-content_item-title">订单总额：</span>
-          <span>￥{orderInfo?.sumInfo?.totalMoney}</span>
+          <span>
+            ￥{getFloat(orderInfo?.sumInfo?.totalMoney / TRANSTEMP, PRECISION)}
+          </span>
         </li>
         <li className="confirm-pay-content_item">
           <span className="confirm-pay-content_item-title">账户余额：</span>
-          <span>￥{amount}</span>
-          <span style={{ marginLeft: '15px' }}>
+          <span>￥{getFloat(amount / TRANSTEMP, PRECISION)}</span>
+          <span style={{ marginLeft: "15px" }}>
             {amount < orderInfo?.sumInfo?.totalMoney ? (
               <>
                 余额不足，
@@ -93,7 +97,9 @@ export default (props) => {
               </>
             ) : (
               <>
-                <Button type="link" style={{ padding: 0 }}>充值</Button>
+                <Button type="link" style={{ padding: 0 }}>
+                  充值
+                </Button>
               </>
             )}
           </span>
@@ -108,7 +114,7 @@ export default (props) => {
           </span>
           <Input
             ref={inputRef}
-            style={{ width: '180px' }}
+            style={{ width: "180px" }}
             size="large"
             className="byMessage_cst-input"
             addonAfter={
@@ -118,7 +124,7 @@ export default (props) => {
                 type="link"
                 onClick={handleSendAuthCode}
               >
-                {timing ? time + 's' : !loading && '发送验证码'}
+                {timing ? time + "s" : !loading && "发送验证码"}
               </Button>
             }
           />
@@ -129,7 +135,7 @@ export default (props) => {
           确认付款
         </Button>
         <Button
-          style={{ marginLeft: '10px' }}
+          style={{ marginLeft: "10px" }}
           onClick={() => {
             changeStep(2);
           }}

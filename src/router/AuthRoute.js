@@ -1,26 +1,23 @@
 /*
  * @Date: 2020-06-20 17:03:19
- * @LastEditTime: 2020-07-21 20:58:56
+ * @LastEditTime: 2020-07-22 19:25:20
  */
-import React from 'react';
-import { connect } from 'dva';
+import React from "react";
+import { connect } from "dva";
 // import { Route, Redirect } from 'react-router-dom';
-import { routerRedux, Route, Redirect } from 'dva/router';
+import { routerRedux, Route, Redirect } from "dva/router";
 
-import { getToken } from '@/utils/auth';
+import { getToken } from "@/utils/auth";
 
 const AuthRoute = ({ Component, authTo, user, dispatch, ...rest }) => {
   return (
     <Route
       render={(props) => {
         const isLogin =
-          props.location.pathname === '/signIn' ||
-          props.location.pathname === '/signUp' ||
-          props.location.pathname === '/resetPassword';
-        console.log(
-          'AuthRoute -> props.location.pathname',
-          props.location.pathname
-        );
+          props.location.pathname === "/signIn" ||
+          props.location.pathname === "/signUp" ||
+          props.location.pathname === "/resetPassword";
+
         const token = getToken();
         const c = <Component {...props} />;
         const r = (
@@ -32,13 +29,13 @@ const AuthRoute = ({ Component, authTo, user, dispatch, ...rest }) => {
           // 如果有token 判断有没有用户信息没有就去拉取
           if (!user.id) {
             dispatch({
-              type: 'account/setUser',
+              type: "account/setUser",
             });
             dispatch({
-              type: 'account/setAmount',
+              type: "account/setAmount",
             });
             dispatch({
-              type: 'account/setCarData',
+              type: "account/setCarData",
             });
           }
 

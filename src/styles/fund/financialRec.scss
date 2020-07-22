@@ -1,0 +1,81 @@
+.financial-rec {
+  border: 1px solid #f2f2f2;
+  .global-table {
+    .ant-btn > .anticon + span {
+      margin-left: 0;
+    }
+  }
+  &_header {
+    @extend .breadCrumb;
+    background: #f2f2f2;
+  }
+  &_filter {
+    padding: 30px 0;
+    background: #ffffff;
+  }
+  &_table {
+    background: #ffffff;
+    margin-top: 10px;
+    &-tools {
+      height: 50px;
+      padding: 0 50px;
+      @extend .fbc;
+      &-title {
+        line-height: 50px;
+        font-size: 14px;
+        color: #333333;
+        font-weight: bold;
+      }
+    }
+  }
+  &_empty {
+    padding-top: 127px;
+    padding-bottom: 200px;
+  }
+  &_pagination {
+    padding: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    background: #ffffff;
+    position: relative;
+    &-denote {
+      position: absolute;
+      font-size: 12px;
+      color: #999999;
+      top: 15px;
+      left: 55px;
+    }
+    &-data {
+      font-size: 12px;
+      color: #cccccc;
+      margin-left: 28px;
+    }
+  }
+  &_item-info {
+    width: 320px;
+    margin: auto;
+    & > li {
+      font-size: 16px;
+      color: #333333;
+      margin-bottom: 30px;
+    }
+    &-title {
+      display: inline-block;
+      width: 80px;
+      text-align: right;
+    }
+  }
+  &_uploader {
+    .ant-upload.ant-upload-select-picture-card {
+      width: 100px;
+      height: 100px;
+      margin-right: 0;
+      margin-bottom: 0;
+      border: 1px solid #e6e6e6;
+      & > .ant-upload {
+        padding: 0;
+      }
+    }
+  }
+}
