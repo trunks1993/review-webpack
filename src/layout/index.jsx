@@ -319,12 +319,17 @@ const Comp = ({ carCount, user, dispatch, ...rest }) => {
             />
             <span className="layout_header-logo">助力企业数字化转型</span>
           </div>
-          <Menu theme="dark" mode="horizontal" style={{ lineHeight: '60px' }}>
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            selectedKeys={[rest.location.pathname]}
+            style={{ lineHeight: '60px' }}
+          >
             {_.map(
               asyncRoutes,
               (item) => !item.hidden && (
                 <Menu.Item
-                  key={item.id}
+                  key={item.path}
                   onClick={(e) => history.push(`${item.path}`)}
                 >
                   {item.title}
@@ -367,4 +372,5 @@ const Comp = ({ carCount, user, dispatch, ...rest }) => {
 export default connect(({ app, account }) => ({
   carCount: app.carCount,
   user: account.user,
+  // path: routing.location.pathname,
 }))(Comp);

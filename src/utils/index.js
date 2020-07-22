@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-19 20:47:15
- * @LastEditTime: 2020-07-22 12:45:33
+ * @LastEditTime: 2020-07-22 21:21:05
  */
 import moment from 'moment';
 
@@ -38,6 +38,19 @@ export function getQueryVariable(variable) {
   return false;
 }
 
-export function formateTime(timeStr) {
-  return timeStr ? moment(timeStr).format('YYYY-MM-DD HH:mm:ss') : '';
+export function formateTime(timeStr, formatStr) {
+  return timeStr
+    ? moment(timeStr).format(formatStr ? formatStr : 'YYYY-MM-DD HH:mm:ss')
+    : '';
 }
+
+export const getFloat = (number, n) => {
+  let num = parseFloat(number);
+  n = n ? n : 0;
+  if (n <= 0) {
+    return Math.round(number);
+  }
+  num = Math.round(num * Math.pow(10, n)) / Math.pow(10, n); // 四舍五入
+  num = parseFloat(num).toFixed(n); // 补足位数
+  return num;
+};

@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-20 17:03:03
- * @LastEditTime: 2020-07-16 16:36:15
+ * @LastEditTime: 2020-07-22 20:30:03
  */
 import React from 'react';
 import { routerRedux, Route, Redirect, Switch } from 'dva/router';
@@ -24,6 +24,7 @@ import Page404 from '@/pages/page404';
 // layout下的子模块
 import Dashboard from '@/pages/dashboard';
 import ShopHome from '@/pages/shop/home';
+import FundHome from '@/pages/fund/home';
 
 export default ({ history }) => {
   return (
@@ -81,6 +82,7 @@ export const ChildRouteList = React.memo(() => {
           );
         })}
       <Route path="/admin/shop" component={ShopHome} />
+      <Route path="/admin/fund" component={FundHome} />
     </Switch>
   );
 });

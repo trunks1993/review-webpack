@@ -1,10 +1,10 @@
 /*
  * @Date: 2020-07-16 19:17:35
- * @LastEditTime: 2020-07-21 11:27:19
+ * @LastEditTime: 2020-07-22 21:34:03
  */
 
 import React, { useEffect, useState } from 'react';
-import { getQueryVariable } from '@/utils';
+import { getQueryVariable, getFloat } from '@/utils';
 import {
   getProductMap,
   getGoodsSku,
@@ -13,7 +13,7 @@ import {
   addToCart,
 } from '@/services/shop';
 import { message, List, Avatar, Skeleton, Button, Tabs } from 'antd';
-import { ProductTypes, PRODUCT_TYPE_4 } from '@/const';
+import { ProductTypes, PRODUCT_TYPE_4, TRANSTEMP, PRECISION } from '@/const';
 import SkuPanel from './SkuPanel';
 import { connect } from 'dva';
 const { TabPane } = Tabs;
@@ -198,10 +198,15 @@ const ShopItem = (props) => {
                     <span style={{ position: 'relative' }}>
                       <span className="shop-item_description-price">
                         <span style={{ fontSize: '16px' }}>￥</span>
-                        {goodsInfo?.price}
+                        {getFloat(goodsInfo?.price / TRANSTEMP, PRECISION)}
                       </span>
                       <span className="shop-item_description-price--old">
-                        [ ￥{goodsInfo?.productSub?.facePrice} ]
+                        [ ￥
+                        {getFloat(
+                          goodsInfo?.productSub?.facePrice / TRANSTEMP,
+                          PRECISION
+                        )}{' '}
+                        ]
                       </span>
                       <span className="shop-item_description-code">
                         商品代码：{goodsInfo?.code}

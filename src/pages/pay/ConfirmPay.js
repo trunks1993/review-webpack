@@ -1,11 +1,13 @@
 /*
  * @Date: 2020-07-15 16:39:54
- * @LastEditTime: 2020-07-21 20:23:09
+ * @LastEditTime: 2020-07-22 21:41:21
  */
 
 import React, { useState, useEffect } from 'react';
 import { Button, Input, message } from 'antd';
 import { sendAuthCode, pay } from '@/services/pay';
+import { TRANSTEMP, PRECISION } from '@/const';
+import { getFloat } from '@/utils';
 
 export default (props) => {
   const { amount, telephone, orderInfo, changeStep } = props;
@@ -78,11 +80,13 @@ export default (props) => {
         </li>
         <li className="confirm-pay-content_item">
           <span className="confirm-pay-content_item-title">订单总额：</span>
-          <span>￥{orderInfo?.sumInfo?.totalMoney}</span>
+          <span>
+            ￥{getFloat(orderInfo?.sumInfo?.totalMoney / TRANSTEMP, PRECISION)}
+          </span>
         </li>
         <li className="confirm-pay-content_item">
           <span className="confirm-pay-content_item-title">账户余额：</span>
-          <span>￥{amount}</span>
+          <span>￥{getFloat(amount / TRANSTEMP, PRECISION)}</span>
           <span style={{ marginLeft: '15px' }}>
             {amount < orderInfo?.sumInfo?.totalMoney ? (
               <>
@@ -93,7 +97,9 @@ export default (props) => {
               </>
             ) : (
               <>
-                <Button type="link" style={{ padding: 0 }}>充值</Button>
+                <Button type="link" style={{ padding: 0 }}>
+                  充值
+                </Button>
               </>
             )}
           </span>

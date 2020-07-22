@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-22 11:01:06
- * @LastEditTime: 2020-07-22 16:31:43
+ * @LastEditTime: 2020-07-22 21:30:55
  */
 
 import React, { useState, useEffect } from 'react';
@@ -29,11 +29,13 @@ import {
   CASH_FLOW_STATUS_1,
   CASH_FLOW_STATUS_2,
   CASH_FLOW_STATUS_3,
+  TRANSTEMP,
+  PRECISION,
 } from '@/const';
 
 import noCashFlow from '@/assets/images/fund/no-cash-flow.png';
 import _ from 'lodash';
-import { formateTime } from '@/utils';
+import { formateTime, getFloat } from '@/utils';
 import GlobalModal from '@/components/GlobalModal';
 import { Icon } from 'antd';
 
@@ -103,10 +105,13 @@ const CashFlow = (props) => {
   useEffect(() => {
     const { code, amount, bizType } = uploadFormData;
     if (uploadVisible) {
+      const amountFormate = getFloat(amount / TRANSTEMP, PRECISION);
       uploadForm?.setFieldsValue({
         code,
         amountText:
-          bizType === CASH_FLOW_BIZTYPE_1 ? `+${amount}` : `-${amount}`,
+          bizType === CASH_FLOW_BIZTYPE_1
+            ? `+${amountFormate}`
+            : `-${amountFormate}`,
       });
     }
   }, [uploadForm]);
@@ -189,6 +194,7 @@ const CashFlow = (props) => {
       key: 'id',
       render: (record) => formateTime(record.createTime),
       width: '20%',
+      align: 'center',
     },
     {
       title: '业务订单号',
@@ -218,8 +224,8 @@ const CashFlow = (props) => {
       render: (record) => (
         <span style={{ fontWeight: 'bold' }}>
           {record.bizType === CASH_FLOW_BIZTYPE_1
-            ? `+${record.amount}`
-            : `-${record.amount}`}
+            ? `+${getFloat(record.amount / TRANSTEMP, PRECISION)}`
+            : `-${getFloat(record.amount / TRANSTEMP, PRECISION)}`}
         </span>
       ),
       width: '10%',
@@ -228,7 +234,9 @@ const CashFlow = (props) => {
       title: '账户余额(元)',
       align: 'center',
       render: (record) => (
-        <span style={{ fontWeight: 'bold' }}>{record.balance}</span>
+        <span style={{ fontWeight: 'bold' }}>
+          {getFloat(record.balance / TRANSTEMP, PRECISION)}
+        </span>
       ),
       width: '10%',
     },
@@ -391,7 +399,7 @@ const CashFlow = (props) => {
         <ul className="cash-flow_item-info">
           <li>
             <span className="cash-flow_item-info-title">金额：</span>
-            <span>{item.amount}元</span>
+            <span>{getFloat(item.amount / TRANSTEMP, PRECISION)}元</span>
           </li>
           <li>
             <span className="cash-flow_item-info-title">状态：</span>

@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-18 17:19:33
- * @LastEditTime: 2020-07-21 15:55:03
+ * @LastEditTime: 2020-07-22 21:37:37
  */
 
 import React, { useState, useEffect } from 'react';
@@ -15,7 +15,7 @@ import {
   message,
 } from 'antd';
 import { connect } from 'dva';
-import { ProductTypes, PRODUCT_TYPE_4 } from '@/const';
+import { ProductTypes, PRODUCT_TYPE_4, TRANSTEMP, PRECISION } from '@/const';
 import {
   removeCarItem,
   updateCarItem,
@@ -28,6 +28,7 @@ import car from '@/assets/images/shop/big-car.png';
 import InputNumber from '@/components/InputNumber';
 import _ from 'lodash';
 import GlobalModal from '@/components/GlobalModal';
+import { getFloat } from '@/utils';
 
 const { confirm } = Modal;
 
@@ -219,7 +220,9 @@ const CarPage = (props) => {
     {
       title: '单价',
       align: 'center',
-      render: (record) => <span>￥{record.goods.price}</span>,
+      render: (record) => (
+        <span>￥{getFloat(record.goods.price / TRANSTEMP, PRECISION)}</span>
+      ),
       width: '10%',
     },
     {
@@ -240,7 +243,15 @@ const CarPage = (props) => {
     {
       title: '总价',
       align: 'center',
-      render: (record) => <span>￥{record.goods.price * record.amount}</span>,
+      render: (record) => (
+        <span>
+          ￥
+          {getFloat(
+            (record.goods.price * record.amount) / TRANSTEMP,
+            PRECISION
+          )}
+        </span>
+      ),
       width: '10%',
     },
     {
@@ -420,7 +431,11 @@ const CarPage = (props) => {
               提取卡密 <span>{carData?.sumInfo?.cardCount}</span> 件
             </span>
             <span className="car-footer_detail-total">
-              合计：<span>￥{carData?.sumInfo?.totalMoney}</span>
+              合计：
+              <span>
+                ￥
+                {getFloat(carData?.sumInfo?.totalMoney / TRANSTEMP, PRECISION)}
+              </span>
             </span>
             <Button loading={loading} type="primary" onClick={submitOrder}>
               提交订单
