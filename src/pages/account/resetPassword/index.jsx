@@ -3,16 +3,16 @@
  * @LastEditTime: 2020-07-22 10:13:23
  */
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import MapForm from "@/components/MapForm";
-import Container from "../Container";
+import MapForm from '@/components/MapForm';
+import Container from '../Container';
 
-import { Form, Button, Checkbox, message } from "antd";
-import { createHashHistory } from "history";
-import { patternPhone } from "@/rules";
-import { getResetPwdValidCode, resetPassword } from "@/services/account";
-import successImg from "@/assets/images/pay/success.png";
+import { Form, Button, Checkbox, message } from 'antd';
+import { createHashHistory } from 'history';
+import { patternPhone } from '@/rules';
+import { getResetPwdValidCode, resetPassword } from '@/services/account';
+import successImg from '@/assets/images/pay/success.png';
 
 const history = createHashHistory();
 
@@ -40,7 +40,7 @@ export default () => {
   let timer = null;
 
   const handleSendAuthCode = () => {
-    form.validateFields(["telephone"], async (err, value) => {
+    form.validateFields(['telephone'], async(err, value) => {
       if (!err) {
         try {
           setLoading(true);
@@ -76,7 +76,7 @@ export default () => {
   };
 
   const handleResetPwd = () => {
-    form.validateFields(async (err, value) => {
+    form.validateFields(async(err, value) => {
       if (!err) {
         try {
           setResetPwdLoading(true);
@@ -84,7 +84,7 @@ export default () => {
           setResetPwdLoading(false);
           if (!err) {
             setSucess(true);
-            dispatchTimer(3, setTime3, () => history.push("/admin/signIn"));
+            dispatchTimer(3, setTime3, () => history.push('/admin/signIn'));
           } else message.error(msg);
         } catch (error) {}
       }
@@ -95,7 +95,7 @@ export default () => {
     <Container>
       <div className="sign-up">
         {success ? (
-          <div style={{ padding: "0 80px" }}>
+          <div style={{ padding: '0 80px' }}>
             <div className="sign-up_success-title">密码重置成功</div>
             <div className="sign-up_success-img">
               <img width="122px" height="122px" src={successImg} />
@@ -107,7 +107,7 @@ export default () => {
               type="primary"
               block
               size="large"
-              onClick={() => history.push("/admin/signIn")}
+              onClick={() => history.push('/admin/signIn')}
             >
               返回登录（{time3}）
             </Button>
@@ -124,18 +124,18 @@ export default () => {
               label="手机号"
               name="telephone"
               customProps={{
-                placeholder: "请输入手机号",
-                size: "large",
+                placeholder: '请输入手机号',
+                size: 'large',
               }}
               validateTrigger="onBlur"
               rules={[
                 {
                   required: true,
-                  message: "手机号不能为空",
+                  message: '手机号不能为空',
                 },
                 {
                   pattern: patternPhone,
-                  message: "手机号格式有误",
+                  message: '手机号格式有误',
                 },
               ]}
             />
@@ -143,19 +143,19 @@ export default () => {
               label="新密码"
               name="password"
               customProps={{
-                placeholder: "请输入6~20位字符",
-                size: "large",
+                placeholder: '请输入6~20位字符',
+                size: 'large',
               }}
               rules={[
                 {
                   required: true,
-                  message: "密码不能为空",
+                  message: '密码不能为空',
                   whitespace: true,
                 },
                 {
                   min: 6,
                   max: 20,
-                  message: "请输入6~20位字符",
+                  message: '请输入6~20位字符',
                 },
               ]}
             />
@@ -163,19 +163,19 @@ export default () => {
               label="确认密码"
               name="passwordSure"
               customProps={{
-                placeholder: "再次输入新密码",
-                size: "large",
+                placeholder: '再次输入新密码',
+                size: 'large',
               }}
               rules={[
                 {
                   required: true,
-                  message: "确认新密码不能为空",
+                  message: '确认新密码不能为空',
                   whitespace: true,
                 },
                 {
                   validator: (rule, value, callback) => {
-                    if (value && value !== form.getFieldValue("password")) {
-                      callback("确认新密码输入错误");
+                    if (value && value !== form.getFieldValue('password')) {
+                      callback('确认新密码输入错误');
                     } else {
                       callback();
                     }
@@ -187,7 +187,7 @@ export default () => {
               label="验证码"
               name="code"
               customProps={{
-                placeholder: "请输入验证码",
+                placeholder: '请输入验证码',
                 addonAfter: (
                   <Button
                     loading={loading}
@@ -195,20 +195,19 @@ export default () => {
                     type="link"
                     onClick={handleSendAuthCode}
                   >
-                    {timing ? time + "s" : !loading && "发送验证码"}
+                    {timing ? time + 's' : !loading && '发送验证码'}
                   </Button>
                 ),
-                className: "byMessage_cst-input",
-                size: "large",
+                className: 'byMessage_cst-input',
+                size: 'large',
               }}
               rules={[
                 {
                   required: true,
-                  transform: (value) =>
-                    value % 1 === 0 ? parseInt(value) : false,
-                  type: "number",
+                  transform: (value) => value % 1 === 0 ? parseInt(value) : false,
+                  type: 'number',
                   whitespace: true,
-                  message: "请输入正确验证码",
+                  message: '请输入正确验证码',
                 },
               ]}
             />
@@ -225,7 +224,7 @@ export default () => {
               </Button>
               <div className="fbc">
                 <span />
-                <Button type="link" onClick={() => history.push("./signIn")}>
+                <Button type="link" onClick={() => history.push('./signIn')}>
                   已有账号，立即登录
                 </Button>
               </div>

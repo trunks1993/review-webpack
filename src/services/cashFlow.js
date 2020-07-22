@@ -3,15 +3,15 @@
  * @LastEditTime: 2020-07-22 15:11:28
  */
 
-import request from "@/utils/request";
+import request from '@/utils/request';
 
 /**
  * @name: 列表
  * @param {data}
  */
 export async function fetchList(data) {
-  return request("/bankroll/searchRechargeWorkorderList", {
-    method: "POST",
+  return request('/bankroll/searchRechargeWorkorderList', {
+    method: 'POST',
     data,
   });
 }
@@ -21,8 +21,8 @@ export async function fetchList(data) {
  * @param {data}
  */
 export async function getInfo(id) {
-  return request("/bankroll/getRechargeChannelInfo", {
-    method: "POST",
+  return request('/bankroll/getRechargeChannelInfo', {
+    method: 'POST',
     data: {
       id,
     },
@@ -34,8 +34,8 @@ export async function getInfo(id) {
  * @param {data}
  */
 export async function modify(data) {
-  return request("/bankroll/modifyRechargeWorkorder", {
-    method: "POST",
+  return request('/bankroll/modifyRechargeWorkorder', {
+    method: 'POST',
     data,
   });
 }

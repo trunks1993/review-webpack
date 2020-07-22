@@ -3,8 +3,8 @@
  * @LastEditTime: 2020-07-22 17:04:02
  */
 
-import React, { useState, useEffect } from "react";
-import MapForm from "@/components/MapForm";
+import React, { useState, useEffect } from 'react';
+import MapForm from '@/components/MapForm';
 import {
   Form,
   Button,
@@ -14,8 +14,8 @@ import {
   Table,
   Select,
   Pagination,
-} from "antd";
-import { fetchList } from "@/services/financialFlow";
+} from 'antd';
+import { fetchList } from '@/services/financialFlow';
 
 const { CstInput, CstSelect, CstUpload } = MapForm;
 
@@ -26,15 +26,15 @@ import {
   financialFlowBillTypes,
   FINANCIAL_FLOW_BILLTYPE_1,
   FINANCIAL_FLOW_BILLTYPE_2,
-} from "@/const";
+} from '@/const';
 
-import noCashFlow from "@/assets/images/fund/no-cash-flow.png";
-import _ from "lodash";
-import { formateTime } from "@/utils";
+import noCashFlow from '@/assets/images/fund/no-cash-flow.png';
+import _ from 'lodash';
+import { formateTime } from '@/utils';
 
 const colorMaps = {
-  [FINANCIAL_FLOW_BILLTYPE_1]: "#D70000",
-  [FINANCIAL_FLOW_BILLTYPE_2]: "#1A61DC",
+  [FINANCIAL_FLOW_BILLTYPE_1]: '#D70000',
+  [FINANCIAL_FLOW_BILLTYPE_2]: '#1A61DC',
 };
 
 const FinancialFlow = (props) => {
@@ -54,7 +54,7 @@ const FinancialFlow = (props) => {
   /**
    * @name: 列表加载
    */
-  const initList = async () => {
+  const initList = async() => {
     try {
       const filterData = filterForm?.getFieldsValue();
       const queryParams = {
@@ -83,60 +83,60 @@ const FinancialFlow = (props) => {
 
   const columns = [
     {
-      title: "交易时间",
-      key: "id",
+      title: '交易时间',
+      key: 'id',
       render: (record) => formateTime(record.createTime),
-      width: "20%",
+      width: '20%',
     },
     {
-      title: "业务订单号",
-      align: "center",
+      title: '业务订单号',
+      align: 'center',
       render: (record) => record.code,
-      width: "15%",
+      width: '15%',
     },
     {
-      title: "交易类型",
-      align: "center",
+      title: '交易类型',
+      align: 'center',
       render: (record) => financialFlowBizTypes[record.bizType],
-      width: "10%",
+      width: '10%',
     },
     {
-      title: "收支类型",
-      align: "center",
+      title: '收支类型',
+      align: 'center',
       render: (record) => (
         <span style={{ color: colorMaps[record.billType] }}>
           {financialFlowBillTypes[record.billType]}
         </span>
       ),
-      width: "10%",
+      width: '10%',
     },
     {
-      title: "金额(元)",
-      align: "center",
+      title: '金额(元)',
+      align: 'center',
       render: (record) => (
-        <span style={{ fontWeight: "bold" }}>{record.changeAmount}</span>
+        <span style={{ fontWeight: 'bold' }}>{record.changeAmount}</span>
       ),
-      width: "10%",
+      width: '10%',
     },
     {
-      title: "余额(元)",
-      align: "center",
+      title: '余额(元)',
+      align: 'center',
       render: (record) => (
-        <span style={{ fontWeight: "bold" }}>{record.amount}</span>
+        <span style={{ fontWeight: 'bold' }}>{record.amount}</span>
       ),
-      width: "10%",
+      width: '10%',
     },
     {
-      title: "备注",
-      align: "center",
-      dataIndex: "remark",
-      width: "25%",
+      title: '备注',
+      align: 'center',
+      dataIndex: 'remark',
+      width: '25%',
     },
   ];
 
   return (
     <div className="cash-flow">
-      <div className="cash-flow_header">{"财务管理 > 财务流水"}</div>
+      <div className="cash-flow_header">{'财务管理 > 财务流水'}</div>
       <div className="cash-flow_filter">
         <MapForm
           className="filter-form"
@@ -151,8 +151,8 @@ const FinancialFlow = (props) => {
                 name="code"
                 label="交易订单号"
                 customProps={{
-                  placeholder: "输入订单号",
-                  size: "large",
+                  placeholder: '输入订单号',
+                  size: 'large',
                 }}
               />
             </Col>
@@ -163,8 +163,8 @@ const FinancialFlow = (props) => {
                 name="bizType"
                 label="交易类型"
                 customProps={{
-                  placeholder: "选择业务类型",
-                  size: "large",
+                  placeholder: '选择业务类型',
+                  size: 'large',
                 }}
               >
                 {_.map(financialFlowBizTypes, (item, key) => (
@@ -185,7 +185,7 @@ const FinancialFlow = (props) => {
                 </Button>
                 <Button
                   icon="undo"
-                  style={{ marginLeft: "10px" }}
+                  style={{ marginLeft: '10px' }}
                   onClick={() => filterForm?.resetFields()}
                 >
                   重置
@@ -202,9 +202,9 @@ const FinancialFlow = (props) => {
           columns={columns}
           pagination={false}
           dataSource={list}
-          rowClassName={() => "global-table_row-tr"}
+          rowClassName={() => 'global-table_row-tr'}
           onHeaderRow={() => ({
-            className: "global-table_head-tr",
+            className: 'global-table_head-tr',
           })}
           rowKey={(record, index) => record.id}
           locale={{

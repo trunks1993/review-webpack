@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import MapForm from "@/components/MapForm";
-import Container from "../Container";
-import { patternPhone } from "@/rules";
+import MapForm from '@/components/MapForm';
+import Container from '../Container';
+import { patternPhone } from '@/rules';
 
-import { Form, Button, Checkbox, message } from "antd";
-import { getSignUpValidCode, signUp } from "@/services/account";
+import { Form, Button, Checkbox, message } from 'antd';
+import { getSignUpValidCode, signUp } from '@/services/account';
 
-import { createHashHistory } from "history";
+import { createHashHistory } from 'history';
 const history = createHashHistory();
-import successImg from "@/assets/images/pay/success.png";
+import successImg from '@/assets/images/pay/success.png';
 
 const { CstInput, CstPassword } = MapForm;
 const formItemLayout = {
@@ -34,7 +34,7 @@ export default () => {
   const checkboxRef = React.createRef();
 
   const handleSendAuthCode = () => {
-    form.validateFields(["telephone"], async (err, value) => {
+    form.validateFields(['telephone'], async(err, value) => {
       if (!err) {
         try {
           setLoading(true);
@@ -71,8 +71,8 @@ export default () => {
 
   const handleSignUp = () => {
     const checked = checkboxRef.current.rcCheckbox.state.checked;
-    if (!checked) return message.error("请阅读用户服务协议");
-    form.validateFields(async (err, value) => {
+    if (!checked) return message.error('请阅读用户服务协议');
+    form.validateFields(async(err, value) => {
       if (!err) {
         try {
           setSignUpLoading(true);
@@ -90,14 +90,14 @@ export default () => {
     <Container>
       <div className="sign-up">
         {success ? (
-          <div style={{ padding: "0 80px" }}>
+          <div style={{ padding: '0 80px' }}>
             <div className="sign-up_success-title">注册成功</div>
             <div className="sign-up_success-img">
               <img width="122px" height="122px" src={successImg} />
             </div>
             <div
               className="sign-up_success-title--sub"
-              style={{ marginBottom: "0" }}
+              style={{ marginBottom: '0' }}
             >
               恭喜您成为星权益注册会员
             </div>
@@ -105,9 +105,9 @@ export default () => {
               type="link"
               block
               size="large"
-              onClick={() => history.push("/admin/signIn")}
+              onClick={() => history.push('/admin/signIn')}
             >
-              {"去登陆>"}
+              {'去登陆>'}
             </Button>
           </div>
         ) : (
@@ -123,13 +123,13 @@ export default () => {
               label="用户名"
               name="aliasName"
               customProps={{
-                placeholder: "请输入用户名称",
-                size: "large",
+                placeholder: '请输入用户名称',
+                size: 'large',
               }}
               rules={[
                 {
                   required: true,
-                  message: "用户名不能为空",
+                  message: '用户名不能为空',
                 },
               ]}
             />
@@ -137,17 +137,17 @@ export default () => {
               label="手机号"
               name="telephone"
               customProps={{
-                placeholder: "请输入手机号",
-                size: "large",
+                placeholder: '请输入手机号',
+                size: 'large',
               }}
               rules={[
                 {
                   required: true,
-                  message: "手机号不能为空",
+                  message: '手机号不能为空',
                 },
                 {
                   pattern: patternPhone,
-                  message: "手机号格式有误",
+                  message: '手机号格式有误',
                 },
               ]}
             />
@@ -155,7 +155,7 @@ export default () => {
               label="验证码"
               name="code"
               customProps={{
-                placeholder: "请输入密码",
+                placeholder: '请输入密码',
                 addonAfter: (
                   <Button
                     loading={loading}
@@ -163,20 +163,19 @@ export default () => {
                     type="link"
                     onClick={handleSendAuthCode}
                   >
-                    {timing ? time + "s" : !loading && "发送验证码"}
+                    {timing ? time + 's' : !loading && '发送验证码'}
                   </Button>
                 ),
-                className: "byMessage_cst-input",
-                size: "large",
+                className: 'byMessage_cst-input',
+                size: 'large',
               }}
               rules={[
                 {
                   required: true,
-                  transform: (value) =>
-                    value % 1 === 0 ? parseInt(value) : false,
-                  type: "number",
+                  transform: (value) => value % 1 === 0 ? parseInt(value) : false,
+                  type: 'number',
                   whitespace: true,
-                  message: "请输入正确验证码",
+                  message: '请输入正确验证码',
                 },
               ]}
             />
@@ -184,13 +183,13 @@ export default () => {
               label="设置密码"
               name="password"
               customProps={{
-                placeholder: "请设置6-20位登录密码",
-                size: "large",
+                placeholder: '请设置6-20位登录密码',
+                size: 'large',
               }}
               rules={[
                 {
                   required: true,
-                  message: "密码不能为空",
+                  message: '密码不能为空',
                 },
               ]}
             />
@@ -211,7 +210,7 @@ export default () => {
               </Button>
               <div className="fbc">
                 <span />
-                <Button type="link" onClick={() => history.push("./signIn")}>
+                <Button type="link" onClick={() => history.push('./signIn')}>
                   已有账号，立即登录
                 </Button>
               </div>

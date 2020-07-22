@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import MapForm from "@/components/MapForm";
-import { Context } from "../Context";
-import { Form, Button, Checkbox, message } from "antd";
-import { createHashHistory } from "history";
-import { patternPhone } from "@/rules";
-import { getLoginValidCode } from "@/services/account";
+import React, { useState } from 'react';
+import MapForm from '@/components/MapForm';
+import { Context } from '../Context';
+import { Form, Button, Checkbox, message } from 'antd';
+import { createHashHistory } from 'history';
+import { patternPhone } from '@/rules';
+import { getLoginValidCode } from '@/services/account';
 
 const history = createHashHistory();
 
@@ -29,7 +29,7 @@ export default () => {
   let timer = null;
 
   const handleSendAuthCode = () => {
-    form.validateFields(["telephone"], async (err, value) => {
+    form.validateFields(['telephone'], async(err, value) => {
       if (!err) {
         try {
           setLoading(true);
@@ -69,23 +69,23 @@ export default () => {
       labelAlign="left"
       onCreate={(form) => setForm(form)}
     >
-      <CstInput name="type" defaultValue={2} style={{ display: "none" }} />
+      <CstInput name="type" defaultValue={2} style={{ display: 'none' }} />
       <CstInput
         label="手机号"
         name="telephone"
         customProps={{
-          placeholder: "请输入手机号",
-          size: "large",
+          placeholder: '请输入手机号',
+          size: 'large',
         }}
         validateTrigger="onBlur"
         rules={[
           {
             required: true,
-            message: "手机号不能为空",
+            message: '手机号不能为空',
           },
           {
             pattern: patternPhone,
-            message: "手机号格式有误",
+            message: '手机号格式有误',
           },
         ]}
       />
@@ -93,7 +93,7 @@ export default () => {
         label="验证码"
         name="code"
         customProps={{
-          placeholder: "请输入验证码",
+          placeholder: '请输入验证码',
           addonAfter: (
             <Button
               loading={loading}
@@ -101,26 +101,26 @@ export default () => {
               type="link"
               onClick={handleSendAuthCode}
             >
-              {timing ? time + "s" : !loading && "发送验证码"}
+              {timing ? time + 's' : !loading && '发送验证码'}
             </Button>
           ),
-          className: "byMessage_cst-input",
-          size: "large",
+          className: 'byMessage_cst-input',
+          size: 'large',
         }}
         rules={[
           {
             required: true,
             transform: (value) => (value % 1 === 0 ? parseInt(value) : false),
-            type: "number",
+            type: 'number',
             whitespace: true,
-            message: "请输入正确验证码",
+            message: '请输入正确验证码',
           },
         ]}
       />
       <Form.Item label=" " colon={false}>
         <div className="fbc">
           <Checkbox>自动登录</Checkbox>
-          <Button type="link" onClick={() => history.push("./resetPassword")}>
+          <Button type="link" onClick={() => history.push('./resetPassword')}>
             忘记密码?
           </Button>
         </div>
@@ -138,7 +138,7 @@ export default () => {
         </Context.Consumer>
         <div className="fbc">
           <span />
-          <Button type="link" onClick={() => history.push("./signUp")}>
+          <Button type="link" onClick={() => history.push('./signUp')}>
             立即注册
           </Button>
         </div>

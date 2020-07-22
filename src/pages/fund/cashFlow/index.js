@@ -3,8 +3,8 @@
  * @LastEditTime: 2020-07-22 16:31:43
  */
 
-import React, { useState, useEffect } from "react";
-import MapForm from "@/components/MapForm";
+import React, { useState, useEffect } from 'react';
+import MapForm from '@/components/MapForm';
 import {
   Form,
   Button,
@@ -14,8 +14,8 @@ import {
   Table,
   Select,
   Pagination,
-} from "antd";
-import { fetchList, getInfo, modify } from "@/services/cashFlow";
+} from 'antd';
+import { fetchList, getInfo, modify } from '@/services/cashFlow';
 
 const { CstInput, CstSelect, CstUpload } = MapForm;
 
@@ -29,18 +29,18 @@ import {
   CASH_FLOW_STATUS_1,
   CASH_FLOW_STATUS_2,
   CASH_FLOW_STATUS_3,
-} from "@/const";
+} from '@/const';
 
-import noCashFlow from "@/assets/images/fund/no-cash-flow.png";
-import _ from "lodash";
-import { formateTime } from "@/utils";
-import GlobalModal from "@/components/GlobalModal";
-import { Icon } from "antd";
+import noCashFlow from '@/assets/images/fund/no-cash-flow.png';
+import _ from 'lodash';
+import { formateTime } from '@/utils';
+import GlobalModal from '@/components/GlobalModal';
+import { Icon } from 'antd';
 
 const colorMaps = {
-  [CASH_FLOW_STATUS_1]: "#1A61DC",
-  [CASH_FLOW_STATUS_2]: "#333333",
-  [CASH_FLOW_STATUS_3]: "#D70000",
+  [CASH_FLOW_STATUS_1]: '#1A61DC',
+  [CASH_FLOW_STATUS_2]: '#333333',
+  [CASH_FLOW_STATUS_3]: '#D70000',
 };
 
 const formItemLayout = {
@@ -55,7 +55,7 @@ const formItemLayout = {
 
 const Content = ({ value }) => {
   const uploadButton = (
-    <div style={{ fontSize: "12px", color: "#CCCCCC" }}>
+    <div style={{ fontSize: '12px', color: '#CCCCCC' }}>
       <Icon type="plus" />
       <div>点击上传</div>
     </div>
@@ -64,7 +64,7 @@ const Content = ({ value }) => {
     <img
       src={process.env.FILE_URL + value}
       alt="avatar"
-      style={{ width: "100%" }}
+      style={{ width: '100%' }}
     />
   ) : (
     uploadButton
@@ -85,7 +85,7 @@ const CashFlow = (props) => {
   const [item, setItem] = useState({});
 
   const [uploadVisible, setUploadVisible] = useState(false);
-  const [imgUrl, setImgUrl] = useState("");
+  const [imgUrl, setImgUrl] = useState('');
 
   const [uploadForm, setUploadForm] = React.useState(null);
   const [uploadFormData, setUploadFormData] = useState({});
@@ -114,7 +114,7 @@ const CashFlow = (props) => {
   /**
    * @name: 列表加载
    */
-  const initList = async () => {
+  const initList = async() => {
     try {
       const filterData = filterForm?.getFieldsValue();
       const queryParams = {
@@ -135,7 +135,7 @@ const CashFlow = (props) => {
   /**
    * @name: 详情
    */
-  const _getInfo = async () => {
+  const _getInfo = async() => {
     try {
       const [err, data, msg] = await getInfo(itemId);
       if (!err) {
@@ -167,14 +167,14 @@ const CashFlow = (props) => {
    * @param {type}
    */
   const handleUploadSubmit = () => {
-    uploadForm?.validateFields(async (err, value) => {
+    uploadForm?.validateFields(async(err, value) => {
       if (!err) {
         try {
           setUploadLoading(true);
           const [err, data, msg] = await modify(value);
           setUploadLoading(false);
           if (!err) {
-            message.success("操作成功");
+            message.success('操作成功');
             setUploadVisible(false);
             dispatchInit();
           } else message.error(msg);
@@ -185,56 +185,56 @@ const CashFlow = (props) => {
 
   const columns = [
     {
-      title: "交易时间",
-      key: "id",
+      title: '交易时间',
+      key: 'id',
       render: (record) => formateTime(record.createTime),
-      width: "20%",
+      width: '20%',
     },
     {
-      title: "业务订单号",
-      align: "center",
+      title: '业务订单号',
+      align: 'center',
       render: (record) => record.code,
-      width: "20%",
+      width: '20%',
     },
     {
-      title: "业务类型",
-      align: "center",
+      title: '业务类型',
+      align: 'center',
       render: (record) => CashFlowBizTypes[record.bizType],
-      width: "10%",
+      width: '10%',
     },
     {
-      title: "状态",
-      align: "center",
+      title: '状态',
+      align: 'center',
       render: (record) => (
         <span style={{ color: colorMaps[record.status] }}>
           {CashFlowStatus[record.status]}
         </span>
       ),
-      width: "10%",
+      width: '10%',
     },
     {
-      title: "金额(元)",
-      align: "center",
+      title: '金额(元)',
+      align: 'center',
       render: (record) => (
-        <span style={{ fontWeight: "bold" }}>
+        <span style={{ fontWeight: 'bold' }}>
           {record.bizType === CASH_FLOW_BIZTYPE_1
             ? `+${record.amount}`
             : `-${record.amount}`}
         </span>
       ),
-      width: "10%",
+      width: '10%',
     },
     {
-      title: "账户余额(元)",
-      align: "center",
+      title: '账户余额(元)',
+      align: 'center',
       render: (record) => (
-        <span style={{ fontWeight: "bold" }}>{record.balance}</span>
+        <span style={{ fontWeight: 'bold' }}>{record.balance}</span>
       ),
-      width: "10%",
+      width: '10%',
     },
     {
-      title: "操作",
-      align: "center",
+      title: '操作',
+      align: 'center',
       render: (record) => (
         <>
           <Button
@@ -247,24 +247,24 @@ const CashFlow = (props) => {
           </Button>
           <Button
             size="small"
-            style={{ marginLeft: "10px" }}
+            style={{ marginLeft: '10px' }}
             onClick={
               record.receiptUrl
                 ? () => setImgUrl(record.receiptUrl)
                 : () => handleUploadVisible(record)
             }
           >
-            {record.receiptUrl ? "查看回单" : "上传回单"}
+            {record.receiptUrl ? '查看回单' : '上传回单'}
           </Button>
         </>
       ),
-      width: "20%",
+      width: '20%',
     },
   ];
 
   return (
     <div className="cash-flow">
-      <div className="cash-flow_header">{"资金管理 > 资金流水"}</div>
+      <div className="cash-flow_header">{'资金管理 > 资金流水'}</div>
       <div className="cash-flow_filter">
         <MapForm
           className="filter-form"
@@ -279,8 +279,8 @@ const CashFlow = (props) => {
                 name="bizType"
                 label="业务类型"
                 customProps={{
-                  placeholder: "选择业务类型",
-                  size: "large",
+                  placeholder: '选择业务类型',
+                  size: 'large',
                 }}
               >
                 {_.map(CashFlowBizTypes, (item, key) => (
@@ -297,8 +297,8 @@ const CashFlow = (props) => {
                 name="status"
                 label="处理状态"
                 customProps={{
-                  placeholder: "选择处理状态",
-                  size: "large",
+                  placeholder: '选择处理状态',
+                  size: 'large',
                 }}
               >
                 {_.map(CashFlowStatus, (item, key) => (
@@ -315,8 +315,8 @@ const CashFlow = (props) => {
                 name="code"
                 label="业务订单号"
                 customProps={{
-                  placeholder: "输入订单号",
-                  size: "large",
+                  placeholder: '输入订单号',
+                  size: 'large',
                 }}
               />
             </Col>
@@ -332,7 +332,7 @@ const CashFlow = (props) => {
                 </Button>
                 <Button
                   icon="undo"
-                  style={{ marginLeft: "10px" }}
+                  style={{ marginLeft: '10px' }}
                   onClick={() => filterForm?.resetFields()}
                 >
                   重置
@@ -349,9 +349,9 @@ const CashFlow = (props) => {
           columns={columns}
           pagination={false}
           dataSource={list}
-          rowClassName={() => "global-table_row-tr"}
+          rowClassName={() => 'global-table_row-tr'}
           onHeaderRow={() => ({
-            className: "global-table_head-tr",
+            className: 'global-table_head-tr',
           })}
           rowKey={(record, index) => record.id}
           locale={{
@@ -381,7 +381,7 @@ const CashFlow = (props) => {
       <GlobalModal
         modalVisible={!!itemId}
         // confirmLoading={pwdLoading}
-        title={<div style={{ textAlign: "center" }}>资金流水详情</div>}
+        title={<div style={{ textAlign: 'center' }}>资金流水详情</div>}
         cancelText="取消"
         onOk={() => setItemId(false)}
         onCancel={() => setItemId(false)}
@@ -413,12 +413,12 @@ const CashFlow = (props) => {
       </GlobalModal>
       <GlobalModal
         modalVisible={!!imgUrl}
-        title={<div style={{ textAlign: "center" }}>查看回单</div>}
+        title={<div style={{ textAlign: 'center' }}>查看回单</div>}
         width={600}
         footer={null}
-        onCancel={() => setImgUrl("")}
+        onCancel={() => setImgUrl('')}
       >
-        <div style={{ height: "480px", overflow: "auto" }}>
+        <div style={{ height: '480px', overflow: 'auto' }}>
           <img width="100%" src={process.env.FILE_URL + imgUrl} />
         </div>
       </GlobalModal>
@@ -426,7 +426,7 @@ const CashFlow = (props) => {
       <GlobalModal
         modalVisible={uploadVisible}
         confirmLoading={uploadLoading}
-        title={<div style={{ textAlign: "center" }}>上传回单</div>}
+        title={<div style={{ textAlign: 'center' }}>上传回单</div>}
         width={600}
         onOk={handleUploadSubmit}
         onCancel={() => setUploadVisible(false)}
@@ -442,8 +442,8 @@ const CashFlow = (props) => {
             label="业务订单号"
             name="code"
             customProps={{
-              placeholder: "请输入企业名称或昵称",
-              size: "large",
+              placeholder: '请输入企业名称或昵称',
+              size: 'large',
               disabled: true,
             }}
           />
@@ -451,8 +451,8 @@ const CashFlow = (props) => {
             label="金额"
             name="amountText"
             customProps={{
-              placeholder: "请输入账号/手机号",
-              size: "large",
+              placeholder: '请输入账号/手机号',
+              size: 'large',
               disabled: true,
             }}
           />
@@ -461,14 +461,14 @@ const CashFlow = (props) => {
             name="receiptUrl"
             customProps={{
               action: `${process.env.FILE_URL}/upload`,
-              method: "post",
+              method: 'post',
               data: {
-                userName: "yunjin_file_upload",
-                password: "yunjin_upload_password",
-                secret: "N",
-                domain: "headicon",
+                userName: 'yunjin_file_upload',
+                password: 'yunjin_upload_password',
+                secret: 'N',
+                domain: 'headicon',
               },
-              className: "cash-flow_uploader",
+              className: 'cash-flow_uploader',
               Content,
             }}
           />
