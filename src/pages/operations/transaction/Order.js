@@ -2,15 +2,22 @@
  * @Author: Dad
  * @Date: 2020-07-13 14:20:06
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-17 14:54:50
+ * @LastEditTime: 2020-07-24 16:41:00
  */
 import React, { useState, useEffect } from 'react';
 import MapForm from '@/components/MapForm';
+import { getFloat } from '@/utils';
 import { connect } from 'dva';
-import { TransactionTypes, TransaStatus, TRANSA_STATUS_5 } from '@/const';
+import {
+  TransactionTypes,
+  TransaStatus,
+  TRANSA_STATUS_5,
+  TRANSTEMP,
+  PRECISION,
+} from '@/const';
 import moment from 'moment';
 import _ from 'lodash';
-import { Select, Form, Button, Table, Pagination } from 'antd';
+import { Select, Form, Button, Table, Pagination, Row, Col } from 'antd';
 
 const { CstInput, CstSelect, CstRangePicker } = MapForm;
 
@@ -83,7 +90,9 @@ const Order = ({ dispatch, list, total, loading }) => {
       align: 'center',
       width: 140,
       dataIndex: 'totalPay',
-      render: (totalPay) => totalPay / 10000,
+      render: (totalPay) => {
+        getFloat(totalPay / TRANSTEMP, PRECISION);
+      },
     },
     {
       title: '交易类型',
@@ -110,7 +119,8 @@ const Order = ({ dispatch, list, total, loading }) => {
       dataIndex: 'status',
       width: 100,
       render: (status) => {
-        if (status === TRANSA_STATUS_5) return <div style={{ color: 'red' }}>失败</div>;
+        if (status === TRANSA_STATUS_5)
+          return <div style={{ color: 'red' }}>失败</div>;
         return TransaStatus[status];
       },
     },
@@ -118,86 +128,97 @@ const Order = ({ dispatch, list, total, loading }) => {
 
   return (
     <div className="order">
-      <div className="orderInfo">
-        <MapForm
-          layout="inline"
-          className="filter-form"
-          onCreate={(form) => setForm(form)}
-        >
-          <CstInput
-            label="交易订单号"
-            name="tradeOrderId"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
-            customProps={{
-              placeholder: '请输入交易订单号',
-              size: 'large',
-            }}
-          />
-          <CstSelect
-            label="交易类型"
-            name="bizType"
-            style={{ width: 260 }}
-            customProps={{
-              placeholder: '请输入交易类型',
-              size: 'large',
-            }}
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
-          >
-            {_.map(TransactionTypes, (item, key) => (
-              <Select.Option key={key} value={parseInt(key)}>
-                {item}
-              </Select.Option>
-            ))}
-          </CstSelect>
-          <CstInput
-            label="商品"
-            name="goodsName"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
-            customProps={{
-              placeholder: '请输入商品',
-              size: 'large',
-            }}
-          />
-          <CstInput
-            label="外部订单号"
-            name="customerOrderNo"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
-            customProps={{
-              placeholder: '请输入交易订单号',
-              size: 'large',
-            }}
-          />
-          <CstRangePicker
-            label="交易时间"
-            name="CreateTime"
-            style={{ width: 360 }}
-            labelCol={{ span: 6 }}
-            wrapperCol={{ span: 18 }}
-            customProps={{
-              placeholder: ['开始时间', '结束时间'],
-              size: 'large',
-            }}
-          />
-          <Form.Item>
-            <Button
-              icon="search"
-              className="filter_button--blue"
-              onClick={() => dispatchInit()}
-            >
-              查询
-            </Button>
-            <Button
-              icon="undo"
-              className="filter_button--white"
-              onClick={() => form?.resetFields()}
-            >
-              重置
-            </Button>
-          </Form.Item>
+      <div className="shop-item_header">交易管理 / 交易订单</div>
+      <div className="order-info">
+        <MapForm layout="horizontal" onCreate={(form) => setForm(form)}>
+          <Row>
+            <Col span={8}>
+              <CstInput
+                label="交易订单号"
+                name="tradeOrderId"
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                customProps={{
+                  placeholder: '请输入交易订单号',
+                  size: 'large',
+                }}
+              />
+            </Col>
+            <Col span={8}>
+              <CstSelect
+                label="交易类型"
+                name="bizType"
+                customProps={{
+                  placeholder: '请输入交易类型',
+                  size: 'large',
+                }}
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+              >
+                {_.map(TransactionTypes, (item, key) => (
+                  <Select.Option key={key} value={parseInt(key)}>
+                    {item}
+                  </Select.Option>
+                ))}
+              </CstSelect>
+            </Col>
+            <Col span={8}>
+              <CstInput
+                label="商品"
+                name="goodsName"
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                customProps={{
+                  placeholder: '请输入商品',
+                  size: 'large',
+                }}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col span={8}>
+              <CstInput
+                label="外部订单号"
+                name="customerOrderNo"
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                customProps={{
+                  placeholder: '请输入交易订单号',
+                  size: 'large',
+                }}
+              />
+            </Col>
+            <Col span={8}>
+              <CstRangePicker
+                label="交易时间"
+                name="CreateTime"
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 18 }}
+                customProps={{
+                  placeholder: ['开始时间', '结束时间'],
+                  size: 'large',
+                }}
+              />
+            </Col>
+            <Col span={7} offset={1}>
+              <Form.Item>
+                <Button
+                  icon="search"
+                  type="primary"
+                  onClick={() => dispatchInit()}
+                >
+                  查询
+                </Button>
+                <Button
+                  icon="undo"
+                  style={{ marginLeft: '20px' }}
+                  onClick={() => form?.resetFields()}
+                >
+                  重置
+                </Button>
+              </Form.Item>
+            </Col>
+          </Row>
         </MapForm>
       </div>
       <Table
@@ -205,6 +226,10 @@ const Order = ({ dispatch, list, total, loading }) => {
         dataSource={list}
         columns={columns}
         pagination={false}
+        className="global-table"
+        onHeaderRow={() => ({
+          className: 'global-table_head-tr',
+        })}
         scroll={{ x: 1300, y: 'calc(100vh - 480px)' }}
       />
       <div

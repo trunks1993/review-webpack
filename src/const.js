@@ -1,11 +1,13 @@
 /*
  * @Date: 2020-06-30 11:17:03
- * @LastEditTime: 2020-07-22 17:34:35
+ * @LastEditTime: 2020-07-22 21:43:52
  */
 
 export const METHOD_POST = 'POST'; // post
 export const DEFAULT_PAGE_NUM = 1; // 默认页码
 export const DEFAULT_PAGE_SIZE = 7; // 默认每页条数
+export const TRANSTEMP = 10000; // 金额转换倍数
+export const PRECISION = 4; // 金额转换倍数
 
 // 不需要带token的api
 export const whiteUrls = [process.env.BASE_API + '/user/login'];
@@ -175,4 +177,24 @@ export const FINANCIAL_FLOW_BILLTYPE_2 = 2;
 export const financialFlowBillTypes = {
   [FINANCIAL_FLOW_BILLTYPE_1]: '收入',
   [FINANCIAL_FLOW_BILLTYPE_2]: '支出',
+};
+
+export const FINANCIAL_REC_BILLTYPE_1 = 1;
+export const FINANCIAL_REC_BILLTYPE_2 = 2;
+export const FINANCIAL_REC_BILLTYPE_3 = 3;
+
+export const financialRecBillTypes = {
+  [FINANCIAL_REC_BILLTYPE_1]: '星权益',
+  [FINANCIAL_REC_BILLTYPE_2]: '星缴费',
+  [FINANCIAL_REC_BILLTYPE_3]: '星短信',
+};
+
+export const FINANCIAL_REC_STATUS_0 = 0;
+export const FINANCIAL_REC_STATUS_1 = 1;
+export const FINANCIAL_REC_STATUS_2 = 2;
+
+export const financialRecStatus = {
+  [FINANCIAL_REC_STATUS_0]: '待生成',
+  [FINANCIAL_REC_STATUS_1]: '生成中',
+  [FINANCIAL_REC_STATUS_2]: '已生成',
 };

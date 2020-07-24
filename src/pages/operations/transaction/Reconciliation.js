@@ -2,10 +2,10 @@
  * @Author: Dad
  * @Date: 2020-07-13 19:32:18
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-15 09:23:50
+ * @LastEditTime: 2020-07-24 16:41:28
  */
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Table, Pagination, Icon } from 'antd';
+import { Form, Button, Table, Pagination, Icon, Row, Col } from 'antd';
 import { connect } from 'dva';
 import { ReconStatus } from '@/const';
 import MapForm from '@/components/MapForm';
@@ -126,49 +126,57 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
 
   return (
     <div className="reconciliation">
+      <div className="shop-item_header">交易管理 / 交易对账</div>
       <div className="reconciliation-Info">
         <MapForm
           onCreate={(form) => setForm(form)}
           layout="inline"
           className="filter-form"
         >
-          <CstInput
-            label="标题"
-            name="title"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
-            customProps={{
-              placeholder: '请输入标题',
-              size: 'large',
-            }}
-          />
-          <CstRangePicker
-            label="对账时间"
-            name="CreateTime"
-            style={{ width: 360 }}
-            labelCol={{ span: 6 }}
-            wrapperCol={{ span: 18 }}
-            customProps={{
-              placeholder: ['开始时间', '结束时间'],
-              size: 'large',
-            }}
-          />
-          <Form.Item>
-            <Button
-              icon="search"
-              className="filter_button--blue"
-              onClick={() => dispatchInit()}
-            >
-              查询
-            </Button>
-            <Button
-              icon="undo"
-              className="filter_button--white"
-              onClick={() => form?.resetFields()}
-            >
-              重置
-            </Button>
-          </Form.Item>
+          <Row>
+            <Col span={6}>
+              <CstInput
+                label="标题"
+                name="title"
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                customProps={{
+                  placeholder: '请输入标题',
+                  size: 'large',
+                }}
+              />
+            </Col>
+            <Col span={10}>
+              <CstRangePicker
+                label="对账时间"
+                name="CreateTime"
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 18 }}
+                customProps={{
+                  placeholder: ['开始时间', '结束时间'],
+                  size: 'large',
+                }}
+              />
+            </Col>
+            <Col span={7} offset={1}>
+              <Form.Item>
+                <Button
+                  icon="search"
+                  type="primary"
+                  onClick={() => dispatchInit()}
+                >
+                  查询
+                </Button>
+                <Button
+                  icon="undo"
+                  style={{ marginLeft: '20px' }}
+                  onClick={() => form?.resetFields()}
+                >
+                  重置
+                </Button>
+              </Form.Item>
+            </Col>
+          </Row>
         </MapForm>
       </div>
       <div className="reconciliation-table">
@@ -184,6 +192,10 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
           columns={columns}
           pagination={false}
           scroll={{ x: 1100, y: 'calc(100vh - 450px)' }}
+          className="global-table"
+          onHeaderRow={() => ({
+            className: 'global-table_head-tr',
+          })}
           loading={loading}
         />
         <div

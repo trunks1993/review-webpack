@@ -1,7 +1,8 @@
-.orderInfo{
-    padding: 30px 30px;
-}
-.order{
+.order {
     height: 100%;
     background-color: $white;
+
+    &-info {
+        padding: 30px 30px;
+    }
 }

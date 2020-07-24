@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-14 15:37:18
- * @LastEditTime: 2020-07-16 15:08:25
+ * @LastEditTime: 2020-07-23 14:39:31
  */
 
 import React, { useEffect, useState } from 'react';
@@ -35,8 +35,8 @@ const Pay = (props) => {
   };
 
   const initOrderInfo = async() => {
-    const orderId = getQueryVariable('orderId');
     try {
+      const orderId = getQueryVariable('orderId');
       const [err, data, msg] = await getOrderInfo(orderId);
       if (!err) {
         setOrderInfo(data);

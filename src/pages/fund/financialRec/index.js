@@ -1,6 +1,6 @@
 /*
- * @Date: 2020-07-22 16:33:56
- * @LastEditTime: 2020-07-22 21:26:53
+ * @Date: 2020-07-22 17:33:29
+ * @LastEditTime: 2020-07-22 21:27:50
  */
 
 import React, { useState, useEffect } from 'react';
@@ -14,18 +14,18 @@ import {
   Table,
   Select,
   Pagination,
+  Icon,
 } from 'antd';
-import { fetchList } from '@/services/financialFlow';
+import { fetchList } from '@/services/financialRec';
 
 const { CstInput, CstSelect, CstUpload } = MapForm;
 
 import {
   DEFAULT_PAGE_SIZE,
   DEFAULT_PAGE_NUM,
-  financialFlowBizTypes,
-  financialFlowBillTypes,
-  FINANCIAL_FLOW_BILLTYPE_1,
-  FINANCIAL_FLOW_BILLTYPE_2,
+  financialRecBillTypes,
+  financialRecStatus,
+  FINANCIAL_REC_STATUS_2,
   TRANSTEMP,
   PRECISION,
 } from '@/const';
@@ -33,11 +33,6 @@ import {
 import noCashFlow from '@/assets/images/fund/no-cash-flow.png';
 import _ from 'lodash';
 import { formateTime, getFloat } from '@/utils';
-
-const colorMaps = {
-  [FINANCIAL_FLOW_BILLTYPE_1]: '#D70000',
-  [FINANCIAL_FLOW_BILLTYPE_2]: '#1A61DC',
-};
 
 const FinancialFlow = (props) => {
   const [filterForm, setFilterForm] = React.useState(null);
@@ -85,66 +80,86 @@ const FinancialFlow = (props) => {
 
   const columns = [
     {
-      title: '交易时间',
-      key: 'id',
-      render: (record) => formateTime(record.createTime),
-      width: '20%',
+      title: '标题',
+      dataIndex: 'title',
+      width: '25%',
       align: 'center',
     },
+
     {
-      title: '业务订单号',
+      title: '账单类型',
       align: 'center',
-      render: (record) => record.code,
+      render: (record) => financialRecBillTypes[record.billType],
+      width: '10%',
+    },
+    {
+      title: '交易笔数(笔)',
+      align: 'center',
+      dataIndex: 'tradeCount',
+      width: '10%',
+    },
+    {
+      title: '交易金额(元)',
+      align: 'center',
+      render: (record) => (
+        <span style={{ fontWeight: 'bold' }}>
+          {getFloat(record.tradeAmount / TRANSTEMP, PRECISION)}
+        </span>
+      ),
+      width: '10%',
+    },
+    {
+      title: '状态',
+      align: 'center',
+      render: (record) => <span>{financialRecStatus[record.status]}</span>,
+      width: '10%',
+    },
+
+    {
+      title: '创建时间',
+      key: 'id',
+      align: 'center',
+      render: (record) => formateTime(record.createTime, 'MM/DD HH:mm:ss'),
       width: '15%',
     },
     {
-      title: '交易类型',
-      align: 'center',
-      render: (record) => financialFlowBizTypes[record.bizType],
-      width: '10%',
-    },
-    {
-      title: '收支类型',
-      align: 'center',
+      title: '操作',
+      align: 'left',
       render: (record) => (
-        <span style={{ color: colorMaps[record.billType] }}>
-          {financialFlowBillTypes[record.billType]}
-        </span>
+        <>
+          <Button
+            size="small"
+            type="primary"
+            ghost
+            onClick={() => dispatchInit()}
+          >
+            刷新
+          </Button>
+          {record.status === FINANCIAL_REC_STATUS_2 ? (
+            <Button
+              style={{ marginLeft: '10px' }}
+              size="small"
+              type="primary"
+              ghost
+              onClick={() => window.open(
+                `${process.env.FILE_URL + record.checkFileList[0].fileUrl}`
+              )
+              }
+            >
+              <Icon type="vertical-align-bottom" />
+              <span>下载</span>
+            </Button>
+          ) : null}
+        </>
       ),
-      width: '10%',
-    },
-    {
-      title: '金额(元)',
-      align: 'center',
-      render: (record) => (
-        <span style={{ fontWeight: 'bold' }}>
-          {getFloat(record.changeAmount / TRANSTEMP, PRECISION)}
-        </span>
-      ),
-      width: '10%',
-    },
-    {
-      title: '余额(元)',
-      align: 'center',
-      render: (record) => (
-        <span style={{ fontWeight: 'bold' }}>
-          {getFloat(record.amount / TRANSTEMP, PRECISION)}
-        </span>
-      ),
-      width: '10%',
-    },
-    {
-      title: '备注',
-      align: 'center',
-      dataIndex: 'remark',
-      width: '25%',
+      width: '20%',
     },
   ];
 
   return (
-    <div className="cash-flow">
-      <div className="cash-flow_header">{'财务管理 > 财务流水'}</div>
-      <div className="cash-flow_filter">
+    <div className="financial-rec">
+      <div className="financial-rec_header">{'财务管理 > 财务对账'}</div>
+      <div className="financial-rec_filter">
         <MapForm
           className="filter-form"
           layout="horizontal"
@@ -155,10 +170,10 @@ const FinancialFlow = (props) => {
               <CstInput
                 labelCol={{ span: 9 }}
                 wrapperCol={{ span: 15 }}
-                name="code"
-                label="交易订单号"
+                name="title"
+                label="标题"
                 customProps={{
-                  placeholder: '输入订单号',
+                  placeholder: '输入标题/关键字',
                   size: 'large',
                 }}
               />
@@ -167,14 +182,14 @@ const FinancialFlow = (props) => {
               <CstSelect
                 labelCol={{ span: 9 }}
                 wrapperCol={{ span: 15 }}
-                name="bizType"
-                label="交易类型"
+                name="billType"
+                label="账单类型"
                 customProps={{
-                  placeholder: '选择业务类型',
+                  placeholder: '选择账单类型',
                   size: 'large',
                 }}
               >
-                {_.map(financialFlowBizTypes, (item, key) => (
+                {_.map(financialRecBillTypes, (item, key) => (
                   <Select.Option key={key} value={key}>
                     {item}
                   </Select.Option>
@@ -202,7 +217,11 @@ const FinancialFlow = (props) => {
           </Row>
         </MapForm>
       </div>
-      <div className="cash-flow_table">
+      <div className="financial-rec_table">
+        <div className="financial-rec_table-tools">
+          <span className="financial-rec_table-tools-title">对账单列表</span>
+          <Button type="link">+申请对账单</Button>
+        </div>
         <Table
           className="global-table"
           loading={loading}
@@ -216,23 +235,27 @@ const FinancialFlow = (props) => {
           rowKey={(record, index) => record.id}
           locale={{
             emptyText: (
-              <div className="cash-flow_empty">
+              <div className="financial-rec_empty">
                 <img width="218px" height="134px" src={noCashFlow} />
-                <p className="cash-flow_empty-text">暂无财务流水</p>
+                <p className="financial-rec_empty-text">暂无财务对账</p>
               </div>
             ),
           }}
         />
       </div>
       {!list.length ? null : (
-        <div className="cash-flow_pagination">
+        <div className="financial-rec_pagination">
+          <span className="financial-rec_pagination-denote">
+            说明：1、如需自动生成对账文件，请开启相关配置。
+            2、已生成的对账单只保留7天，请您及时下载查收。
+          </span>
           <Pagination
             current={currPage}
             onChange={(currPage) => setCurrPage(currPage)}
             defaultPageSize={pageSize}
             total={total}
           />
-          <span className="cash-flow_pagination-data">
+          <span className="financial-rec_pagination-data">
             共 {total} 条 ,每页 {pageSize} 条
           </span>
         </div>

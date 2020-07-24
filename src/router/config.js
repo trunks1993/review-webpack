@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 16:24:34
- * @LastEditTime: 2020-07-22 17:33:06
+ * @LastEditTime: 2020-07-24 16:51:53
  */
 // layout下的子模块
 import ChildLayout from '@/pages';
@@ -31,8 +31,12 @@ import Success from '@/pages/operations/businessInfo/success';
 /** 运营管理-业务管理--账号信息 */
 import Account from '@/pages/operations/businessInfo/account';
 
+import FundHome from '@/pages/fund/home';
 import CashFlow from '@/pages/fund/cashFlow';
 import FinancialFlow from '@/pages/fund/financialFlow';
+import FinancialRec from '@/pages/fund/financialRec';
+import Recharge from '@/pages/fund/recharge';
+import CashOut from '@/pages/fund/cashOut';
 
 import module_shop_menu_icon from '@/assets/images/global/module_shop_menu_icon.png';
 import module_fund_menu_icon from '@/assets/images/global/module_fund_menu_icon.png';
@@ -60,6 +64,7 @@ export const asyncRoutes = [
         icon: 'icon-gouwuche',
         component: ShopHome,
         isLeaf: true,
+        isHome: true,
       },
       {
         id: 12,
@@ -111,6 +116,7 @@ export const asyncRoutes = [
             path: '/admin/operations/transaction/order',
             component: Order,
             isLeaf: true,
+            isHome: true,
           },
           {
             id: 212,
@@ -179,16 +185,17 @@ export const asyncRoutes = [
     id: 3,
     title: '资金管理',
     component: ChildLayout,
-    icon: module_fund_menu_icon,
     path: '/admin/fund',
+    icon: module_fund_menu_icon,
     children: [
       {
         id: 31,
         title: '资金总览',
-        // path: '/dashboard',
+        path: '/admin/fund/home',
         icon: 'icon-tongji',
-        component: Dashboard,
+        component: FundHome,
         isLeaf: true,
+        isHome: true,
       },
       {
         id: 32,
@@ -199,15 +206,15 @@ export const asyncRoutes = [
           {
             id: 321,
             title: '充值',
-            path: '/dashboard',
-            component: Dashboard,
+            path: '/admin/fund/recharge',
+            component: Recharge,
             isLeaf: true,
           },
           {
             id: 322,
             title: '提现',
-            path: '/dashboard',
-            component: Dashboard,
+            path: '/admin/fund/cashOut',
+            component: CashOut,
             isLeaf: true,
           },
           {
@@ -222,7 +229,6 @@ export const asyncRoutes = [
       {
         id: 33,
         title: '财务管理',
-        // path: '/dashboard',
         icon: 'icon-guanli',
         children: [
           {
@@ -235,8 +241,8 @@ export const asyncRoutes = [
           {
             id: 332,
             title: '财务对账',
-            path: '/dashboard',
-            component: Dashboard,
+            path: '/admin/fund/financialRec',
+            component: FinancialRec,
             isLeaf: true,
           },
         ],

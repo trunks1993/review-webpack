@@ -1,14 +1,21 @@
 /*
  * @Date: 2020-07-15 16:40:01
- * @LastEditTime: 2020-07-16 19:07:42
+ * @LastEditTime: 2020-07-23 17:10:58
  */
 
 import React, { useState, useEffect } from 'react';
 import { Button, Table, List, Avatar } from 'antd';
 import moment from 'moment';
-import { PRODUCT_TYPE_4, TRACE_STATUS_5, TRACE_STATUS_6 } from '@/const';
+import {
+  PRODUCT_TYPE_4,
+  TRACE_STATUS_5,
+  TRACE_STATUS_6,
+  TRANSTEMP,
+  PRECISION,
+} from '@/const';
 import GlobalModal from '@/components/GlobalModal';
 import { queryListTrace } from '@/services/shop';
+import { getFloat } from '@/utils';
 
 export default (props) => {
   const { orderInfo, changeStep } = props;
@@ -65,13 +72,17 @@ export default (props) => {
     {
       title: '面值(元)',
       align: 'center',
-      render: (record) => <span>￥{record.facePrice}</span>,
+      render: (record) => (
+        <span>￥{getFloat(record.facePrice / TRANSTEMP, PRECISION)}</span>
+      ),
       width: '14%',
     },
     {
       title: '采购价(元)',
       align: 'center',
-      render: (record) => <span>￥{record.price}</span>,
+      render: (record) => (
+        <span>￥{getFloat(record.price / TRANSTEMP, PRECISION)}</span>
+      ),
       width: '14%',
     },
     {
@@ -108,7 +119,12 @@ export default (props) => {
     {
       title: '总价(元)',
       align: 'center',
-      render: (record) => <span>￥{record.price * record.detailCount}</span>,
+      render: (record) => (
+        <span>
+          ￥
+          {getFloat((record.price * record.detailCount) / TRANSTEMP, PRECISION)}
+        </span>
+      ),
       width: '14%',
     },
   ];
@@ -152,6 +168,7 @@ export default (props) => {
       <Table
         // className="global-table"
         // loading={false}
+        locale={{ emptyText: <div /> }}
         columns={columns}
         pagination={false}
         dataSource={orderInfo.orderItemList}
@@ -185,7 +202,11 @@ export default (props) => {
             提取卡密 <span>{orderInfo?.sumInfo?.cardCount}</span> 件
           </span>
           <span className="page-pay_order-detail-total">
-            合计：<span>￥{orderInfo?.sumInfo?.totalMoney}</span>
+            合计：
+            <span>
+              ￥
+              {getFloat(orderInfo?.sumInfo?.totalMoney / TRANSTEMP, PRECISION)}
+            </span>
           </span>
           <Button type="primary" onClick={() => changeStep(3)}>
             立即付款

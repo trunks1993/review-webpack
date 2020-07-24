@@ -103,7 +103,6 @@ $filterItemHeight: 42 40 50;
 .purchase-order {
   border: 1px solid rgba(230, 230, 230, 1);
   border-radius: 2px;
-  height: 100%;
   background: #fff;
   overflow-y: scroll;
   .ant-tabs-bar {
@@ -138,6 +137,7 @@ $filterItemHeight: 42 40 50;
     text-align: center;
     font-size: 12px;
     padding: 6px 0;
+    color: #333333;
     &--fixed {
       background: #f2f2f2;
       border: 1px solid #e6e6e6;
