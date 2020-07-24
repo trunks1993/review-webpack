@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-14 15:37:18
- * @LastEditTime: 2020-07-23 14:39:31
+ * @LastEditTime: 2020-07-24 17:55:37
  */
 
 import React, { useEffect, useState } from 'react';
@@ -56,6 +56,7 @@ const Pay = (props) => {
         changeStep={changeStep}
         amount={amount}
         telephone={telephone}
+        history={history}
       />
     ),
     4: () => <PaySuccess history={history} />,
