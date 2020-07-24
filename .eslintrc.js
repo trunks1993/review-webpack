@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-23 17:04:19
- * @LastEditTime: 2020-07-03 18:41:18
+ * @LastEditTime: 2020-07-24 09:13:34
  */
 
 module.exports = {
@@ -22,7 +22,7 @@ module.exports = {
     "no-extra-boolean-cast": 2, // 禁止不必要的布尔转换
     "use-isnan": 2, // 要求使用 isNaN() 检查 NaN
     "block-scoped-var": 2, // 强制把变量的使用限制在其定义的作用域范围内
-    complexity: ["warn", 10], // 限制圈复杂度
+    // complexity: ["warn", 10], // 限制圈复杂度
     eqeqeq: ["error", "always"], // 强制使用=== !==
     "no-alert": 2,
     "no-caller": 2,

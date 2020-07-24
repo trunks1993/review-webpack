@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-15 16:40:01
- * @LastEditTime: 2020-07-22 21:39:37
+ * @LastEditTime: 2020-07-23 17:10:58
  */
 
 import React, { useState, useEffect } from 'react';
@@ -168,6 +168,7 @@ export default (props) => {
       <Table
         // className="global-table"
         // loading={false}
+        locale={{ emptyText: <div /> }}
         columns={columns}
         pagination={false}
         dataSource={orderInfo.orderItemList}
@@ -201,7 +202,11 @@ export default (props) => {
             提取卡密 <span>{orderInfo?.sumInfo?.cardCount}</span> 件
           </span>
           <span className="page-pay_order-detail-total">
-            合计：<span>￥{orderInfo?.sumInfo?.totalMoney}</span>
+            合计：
+            <span>
+              ￥
+              {getFloat(orderInfo?.sumInfo?.totalMoney / TRANSTEMP, PRECISION)}
+            </span>
           </span>
           <Button type="primary" onClick={() => changeStep(3)}>
             立即付款

@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-16 19:17:35
- * @LastEditTime: 2020-07-22 21:34:03
+ * @LastEditTime: 2020-07-23 14:33:58
  */
 
 import React, { useEffect, useState } from 'react';
@@ -49,7 +49,7 @@ const ShopItem = (props) => {
   }, []);
 
   useEffect(() => {
-    if (productList.length) setProductCodeSelect(productCode || productList[0].productCode);
+    if (productList && productList.length) setProductCodeSelect(productCode || productList[0].productCode);
   }, [productList]);
 
   useEffect(() => {
@@ -132,7 +132,9 @@ const ShopItem = (props) => {
       } else {
         message.error(msg);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log('_getGoodsInfo -> error', error);
+    }
   };
 
   /**

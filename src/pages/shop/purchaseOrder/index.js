@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 20:14:20
- * @LastEditTime: 2020-07-20 09:23:33
+ * @LastEditTime: 2020-07-23 17:04:35
  */
 import React, { useState, useEffect } from 'react';
 import {
@@ -31,6 +31,7 @@ import {
   TRACE_STATUS_6,
 } from '@/const';
 import GlobalModal from '@/components/GlobalModal';
+import noOrder from '@/assets/images/shop/no-order.png';
 
 import moment from 'moment';
 import { getToken } from '@/utils/auth';
@@ -244,7 +245,11 @@ export default (props) => {
   ];
 
   return (
-    <div className="purchase-order" onScroll={pageScroll}>
+    <div
+      className="purchase-order"
+      style={{ height: list.length > 0 ? 'auto' : '100%' }}
+      onScroll={pageScroll}
+    >
       <div className="purchase-order_header">星权益 / 采购订单</div>
       <TabsPanel
         onChange={(status) => setFilterParams({
@@ -269,6 +274,7 @@ export default (props) => {
             <Col span={6}>操作</Col>
           </Row>
           {fixed && <div style={{ marginBottom: '20px' }} />}
+
           <Skeleton
             loading={loading}
             active
@@ -276,66 +282,84 @@ export default (props) => {
             avatar={false}
             paragraph={{ rows: 10 }}
           >
-            {_.map(list, (item) => (
-              <Row key={item.id}>
-                <Col span={24} className="purchase-order_table-title">
-                  <span>
-                    {moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')}
-                  </span>
-                  <span style={{ marginLeft: '48px' }}>
-                    订单号：{item.orderId}
-                  </span>
-                </Col>
-                {_.map(item.orderItemList, (v, index) => (
-                  <span key={index} className="purchase-order_table-item">
-                    <Col span={6}>
-                      <div style={{ width: '80%' }}>
-                        <List.Item.Meta
-                          avatar={
-                            <Avatar
-                              shape="square"
-                              size={60}
-                              src={`/file${v.iconUrl}`}
-                            />
-                          }
-                          title={
-                            <>
-                              <span
-                                title={v.brandName}
-                                className="purchase-order_product-title"
-                              >
-                                {v.brandName}
+            {list && list.length > 0 ? (
+              _.map(list, (item) => (
+                <Row key={item.id}>
+                  <Col span={24} className="purchase-order_table-title">
+                    <span>
+                      {moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')}
+                    </span>
+                    <span style={{ marginLeft: '48px' }}>
+                      订单号：{item.orderId}
+                    </span>
+                  </Col>
+                  {_.map(item.orderItemList, (v, index) => (
+                    <span key={index} className="purchase-order_table-item">
+                      <Col span={6}>
+                        <div style={{ width: '80%' }}>
+                          <List.Item.Meta
+                            avatar={
+                              <Avatar
+                                shape="square"
+                                size={60}
+                                src={`/file${v.iconUrl}`}
+                              />
+                            }
+                            title={
+                              <>
+                                <span
+                                  title={v.brandName}
+                                  className="purchase-order_product-title"
+                                >
+                                  {v.brandName}
+                                </span>
+                                {TypeBtnMap[v.productTypeCode] &&
+                                  TypeBtnMap[v.productTypeCode](v)}
+                              </>
+                            }
+                            description={
+                              <span title={v.productSubName}>
+                                {v.productSubName}
                               </span>
-                              {TypeBtnMap[v.productTypeCode] &&
-                                TypeBtnMap[v.productTypeCode](v)}
-                            </>
-                          }
-                          description={
-                            <span title={v.productSubName}>
-                              {v.productSubName}
-                            </span>
-                          }
-                        />
-                      </div>
-                    </Col>
-                    <Col span={2}>{v.detailCount}</Col>
-                    <Col span={2}>{v.typeLabel}</Col>
-                    <Col span={4}>￥{v.price}</Col>
-                    {index === 0 ? (
-                      <>
-                        <Col span={2}>￥{item.realTotalPay}</Col>
-                        <Col span={2}>{OrderStatus[item.status]}</Col>
-                        <Col span={6}>{ToolMap[item.status](item)}</Col>
-                      </>
-                    ) : (
-                      <>
-                        <Col span={10} />
-                      </>
-                    )}
-                  </span>
-                ))}
-              </Row>
-            ))}
+                            }
+                          />
+                        </div>
+                      </Col>
+                      <Col span={2}>{v.detailCount}</Col>
+                      <Col span={2}>{v.typeLabel}</Col>
+                      <Col span={4}>￥{v.price}</Col>
+                      {index === 0 ? (
+                        <>
+                          <Col span={2}>￥{item.realTotalPay}</Col>
+                          <Col span={2}>{OrderStatus[item.status]}</Col>
+                          <Col span={6}>{ToolMap[item.status](item)}</Col>
+                        </>
+                      ) : (
+                        <>
+                          <Col span={10} />
+                        </>
+                      )}
+                    </span>
+                  ))}
+                </Row>
+              ))
+            ) : (
+              <div style={{ textAlign: 'center', paddingTop: '65px' }}>
+                <div>
+                  <img width="224px" height="133" src={noOrder} />
+                </div>
+                <span style={{ color: '#999999' }}>
+                  暂无订单，
+                  <Button
+                    type="link"
+                    style={{ padding: '0' }}
+                    onClick={() => history.push('/admin/shop')}
+                  >
+                    去购买{' '}
+                  </Button>
+                </span>
+              </div>
+            )}
           </Skeleton>
         </div>
       </TabsPanel>

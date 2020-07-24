@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 16:24:34
- * @LastEditTime: 2020-07-22 21:44:29
+ * @LastEditTime: 2020-07-24 09:14:34
  */
 // layout下的子模块
 import ChildLayout from '@/pages';
@@ -29,6 +29,8 @@ import FundHome from '@/pages/fund/home';
 import CashFlow from '@/pages/fund/cashFlow';
 import FinancialFlow from '@/pages/fund/financialFlow';
 import FinancialRec from '@/pages/fund/financialRec';
+import Recharge from '@/pages/fund/recharge';
+import CashOut from '@/pages/fund/cashOut';
 
 import module_shop_menu_icon from '@/assets/images/global/module_shop_menu_icon.png';
 import module_fund_menu_icon from '@/assets/images/global/module_fund_menu_icon.png';
@@ -180,15 +182,15 @@ export const asyncRoutes = [
           {
             id: 321,
             title: '充值',
-            path: '/dashboard',
-            component: Dashboard,
+            path: '/admin/fund/recharge',
+            component: Recharge,
             isLeaf: true,
           },
           {
             id: 322,
             title: '提现',
-            path: '/dashboard',
-            component: Dashboard,
+            path: '/admin/fund/cashOut',
+            component: CashOut,
             isLeaf: true,
           },
           {
