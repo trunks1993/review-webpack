@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 20:14:20
- * @LastEditTime: 2020-07-23 17:04:35
+ * @LastEditTime: 2020-07-24 12:49:25
  */
 import React, { useState, useEffect } from 'react';
 import {
@@ -29,12 +29,15 @@ import {
   TraceStatus,
   TRACE_STATUS_5,
   TRACE_STATUS_6,
+  TRANSTEMP,
+  PRECISION,
 } from '@/const';
 import GlobalModal from '@/components/GlobalModal';
 import noOrder from '@/assets/images/shop/no-order.png';
 
 import moment from 'moment';
 import { getToken } from '@/utils/auth';
+import { getFloat } from '@/utils';
 
 const { confirm } = Modal;
 
@@ -134,6 +137,7 @@ export default (props) => {
       content: '是否删除',
       okText: '确定',
       cancelText: '取消',
+      centered: true,
       onOk: async() => {
         try {
           const [err, data, msg] = await cancelOrder(id);
@@ -327,10 +331,18 @@ export default (props) => {
                       </Col>
                       <Col span={2}>{v.detailCount}</Col>
                       <Col span={2}>{v.typeLabel}</Col>
-                      <Col span={4}>￥{v.price}</Col>
+                      <Col span={4}>
+                        ￥{getFloat(v.price / TRANSTEMP, PRECISION)}
+                      </Col>
                       {index === 0 ? (
                         <>
-                          <Col span={2}>￥{item.realTotalPay}</Col>
+                          <Col
+                            span={2}
+                            style={{ fontWeight: 'bold', color: '#333333' }}
+                          >
+                            ￥
+                            {getFloat(item.realTotalPay / TRANSTEMP, PRECISION)}
+                          </Col>
                           <Col span={2}>{OrderStatus[item.status]}</Col>
                           <Col span={6}>{ToolMap[item.status](item)}</Col>
                         </>
@@ -428,7 +440,6 @@ export default (props) => {
           style: { position: 'absolute', left: 0 },
           disabled: true,
         }}
-        okText="确认"
         width={560}
       >
         <Table

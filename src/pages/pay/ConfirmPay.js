@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-15 16:39:54
- * @LastEditTime: 2020-07-22 21:41:21
+ * @LastEditTime: 2020-07-24 12:14:35
  */
 
 import React, { useState, useEffect } from 'react';
@@ -80,13 +80,15 @@ export default (props) => {
         </li>
         <li className="confirm-pay-content_item">
           <span className="confirm-pay-content_item-title">订单总额：</span>
-          <span>
+          <span style={{ fontWeight: 'bold', fontSize: '16px' }}>
             ￥{getFloat(orderInfo?.sumInfo?.totalMoney / TRANSTEMP, PRECISION)}
           </span>
         </li>
         <li className="confirm-pay-content_item">
           <span className="confirm-pay-content_item-title">账户余额：</span>
-          <span>￥{getFloat(amount / TRANSTEMP, PRECISION)}</span>
+          <span style={{ fontWeight: 'bold', fontSize: '16px' }}>
+            ￥{getFloat(amount / TRANSTEMP, PRECISION)}
+          </span>
           <span style={{ marginLeft: '15px' }}>
             {amount < orderInfo?.sumInfo?.totalMoney ? (
               <>
