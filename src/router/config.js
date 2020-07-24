@@ -24,6 +24,12 @@ import Reconciliation from '@/pages/operations/transaction/Reconciliation';
 import Application from '@/pages/operations/businessInfo/application';
 /** 运营管理-业务管理--修改应用 */
 import ModifyApp from '@/pages/operations/businessInfo/modifyApp';
+/** 运营管理-业务管理--应用配置 */
+import ConfigApp from '@/pages/operations/businessInfo/configApp';
+/** 运营管理-业务管理--实名认证 */
+import Certification from '@/pages/operations/businessInfo/certification';
+/** 运营管理-业务管理--实名认证提交成功 */
+import Success from '@/pages/operations/businessInfo/success';
 /** 运营管理-业务管理--账号信息 */
 import Account from '@/pages/operations/businessInfo/account';
 
@@ -114,6 +120,7 @@ export const asyncRoutes = [
             path: '/admin/operations/transaction/order',
             component: Order,
             isLeaf: true,
+            isHome: true,
           },
           {
             id: 212,
@@ -137,18 +144,35 @@ export const asyncRoutes = [
             isLeaf: true,
           },
           {
-            id: 221,
+            id: 2211,
             title: '修改应用',
             path: '/admin/operations/businessInfo/modifyapp',
             component: ModifyApp,
             isLeaf: true,
+            hidden: true,
+          },
+          {
+            id: 2212,
+            title: '配置应用',
+            path: '/admin/operations/businessInfo/configapp',
+            component: ConfigApp,
+            isLeaf: true,
+            hidden: true,
           },
           {
             id: 222,
             title: '实名认证',
-            path: '/dashboard',
-            component: Dashboard,
+            path: '/admin/operations/businessInfo/certification',
+            component: Certification,
             isLeaf: true,
+          },
+          {
+            id: 2221,
+            title: '提交成功',
+            path: '/admin/operations/businessInfo/success',
+            component: Success,
+            isLeaf: true,
+            hidden: true,
           },
           {
             id: 223,

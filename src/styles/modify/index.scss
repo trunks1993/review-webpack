@@ -1,0 +1,15 @@
+.modifyApp{
+    background-color: $white;
+    height: 100vh;
+    &-title{
+        @extend .f16;
+        font-family:Microsoft YaHei;
+        font-weight:bold;
+        color:$black;
+        margin: 30px 0px 30px 12%;
+    }
+    &-but{
+        width: 100px;
+        background-color: $blue;
+    }
+}

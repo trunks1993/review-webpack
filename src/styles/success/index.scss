@@ -1,0 +1,29 @@
+.success {
+    div {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 40px;
+    }
+
+    &-title {
+        font-size: 24px;
+        font-family: Microsoft YaHei;
+        font-weight: 400;
+        color: $black;
+    }
+
+    &-desc {
+        font-size: 14px;
+        font-family: Microsoft YaHei;
+        font-weight: 400;
+        color: $black;
+    }
+
+    &-btn {
+        width: 90px;
+        height: 32px;
+        border: 1px solid $blue;
+        border-radius: 4px;
+        color: $blue;
+    }
+}

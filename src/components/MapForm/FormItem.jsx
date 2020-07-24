@@ -4,6 +4,7 @@ import ItemMap from './map';
 import FormContext from './FormContext';
 import TextArea from 'antd/lib/input/TextArea';
 import FormUpLoad from '../FormUpLoad';
+import GlobalUpload from '../GlobalUpload';
 // import TreeCheck from "@/pages/sys/manager/role/components/TreeCheck";
 // import BlockCheckbox from "../BlockCheckbox";
 // import GlobalCheckbox from "../GlobCheckbox";
@@ -95,10 +96,10 @@ class WrapFormItem extends Component {
       //   name,
       //   options
       // )(<GlobalCheckbox {...customProps} />),
-      // CstDatePicker: getFieldDecorator(
-      //   name,
-      //   options
-      // )(<GlobalDatePicker {...customProps} />),
+      CstDatePicker: getFieldDecorator(
+        name,
+        options
+      )(<DatePicker {...customProps} />),
       CstRangePicker: getFieldDecorator(
         name,
         options

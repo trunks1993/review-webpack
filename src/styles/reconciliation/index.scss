@@ -1,37 +1,44 @@
-.reconciliation{
-    &-Info{
+.reconciliation {
+    &-Info {
         padding: 30px 30px;
         height: 100px;
         background-color: $white;
     }
-    &-table{
+
+    &-table {
         background-color: $white;
-        height:calc(100vh - 280px);
+        height: calc(100vh - 280px);
         margin-top: 20px;
-        &--title{
+
+        &--title {
             margin-left: 20px;
             padding: 10px;
         }
-        &--desc{
+
+        &--desc {
             font-size: 14px;
             font-weight: 600;
             margin-left: 10px;
         }
-        &--name{
+
+        &--name {
             float: right;
             font-size: 13px;
             color: $blue;
             font-weight: 600;
         }
     }
-    &-download{
+
+    &-download {
         border: 1px solid #1a61dc;
         padding: 2px 4px;
         color: $blue;
     }
-    &-delete{
+
+    &-delete {
         color: #999999;
-        img{
+
+        img {
             margin-right: 6px;
         }
     }

@@ -57,6 +57,20 @@ export const TraceStatus = {
   [TRACE_STATUS_7]: '取消',
 };
 
+export const TRANSA_STATUS_1 = 1; // 初始
+export const TRANSA_STATUS_2 = 2; // 待处理
+export const TRANSA_STATUS_3 = 3; // 处理中
+export const TRANSA_STATUS_4 = 4; // 成功
+export const TRANSA_STATUS_5 = 5; // 失败
+
+export const TransaStatus = {
+  [TRANSA_STATUS_1]: '初始',
+  [TRANSA_STATUS_2]: '待处理',
+  [TRANSA_STATUS_3]: '处理中',
+  [TRANSA_STATUS_4]: '成功',
+  [TRANSA_STATUS_5]: '失败',
+};
+
 export const TRANSACTION_TYPE_1 = 1;
 export const TRANSACTION_TYPE_2 = 2;
 
@@ -113,6 +127,16 @@ export const MerchantStatus = {
   [MERCHANT_STATUS_3]: '已认证',
 };
 
+// 异常原因
+export const JIEGUO_STATUS_0 = 0; // 开发者订单重复
+export const JIEGUO_STATUS_1 = 1; // json解析失败
+export const JIEGUO_STATUS_2 = 2; // 其他
+
+export const JieGuoStatus = {
+  [JIEGUO_STATUS_0]: '开发者订单重复',
+  [JIEGUO_STATUS_1]: 'json解析失败',
+  [JIEGUO_STATUS_2]: '其他',
+};
 export const CASH_FLOW_STATUS_1 = 1;
 export const CASH_FLOW_STATUS_2 = 2;
 export const CASH_FLOW_STATUS_3 = 3;
