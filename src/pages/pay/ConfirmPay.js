@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-15 16:39:54
- * @LastEditTime: 2020-07-24 12:14:35
+ * @LastEditTime: 2020-07-24 17:55:23
  */
 
 import React, { useState, useEffect } from 'react';
@@ -10,7 +10,7 @@ import { TRANSTEMP, PRECISION } from '@/const';
 import { getFloat } from '@/utils';
 
 export default (props) => {
-  const { amount, telephone, orderInfo, changeStep } = props;
+  const { amount, telephone, orderInfo, changeStep, history } = props;
   const [loading, setLoading] = useState(false);
   const [timing, setTiming] = useState(false);
   const [time, setTime] = useState(60);
@@ -93,7 +93,11 @@ export default (props) => {
             {amount < orderInfo?.sumInfo?.totalMoney ? (
               <>
                 余额不足，
-                <Button type="link" style={{ padding: 0 }}>
+                <Button
+                  type="link"
+                  style={{ padding: 0 }}
+                  onClick={() => history.push('/admin/fund/recharge')}
+                >
                   立即充值
                 </Button>
               </>

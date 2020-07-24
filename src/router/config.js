@@ -1,7 +1,13 @@
 /*
+<<<<<<< HEAD
  * @Date: 2020-07-02 16:24:34
  * @LastEditTime: 2020-07-24 17:32:27
+=======
+ * @Date: 2020-07-24 17:20:08
+ * @LastEditTime: 2020-07-24 17:58:29
+>>>>>>> 407301f553a630b91f5cbfd5b1dca2908c92740e
  */
+
 // layout下的子模块
 import ChildLayout from '@/pages';
 import Dashboard from '@/pages/dashboard';
@@ -38,6 +44,8 @@ import FinancialFlow from '@/pages/fund/financialFlow';
 import FinancialRec from '@/pages/fund/financialRec';
 import Recharge from '@/pages/fund/recharge';
 import CashOut from '@/pages/fund/cashOut';
+import RechargeSuccess from '@/pages/fund/success/recharge';
+import CashOutSuccess from '@/pages/fund/success/cashOut';
 
 import module_shop_menu_icon from '@/assets/images/global/module_shop_menu_icon.png';
 import module_fund_menu_icon from '@/assets/images/global/module_fund_menu_icon.png';
@@ -224,6 +232,22 @@ export const asyncRoutes = [
             path: '/admin/fund/cashFlow',
             component: CashFlow,
             isLeaf: true,
+          },
+          {
+            id: 324,
+            title: '充值成功',
+            path: '/admin/fund/rechargeSuccess',
+            component: RechargeSuccess,
+            isLeaf: true,
+            hidden: true,
+          },
+          {
+            id: 325,
+            title: '提现成功',
+            path: '/admin/fund/cashOutSuccess',
+            component: CashOutSuccess,
+            isLeaf: true,
+            hidden: true,
           },
         ],
       },
