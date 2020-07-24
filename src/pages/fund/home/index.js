@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-22 20:19:58
- * @LastEditTime: 2020-07-24 19:05:54
+ * @LastEditTime: 2020-07-24 16:28:28
  */
 
 import React, { useState, useEffect } from 'react';
@@ -8,10 +8,7 @@ import JINBI from '@/assets/images/fund/jinbi.png';
 import { Row, Col, Tag, Button, Tabs, Table } from 'antd';
 import Charts from './charts';
 import { getTimeDistance, getFloat } from '@/utils';
-import { searchAccountTrace, getUnpaidOrderNum } from '@/services/home';
-import { createHashHistory } from 'history';
-import { connect } from 'dva';
-const history = createHashHistory();
+import { searchAccountTrace } from '@/services/home';
 import {
   TRANSTEMP,
   PRECISION,
@@ -33,19 +30,14 @@ const salesData = [
   { x: '11月', y: 25 },
   { x: '12月', y: 30 },
 ];
-const home = ({ list: { amount, frozeAmount } }) => {
+const home = () => {
   const [rangePickerValue, setRangePickerValue] = useState('');
   const [tabKey, setTabKey] = useState('2');
-  const [payOrder, setPayOrder] = useState('');
   const [financeList, setFinanceList] = useState();
 
   useEffect(() => {
     getAccountTrace();
   }, [tabKey]);
-
-  useEffect(() => {
-    getPayOrder();
-  }, []);
 
   /** 更新时间 */
   const selectDate = (type) => {
@@ -78,14 +70,6 @@ const home = ({ list: { amount, frozeAmount } }) => {
     try {
       const [err, data, msg] = await searchAccountTrace(obj);
       if (!err) setFinanceList(data.list);
-    } catch (error) {}
-  };
-
-  /** 获取待支付订单 */
-  const getPayOrder = async () => {
-    try {
-      const [err, data, msg] = await getUnpaidOrderNum();
-      if (!err) setPayOrder(data);
     } catch (error) {}
   };
 
@@ -174,18 +158,13 @@ const home = ({ list: { amount, frozeAmount } }) => {
             <div className="home-left--number">
               <img src={JINBI} alt="" style={{ marginRight: 10 }} />
               <span>账户可用余额(元)</span>
-              <Tag className="home-left--tag">
-                冻结￥
-                {frozeAmount ? getFloat(frozeAmount / TRANSTEMP, PRECISION) : 0.00}
-              </Tag>
+              <Tag className="home-left--tag">冻结￥ 12312</Tag>
             </div>
-            <div className="home-left--money">
-              ￥{amount ? getFloat(amount / TRANSTEMP, PRECISION) : 0.00}
-            </div>
+            <div className="home-left--money">￥123</div>
             <Button
               className="home-left--btn"
               onClick={() => {
-                history.push('/admin/fund/recharge');
+                router.push('/admin/fund/recharge');
               }}
               type="primary"
             >
@@ -195,7 +174,7 @@ const home = ({ list: { amount, frozeAmount } }) => {
               className="home-left--btn"
               style={{ border: '1px solid #1a61dc', color: '#1a61dc' }}
               onClick={() => {
-                history.push('/admin/fund/cashOut');
+                router.push('/admin/fund/cashOut');
               }}
             >
               提现
@@ -216,7 +195,7 @@ const home = ({ list: { amount, frozeAmount } }) => {
             <Col span={8} className="home-right--col">
               <span className="home-right--title">待支付订单</span>
               <div>
-                {payOrder}
+                123
                 <span>个</span>
               </div>
             </Col>
@@ -266,10 +245,6 @@ const home = ({ list: { amount, frozeAmount } }) => {
               dataSource={financeList}
               columns={columns}
               pagination={false}
-              className="global-table"
-              onHeaderRow={() => ({
-                className: 'global-table_head-tr',
-              })}
               scroll={{ y: 260 }}
             />
           </Tabs.TabPane>
@@ -278,6 +253,4 @@ const home = ({ list: { amount, frozeAmount } }) => {
     </div>
   );
 };
-export default connect(({ account }) => ({
-  list: account.amountInfo,
-}))(home);
+export default home;
