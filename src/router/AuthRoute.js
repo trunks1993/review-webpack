@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-20 17:03:19
- * @LastEditTime: 2020-07-16 21:18:45
+ * @LastEditTime: 2020-07-21 20:58:56
  */
 import React from 'react';
 import { connect } from 'dva';
@@ -13,7 +13,14 @@ const AuthRoute = ({ Component, authTo, user, dispatch, ...rest }) => {
   return (
     <Route
       render={(props) => {
-        const isLogin = props.location.pathname === '/signIn';
+        const isLogin =
+          props.location.pathname === '/signIn' ||
+          props.location.pathname === '/signUp' ||
+          props.location.pathname === '/resetPassword';
+        console.log(
+          'AuthRoute -> props.location.pathname',
+          props.location.pathname
+        );
         const token = getToken();
         const c = <Component {...props} />;
         const r = (

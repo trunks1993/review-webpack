@@ -1,7 +1,8 @@
 /*
  * @Date: 2020-06-19 20:47:15
- * @LastEditTime: 2020-07-14 20:40:41
+ * @LastEditTime: 2020-07-22 12:45:33
  */
+import moment from 'moment';
 
 export function guid() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -35,4 +36,8 @@ export function getQueryVariable(variable) {
     }
   }
   return false;
+}
+
+export function formateTime(timeStr) {
+  return timeStr ? moment(timeStr).format('YYYY-MM-DD HH:mm:ss') : '';
 }

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import MapForm from '@/components/MapForm';
 import { Context } from '../Context';
-import { Form, Button, Checkbox } from 'antd';
+import { Form, Button, Checkbox, message } from 'antd';
 import { createHashHistory } from 'history';
 import { patternPhone } from '@/rules';
+import { getLoginValidCode } from '@/services/account';
 
 const history = createHashHistory();
 
@@ -20,6 +21,48 @@ const formItemLayout = {
 
 export default () => {
   const [form, setForm] = useState({});
+
+  const [loading, setLoading] = useState(false);
+  const [timing, setTiming] = useState(false);
+  const [time, setTime] = useState(60);
+
+  let timer = null;
+
+  const handleSendAuthCode = () => {
+    form.validateFields(['telephone'], async(err, value) => {
+      if (!err) {
+        try {
+          setLoading(true);
+          const [err, data, msg] = await getLoginValidCode(value);
+          if (!err) {
+            dispatchTimer();
+          } else {
+            setLoading(false);
+            message.error(msg);
+          }
+        } catch (error) {
+          setLoading(false);
+        }
+      }
+    });
+  };
+
+  const dispatchTimer = () => {
+    setTiming(true);
+    setLoading(false);
+    if (timer) return;
+    let i = 1;
+    timer = setInterval(() => {
+      if (i < 60) {
+        setTime(time - i++);
+      } else {
+        setTiming(false);
+        clearTimeout(timer);
+        setTime(60);
+      }
+    }, 1000);
+  };
+
   return (
     <MapForm
       layColWrapper={formItemLayout}
@@ -50,8 +93,17 @@ export default () => {
         label="验证码"
         name="code"
         customProps={{
-          placeholder: '请输入密码',
-          addonAfter: <Button type="link">获取验证码</Button>,
+          placeholder: '请输入验证码',
+          addonAfter: (
+            <Button
+              loading={loading}
+              disabled={timing}
+              type="link"
+              onClick={handleSendAuthCode}
+            >
+              {timing ? time + 's' : !loading && '发送验证码'}
+            </Button>
+          ),
           className: 'byMessage_cst-input',
           size: 'large',
         }}

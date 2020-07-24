@@ -11,7 +11,6 @@ export default {
   CstTreeCheck: {},
   CstSelect: {},
   CstUpload: {},
-  CstGlobalUpload: {},
   CstBlockCheckbox: {},
   CstRadio: {},
   CstCheckbox: {},

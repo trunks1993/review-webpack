@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-14 16:36:47
- * @LastEditTime: 2020-07-14 17:47:20
+ * @LastEditTime: 2020-07-22 15:15:19
  */
 
 import React from 'react';
@@ -17,6 +17,7 @@ const GlobalModal = (props) => {
     cancelText,
     cancelButtonProps,
     okText,
+    footer,
   } = props;
 
   return (
@@ -36,6 +37,7 @@ const GlobalModal = (props) => {
       }
       cancelText={cancelText}
       okText={okText}
+      footer={footer}
     >
       {props.children}
     </Modal>

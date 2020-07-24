@@ -1,9 +1,11 @@
 /*
  * @Date: 2020-06-30 11:17:03
- * @LastEditTime: 2020-07-17 20:39:41
+ * @LastEditTime: 2020-07-22 17:34:35
  */
 
 export const METHOD_POST = 'POST'; // post
+export const DEFAULT_PAGE_NUM = 1; // 默认页码
+export const DEFAULT_PAGE_SIZE = 7; // 默认每页条数
 
 // 不需要带token的api
 export const whiteUrls = [process.env.BASE_API + '/user/login'];
@@ -132,4 +134,45 @@ export const JieGuoStatus = {
   [JIEGUO_STATUS_0]: '开发者订单重复',
   [JIEGUO_STATUS_1]: 'json解析失败',
   [JIEGUO_STATUS_2]: '其他',
+};
+export const CASH_FLOW_STATUS_1 = 1;
+export const CASH_FLOW_STATUS_2 = 2;
+export const CASH_FLOW_STATUS_3 = 3;
+
+export const CashFlowStatus = {
+  [CASH_FLOW_STATUS_1]: '处理中',
+  [CASH_FLOW_STATUS_2]: '已完成',
+  [CASH_FLOW_STATUS_3]: '已取消',
+};
+
+export const CASH_FLOW_BIZTYPE_1 = 1;
+export const CASH_FLOW_BIZTYPE_2 = 2;
+
+export const CashFlowBizTypes = {
+  [CASH_FLOW_BIZTYPE_1]: '充值',
+  [CASH_FLOW_BIZTYPE_2]: '提现',
+};
+
+export const FINANCIAL_FLOW_BIZTYPE_1 = 1;
+export const FINANCIAL_FLOW_BIZTYPE_2 = 2;
+export const FINANCIAL_FLOW_BIZTYPE_3 = 3;
+export const FINANCIAL_FLOW_BIZTYPE_4 = 4;
+export const FINANCIAL_FLOW_BIZTYPE_5 = 5;
+export const FINANCIAL_FLOW_BIZTYPE_6 = 6;
+
+export const financialFlowBizTypes = {
+  [FINANCIAL_FLOW_BIZTYPE_1]: '充值',
+  [FINANCIAL_FLOW_BIZTYPE_2]: '提现',
+  [FINANCIAL_FLOW_BIZTYPE_3]: '采购',
+  [FINANCIAL_FLOW_BIZTYPE_4]: '加款',
+  [FINANCIAL_FLOW_BIZTYPE_5]: '减款',
+  [FINANCIAL_FLOW_BIZTYPE_6]: '退款',
+};
+
+export const FINANCIAL_FLOW_BILLTYPE_1 = 1;
+export const FINANCIAL_FLOW_BILLTYPE_2 = 2;
+
+export const financialFlowBillTypes = {
+  [FINANCIAL_FLOW_BILLTYPE_1]: '收入',
+  [FINANCIAL_FLOW_BILLTYPE_2]: '支出',
 };

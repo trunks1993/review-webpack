@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-17 20:59:45
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-22 16:23:57
+ * @LastEditTime: 2020-07-24 09:06:15
  */
 
 import React, { useState, useEffect } from 'react';
@@ -28,7 +28,7 @@ import {
   MERCHANT_STATUS_3,
 } from '@/const';
 
-const { CstInput, CstGlobalUpload } = MapForm;
+const { CstInput, CstUpload } = MapForm;
 
 const certification = () => {
   const [tabKey, setTabKey] = useState();
@@ -134,6 +134,24 @@ const certification = () => {
     },
   };
 
+  const Content = ({ value }) => {
+    const uploadButton = (
+      <div style={{ fontSize: '12px', color: '#CCCCCC' }}>
+        <Icon type="plus" />
+        <div>点击上传</div>
+      </div>
+    );
+    return value ? (
+      <img
+        src={process.env.FILE_URL + value}
+        alt="avatar"
+        style={{ height: 136  }}
+      />
+    ) : (
+      uploadButton
+    );
+  };
+
   return (
     <div className="certification">
       {rejectTextType === 0 ? (
@@ -216,13 +234,12 @@ const certification = () => {
                       { required: true, message: '统一社会信用代码不能为空' },
                     ]}
                   />
-                  <CstGlobalUpload
+                  <CstUpload
                     name="img"
                     label="企业证件图片:"
                     help={helpMsg}
                     labelCol={{ span: 4 }}
                     wrapperCol={{ span: 17 }}
-                    className="configApp-content--upload"
                     rules={[
                       {
                         validator: (rule, value, callback) => {
@@ -251,6 +268,8 @@ const certification = () => {
                         domain: 'identify',
                         secret: 'Y',
                       },
+                      className: 'layout_uploader',
+                      Content,
                       multiple: 'true',
                       uploadName: '请上传身份证的头像面',
                       disabled: Inputdisabled,
@@ -336,13 +355,12 @@ const certification = () => {
                   />
                   <Row>
                     <Col span={10} push={2}>
-                      <CstGlobalUpload
+                      <CstUpload
                         name="idCardFront"
                         label="应用logo:"
                         help={helpMsg}
                         labelCol={{ span: 5 }}
                         wrapperCol={{ span: 17 }}
-                        className="configApp-content--upload"
                         rules={[
                           {
                             validator: (rule, value, callback) => {
@@ -374,6 +392,8 @@ const certification = () => {
                             domain: 'identify',
                             secret: 'Y',
                           },
+                          className: 'layout_uploader',
+                          Content,
                           multiple: 'true',
                           uploadName: '请上传身份证的头像面',
                           disabled: Inputdisabled,
@@ -386,10 +406,9 @@ const certification = () => {
                   </Row>
                   <Row>
                     <Col span={10} push={2}>
-                      <CstGlobalUpload
+                      <CstUpload
                         name="idCardBack"
                         help={helpMsag}
-                        className=""
                         labelCol={{ span: 8 }}
                         wrapperCol={{ span: 17, offset: 5 }}
                         rules={[
@@ -425,6 +444,8 @@ const certification = () => {
                           uploadName: '请上传身份证的国徽面',
                           showUploadList: false,
                           disabled: Inputdisabled,
+                          className: 'layout_uploader',
+                          Content,
                         }}
                       />
                     </Col>

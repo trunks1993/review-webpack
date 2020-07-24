@@ -16,6 +16,7 @@
 @import "./certification/index.scss";
 @import "./success/index.scss";
 @import "./car/index.scss";
+@import "./fund/cashFlow.scss";
 
 /*!
  * @名称：base.css
@@ -189,31 +190,16 @@ div:focus {
 }
 
 .filter-form {
-  .ant-form-item {
-    padding-bottom: 10px;
-  }
-  .filter_button--white {
-    width: 90px;
-    height: 32px;
-    margin-left: 20px;
-  }
-  .filter_button--blue {
-    background-color: $blue;
-    color: $white;
-    width: 90px;
-    height: 32px;
+  .ant-col > .ant-form-item {
+    margin-bottom: 0;
   }
 }
-.app-modal {
-  .ant-modal-header {
-    background-color: #f2f2f2 !important;
-  }
-  .ant-modal-footer {
-    background-color: #f2f2f2 !important;
-  }
-  .ant-modal-title {
-    font-size: 16px;
-    color: $black;
-    font-weight: 600;
-  }
+
+.breadCrumb {
+  border: 1px solid #e6e6e6;
+  color: #999999;
+  font-size: 12px;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 20px;
 }

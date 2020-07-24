@@ -52,7 +52,7 @@ const application = ({ user }) => {
   };
 
   /** 获取app */
-  const getAppInfo = async () => {
+  const getAppInfo = async() => {
     const [err, data, msg] = await getApp();
     if (!err) {
       const visible = {};
@@ -74,7 +74,7 @@ const application = ({ user }) => {
       okType: 'danger',
       cancelText: '取消',
       centered: true,
-      onOk: async () => {
+      onOk: async() => {
         const [err, data, msg] = await deleteApp({ appId });
         getAppInfo();
         if (!err) message.success('删除成功!');
@@ -84,7 +84,7 @@ const application = ({ user }) => {
 
   /** Modal确认按钮 */
   const handleOk = () => {
-    form.validateFields(async (errs, value) => {
+    form.validateFields(async(errs, value) => {
       if (!errs) {
         const datas = { ...value, appId };
         const [err, data, msg] = await getSecret(datas);
@@ -117,8 +117,7 @@ const application = ({ user }) => {
 
         <div
           className="app-newlist"
-          onClick={() =>
-            history.push('/admin/operations/businessInfo/modifyapp')
+          onClick={() => history.push('/admin/operations/businessInfo/modifyapp')
           }
         >
           <Icon type="plus" />
@@ -163,8 +162,7 @@ const application = ({ user }) => {
             rules={[
               {
                 required: true,
-                transform: (value) =>
-                  value % 1 === 0 ? parseInt(value) : false,
+                transform: (value) => value % 1 === 0 ? parseInt(value) : false,
                 type: 'number',
                 whitespace: true,
                 message: '请输入正确验证码',
