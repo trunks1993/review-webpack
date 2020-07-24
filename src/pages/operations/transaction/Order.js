@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 14:20:06
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-24 16:41:00
+ * @LastEditTime: 2020-07-24 18:31:08
  */
 import React, { useState, useEffect } from 'react';
 import MapForm from '@/components/MapForm';
@@ -18,6 +18,7 @@ import {
 import moment from 'moment';
 import _ from 'lodash';
 import { Select, Form, Button, Table, Pagination, Row, Col } from 'antd';
+import noData from '@/assets/images/operations/unData.png';
 
 const { CstInput, CstSelect, CstRangePicker } = MapForm;
 
@@ -230,6 +231,14 @@ const Order = ({ dispatch, list, total, loading }) => {
         onHeaderRow={() => ({
           className: 'global-table_head-tr',
         })}
+        locale={{
+          emptyText: (
+            <div className="cash-flow_empty">
+              <img width="218px" height="134px" src={noData} />
+              <p className="cash-flow_empty-text">暂无交易订单信息</p>
+            </div>
+          ),
+        }}
         scroll={{ x: 1300, y: 'calc(100vh - 480px)' }}
       />
       <div

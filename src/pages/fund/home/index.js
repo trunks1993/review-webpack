@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-22 20:19:58
- * @LastEditTime: 2020-07-24 16:28:28
+ * @LastEditTime: 2020-07-24 18:19:00
  */
 
 import React, { useState, useEffect } from 'react';
@@ -9,6 +9,8 @@ import { Row, Col, Tag, Button, Tabs, Table } from 'antd';
 import Charts from './charts';
 import { getTimeDistance, getFloat } from '@/utils';
 import { searchAccountTrace } from '@/services/home';
+import { createHashHistory } from 'history';
+const history = createHashHistory();
 import {
   TRANSTEMP,
   PRECISION,
@@ -164,7 +166,7 @@ const home = () => {
             <Button
               className="home-left--btn"
               onClick={() => {
-                router.push('/admin/fund/recharge');
+                history.push('/admin/fund/recharge');
               }}
               type="primary"
             >
@@ -174,7 +176,7 @@ const home = () => {
               className="home-left--btn"
               style={{ border: '1px solid #1a61dc', color: '#1a61dc' }}
               onClick={() => {
-                router.push('/admin/fund/cashOut');
+                history.push('/admin/fund/cashOut');
               }}
             >
               提现
@@ -245,6 +247,10 @@ const home = () => {
               dataSource={financeList}
               columns={columns}
               pagination={false}
+              className="global-table"
+              onHeaderRow={() => ({
+                className: 'global-table_head-tr',
+              })}
               scroll={{ y: 260 }}
             />
           </Tabs.TabPane>
