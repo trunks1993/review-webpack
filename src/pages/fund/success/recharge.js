@@ -3,24 +3,24 @@
  * @LastEditTime: 2020-07-24 17:47:01
  */
 
-import React, { useState, useEffect } from "react";
-import success from "@/assets/images/pay/success.png";
-import { Button } from "antd";
+import React, { useState, useEffect } from 'react';
+import success from '@/assets/images/pay/success.png';
+import { Button } from 'antd';
 
 const RechargeSuccess = (props) => {
   const { history, location } = props;
   useEffect(() => {
     if (
       !location?.state?.from ||
-      location.state.from !== "/admin/fund/recharge"
+      location.state.from !== '/admin/fund/recharge'
     ) {
-      history.push("/admin/fund/recharge");
+      history.push('/admin/fund/recharge');
     }
   }, []);
 
   return (
     <div className="fund-recharge">
-      <div className="fund-recharge_header">{"资金管理 > 充值 > 充值成功"}</div>
+      <div className="fund-recharge_header">{'资金管理 > 充值 > 充值成功'}</div>
       <div className="fund-recharge_content">
         <p className="fund-recharge_content-info">
           温馨提示：受银行处理时间影响，采用外汇或者线下汇款方式到账会有延误，强烈建议采用支付宝、网银实时到账。线下汇款直接向我司专属账户汇款，公司每天将按汇款
@@ -30,17 +30,17 @@ const RechargeSuccess = (props) => {
         </p>
 
         <p className="fund-recharge_content-p1">恭喜您充值成功！</p>
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: 'center' }}>
           <img src={success} />
         </div>
         <p className="fund-recharge_content-p2">
           恭喜您充值成功，现在您可以去星权益购买商品啦
         </p>
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: 'center' }}>
           <Button
             type="primary"
             ghost
-            onClick={() => history.push("/admin/shop")}
+            onClick={() => history.push('/admin/shop')}
           >
             去购买
           </Button>
