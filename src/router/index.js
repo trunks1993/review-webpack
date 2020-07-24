@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-20 17:03:03
- * @LastEditTime: 2020-07-24 20:04:32
+ * @LastEditTime: 2020-07-24 18:30:18
  */
 import React from 'react';
 import { routerRedux, Route, Redirect, Switch } from 'dva/router';
@@ -25,7 +25,7 @@ import Page404 from '@/pages/page404';
 import Dashboard from '@/pages/dashboard';
 import ShopHome from '@/pages/shop/home';
 import FundHome from '@/pages/fund/home';
-import OperationsHome from '@/pages/operations/transaction/Order';
+
 import { ConfigProvider } from 'antd';
 
 export default ({ history }) => {
@@ -87,7 +87,6 @@ export const ChildRouteList = React.memo(() => {
         })}
       <Route path="/admin/shop" component={ShopHome} />
       <Route path="/admin/fund" component={FundHome} />
-      <Route path="/admin/operations" component={OperationsHome} />
     </Switch>
   );
 });
