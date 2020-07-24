@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-14 15:37:18
- * @LastEditTime: 2020-07-24 17:55:37
+ * @LastEditTime: 2020-07-24 20:13:15
  */
 
 import React, { useEffect, useState } from 'react';
@@ -64,12 +64,14 @@ const Pay = (props) => {
 
   return (
     <div className="page-pay">
-      <div className="page-pay_header">星权益 / 采购订单</div>
-      <Step step={step} />
-      {StepMap[step](orderInfo, (step) => {
-        setStep(step);
-        setStepCookie(step);
-      })}
+      <div style={{ border: '1px solid #e6e6e6' }}>
+        <div className="page-pay_header">星权益 / 采购订单</div>
+        <Step step={step} />
+        {StepMap[step](orderInfo, (step) => {
+          setStep(step);
+          setStepCookie(step);
+        })}
+      </div>
     </div>
   );
 };
