@@ -103,30 +103,48 @@
       height: 30px;
       color: #333333 !important;
     }
+    &--40 > th {
+      background: #eeeeee !important;
+      font-size: 12px;
+      padding: 0 16px !important;
+      height: 40px;
+      color: #333333 !important;
+    }
   }
   &_row-tr {
     & > td {
       color: #333333;
     }
-  }
-  // td {
-  //   padding: 4px 16px !important;
-  //   min-height: 40px;
-  // }
-  th {
-    // background: #e6e6e6 !important;
-    // font-size: 12px;
-    // border-top: 1px solid #e6e6e6;
-    // padding: 4px 16px !important;
-    // min-height: 40px;
+    &--114 {
+      & > td {
+        color: #333333 !important;
+        height: 114px;
+      }
+    }
   }
   &--none {
     display: none;
   }
-  .ant-checkbox-inner {
-    border-radius: 50%;
+}
+// table checkbox
+.check-box {
+  &-circular {
+    .ant-checkbox-inner {
+      border-radius: 50%;
+    }
+  }
+  &-rectangle {
+    .ant-checkbox-inner {
+      width: 12px;
+      height: 12px;
+      background: #e6e6e6;
+      border: 1px solid #cccccc;
+      border-radius: 2px;
+    }
   }
 }
+
+// table checkbox
 
 /* 全局弹窗样式 */
 .global-modal {
@@ -206,16 +224,49 @@
   }
 }
 
-// // 上传图片
-// .avatar-uploader {
-//   .ant-upload.ant-upload-select-picture-card {
-//     width: 60px;
-//     height: 60px;
-//     margin-right: 0;
-//     margin-bottom: 0;
-//     border: 1px solid #f2f2f2;
-//     & > .ant-upload {
-//       padding: 0;
-//     }
-//   }
-// }
+// delete modal
+.ant-modal-confirm {
+  .ant-modal-content {
+    position: relative;
+    border-radius: 4px;
+  }
+  .ant-modal-body {
+    padding: 0;
+  }
+  &-body {
+    i {
+      display: none;
+    }
+  }
+  &-title {
+    text-align: center;
+    height: 50px;
+    line-height: 50px !important;
+    background: #f2f2f2;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    border-radius: 4px 4px 0 0;
+  }
+  &-content {
+    text-align: center;
+    font-size: 16px !important;
+    color: #666666 !important;
+    margin: 60px 0 46px 0 !important;
+  }
+  &-btns {
+    float: initial !important;
+    margin: 0;
+    text-align: center;
+    background: #f2f2f2;
+    padding: 12px 0;
+    border-radius: 0 0 4px 4px;
+    button {
+      padding: 0 48px;
+      font-size: 12px;
+      height: 26px;
+      &:first-child {
+        margin-right: 12px;
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-22 16:33:56
- * @LastEditTime: 2020-07-22 21:26:53
+ * @LastEditTime: 2020-07-24 12:53:11
  */
 
 import React, { useState, useEffect } from 'react';
@@ -186,12 +186,14 @@ const FinancialFlow = (props) => {
                 <Button
                   type="primary"
                   icon="search"
+                  size="large"
                   onClick={() => dispatchInit()}
                 >
                   筛选
                 </Button>
                 <Button
                   icon="undo"
+                  size="large"
                   style={{ marginLeft: '10px' }}
                   onClick={() => filterForm?.resetFields()}
                 >

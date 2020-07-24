@@ -1,13 +1,13 @@
 /*
  * @Date: 2020-06-20 17:03:03
- * @LastEditTime: 2020-07-22 20:30:03
+ * @LastEditTime: 2020-07-24 10:27:40
  */
 import React from 'react';
 import { routerRedux, Route, Redirect, Switch } from 'dva/router';
 import _ from 'lodash';
+import zhCN from 'antd/es/locale/zh_CN';
 
 import { flatTree } from '@/utils';
-import { getToken } from '@/utils/auth';
 const { ConnectedRouter } = routerRedux;
 
 import { asyncRoutes } from './config';
@@ -25,24 +25,27 @@ import Page404 from '@/pages/page404';
 import Dashboard from '@/pages/dashboard';
 import ShopHome from '@/pages/shop/home';
 import FundHome from '@/pages/fund/home';
+import { ConfigProvider } from 'antd';
 
 export default ({ history }) => {
   return (
-    <ConnectedRouter history={history}>
-      <Switch>
-        <AuthRoute exact path="/signIn" authTo="/" Component={SignIn} />
-        <AuthRoute
-          exact
-          path="/resetPassword"
-          authTo="/"
-          Component={ResetPassword}
-        />
-        <AuthRoute exact path="/signUp" authTo="/" Component={SignUp} />
-        <AuthRoute path="/admin" authTo="/signIn" Component={Layout} />
-        <Redirect from="/" to="/admin" />
-        <Route component={Page404} />
-      </Switch>
-    </ConnectedRouter>
+    <ConfigProvider locale={zhCN}>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <AuthRoute exact path="/signIn" authTo="/" Component={SignIn} />
+          <AuthRoute
+            exact
+            path="/resetPassword"
+            authTo="/"
+            Component={ResetPassword}
+          />
+          <AuthRoute exact path="/signUp" authTo="/" Component={SignUp} />
+          <AuthRoute path="/admin" authTo="/signIn" Component={Layout} />
+          <Redirect from="/" to="/admin" />
+          <Route component={Page404} />
+        </Switch>
+      </ConnectedRouter>
+    </ConfigProvider>
   );
 };
 

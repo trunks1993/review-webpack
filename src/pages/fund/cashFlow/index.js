@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-22 11:01:06
- * @LastEditTime: 2020-07-22 21:30:55
+ * @LastEditTime: 2020-07-24 12:53:01
  */
 
 import React, { useState, useEffect } from 'react';
@@ -334,12 +334,14 @@ const CashFlow = (props) => {
                 <Button
                   type="primary"
                   icon="search"
+                  size="large"
                   onClick={() => dispatchInit()}
                 >
                   筛选
                 </Button>
                 <Button
                   icon="undo"
+                  size="large"
                   style={{ marginLeft: '10px' }}
                   onClick={() => filterForm?.resetFields()}
                 >
@@ -352,7 +354,7 @@ const CashFlow = (props) => {
       </div>
       <div className="cash-flow_table">
         <Table
-          className="global-table"
+          className=""
           loading={loading}
           columns={columns}
           pagination={false}
@@ -390,10 +392,8 @@ const CashFlow = (props) => {
         modalVisible={!!itemId}
         // confirmLoading={pwdLoading}
         title={<div style={{ textAlign: 'center' }}>资金流水详情</div>}
-        cancelText="取消"
         onOk={() => setItemId(false)}
         onCancel={() => setItemId(false)}
-        okText="确认"
         width={600}
       >
         <ul className="cash-flow_item-info">
@@ -438,8 +438,6 @@ const CashFlow = (props) => {
         width={600}
         onOk={handleUploadSubmit}
         onCancel={() => setUploadVisible(false)}
-        okText="确认"
-        cancelText="取消"
       >
         <MapForm
           layColWrapper={formItemLayout}

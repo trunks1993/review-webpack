@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-18 17:19:33
- * @LastEditTime: 2020-07-22 21:37:37
+ * @LastEditTime: 2020-07-24 13:12:10
  */
 
 import React, { useState, useEffect } from 'react';
@@ -64,6 +64,7 @@ const CarPage = (props) => {
       content: '是否删除',
       okText: '确定',
       cancelText: '取消',
+      centered: true,
       onOk: async() => {
         try {
           setLoading(true);
@@ -91,6 +92,7 @@ const CarPage = (props) => {
       content: '是否删除',
       okText: '确定',
       cancelText: '取消',
+      centered: true,
       onOk: async() => {
         try {
           setLoading(true);
@@ -195,19 +197,17 @@ const CarPage = (props) => {
       title: '商品信息',
       key: 'id',
       render: (record) => (
-        <div style={{ padding: '26px 0' }}>
-          <List.Item.Meta
-            avatar={
-              <Avatar
-                shape="square"
-                size={60}
-                src={`/file${record.goods.iconUrl}`}
-              />
-            }
-            title={record.brand.name}
-            description={record.goods.productSubName}
-          />
-        </div>
+        <List.Item.Meta
+          avatar={
+            <Avatar
+              shape="square"
+              size={60}
+              src={`/file${record.goods.iconUrl}`}
+            />
+          }
+          title={record.brand.name}
+          description={record.goods.productSubName}
+        />
       ),
       width: '25%',
     },
@@ -371,13 +371,17 @@ const CarPage = (props) => {
       </div>
       <div>
         <Table
-          className="global-table"
+          className="global-table check-box-circular"
           rowSelection={rowSelection}
           loading={loading}
           columns={columns}
           pagination={false}
           dataSource={carData.cartItemList}
           rowKey={(record, index) => record.id}
+          rowClassName={() => 'global-table_row-tr--114'}
+          onHeaderRow={() => ({
+            className: 'global-table_head-tr--40',
+          })}
           locale={{
             emptyText: (
               <div className="car_empty-text">
@@ -492,7 +496,6 @@ const CarPage = (props) => {
           style: { position: 'absolute', left: 0 },
           disabled: true,
         }}
-        okText="确认"
         width={560}
       >
         <Table

@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-15 16:40:01
- * @LastEditTime: 2020-07-23 17:10:58
+ * @LastEditTime: 2020-07-24 13:14:46
  */
 
 import React, { useState, useEffect } from 'react';
@@ -51,15 +51,13 @@ export default (props) => {
       title: '权益商品',
       key: 'id',
       render: (record) => (
-        <div style={{ padding: '13px 25px' }}>
-          <List.Item.Meta
-            avatar={
-              <Avatar shape="square" size={60} src={`/file${record.iconUrl}`} />
-            }
-            title={record.brandName}
-            description={record.productSubName}
-          />
-        </div>
+        <List.Item.Meta
+          avatar={
+            <Avatar shape="square" size={60} src={`/file${record.iconUrl}`} />
+          }
+          title={record.brandName}
+          description={record.productSubName}
+        />
       ),
       width: '30%',
     },
@@ -120,7 +118,7 @@ export default (props) => {
       title: '总价(元)',
       align: 'center',
       render: (record) => (
-        <span>
+        <span style={{ fontWeight: 'bold', color: '#333333' }}>
           ￥
           {getFloat((record.price * record.detailCount) / TRANSTEMP, PRECISION)}
         </span>
@@ -166,12 +164,14 @@ export default (props) => {
   return (
     <div className="page-pay_confirm-order">
       <Table
-        // className="global-table"
-        // loading={false}
-        locale={{ emptyText: <div /> }}
+        className="global-table"
         columns={columns}
         pagination={false}
         dataSource={orderInfo.orderItemList}
+        rowClassName={() => 'global-table_row-tr--114'}
+        onHeaderRow={() => ({
+          className: 'global-table_head-tr--40',
+        })}
         rowKey={(record) => record.id.toString()}
       />
       <div className="page-pay_confirm-order-footer">
@@ -278,7 +278,6 @@ export default (props) => {
           style: { position: 'absolute', left: 0 },
           disabled: true,
         }}
-        okText="确认"
         width={560}
       >
         <Table

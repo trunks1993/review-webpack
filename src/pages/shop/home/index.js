@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 19:14:16
- * @LastEditTime: 2020-07-18 16:55:56
+ * @LastEditTime: 2020-07-24 10:29:32
  */
 
 import React, { useEffect, useState } from 'react';
@@ -136,7 +136,7 @@ export default (props) => {
       />
       <List
         loading={categoryLoading || productTypeLoading}
-        locale={{ emptyText: '暂无数据' }}
+        // locale={{ emptyText: '暂无数据' }}
         grid={{
           column: 3,
           gutter: 10,

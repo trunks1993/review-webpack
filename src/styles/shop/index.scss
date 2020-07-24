@@ -367,3 +367,41 @@ $filterItemHeight: 42 40 50;
     }
   }
 }
+
+.service-order {
+  &_header {
+    @extend .breadCrumb;
+    background: #f2f2f2;
+  }
+
+  &_content {
+    border: 1px solid #e6e6e6;
+    margin-top: 10px;
+    background: #ffffff;
+    position: relative;
+    .ant-tabs-bar {
+      margin: 0;
+    }
+    .ant-tabs-nav {
+      padding-left: 34px;
+    }
+    .ant-tabs-tab {
+      height: 56px;
+      padding: 18px 16px;
+    }
+    &-search {
+      position: absolute;
+      display: inline-block;
+      width: 230px;
+      top: 13px;
+      right: 25px;
+    }
+  }
+  &_empty {
+    padding: 90px 0 132px 0;
+    &-text {
+      font-size: 12px;
+      color: #999999;
+    }
+  }
+}

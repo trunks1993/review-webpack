@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-05-29 14:30:28
- * @LastEditTime: 2020-07-22 13:06:40
+ * @LastEditTime: 2020-07-24 10:18:08
  */
 
 const utils = require("./utils");
@@ -77,6 +77,8 @@ module.exports = {
                   "menu-item-active-border-width": "2px",
                   "layout-sider-background": "#ffffff",
                   "input-height-lg": "34px",
+                  "btn-height-lg": "34px",
+                  "btn-font-size-lg": "12px",
                   "select-single-item-height-lg": "34px",
                   "table-border-radius-base": "0",
                   "table-font-size": "12px",
