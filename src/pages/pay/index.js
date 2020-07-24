@@ -3,17 +3,17 @@
  * @LastEditTime: 2020-07-23 14:39:31
  */
 
-import React, { useEffect, useState } from "react";
-import { getQueryVariable } from "@/utils";
-import { getStepCookie, setStepCookie } from "@/utils/auth";
+import React, { useEffect, useState } from 'react';
+import { getQueryVariable } from '@/utils';
+import { getStepCookie, setStepCookie } from '@/utils/auth';
 
-import { getOrderInfo } from "@/services/pay";
-import { message, Button } from "antd";
-import Step from "./Step";
-import ConfirmOrder from "./ConfirmOrder";
-import ConfirmPay from "./ConfirmPay";
-import PaySuccess from "./PaySuccess";
-import { connect } from "dva";
+import { getOrderInfo } from '@/services/pay';
+import { message, Button } from 'antd';
+import Step from './Step';
+import ConfirmOrder from './ConfirmOrder';
+import ConfirmPay from './ConfirmPay';
+import PaySuccess from './PaySuccess';
+import { connect } from 'dva';
 
 const Pay = (props) => {
   const { location, amount, telephone, history } = props;
@@ -34,9 +34,9 @@ const Pay = (props) => {
     }
   };
 
-  const initOrderInfo = async () => {
+  const initOrderInfo = async() => {
     try {
-      const orderId = getQueryVariable("orderId");
+      const orderId = getQueryVariable('orderId');
       const [err, data, msg] = await getOrderInfo(orderId);
       if (!err) {
         setOrderInfo(data);

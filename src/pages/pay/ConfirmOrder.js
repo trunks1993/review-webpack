@@ -3,26 +3,26 @@
  * @LastEditTime: 2020-07-23 17:10:58
  */
 
-import React, { useState, useEffect } from "react";
-import { Button, Table, List, Avatar } from "antd";
-import moment from "moment";
+import React, { useState, useEffect } from 'react';
+import { Button, Table, List, Avatar } from 'antd';
+import moment from 'moment';
 import {
   PRODUCT_TYPE_4,
   TRACE_STATUS_5,
   TRACE_STATUS_6,
   TRANSTEMP,
   PRECISION,
-} from "@/const";
-import GlobalModal from "@/components/GlobalModal";
-import { queryListTrace } from "@/services/shop";
-import { getFloat } from "@/utils";
+} from '@/const';
+import GlobalModal from '@/components/GlobalModal';
+import { queryListTrace } from '@/services/shop';
+import { getFloat } from '@/utils';
 
 export default (props) => {
   const { orderInfo, changeStep } = props;
-  const [orderItemCode, setOrderItemCode] = useState("");
+  const [orderItemCode, setOrderItemCode] = useState('');
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [traceList, setTraceList] = useState([]);
-  const [modalTitle, setModalTitle] = useState("");
+  const [modalTitle, setModalTitle] = useState('');
 
   useEffect(() => {
     if (orderItemCode) initTraceList();
@@ -32,7 +32,7 @@ export default (props) => {
   /**
    * @name: 列表加载
    */
-  const initTraceList = async () => {
+  const initTraceList = async() => {
     setConfirmLoading(true);
     try {
       const [err, data, msg] = await queryListTrace({
@@ -48,10 +48,10 @@ export default (props) => {
 
   const columns = [
     {
-      title: "权益商品",
-      key: "id",
+      title: '权益商品',
+      key: 'id',
       render: (record) => (
-        <div style={{ padding: "13px 25px" }}>
+        <div style={{ padding: '13px 25px' }}>
           <List.Item.Meta
             avatar={
               <Avatar shape="square" size={60} src={`/file${record.iconUrl}`} />
@@ -61,46 +61,46 @@ export default (props) => {
           />
         </div>
       ),
-      width: "30%",
+      width: '30%',
     },
     {
-      title: "商品类型",
-      align: "center",
-      dataIndex: "typeLabel",
-      width: "14%",
+      title: '商品类型',
+      align: 'center',
+      dataIndex: 'typeLabel',
+      width: '14%',
     },
     {
-      title: "面值(元)",
-      align: "center",
+      title: '面值(元)',
+      align: 'center',
       render: (record) => (
         <span>￥{getFloat(record.facePrice / TRANSTEMP, PRECISION)}</span>
       ),
-      width: "14%",
+      width: '14%',
     },
     {
-      title: "采购价(元)",
-      align: "center",
+      title: '采购价(元)',
+      align: 'center',
       render: (record) => (
         <span>￥{getFloat(record.price / TRANSTEMP, PRECISION)}</span>
       ),
-      width: "14%",
+      width: '14%',
     },
     {
-      title: "总数量（件）",
-      align: "center",
+      title: '总数量（件）',
+      align: 'center',
       // dataIndex: "detailCount",
       render: (record) => (
         <span
           style={{
-            position: "relative",
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
           }}
         >
           <span>x{record.detailCount}</span>
           {record.productTypeCode === PRODUCT_TYPE_4 && (
-            <span style={{ position: "absolute", top: "10px" }}>
+            <span style={{ position: 'absolute', top: '10px' }}>
               <Button
                 type="link"
                 onClick={() => {
@@ -114,40 +114,40 @@ export default (props) => {
           )}
         </span>
       ),
-      width: "14%",
+      width: '14%',
     },
     {
-      title: "总价(元)",
-      align: "center",
+      title: '总价(元)',
+      align: 'center',
       render: (record) => (
         <span>
           ￥
           {getFloat((record.price * record.detailCount) / TRANSTEMP, PRECISION)}
         </span>
       ),
-      width: "14%",
+      width: '14%',
     },
   ];
 
   const columnsTrace = [
     {
-      title: "序号",
-      align: "center",
-      key: "id",
+      title: '序号',
+      align: 'center',
+      key: 'id',
       render: (record, arr, index) => index + 1,
-      width: "20%",
+      width: '20%',
     },
     {
-      title: "充值账号",
-      align: "center",
-      dataIndex: "objNo",
-      width: "25%",
+      title: '充值账号',
+      align: 'center',
+      dataIndex: 'objNo',
+      width: '25%',
     },
     {
-      title: "充值数量（件）",
-      align: "center",
-      dataIndex: "amount",
-      width: "25%",
+      title: '充值数量（件）',
+      align: 'center',
+      dataIndex: 'amount',
+      width: '25%',
     },
     // {
     //   title: "充值状态",
@@ -156,10 +156,10 @@ export default (props) => {
     //   width: "20%",
     // },
     {
-      title: "备注",
-      align: "center",
-      dataIndex: "remark",
-      width: "30%",
+      title: '备注',
+      align: 'center',
+      dataIndex: 'remark',
+      width: '30%',
     },
   ];
 
@@ -168,7 +168,7 @@ export default (props) => {
       <Table
         // className="global-table"
         // loading={false}
-        locale={{ emptyText: <div></div> }}
+        locale={{ emptyText: <div /> }}
         columns={columns}
         pagination={false}
         dataSource={orderInfo.orderItemList}
@@ -181,14 +181,14 @@ export default (props) => {
           </span>
           <span className="page-pay_order-info-item">
             下单时间：
-            {moment(orderInfo?.order?.createTime).format("YYYY-MM-DD HH:mm:ss")}
+            {moment(orderInfo?.order?.createTime).format('YYYY-MM-DD HH:mm:ss')}
           </span>
         </span>
         <span className="page-pay_order-detail">
           <span className="page-pay_order-detail-item">
             已选择商品 <span>{orderInfo?.sumInfo?.checkedCount}</span> 个
           </span>
-          {orderInfo?.sumInfo?.hasZhiChong === "Y" && (
+          {orderInfo?.sumInfo?.hasZhiChong === 'Y' && (
             <>
               <span className="page-pay_order-detail-item">
                 充值账号 <span>{orderInfo?.sumInfo?.accountNums}</span> 个
@@ -218,31 +218,31 @@ export default (props) => {
         modalVisible={!!orderItemCode}
         title={
           <div
-            style={{ textAlign: "center", fontWeight: "bold" }}
+            style={{ textAlign: 'center', fontWeight: 'bold' }}
           >{`${modalTitle}-直充明细`}</div>
         }
         cancelText={
           <>
-            <span style={{ color: "#333333" }}>
+            <span style={{ color: '#333333' }}>
               充值账号
               <span
                 style={{
-                  color: "#1A61DC",
-                  fontWeight: "bold",
-                  margin: "0 5px",
+                  color: '#1A61DC',
+                  fontWeight: 'bold',
+                  margin: '0 5px',
                 }}
               >
                 {traceList.length}
               </span>
               个
             </span>
-            <span style={{ color: "#333333", marginLeft: "10px" }}>
+            <span style={{ color: '#333333', marginLeft: '10px' }}>
               充值成功
               <span
                 style={{
-                  color: "#1A61DC",
-                  fontWeight: "bold",
-                  margin: "0 5px",
+                  color: '#1A61DC',
+                  fontWeight: 'bold',
+                  margin: '0 5px',
                 }}
               >
                 {_.map(
@@ -252,13 +252,13 @@ export default (props) => {
               </span>
               件
             </span>
-            <span style={{ color: "#333333", marginLeft: "10px" }}>
+            <span style={{ color: '#333333', marginLeft: '10px' }}>
               充值失败
               <span
                 style={{
-                  color: "#DD0000",
-                  fontWeight: "bold",
-                  margin: "0 5px",
+                  color: '#DD0000',
+                  fontWeight: 'bold',
+                  margin: '0 5px',
                 }}
               >
                 {_.map(
@@ -270,12 +270,12 @@ export default (props) => {
             </span>
           </>
         }
-        onOk={() => setOrderItemCode("")}
-        onCancel={() => setOrderItemCode("")}
+        onOk={() => setOrderItemCode('')}
+        onCancel={() => setOrderItemCode('')}
         cancelButtonProps={{
-          className: "global-modal-btn-cancel",
-          type: "link",
-          style: { position: "absolute", left: 0 },
+          className: 'global-modal-btn-cancel',
+          type: 'link',
+          style: { position: 'absolute', left: 0 },
           disabled: true,
         }}
         okText="确认"
