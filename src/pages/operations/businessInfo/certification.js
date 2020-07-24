@@ -84,7 +84,7 @@ const certification = () => {
 
   // 提交
   const handleSubmit = () => {
-    form.validateFields(async (err, value) => {
+    form.validateFields(async(err, value) => {
       console.log(value);
       if (!err) {
         const [errs, datas, msg] = await addIdentifyWorkorder({
@@ -101,7 +101,7 @@ const certification = () => {
   };
 
   // 获取用户身份
-  const getMerchantBase = async () => {
+  const getMerchantBase = async() => {
     try {
       const [err, data, msg] = await getMerchantBaseInfo();
       if (!err) setTypeData(data);
@@ -109,7 +109,7 @@ const certification = () => {
   };
 
   // 获取用户状态
-  const getLatestIdentify = async () => {
+  const getLatestIdentify = async() => {
     try {
       const [err, data, msg] = await getLatestIdentifyWorkorder();
       if (!err) setStateData(data);

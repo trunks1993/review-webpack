@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-18 17:19:33
- * @LastEditTime: 2020-07-24 13:12:10
+ * @LastEditTime: 2020-07-24 19:58:37
  */
 
 import React, { useState, useEffect } from 'react';
@@ -363,88 +363,93 @@ const CarPage = (props) => {
 
   return (
     <div className="car">
-      <div className="car-header">
-        <span className="car-header_title">购物车</span>
-        <Button type="link" onClick={() => history.push('/admin/shop')}>
-          {'添加更多商品>'}
-        </Button>
-      </div>
-      <div>
-        <Table
-          className="global-table check-box-circular"
-          rowSelection={rowSelection}
-          loading={loading}
-          columns={columns}
-          pagination={false}
-          dataSource={carData.cartItemList}
-          rowKey={(record, index) => record.id}
-          rowClassName={() => 'global-table_row-tr--114'}
-          onHeaderRow={() => ({
-            className: 'global-table_head-tr--40',
-          })}
-          locale={{
-            emptyText: (
-              <div className="car_empty-text">
-                <img width="134px" height="116px" src={car} />
-                <p className="car_empty-text-title">您目前还没有任何商品</p>
-                <Button
-                  size="small"
-                  onClick={() => history.push('/admin/shop')}
-                >
-                  返回购买
-                </Button>
-              </div>
-            ),
-          }}
-        />
-        <div className="car-footer">
-          <span className="car-footer_tool-box">
-            <Checkbox
-              indeterminate={
-                carData?.cartItemList?.length !== selectedRowKeys.length &&
-                selectedRowKeys.length > 0
-              }
-              onChange={handleSelectAll}
-              checked={selectedRowKeys.length > 0}
-            >
-              已选({selectedRowKeys.length})
-            </Checkbox>
-            <Button
-              type="link"
-              disabled={!selectedRowKeys.length}
-              onClick={removeCarSelection}
-            >
-              批量删除选中的商品
-            </Button>
-          </span>
-          <span className="car-footer_detail">
-            <span className="car-footer_detail-item">
-              已选择商品 <span>{carData?.sumInfo?.checkedCount}</span> 个
+      <div style={{ border: '1px solid #e6e6e6' }}>
+        <div className="car-header">
+          <span className="car-header_title">购物车</span>
+          <Button type="link" onClick={() => history.push('/admin/shop')}>
+            {'添加更多商品>'}
+          </Button>
+        </div>
+        <div>
+          <Table
+            className="global-table check-box-circular"
+            rowSelection={rowSelection}
+            loading={loading}
+            columns={columns}
+            pagination={false}
+            dataSource={carData.cartItemList}
+            rowKey={(record, index) => record.id}
+            rowClassName={() => 'global-table_row-tr--114'}
+            onHeaderRow={() => ({
+              className: 'global-table_head-tr--40',
+            })}
+            locale={{
+              emptyText: (
+                <div className="car_empty-text">
+                  <img width="134px" height="116px" src={car} />
+                  <p className="car_empty-text-title">您目前还没有任何商品</p>
+                  <Button
+                    size="small"
+                    onClick={() => history.push('/admin/shop')}
+                  >
+                    返回购买
+                  </Button>
+                </div>
+              ),
+            }}
+          />
+          <div className="car-footer">
+            <span className="car-footer_tool-box">
+              <Checkbox
+                indeterminate={
+                  carData?.cartItemList?.length !== selectedRowKeys.length &&
+                  selectedRowKeys.length > 0
+                }
+                onChange={handleSelectAll}
+                checked={selectedRowKeys.length > 0}
+              >
+                已选({selectedRowKeys.length})
+              </Checkbox>
+              <Button
+                type="link"
+                disabled={!selectedRowKeys.length}
+                onClick={removeCarSelection}
+              >
+                批量删除选中的商品
+              </Button>
             </span>
-            {carData?.sumInfo?.hasZhiChong === 'Y' && (
-              <>
-                <span className="car-footer_detail-item">
-                  充值账号 <span>{carData?.sumInfo?.accountNums}</span> 个
-                </span>
-                <span className="car-footer_detail-item">
-                  充值数量 <span>{carData?.sumInfo?.totalAmount}</span> 件
-                </span>
-              </>
-            )}
-            <span className="car-footer_detail-item">
-              提取卡密 <span>{carData?.sumInfo?.cardCount}</span> 件
-            </span>
-            <span className="car-footer_detail-total">
-              合计：
-              <span>
-                ￥
-                {getFloat(carData?.sumInfo?.totalMoney / TRANSTEMP, PRECISION)}
+            <span className="car-footer_detail">
+              <span className="car-footer_detail-item">
+                已选择商品 <span>{carData?.sumInfo?.checkedCount}</span> 个
               </span>
+              {carData?.sumInfo?.hasZhiChong === 'Y' && (
+                <>
+                  <span className="car-footer_detail-item">
+                    充值账号 <span>{carData?.sumInfo?.accountNums}</span> 个
+                  </span>
+                  <span className="car-footer_detail-item">
+                    充值数量 <span>{carData?.sumInfo?.totalAmount}</span> 件
+                  </span>
+                </>
+              )}
+              <span className="car-footer_detail-item">
+                提取卡密 <span>{carData?.sumInfo?.cardCount}</span> 件
+              </span>
+              <span className="car-footer_detail-total">
+                合计：
+                <span>
+                  ￥
+                  {getFloat(
+                    carData?.sumInfo?.totalMoney / TRANSTEMP,
+                    PRECISION
+                  )}
+                </span>
+              </span>
+              <Button loading={loading} type="primary" onClick={submitOrder}>
+                提交订单
+              </Button>
             </span>
-            <Button loading={loading} type="primary" onClick={submitOrder}>
-              提交订单
-            </Button>
-          </span>
+          </div>
         </div>
       </div>
 

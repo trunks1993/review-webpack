@@ -104,7 +104,6 @@ $filterItemHeight: 42 40 50;
   border: 1px solid rgba(230, 230, 230, 1);
   border-radius: 2px;
   background: #fff;
-  overflow-y: scroll;
   .ant-tabs-bar {
     margin: 0;
   }
@@ -187,11 +186,9 @@ $filterItemHeight: 42 40 50;
 }
 
 .shop-item {
-  // border: 1px solid rgba(230, 230, 230, 1);
   border-radius: 2px;
   height: 100%;
-  // background: #fff;
-  overflow-y: scroll;
+
   &_product-info {
     background: #ffffff;
     padding-bottom: 30px;

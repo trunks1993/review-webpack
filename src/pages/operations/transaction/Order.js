@@ -120,8 +120,7 @@ const Order = ({ dispatch, list, total, loading }) => {
       dataIndex: 'status',
       width: 100,
       render: (status) => {
-        if (status === TRANSA_STATUS_5)
-          return <div style={{ color: 'red' }}>失败</div>;
+        if (status === TRANSA_STATUS_5) return <div style={{ color: 'red' }}>失败</div>;
         return TransaStatus[status];
       },
     },
