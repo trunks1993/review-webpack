@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { Layout, Menu, Badge, Popover, message } from "antd";
-import GlobalModal from "@/components/GlobalModal";
-import { updatePassword, updateInfo } from "@/services/account";
-import MapForm from "@/components/MapForm";
-import { removeToken } from "@/utils/auth";
-import noHead from "@/assets/images/global/no-head.png";
+import { Layout, Menu, Badge, Popover, message } from 'antd';
+import GlobalModal from '@/components/GlobalModal';
+import { updatePassword, updateInfo } from '@/services/account';
+import MapForm from '@/components/MapForm';
+import { removeToken } from '@/utils/auth';
+import noHead from '@/assets/images/global/no-head.png';
 
 const { CstInput, CstPassword, CstUpload } = MapForm;
 
@@ -24,7 +24,7 @@ const Content = ({ value }) => {
     <img
       src={value ? process.env.FILE_URL + value : noHead}
       alt="avatar"
-      style={{ width: "100%" }}
+      style={{ width: '100%' }}
     />
   );
 };
@@ -44,14 +44,14 @@ const DropMenu = ({ user, dispatch }) => {
    * @param {type}
    */
   const handlePwdSubmit = () => {
-    pwdForm.validateFields(async (err, value) => {
+    pwdForm.validateFields(async(err, value) => {
       if (!err) {
         try {
           setPwdLoading(true);
           const [err, data, msg] = await updatePassword(value);
           setPwdLoading(false);
           if (!err) {
-            message.success("修改成功");
+            message.success('修改成功');
             setPwdVisible(false);
           } else message.error(msg);
         } catch (error) {}
@@ -64,17 +64,17 @@ const DropMenu = ({ user, dispatch }) => {
    * @param {type}
    */
   const handleInfoSubmit = () => {
-    infoForm.validateFields(async (err, value) => {
+    infoForm.validateFields(async(err, value) => {
       if (!err) {
         try {
           setInfoLoading(true);
           const [err, data, msg] = await updateInfo(value);
           setInfoLoading(false);
           if (!err) {
-            message.success("修改成功");
+            message.success('修改成功');
             setInfoVisible(false);
             dispatch({
-              type: "account/setUser",
+              type: 'account/setUser',
             });
           } else message.error(msg);
         } catch (error) {}
@@ -91,7 +91,7 @@ const DropMenu = ({ user, dispatch }) => {
           <li
             onClick={() => {
               removeToken();
-              window.location.href = "/";
+              window.location.href = '/';
             }}
           >
             退出登录
@@ -103,7 +103,7 @@ const DropMenu = ({ user, dispatch }) => {
         modalVisible={infoVisible}
         confirmLoading={infoLoading}
         title={
-          <div style={{ textAlign: "center", fontWeight: "bold" }}>
+          <div style={{ textAlign: 'center', fontWeight: 'bold' }}>
             个人信息
           </div>
         }
@@ -122,14 +122,14 @@ const DropMenu = ({ user, dispatch }) => {
             defaultValue={user.headIcon}
             customProps={{
               action: `${process.env.FILE_URL}/upload`,
-              method: "post",
+              method: 'post',
               data: {
-                userName: "yunjin_file_upload",
-                password: "yunjin_upload_password",
-                secret: "N",
-                domain: "headicon",
+                userName: 'yunjin_file_upload',
+                password: 'yunjin_upload_password',
+                secret: 'N',
+                domain: 'headicon',
               },
-              className: "layout_uploader",
+              className: 'layout_uploader',
               Content,
             }}
           />
@@ -138,13 +138,13 @@ const DropMenu = ({ user, dispatch }) => {
             name="realname"
             defaultValue={user.realname}
             customProps={{
-              placeholder: "请输入账号/手机号",
-              size: "large",
+              placeholder: '请输入账号/手机号',
+              size: 'large',
             }}
             rules={[
               {
                 required: true,
-                message: "账号/手机号不能为空",
+                message: '账号/手机号不能为空',
                 whitespace: true,
               },
             ]}
@@ -154,13 +154,13 @@ const DropMenu = ({ user, dispatch }) => {
             name="aliasName"
             defaultValue={user.aliasName}
             customProps={{
-              placeholder: "请输入企业名称或昵称",
-              size: "large",
+              placeholder: '请输入企业名称或昵称',
+              size: 'large',
             }}
             rules={[
               {
                 required: true,
-                message: "请输入企业名称或昵称不能为空",
+                message: '请输入企业名称或昵称不能为空',
                 whitespace: true,
               },
             ]}
@@ -170,14 +170,14 @@ const DropMenu = ({ user, dispatch }) => {
             name="telephone"
             defaultValue={user.telephone}
             customProps={{
-              placeholder: "请输入账号/手机号",
-              size: "large",
+              placeholder: '请输入账号/手机号',
+              size: 'large',
               disabled: true,
             }}
             rules={[
               {
                 required: true,
-                message: "账号/手机号不能为空",
+                message: '账号/手机号不能为空',
                 whitespace: true,
               },
             ]}
@@ -189,7 +189,7 @@ const DropMenu = ({ user, dispatch }) => {
         modalVisible={pwdVisible}
         confirmLoading={pwdLoading}
         title={
-          <div style={{ textAlign: "center", fontWeight: "bold" }}>
+          <div style={{ textAlign: 'center', fontWeight: 'bold' }}>
             修改密码
           </div>
         }
@@ -206,13 +206,13 @@ const DropMenu = ({ user, dispatch }) => {
             label="原密码"
             name="oldPassword"
             customProps={{
-              placeholder: "请输入原密码",
-              size: "large",
+              placeholder: '请输入原密码',
+              size: 'large',
             }}
             rules={[
               {
                 required: true,
-                message: "原密码不能为空",
+                message: '原密码不能为空',
                 whitespace: true,
               },
             ]}
@@ -221,19 +221,19 @@ const DropMenu = ({ user, dispatch }) => {
             label="新密码"
             name="newPassword"
             customProps={{
-              placeholder: "请输入6~20位字符",
-              size: "large",
+              placeholder: '请输入6~20位字符',
+              size: 'large',
             }}
             rules={[
               {
                 required: true,
-                message: "新密码不能为空",
+                message: '新密码不能为空',
                 whitespace: true,
               },
               {
                 min: 6,
                 max: 20,
-                message: "请输入6~20位字符",
+                message: '请输入6~20位字符',
               },
             ]}
           />
@@ -241,19 +241,19 @@ const DropMenu = ({ user, dispatch }) => {
             label="确认新密码"
             name="newPasswordSure"
             customProps={{
-              placeholder: "再次输入新密码",
-              size: "large",
+              placeholder: '再次输入新密码',
+              size: 'large',
             }}
             rules={[
               {
                 required: true,
-                message: "确认新密码不能为空",
+                message: '确认新密码不能为空',
                 whitespace: true,
               },
               {
                 validator: (rule, value, callback) => {
-                  if (value && value !== pwdForm.getFieldValue("newPassword")) {
-                    callback("确认新密码输入错误");
+                  if (value && value !== pwdForm.getFieldValue('newPassword')) {
+                    callback('确认新密码输入错误');
                   } else {
                     callback();
                   }

@@ -3,15 +3,15 @@
  * @LastEditTime: 2020-07-24 19:52:27
  */
 
-import React from "react";
-import { Layout, Menu, Icon } from "antd";
-import { connect } from "dva";
-import { asyncRoutes } from "@/router/config";
-import { ChildRouteList } from "@/router";
-import { createHashHistory } from "history";
+import React from 'react';
+import { Layout, Menu, Icon } from 'antd';
+import { connect } from 'dva';
+import { asyncRoutes } from '@/router/config';
+import { ChildRouteList } from '@/router';
+import { createHashHistory } from 'history';
 const history = createHashHistory();
-import { flatTree } from "@/utils";
-import _ from "lodash";
+import { flatTree } from '@/utils';
+import _ from 'lodash';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -23,9 +23,9 @@ const recursion = (dataSource) => {
         <SubMenu
           key={menu.id}
           title={
-            <span style={{ position: "relative", left: "20px" }}>
+            <span style={{ position: 'relative', left: '20px' }}>
               <i className={`iconfont ${menu.icon}`} />
-              <span style={{ marginLeft: "10px" }}>{menu.title}</span>
+              <span style={{ marginLeft: '10px' }}>{menu.title}</span>
             </span>
           }
         >
@@ -35,9 +35,9 @@ const recursion = (dataSource) => {
     }
     return !menu.hidden ? (
       <Menu.Item key={menu.id} onClick={(e) => history.push(`${menu.path}`)}>
-        <span style={{ position: "relative", left: "20px" }}>
+        <span style={{ position: 'relative', left: '20px' }}>
           <i className={`iconfont ${menu.icon}`} />
-          <span style={{ marginLeft: menu.icon ? "10px" : null }}>
+          <span style={{ marginLeft: menu.icon ? '10px' : null }}>
             {menu.title}
           </span>
         </span>
@@ -82,7 +82,7 @@ const PageContainer = (props) => {
         </div>
         <SiderMenu menu={menu} selectId={id} defaultOpenKeys={ids} />
       </Sider>
-      <Layout style={{ marginLeft: "10px", overflow: "hidden auto" }}>
+      <Layout style={{ marginLeft: '10px', overflow: 'hidden auto' }}>
         <ChildRouteList />
       </Layout>
     </>

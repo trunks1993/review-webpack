@@ -1,11 +1,11 @@
-import React from "react";
-import { Layout } from "antd";
-import { RouteList } from "@/router";
+import React from 'react';
+import { Layout } from 'antd';
+import { RouteList } from '@/router';
 
-import { connect } from "dva";
+import { connect } from 'dva';
 
 const { Footer } = Layout;
-import Header from "./Header/index";
+import Header from './Header/index';
 
 const Comp = ({ carCount, user, dispatch, ...rest }) => {
   return (
