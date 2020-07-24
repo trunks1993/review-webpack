@@ -1,19 +1,19 @@
 /*
  * @Date: 2020-07-14 15:37:18
- * @LastEditTime: 2020-07-24 17:55:37
+ * @LastEditTime: 2020-07-24 20:13:15
  */
 
-import React, { useEffect, useState } from 'react';
-import { getQueryVariable } from '@/utils';
-import { getStepCookie, setStepCookie } from '@/utils/auth';
+import React, { useEffect, useState } from "react";
+import { getQueryVariable } from "@/utils";
+import { getStepCookie, setStepCookie } from "@/utils/auth";
 
-import { getOrderInfo } from '@/services/pay';
-import { message, Button } from 'antd';
-import Step from './Step';
-import ConfirmOrder from './ConfirmOrder';
-import ConfirmPay from './ConfirmPay';
-import PaySuccess from './PaySuccess';
-import { connect } from 'dva';
+import { getOrderInfo } from "@/services/pay";
+import { message, Button } from "antd";
+import Step from "./Step";
+import ConfirmOrder from "./ConfirmOrder";
+import ConfirmPay from "./ConfirmPay";
+import PaySuccess from "./PaySuccess";
+import { connect } from "dva";
 
 const Pay = (props) => {
   const { location, amount, telephone, history } = props;
@@ -34,9 +34,9 @@ const Pay = (props) => {
     }
   };
 
-  const initOrderInfo = async() => {
+  const initOrderInfo = async () => {
     try {
-      const orderId = getQueryVariable('orderId');
+      const orderId = getQueryVariable("orderId");
       const [err, data, msg] = await getOrderInfo(orderId);
       if (!err) {
         setOrderInfo(data);
@@ -64,12 +64,14 @@ const Pay = (props) => {
 
   return (
     <div className="page-pay">
-      <div className="page-pay_header">星权益 / 采购订单</div>
-      <Step step={step} />
-      {StepMap[step](orderInfo, (step) => {
-        setStep(step);
-        setStepCookie(step);
-      })}
+      <div style={{ border: "1px solid #e6e6e6" }}>
+        <div className="page-pay_header">星权益 / 采购订单</div>
+        <Step step={step} />
+        {StepMap[step](orderInfo, (step) => {
+          setStep(step);
+          setStepCookie(step);
+        })}
+      </div>
     </div>
   );
 };

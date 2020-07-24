@@ -1,6 +1,8 @@
 .page-pay {
+  @extend .base-scroll;
   margin-top: 10px;
-  border: 1px solid #e5e5e5;
+  // border: 1px solid #e5e5e5;
+  width: 100%;
   &_header {
     @extend .purchase-order_header;
   }
