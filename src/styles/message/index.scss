@@ -1,8 +1,10 @@
 .page-message {
+  width: 100%;
+  @extend .base-scroll;
   &_header {
     @extend .breadCrumb;
     background: #f2f2f2;
-    margin-top: 20px;
+    margin-top: 10px;
   }
   &_content {
     border: 1px solid #e6e6e6;
