@@ -65,7 +65,7 @@ const home = () => {
   };
 
   /** 获取收支记录 */
-  const getAccountTrace = async () => {
+  const getAccountTrace = async() => {
     const obj = { currPage: 1, pageSize: 50, type: tabKey };
     try {
       const [err, data, msg] = await searchAccountTrace(obj);
