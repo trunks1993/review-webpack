@@ -1,11 +1,12 @@
 .dashboard {
+    @extend .base-scroll;
     width: 1200px;
     height: 100%;
     margin-top: 10px;
     @extend .f12;
 
     &-left {
-        width: 870px;
+        width: 860px;
         margin-right: 10px;
         float: left;
     }
@@ -16,7 +17,7 @@
     }
 
     &-footer {
-        width: 870px;
+        width: 860px;
         height: 180px;
         margin-top: 10px;
         background-color: $white;
@@ -74,7 +75,7 @@
     margin-top: 10px;
 
     &-left {
-        width: 360px;
+        width: 350px;
         height: 100%;
         margin-right: 10px;
         background-color: $white;

@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 19:32:18
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-24 16:41:28
+ * @LastEditTime: 2020-07-24 18:32:01
  */
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Table, Pagination, Icon, Row, Col } from 'antd';
@@ -12,6 +12,7 @@ import MapForm from '@/components/MapForm';
 import moment from 'moment';
 import _ from 'lodash';
 import Delete from '@/assets/images/operations/delete.png';
+import noData from '@/assets/images/operations/unData.png';
 
 const { CstInput, CstRangePicker } = MapForm;
 
@@ -196,6 +197,14 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
           onHeaderRow={() => ({
             className: 'global-table_head-tr',
           })}
+          locale={{
+            emptyText: (
+              <div className="cash-flow_empty">
+                <img width="218px" height="134px" src={noData} />
+                <p className="cash-flow_empty-text">暂无交易对账信息</p>
+              </div>
+            ),
+          }}
           loading={loading}
         />
         <div
