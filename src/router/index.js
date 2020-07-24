@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-06-20 17:03:03
- * @LastEditTime: 2020-07-24 10:27:40
+ * @LastEditTime: 2020-07-24 18:30:18
  */
 import React from 'react';
 import { routerRedux, Route, Redirect, Switch } from 'dva/router';
@@ -25,6 +25,7 @@ import Page404 from '@/pages/page404';
 import Dashboard from '@/pages/dashboard';
 import ShopHome from '@/pages/shop/home';
 import FundHome from '@/pages/fund/home';
+
 import { ConfigProvider } from 'antd';
 
 export default ({ history }) => {

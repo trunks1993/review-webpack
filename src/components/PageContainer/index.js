@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 11:29:45
- * @LastEditTime: 2020-07-22 21:17:06
+ * @LastEditTime: 2020-07-24 19:52:27
  */
 
 import React from 'react';
@@ -71,11 +71,10 @@ const PageContainer = (props) => {
       return item.id.toString();
     }
     return false;
-
   }).filter((item) => item);
 
   return (
-    <Layout className="page-container">
+    <>
       <Sider width={180}>
         <div className="page-container_menu-title">
           <img src={menu.icon} />
@@ -83,10 +82,10 @@ const PageContainer = (props) => {
         </div>
         <SiderMenu menu={menu} selectId={id} defaultOpenKeys={ids} />
       </Sider>
-      <Layout style={{ marginLeft: '10px', overflowY: 'auto' }}>
+      <Layout style={{ marginLeft: '10px', overflow: 'hidden auto' }}>
         <ChildRouteList />
       </Layout>
-    </Layout>
+    </>
   );
 };
 

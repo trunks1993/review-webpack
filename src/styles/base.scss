@@ -207,3 +207,13 @@ div:focus {
   line-height: 40px;
   padding-left: 20px;
 }
+
+.base-scroll {
+  overflow: hidden auto;
+}
+
+.filter-form {
+  .ant-col > .ant-form-item {
+    margin-bottom: 0;
+  }
+}
