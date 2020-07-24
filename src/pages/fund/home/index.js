@@ -82,7 +82,7 @@ const home = ({ list: { amount, frozeAmount } }) => {
   };
 
   /** 获取待支付订单 */
-  const getPayOrder = async () => {
+  const getPayOrder = async() => {
     try {
       const [err, data, msg] = await getUnpaidOrderNum();
       if (!err) setPayOrder(data);
