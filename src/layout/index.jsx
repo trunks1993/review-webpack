@@ -125,10 +125,8 @@ const DropMenu = ({ user }) => {
                 个人信息
               </div>
             }
-            cancelText="取消"
             onOk={() => handleInfoSubmit(dispatch)}
             onCancel={() => setInfoVisible(false)}
-            okText="确认"
             width={560}
           >
             <MapForm
@@ -215,10 +213,8 @@ const DropMenu = ({ user }) => {
             修改密码
           </div>
         }
-        cancelText="取消"
         onOk={handlePwdSubmit}
         onCancel={() => setPwdVisible(false)}
-        okText="确认"
         width={560}
       >
         <MapForm

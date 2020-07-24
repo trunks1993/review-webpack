@@ -201,12 +201,14 @@ const FinancialFlow = (props) => {
                 <Button
                   type="primary"
                   icon="search"
+                  size="large"
                   onClick={() => dispatchInit()}
                 >
                   筛选
                 </Button>
                 <Button
                   icon="undo"
+                  size="large"
                   style={{ marginLeft: '10px' }}
                   onClick={() => filterForm?.resetFields()}
                 >

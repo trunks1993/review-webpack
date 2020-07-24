@@ -1,8 +1,8 @@
 /*
  * @Date: 2020-07-02 20:14:20
- * @LastEditTime: 2020-07-23 17:04:35
+ * @LastEditTime: 2020-07-24 12:49:25
  */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Tabs,
   message,
@@ -15,8 +15,8 @@ import {
   Modal,
   Icon,
   Table,
-} from 'antd';
-import { getPurchaseOrder, cancelOrder, queryListTrace } from '@/services/shop';
+} from "antd";
+import { getPurchaseOrder, cancelOrder, queryListTrace } from "@/services/shop";
 import {
   OrderStatus,
   ORDER_STATUS_1,
@@ -29,12 +29,15 @@ import {
   TraceStatus,
   TRACE_STATUS_5,
   TRACE_STATUS_6,
-} from '@/const';
-import GlobalModal from '@/components/GlobalModal';
-import noOrder from '@/assets/images/shop/no-order.png';
+  TRANSTEMP,
+  PRECISION,
+} from "@/const";
+import GlobalModal from "@/components/GlobalModal";
+import noOrder from "@/assets/images/shop/no-order.png";
 
-import moment from 'moment';
-import { getToken } from '@/utils/auth';
+import moment from "moment";
+import { getToken } from "@/utils/auth";
+import { getFloat } from "@/utils";
 
 const { confirm } = Modal;
 
@@ -66,15 +69,15 @@ export default (props) => {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [fixed, setFixed] = useState(false);
-  const [orderItemCode, setOrderItemCode] = useState('');
+  const [orderItemCode, setOrderItemCode] = useState("");
   const [traceList, setTraceList] = useState([]);
-  const [modalTitle, setModalTitle] = useState('');
+  const [modalTitle, setModalTitle] = useState("");
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [filterParams, setFilterParams] = useState({
     currPage: 1,
     pageSize: 10000,
-    status: '',
+    status: "",
   });
 
   useEffect(() => {
@@ -94,7 +97,7 @@ export default (props) => {
     }
   };
 
-  const initPurchaseOrder = async() => {
+  const initPurchaseOrder = async () => {
     try {
       setLoading(true);
       const [err, data, msg] = await getPurchaseOrder(filterParams);
@@ -110,7 +113,7 @@ export default (props) => {
   /**
    * @name: 列表加载
    */
-  const initTraceList = async() => {
+  const initTraceList = async () => {
     setConfirmLoading(true);
     try {
       const [err, data, msg] = await queryListTrace({
@@ -130,14 +133,15 @@ export default (props) => {
    */
   const showConfirm = (id) => {
     confirm({
-      title: '提示',
-      content: '是否删除',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: async() => {
+      title: "提示",
+      content: "是否删除",
+      okText: "确定",
+      cancelText: "取消",
+      centered: true,
+      onOk: async () => {
         try {
           const [err, data, msg] = await cancelOrder(id);
-          if (!err) message.success('操作成功');
+          if (!err) message.success("操作成功");
           else message.error(msg);
         } catch (error) {}
         initPurchaseOrder();
@@ -151,11 +155,12 @@ export default (props) => {
       <>
         <Button
           type="primary"
-          onClick={() => history.push({
-            pathname: '/admin/pay',
-            search: `?orderId=${item.orderId}`,
-            state: { from: location.pathname },
-          })
+          onClick={() =>
+            history.push({
+              pathname: "/admin/pay",
+              search: `?orderId=${item.orderId}`,
+              state: { from: location.pathname },
+            })
           }
           // "/admin/pay?orderId=" + item.orderId
         >
@@ -180,20 +185,21 @@ export default (props) => {
   };
 
   const TypeBtnMap = {
-    [PRODUCT_TYPE_1]: (item) => item.status === ORDER_STATUS_4 && (
-      <span
-        className="purchase-order_trace-btn"
-        onClick={() => {
-          window.open(
-            `${
-              process.env.BASE_API + '/order/cardExtract'
-            }?token=${getToken()}&itemCode=${item.code}`
-          );
-        }}
-      >
+    [PRODUCT_TYPE_1]: (item) =>
+      item.status === ORDER_STATUS_4 && (
+        <span
+          className="purchase-order_trace-btn"
+          onClick={() => {
+            window.open(
+              `${
+                process.env.BASE_API + "/order/cardExtract"
+              }?token=${getToken()}&itemCode=${item.code}`
+            );
+          }}
+        >
           提取
-      </span>
-    ),
+        </span>
+      ),
     [PRODUCT_TYPE_4]: (item) => (
       <span
         className="purchase-order_trace-btn"
@@ -209,63 +215,64 @@ export default (props) => {
 
   const columns = [
     {
-      className: 'global-table--none',
-      dataIndex: 'id',
+      className: "global-table--none",
+      dataIndex: "id",
     },
     {
-      title: '序号',
-      align: 'center',
+      title: "序号",
+      align: "center",
       render: (record, arr, index) => index + 1,
-      width: '20%',
+      width: "20%",
     },
     {
-      title: '充值账号',
-      align: 'center',
-      dataIndex: 'objNo',
-      width: '24%',
+      title: "充值账号",
+      align: "center",
+      dataIndex: "objNo",
+      width: "24%",
     },
     {
-      title: '充值数量（件）',
-      align: 'center',
-      dataIndex: 'amount',
-      width: '16%',
+      title: "充值数量（件）",
+      align: "center",
+      dataIndex: "amount",
+      width: "16%",
     },
     {
-      title: '充值状态',
-      align: 'center',
+      title: "充值状态",
+      align: "center",
       render: (record) => TraceStatus[record.status],
-      width: '20%',
+      width: "20%",
     },
     {
-      title: '备注',
-      align: 'center',
-      dataIndex: 'remark',
-      width: '20%',
+      title: "备注",
+      align: "center",
+      dataIndex: "remark",
+      width: "20%",
     },
   ];
 
   return (
     <div
       className="purchase-order"
-      style={{ height: list.length > 0 ? 'auto' : '100%' }}
+      style={{ height: list.length > 0 ? "auto" : "100%" }}
       onScroll={pageScroll}
     >
       <div className="purchase-order_header">星权益 / 采购订单</div>
       <TabsPanel
-        onChange={(status) => setFilterParams({
-          ...filterParams,
-          status,
-        })
+        onChange={(status) =>
+          setFilterParams({
+            ...filterParams,
+            status,
+          })
         }
       >
         <div>
           <Row
             className={
               fixed
-                ? 'purchase-order_table-header--fixed'
-                : 'purchase-order_table-header'
+                ? "purchase-order_table-header--fixed"
+                : "purchase-order_table-header"
             }
-            style={{ marginBottom: '20px' }}
+            style={{ marginBottom: "20px" }}
           >
             <Col span={4}>最近三个月订单</Col>
             <Col span={10}>订单详情</Col>
@@ -273,7 +280,7 @@ export default (props) => {
             <Col span={2}>状态</Col>
             <Col span={6}>操作</Col>
           </Row>
-          {fixed && <div style={{ marginBottom: '20px' }} />}
+          {fixed && <div style={{ marginBottom: "20px" }} />}
 
           <Skeleton
             loading={loading}
@@ -287,16 +294,16 @@ export default (props) => {
                 <Row key={item.id}>
                   <Col span={24} className="purchase-order_table-title">
                     <span>
-                      {moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')}
+                      {moment(item.createTime).format("YYYY-MM-DD HH:mm:ss")}
                     </span>
-                    <span style={{ marginLeft: '48px' }}>
+                    <span style={{ marginLeft: "48px" }}>
                       订单号：{item.orderId}
                     </span>
                   </Col>
                   {_.map(item.orderItemList, (v, index) => (
                     <span key={index} className="purchase-order_table-item">
                       <Col span={6}>
-                        <div style={{ width: '80%' }}>
+                        <div style={{ width: "80%" }}>
                           <List.Item.Meta
                             avatar={
                               <Avatar
@@ -327,10 +334,18 @@ export default (props) => {
                       </Col>
                       <Col span={2}>{v.detailCount}</Col>
                       <Col span={2}>{v.typeLabel}</Col>
-                      <Col span={4}>￥{v.price}</Col>
+                      <Col span={4}>
+                        ￥{getFloat(v.price / TRANSTEMP, PRECISION)}
+                      </Col>
                       {index === 0 ? (
                         <>
-                          <Col span={2}>￥{item.realTotalPay}</Col>
+                          <Col
+                            span={2}
+                            style={{ fontWeight: "bold", color: "#333333" }}
+                          >
+                            ￥
+                            {getFloat(item.realTotalPay / TRANSTEMP, PRECISION)}
+                          </Col>
                           <Col span={2}>{OrderStatus[item.status]}</Col>
                           <Col span={6}>{ToolMap[item.status](item)}</Col>
                         </>
@@ -344,18 +359,18 @@ export default (props) => {
                 </Row>
               ))
             ) : (
-              <div style={{ textAlign: 'center', paddingTop: '65px' }}>
+              <div style={{ textAlign: "center", paddingTop: "65px" }}>
                 <div>
                   <img width="224px" height="133" src={noOrder} />
                 </div>
-                <span style={{ color: '#999999' }}>
+                <span style={{ color: "#999999" }}>
                   暂无订单，
                   <Button
                     type="link"
-                    style={{ padding: '0' }}
-                    onClick={() => history.push('/admin/shop')}
+                    style={{ padding: "0" }}
+                    onClick={() => history.push("/admin/shop")}
                   >
-                    去购买{' '}
+                    去购买{" "}
                   </Button>
                 </span>
               </div>
@@ -368,31 +383,31 @@ export default (props) => {
         modalVisible={!!orderItemCode}
         title={
           <div
-            style={{ textAlign: 'center', fontWeight: 'bold' }}
+            style={{ textAlign: "center", fontWeight: "bold" }}
           >{`${modalTitle}-直充明细`}</div>
         }
         cancelText={
           <>
-            <span style={{ color: '#333333' }}>
+            <span style={{ color: "#333333" }}>
               充值账号
               <span
                 style={{
-                  color: '#1A61DC',
-                  fontWeight: 'bold',
-                  margin: '0 5px',
+                  color: "#1A61DC",
+                  fontWeight: "bold",
+                  margin: "0 5px",
                 }}
               >
                 {traceList.length}
               </span>
               个
             </span>
-            <span style={{ color: '#333333', marginLeft: '10px' }}>
+            <span style={{ color: "#333333", marginLeft: "10px" }}>
               充值成功
               <span
                 style={{
-                  color: '#1A61DC',
-                  fontWeight: 'bold',
-                  margin: '0 5px',
+                  color: "#1A61DC",
+                  fontWeight: "bold",
+                  margin: "0 5px",
                 }}
               >
                 {_.map(
@@ -402,13 +417,13 @@ export default (props) => {
               </span>
               件
             </span>
-            <span style={{ color: '#333333', marginLeft: '10px' }}>
+            <span style={{ color: "#333333", marginLeft: "10px" }}>
               充值失败
               <span
                 style={{
-                  color: '#DD0000',
-                  fontWeight: 'bold',
-                  margin: '0 5px',
+                  color: "#DD0000",
+                  fontWeight: "bold",
+                  margin: "0 5px",
                 }}
               >
                 {_.map(
@@ -420,15 +435,14 @@ export default (props) => {
             </span>
           </>
         }
-        onOk={() => setOrderItemCode('')}
-        onCancel={() => setOrderItemCode('')}
+        onOk={() => setOrderItemCode("")}
+        onCancel={() => setOrderItemCode("")}
         cancelButtonProps={{
-          className: 'global-modal-btn-cancel',
-          type: 'link',
-          style: { position: 'absolute', left: 0 },
+          className: "global-modal-btn-cancel",
+          type: "link",
+          style: { position: "absolute", left: 0 },
           disabled: true,
         }}
-        okText="确认"
         width={560}
       >
         <Table
