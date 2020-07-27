@@ -17,7 +17,7 @@ const history = createHashHistory();
 const text1 = <span className="content-text">当前账户可用余额</span>;
 const text2 = <span className="content-text">当前账户冻结金额</span>;
 const operations = (
-  <span className="content-left--right" onClick={()=>history.push('/admin/operations/transaction/order')}>
+  <span className="content-left--right" onClick={() => history.push('/admin/operations/transaction/order')}>
     更多交易
     <Icon type="right-circle" style={{ marginLeft: 5 }} />
   </span>

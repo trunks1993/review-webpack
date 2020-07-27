@@ -44,16 +44,14 @@ const user = ({ list }) => {
         <Button
           type="primary"
           className="user-desc--left"
-          onClick={() =>
-            history.push('/admin/operations/businessInfo/certification')
+          onClick={() => history.push('/admin/operations/businessInfo/certification')
           }
         >
           实名认证
         </Button>
         <Button
           className="user-desc--right"
-          onClick={() =>
-            history.push('/admin/operations/businessInfo/account')
+          onClick={() => history.push('/admin/operations/businessInfo/account')
           }
         >
           账号管理

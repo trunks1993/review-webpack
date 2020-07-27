@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Tabs, Form, Button, Row, Col, Icon, message  } from 'antd';
+import { Tabs, Form, Button, Row, Col, Icon, message } from 'antd';
 import MapForm from '@/components/MapForm';
 import Head from '@/assets/images/operations/head.png';
 import Mian from '@/assets/images/operations/mian.png';
