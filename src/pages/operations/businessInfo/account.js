@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 19:32:18
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-24 20:48:33
+ * @LastEditTime: 2020-07-27 16:45:42
  */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
@@ -183,24 +183,20 @@ const account = ({ dispatch, list, total, loading }) => {
               ),
             }}
           />
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginTop: '40px',
-            }}
-          >
-            <Pagination
-              disabled={loading}
-              current={currPage}
-              defaultPageSize={pageSize}
-              total={total}
-            />
-            <span style={{ color: '#CCCCCC', marginLeft: '10px' }}>
-              共{total}条
-            </span>
-          </div>
+          {_.isEmpty(list) ? null : (
+            <div className="cash-flow_pagination">
+              <Pagination
+                disabled={loading}
+                current={currPage}
+                onChange={(currPage) => setCurrPage(currPage)}
+                defaultPageSize={pageSize}
+                total={total}
+              />
+              <span style={{ color: '#CCCCCC', marginLeft: '10px' }}>
+                共 {total} 条 ,每页 {pageSize} 条
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </>
