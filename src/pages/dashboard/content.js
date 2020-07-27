@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-14 10:16:03
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-17 14:54:58
+ * @LastEditTime: 2020-07-27 14:14:51
  */
 import React, { useState } from 'react';
 import EYE from '@/assets/images/dashboard/eye.png';
@@ -11,11 +11,13 @@ import GET from '@/assets/images/dashboard/get.png';
 import SET from '@/assets/images/dashboard/set.png';
 import UNSJ from '@/assets/images/dashboard/Unsj.png';
 import { Icon, Tooltip, Button, Tabs } from 'antd';
+import { createHashHistory } from 'history';
+const history = createHashHistory();
 
 const text1 = <span className="content-text">当前账户可用余额</span>;
 const text2 = <span className="content-text">当前账户冻结金额</span>;
 const operations = (
-  <span className="content-left--right">
+  <span className="content-left--right" onClick={()=>history.push('/admin/operations/transaction/order')}>
     更多交易
     <Icon type="right-circle" style={{ marginLeft: 5 }} />
   </span>
@@ -32,7 +34,10 @@ const content = ({ list }) => {
           <span onClick={() => setVisible(!visible)} style={{ marginLeft: 10 }}>
             <img src={visible ? EYE : UNEYE} alt="" />
           </span>
-          <span className="content-left--right">
+          <span
+            className="content-left--right"
+            onClick={() => history.push('/admin/fund')}
+          >
             资金管理
             <Icon type="right-circle" style={{ marginLeft: 5 }} />
           </span>
@@ -81,10 +86,19 @@ const content = ({ list }) => {
           </div>
           <div style={{ clear: 'both' }} />
           <div>
-            <Button type="primary" className="content-but--left">
+            <Button
+              type="primary"
+              className="content-but--left"
+              onClick={() => history.push('/admin/fund/recharge')}
+            >
               充值
             </Button>
-            <Button className="content-but--right">提现</Button>
+            <Button
+              className="content-but--right"
+              onClick={() => history.push('/admin/fund/cashOut')}
+            >
+              提现
+            </Button>
           </div>
         </div>
       </div>

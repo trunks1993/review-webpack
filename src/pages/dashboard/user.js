@@ -2,13 +2,15 @@
  * @Author: Dad
  * @Date: 2020-07-14 16:26:54
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-21 14:50:06
+ * @LastEditTime: 2020-07-27 14:12:28
  */
 import React from 'react';
 
 import UNHEAD from '@/assets/images/dashboard/Unhead.png';
 import { Row, Col, Button } from 'antd';
 import { MerchantStatus, UserTypes } from '@/const';
+import { createHashHistory } from 'history';
+const history = createHashHistory();
 
 const user = ({ list }) => {
   return (
@@ -39,10 +41,23 @@ const user = ({ list }) => {
           <Col span={7}> 最近登录: </Col>{' '}
           <Col span={13}> {list?.lastAccessTime} </Col>
         </Row>
-        <Button type="primary" className="user-desc--left">
+        <Button
+          type="primary"
+          className="user-desc--left"
+          onClick={() =>
+            history.push('/admin/operations/businessInfo/certification')
+          }
+        >
           实名认证
         </Button>
-        <Button className="user-desc--right"> 账号管理 </Button>
+        <Button
+          className="user-desc--right"
+          onClick={() =>
+            history.push('/admin/operations/businessInfo/account')
+          }
+        >
+          账号管理
+        </Button>
       </div>
     </div>
   );
