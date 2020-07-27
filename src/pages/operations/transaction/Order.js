@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 14:20:06
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-24 18:31:08
+ * @LastEditTime: 2020-07-27 16:44:42
  */
 import React, { useState, useEffect } from 'react';
 import MapForm from '@/components/MapForm';
@@ -120,7 +120,8 @@ const Order = ({ dispatch, list, total, loading }) => {
       dataIndex: 'status',
       width: 100,
       render: (status) => {
-        if (status === TRANSA_STATUS_5) return <div style={{ color: 'red' }}>失败</div>;
+        if (status === TRANSA_STATUS_5)
+          return <div style={{ color: 'red' }}>失败</div>;
         return TransaStatus[status];
       },
     },
@@ -206,12 +207,13 @@ const Order = ({ dispatch, list, total, loading }) => {
                   icon="search"
                   type="primary"
                   onClick={() => dispatchInit()}
+                  style={{ width: 92 }}
                 >
                   查询
                 </Button>
                 <Button
                   icon="undo"
-                  style={{ marginLeft: '20px' }}
+                  style={{ marginLeft: '20px', width: 92 }}
                   onClick={() => form?.resetFields()}
                 >
                   重置
@@ -240,24 +242,20 @@ const Order = ({ dispatch, list, total, loading }) => {
         }}
         scroll={{ x: 1300, y: 'calc(100vh - 480px)' }}
       />
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginTop: '40px',
-        }}
-      >
-        <Pagination
-          disabled={loading}
-          current={currPage}
-          defaultPageSize={pageSize}
-          total={total}
-        />
-        <span style={{ color: '#CCCCCC', marginLeft: '10px' }}>
-          共{total}条
-        </span>
-      </div>
+      {_.isEmpty(list) ? null : (
+        <div className="cash-flow_pagination">
+          <Pagination
+            disabled={loading}
+            current={currPage}
+            onChange={(currPage) => setCurrPage(currPage)}
+            defaultPageSize={pageSize}
+            total={total}
+          />
+          <span style={{ color: '#CCCCCC', marginLeft: '10px' }}>
+            共 {total} 条 ,每页 {pageSize} 条
+          </span>
+        </div>
+      )}
     </div>
   );
 };
