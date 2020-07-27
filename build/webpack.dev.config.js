@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-05-29 14:31:03
- * @LastEditTime: 2020-07-01 15:57:19
+ * @LastEditTime: 2020-07-27 18:21:51
  */
 
 const webpackMerge = require("webpack-merge");
@@ -9,9 +9,15 @@ const utils = require("./utils");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 
-module.exports = webpackMerge(baseWebpackConfig, {
+// 构建速度分析
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const smp = new SpeedMeasurePlugin();
+
+const config = webpackMerge(baseWebpackConfig, {
   // 指定构建环境
   mode: "development",
+  // 控制台信息简化
+  stats: "errors-only",
   // 插件
   plugins: [
     new webpack.DefinePlugin({
@@ -51,3 +57,5 @@ module.exports = webpackMerge(baseWebpackConfig, {
     },
   },
 });
+
+module.exports = smp.wrap(config);

@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-05-29 14:31:35
- * @LastEditTime: 2020-06-30 10:44:57
+ * @LastEditTime: 2020-07-27 19:01:51
  */
 
 const webpackMerge = require("webpack-merge");
@@ -8,17 +8,27 @@ const baseWebpackConfig = require("./webpack.base.config");
 const utils = require("./utils");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
+// 构建速度分析
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const smp = new SpeedMeasurePlugin();
 
-module.exports = webpackMerge(baseWebpackConfig, {
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+
+// css压缩
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+
+const config = webpackMerge(baseWebpackConfig, {
   // 指定构建环境
   mode: "production",
   // 插件
   plugins: [
     new webpack.DefinePlugin({
       "process.env": {
-        BASE_API: '"http://192.168.1.5:8081"',
+        BASE_API: '"/api"',
+        FILE_URL: '"/file"',
       },
     }),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: utils.resolve("./../dist/index.html"), // html模板的生成路径
       template: "index.html", //html模板
@@ -32,4 +42,18 @@ module.exports = webpackMerge(baseWebpackConfig, {
       },
     }),
   ],
+  optimization: {
+    minimizer: [
+      new OptimizeCSSAssetsPlugin({
+        assetNameRegExp: /\.scss$/g,
+        cssProcessor: require("cssnano"),
+        cssProcessorPluginOptions: {
+          preset: ["default", { discardComments: { removeAll: true } }],
+        },
+        canPrint: true,
+      }),
+    ],
+  },
 });
+
+module.exports = smp.wrap(config);
