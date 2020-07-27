@@ -2,11 +2,11 @@
  * @Author: Dad
  * @Date: 2020-07-17 20:59:45
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-24 16:47:14
+ * @LastEditTime: 2020-07-27 14:02:13
  */
 
 import React, { useState, useEffect } from 'react';
-import { Tabs, Form, Button, Row, Col, Icon, Spin } from 'antd';
+import { Tabs, Form, Button, Row, Col, Icon, message  } from 'antd';
 import MapForm from '@/components/MapForm';
 import Head from '@/assets/images/operations/head.png';
 import Mian from '@/assets/images/operations/mian.png';
