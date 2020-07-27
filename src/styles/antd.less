@@ -5,12 +5,10 @@
   .ant-tabs-bar {
     margin: 0 0 50px 0;
   }
-  .ant-tabs-tab {
+  .ant-tabs-tab:extend(.f24) {
     width: 50%;
     text-align: center;
     line-height: 24px;
-    // color: $darkGray;
-    @extend .f24;
   }
   .ant-tabs-large-bar {
     .ant-tabs-tab {
@@ -27,8 +25,7 @@
 }
 
 .ant-input {
-  &::-webkit-input-placeholder {
-    @extend .f12;
+  &::-webkit-input-placeholder:extend(.f12) {
   }
 }
 .ant-select-selection__placeholder {

@@ -1,14 +1,30 @@
-.cash-flow {
-  //   height: auto;
+.financial-rec {
   border: 1px solid #f2f2f2;
-
-  background: #ffffff;
-  &_header {
-    @extend .breadCrumb;
+  .global-table {
+    .ant-btn > .anticon + span {
+      margin-left: 0;
+    }
+  }
+  &_header:extend(.breadCrumb) {
     background: #f2f2f2;
   }
   &_filter {
     padding: 30px 0;
+    background: #ffffff;
+  }
+  &_table {
+    background: #ffffff;
+    margin-top: 10px;
+    &-tools:extend(.fbc) {
+      height: 50px;
+      padding: 0 50px;
+      &-title {
+        line-height: 50px;
+        font-size: 14px;
+        color: #333333;
+        font-weight: bold;
+      }
+    }
   }
   &_empty {
     padding-top: 127px;
@@ -19,6 +35,15 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    background: #ffffff;
+    position: relative;
+    &-denote {
+      position: absolute;
+      font-size: 12px;
+      color: #999999;
+      top: 15px;
+      left: 55px;
+    }
     &-data {
       font-size: 12px;
       color: #cccccc;

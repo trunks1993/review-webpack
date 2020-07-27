@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-05-29 11:05:46
- * @LastEditTime: 2020-07-15 15:57:35
+ * @LastEditTime: 2020-07-27 20:48:08
  */
 
 // import React from "react";
@@ -11,7 +11,7 @@ import createLoading from 'dva-loading';
 import _ from 'lodash';
 import models from '@/models';
 
-import '@/styles/base.scss';
+import '@/styles/base.less';
 
 const app = dva();
 

@@ -1,14 +1,12 @@
 /*
  * @Date: 2020-05-29 14:30:28
- * @LastEditTime: 2020-07-27 19:33:36
+ * @LastEditTime: 2020-07-27 21:00:41
  */
 
 const utils = require("./utils");
 const path = require("path");
 // 打包分析
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-// 压缩插件 对es6友好
-const TerserPlugin = require("terser-webpack-plugin");
 // 擦除无用css
 const PurgecssPlugin = require("purgecss-webpack-plugin");
 
@@ -143,28 +141,14 @@ module.exports = {
     new PurgecssPlugin({
       paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
     }),
-    new HtmlWebpackExternalsPlugin({
-      externals: [
-        {
-          module: "react", // 模块名称
-          entry: "https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.production.min.js", // 引入的cdn
-          global: "React", // 创建一个全局对象 React
-        },
-        {
-          module: "react-dom",
-          entry: "https://11.url.cn/now/lib/16.13.1/react-dom.min.js",
-          global: "ReactDOM",
-        },
-      ],
-    }),
+    // new HtmlWebpackExternalsPlugin({
+    //   externals: [
+    //     {
+    //       module: "react", // 模块名称
+    //       entry: "https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.production.min.js", // 引入的cdn
+    //       global: "React", // 创建一个全局对象 React
+    //     },
+    //   ],
+    // }),
   ],
-  optimization: {
-    minimize: true,
-    usedExports: true,
-    minimizer: [
-      new TerserPlugin({
-        parallel: 4, // 开启几个进程来处理压缩，默认是 os.cpus().length - 1
-      }),
-    ],
-  },
 };

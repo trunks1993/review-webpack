@@ -28,10 +28,9 @@
   }
 }
 
-.layout_header-main {
-  width: $blockWidth;
+.layout_header-main:extend(.fb) {
+  width: @blockWidth;
   margin: auto;
-  @extend .fb;
   .ant-badge-dot {
     box-shadow: none;
     background: #f14546;
@@ -40,10 +39,9 @@
   }
 }
 
-.layout_header-logo {
-  @extend .f14;
+.layout_header-logo:extend(.f14) {
   margin-left: 20px;
-  color: $white;
+  color: @white;
   position: relative;
   top: 15px;
 }
@@ -61,14 +59,13 @@
 
 .layout_drop-menu {
   width: 100px;
-  ul > li {
-    @extend .f12;
+  ul > li:extend(.f12) {
     line-height: 12px;
     cursor: pointer;
     text-align: center;
     padding: 6px 0;
     &:hover {
-      background: $border-color;
+      background: @border-color;
     }
   }
 }

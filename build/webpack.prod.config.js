@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-05-29 14:31:35
- * @LastEditTime: 2020-07-27 19:01:51
+ * @LastEditTime: 2020-07-27 20:57:51
  */
 
 const webpackMerge = require("webpack-merge");
@@ -15,7 +15,10 @@ const smp = new SpeedMeasurePlugin();
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 // css压缩
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+// const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+
+// 压缩插件 对es6友好
+const TerserPlugin = require("terser-webpack-plugin");
 
 const config = webpackMerge(baseWebpackConfig, {
   // 指定构建环境
@@ -43,14 +46,21 @@ const config = webpackMerge(baseWebpackConfig, {
     }),
   ],
   optimization: {
+    // minimizer: [
+    //   new OptimizeCSSAssetsPlugin({
+    //     assetNameRegExp: /\.scss$/g,
+    //     cssProcessor: require("cssnano"),
+    //     cssProcessorPluginOptions: {
+    //       preset: ["default", { discardComments: { removeAll: true } }],
+    //     },
+    //     canPrint: true,
+    //   }),
+    // ],
+    minimize: true,
+    usedExports: true,
     minimizer: [
-      new OptimizeCSSAssetsPlugin({
-        assetNameRegExp: /\.scss$/g,
-        cssProcessor: require("cssnano"),
-        cssProcessorPluginOptions: {
-          preset: ["default", { discardComments: { removeAll: true } }],
-        },
-        canPrint: true,
+      new TerserPlugin({
+        parallel: 4, // 开启几个进程来处理压缩，默认是 os.cpus().length - 1
       }),
     ],
   },

@@ -1,7 +1,7 @@
 .login {
   width: 900px;
   height: 600px;
-  background: $white;
+  background: @white;
 
   box-shadow: 0px 20px 30px 0px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
@@ -26,18 +26,17 @@
       position: absolute;
       right: 0;
       top: 50%;
-      background: $border-color;
+      background: @border-color;
       transform: translate(0, -50%);
     }
   }
 
-  &_login-title {
+  &_login-title:extend(.f24) {
     position: absolute;
     top: -68px;
     left: 261px;
-    color: $black;
+    color: @black;
     font-weight: bold;
-    @extend .f24;
   }
 
   &_login-img {
@@ -77,7 +76,7 @@
   }
   .ant-input-group-addon {
     border-left: none;
-    background-color: $white;
+    background-color: @white;
     position: relative;
     width: 100px;
     padding: 0;
@@ -89,11 +88,10 @@
       position: absolute;
       left: 0;
       top: 50%;
-      background: $border-color;
+      background: @border-color;
       transform: translate(0, -50%);
     }
-    .ant-btn {
-      @extend .f12;
+    .ant-btn:extend(.f12) {
     }
   }
 }
@@ -104,9 +102,8 @@
 
 .sign-up {
   padding: 60px 20px;
-  .signUp_title {
-    @extend .f24;
-    color: $blue;
+  .signUp_title:extend(.f24) {
+    color: @blue;
     text-align: center;
   }
   &_success-title {

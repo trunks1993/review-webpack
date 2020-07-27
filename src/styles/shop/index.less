@@ -12,24 +12,29 @@
   }
 }
 
-$filterItemHeight: 42 40 50;
 .shop-home {
   &_filter-wrapper {
     margin: 10px 0;
-    background: $white;
+    background: @white;
     padding: 0 20px;
   }
-  @each $number in ($filterItemHeight) {
-    .shop-home_filter-item--#{$number} {
-      min-height: $number + px;
-      line-height: $number + px;
-      @if $number == 42 {
-        border-bottom: 1px solid #e5e5e5;
-      } @else if $number == 40 {
-        border-bottom: 1px dashed #e5e5e5;
-      }
-    }
+  .shop-home_filter-item--40 {
+    min-height: 42px;
+    line-height: 42px;
+    border-bottom: 1px dashed #e5e5e5;
   }
+
+  .shop-home_filter-item--42 {
+    min-height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .shop-home_filter-item--50 {
+    min-height: 50px;
+    line-height: 50px;
+  }
+
   &_filter-item-title {
     vertical-align: top;
     position: relative;
@@ -366,8 +371,7 @@ $filterItemHeight: 42 40 50;
 }
 
 .service-order {
-  &_header {
-    @extend .breadCrumb;
+  &_header:extend(.breadCrumb) {
     background: #f2f2f2;
   }
 
