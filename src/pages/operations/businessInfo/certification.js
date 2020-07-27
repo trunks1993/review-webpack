@@ -1,12 +1,12 @@
 /*
  * @Author: Dad
  * @Date: 2020-07-17 20:59:45
- * @LastEditors: Dad
- * @LastEditTime: 2020-07-27 14:02:13
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-07-27 21:24:37
  */
 
 import React, { useState, useEffect } from 'react';
-import { Tabs, Form, Button, Row, Col, Icon, message } from 'antd';
+import { Tabs, Form, Button, Row, Col, Icon, message, Spin } from 'antd';
 import MapForm from '@/components/MapForm';
 import Head from '@/assets/images/operations/head.png';
 import Mian from '@/assets/images/operations/mian.png';
@@ -51,11 +51,9 @@ const certification = () => {
 
   useEffect(() => {
     if (_.isEmpty(form)) return;
-    if (!loading) {
-      const data = JSON.parse(stateData.data);
-      form.setFieldsValue({ ...data });
-      return;
-    }
+    const data = JSON.parse(stateData.data);
+    console.log(data);
+    form.setFieldsValue({ ...data });
   }, [loading]);
 
   useEffect(() => {
@@ -77,14 +75,14 @@ const certification = () => {
     if (_.isEmpty(stateData)) return;
     setTabKey(stateData?.identifyType.toString());
     ToolMap[typeData.identityState](stateData);
-    setInterval(() => {
-      setLoading(false);
-    }, 2000);
+    // setInterval(() => {
+    setLoading(false);
+    // }, 2000);
   }, [stateData]);
 
   // 提交
   const handleSubmit = () => {
-    form.validateFields(async(err, value) => {
+    form.validateFields(async (err, value) => {
       console.log(value);
       if (!err) {
         const [errs, datas, msg] = await addIdentifyWorkorder({
@@ -101,7 +99,7 @@ const certification = () => {
   };
 
   // 获取用户身份
-  const getMerchantBase = async() => {
+  const getMerchantBase = async () => {
     try {
       const [err, data, msg] = await getMerchantBaseInfo();
       if (!err) setTypeData(data);
@@ -109,7 +107,7 @@ const certification = () => {
   };
 
   // 获取用户状态
-  const getLatestIdentify = async() => {
+  const getLatestIdentify = async () => {
     try {
       const [err, data, msg] = await getLatestIdentifyWorkorder();
       if (!err) setStateData(data);
@@ -187,17 +185,17 @@ const certification = () => {
             activeKey={tabKey}
             onChange={(Key) => {
               setTabKey(Key.toString());
-              console.log('tabKey', tabKey, 'Key', Key);
             }}
           >
             <Tabs.TabPane tab={'企业认证'} disabled={disabled} key="2">
               <div style={{ margin: '30px 0px' }}>
-                {type ? (
-                  <Success
-                    title={'企业认证信息提交成功！'}
-                    desc={'企业认证信息已提交成功，平台正在进行审核……'}
-                  />
-                ) : (
+                {/* {loading ? (
+                  // <Success
+                  //   title={'企业认证信息提交成功！'}
+                  //   desc={'企业认证信息已提交成功，平台正在进行审核……'}
+                  // />
+                  <Spin />
+                ) : ( */}
                   <MapForm
                     className="global-form global-edit-form"
                     onCreate={(form) => setForm(form)}
@@ -339,7 +337,7 @@ const certification = () => {
                       ''
                     )}
                   </MapForm>
-                )}
+                )
               </div>
             </Tabs.TabPane>
             <Tabs.TabPane tab={'个人认证'} disabled={disabled} key="1">

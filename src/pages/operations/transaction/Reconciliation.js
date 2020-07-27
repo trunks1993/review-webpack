@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 19:32:18
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-24 18:32:01
+ * @LastEditTime: 2020-07-27 16:43:27
  */
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Table, Pagination, Icon, Row, Col } from 'antd';
@@ -207,24 +207,20 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
           }}
           loading={loading}
         />
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: '40px',
-          }}
-        >
-          <Pagination
-            disabled={loading}
-            current={currPage}
-            defaultPageSize={pageSize}
-            total={reconTotal}
-          />
-          <span style={{ color: '#CCCCCC', marginLeft: '10px' }}>
-            共{reconTotal}条
-          </span>
-        </div>
+        {_.isEmpty(reconList) ? null : (
+          <div className="cash-flow_pagination">
+            <Pagination
+              disabled={loading}
+              current={currPage}
+              onChange={(currPage) => setCurrPage(currPage)}
+              defaultPageSize={pageSize}
+              total={reconTotal}
+            />
+            <span style={{ color: '#CCCCCC', marginLeft: '10px' }}>
+              共 {reconTotal} 条 ,每页 {pageSize} 条
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
