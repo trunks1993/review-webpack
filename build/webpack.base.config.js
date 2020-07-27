@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-05-29 14:30:28
- * @LastEditTime: 2020-07-27 18:51:43
+ * @LastEditTime: 2020-07-27 19:33:36
  */
 
 const utils = require("./utils");
@@ -147,7 +147,7 @@ module.exports = {
       externals: [
         {
           module: "react", // 模块名称
-          entry: "https://11.url.cn/now/lib/16.13.1/react.min.js", // 引入的cdn
+          entry: "https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.production.min.js", // 引入的cdn
           global: "React", // 创建一个全局对象 React
         },
         {
