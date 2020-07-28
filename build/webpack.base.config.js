@@ -1,21 +1,24 @@
 /*
  * @Date: 2020-05-29 14:30:28
- * @LastEditTime: 2020-07-27 21:00:41
+ * @LastEditTime: 2020-07-28 11:49:59
  */
 
 const utils = require("./utils");
 const path = require("path");
+const os = require("os");
+
 // 打包分析
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 // 擦除无用css
 const PurgecssPlugin = require("purgecss-webpack-plugin");
 
+// 多线程处理打包
+const HappyPack = require("happypack");
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+
 // 替代tree-shaking
 // const WebpackDeepScopeAnalysisPlugin = require("webpack-deep-scope-plugin")
 //   .default;
-
-// 打包使用cdn
-const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 
 const glob = require("glob");
 const PATHS = {
@@ -46,13 +49,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/, //一个匹配loaders所处理的文件的拓展名的正则表达式，这里用来匹配js和jsx文件（必须）
         exclude: /node_modules/, // 屏蔽不需要处理的文件（文件夹）（可选）
-        loader: "babel-loader", // loader的名称（必须）
-        query: {
-          // presets: ["env", "react"],
-          plugins: [
-            ["import", { libraryName: "antd", style: true }], // antd按需加载
-          ],
-        },
+        loader: "happypack/loader?id=happyBabel",
       },
       {
         test: /\.css$/,
@@ -61,18 +58,18 @@ module.exports = {
           "css-loader", // 转换css
         ],
       },
-      {
-        test: /\.scss$/,
-        use: [
-          "style-loader", // 创建 <style></style>
-          "css-loader", // 转换css
-          "resolve-url-loader", // 处理scss中url()文件
-          {
-            loader: "sass-loader",
-            options: { sourceMap: true },
-          }, // 编译 Less -> CSS
-        ],
-      },
+      // {
+      //   test: /\.scss$/,
+      //   use: [
+      //     "style-loader", // 创建 <style></style>
+      //     "css-loader", // 转换css
+      //     "resolve-url-loader", // 处理scss中url()文件
+      //     {
+      //       loader: "sass-loader",
+      //       options: { sourceMap: true },
+      //     }, // 编译 Less -> CSS
+      //   ],
+      // },
       {
         test: /\.less$/,
         use: [
@@ -141,14 +138,33 @@ module.exports = {
     new PurgecssPlugin({
       paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
     }),
-    // new HtmlWebpackExternalsPlugin({
-    //   externals: [
-    //     {
-    //       module: "react", // 模块名称
-    //       entry: "https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.production.min.js", // 引入的cdn
-    //       global: "React", // 创建一个全局对象 React
-    //     },
-    //   ],
-    // }),
+    new HappyPack({
+      //用id来标识 happypack处理那里类文件
+      id: "happyBabel",
+      //如何处理  用法和loader 的配置一样
+      loaders: [
+        {
+          loader: "babel-loader",
+          options: {
+            cacheDirectory: true,
+          },
+          query: {
+            // presets: ["env", "react"],
+            plugins: [
+              ["import", { libraryName: "antd", style: true }], // antd按需加载
+            ],
+          },
+        },
+      ],
+      //共享进程池
+      threadPool: happyThreadPool,
+      //允许 HappyPack 输出日志
+      verbose: true,
+    }),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: "all", // "initial" | "all"(推荐) | "async" (默认就是async) | 函数
+    },
+  },
 };

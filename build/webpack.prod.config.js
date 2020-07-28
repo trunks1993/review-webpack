@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-05-29 14:31:35
- * @LastEditTime: 2020-07-27 20:57:51
+ * @LastEditTime: 2020-07-28 10:25:03
  */
 
 const webpackMerge = require("webpack-merge");
@@ -20,9 +20,13 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 // 压缩插件 对es6友好
 const TerserPlugin = require("terser-webpack-plugin");
 
+const externalConfig = JSON.parse(JSON.stringify(utils.externalConfig)); // 读取配置
+const externalModules = utils.getExternalModules(externalConfig); // 获取到合适的路径（引用类型，自动改变）
+
 const config = webpackMerge(baseWebpackConfig, {
   // 指定构建环境
   mode: "production",
+  externals: externalModules,
   // 插件
   plugins: [
     new webpack.DefinePlugin({
@@ -37,6 +41,8 @@ const config = webpackMerge(baseWebpackConfig, {
       template: "index.html", //html模板
       inject: true, // true：默认值，script标签位于html文件的 body 底部
       hash: true, // 在打包的资源插入html会加上hash
+      cdnConfig: externalConfig,
+      onlyCss: false, //加载css
       //  html 文件进行压缩
       minify: {
         removeComments: true, //去注释
