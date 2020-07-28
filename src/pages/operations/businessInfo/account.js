@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 19:32:18
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-28 15:09:23
+ * @LastEditTime: 2020-07-28 17:20:39
  */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
@@ -163,7 +163,7 @@ const account = ({ dispatch, list, total, loading }) => {
             </Button>
           </div>
           <Table
-            dataSource={list}
+            // dataSource={list}
             columns={columns}
             pagination={false}
             scroll={{ x: 1300, y: 'calc(100vh - 480px)' }}
