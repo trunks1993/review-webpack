@@ -19,7 +19,7 @@
     padding-top: 108px;
     position: relative;
     &:after {
-      content: " ";
+      content: ' ';
       display: block;
       width: 1px;
       height: 200px;
@@ -81,7 +81,7 @@
     width: 100px;
     padding: 0;
     &::before {
-      content: " ";
+      content: ' ';
       display: block;
       width: 1px;
       height: 18px;
@@ -121,4 +121,13 @@
     text-align: center;
     margin: 77px 0 56px 0;
   }
+}
+.signUp_modal-title:extend(.f24) {
+  text-align: center;
+  font-weight: bold;
+  color: @black;
+}
+.signUp_modal-button {
+  border-radius: 2px;
+  background-color: @blue;
 }

@@ -4,8 +4,9 @@ import MapForm from '@/components/MapForm';
 import Container from '../Container';
 import { patternPhone } from '@/rules';
 
-import { Form, Button, Checkbox, message } from 'antd';
+import { Form, Button, Checkbox, message, Modal } from 'antd';
 import { getSignUpValidCode, signUp } from '@/services/account';
+import Text from './text';
 
 import { createHashHistory } from 'history';
 const history = createHashHistory();
@@ -31,10 +32,13 @@ export default () => {
   const [signUpLoading, setSignUpLoading] = useState(false);
   const [success, setSucess] = useState(false);
 
+  const [agree, setAgree] = useState(false);
+  const [visible, setVisible] = useState(false);
+
   const checkboxRef = React.createRef();
 
   const handleSendAuthCode = () => {
-    form.validateFields(['telephone'], async(err, value) => {
+    form.validateFields(['telephone'], async (err, value) => {
       if (!err) {
         try {
           setLoading(true);
@@ -72,7 +76,7 @@ export default () => {
   const handleSignUp = () => {
     const checked = checkboxRef.current.rcCheckbox.state.checked;
     if (!checked) return message.error('请阅读用户服务协议');
-    form.validateFields(async(err, value) => {
+    form.validateFields(async (err, value) => {
       if (!err) {
         try {
           setSignUpLoading(true);
@@ -172,7 +176,8 @@ export default () => {
               rules={[
                 {
                   required: true,
-                  transform: (value) => value % 1 === 0 ? parseInt(value) : false,
+                  transform: (value) =>
+                    value % 1 === 0 ? parseInt(value) : false,
                   type: 'number',
                   whitespace: true,
                   message: '请输入正确验证码',
@@ -195,8 +200,11 @@ export default () => {
             />
             <Form.Item label=" " colon={false}>
               <div className="fbc">
-                <Checkbox ref={checkboxRef}>
-                  我已阅读并同意<Button type="link">《用户服务协议》</Button>
+                <Checkbox ref={checkboxRef} checked={agree}>
+                  我已阅读并同意
+                  <Button type="link" onClick={() => setVisible(true)}>
+                    《用户服务协议》
+                  </Button>
                 </Checkbox>
               </div>
               <Button
@@ -217,6 +225,34 @@ export default () => {
             </Form.Item>
           </MapForm>
         )}
+        <Modal
+          title={
+            <div className="signUp_modal-title">
+              {'星权益商户服务平台使用协议'}
+            </div>
+          }
+          visible={visible}
+          width={800}
+          centered
+          onCancel={() => setVisible(false)}
+          bodyStyle={{ height: 430 }}
+          footer={[
+            <Button
+              type="primary"
+              className="signUp_modal-button"
+              onClick={() => {
+                setVisible(false);
+                setAgree(true);
+              }}
+            >
+              同意并继续
+            </Button>,
+          ]}
+        >
+          <div style={{ height: 400, overflow: 'scroll' }}>
+            <Text />
+          </div>
+        </Modal>
       </div>
     </Container>
   );
