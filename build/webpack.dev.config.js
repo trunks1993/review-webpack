@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-05-29 14:31:03
- * @LastEditTime: 2020-07-27 18:21:51
+ * @LastEditTime: 2020-07-28 10:49:05
  */
 
 const webpackMerge = require("webpack-merge");
@@ -12,6 +12,9 @@ const webpack = require("webpack");
 // 构建速度分析
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const smp = new SpeedMeasurePlugin();
+
+const externalConfig = JSON.parse(JSON.stringify(utils.externalConfig)); // 读取配置
+utils.getExternalModules(externalConfig); // 获取到合适的路径（引用类型，自动改变）
 
 const config = webpackMerge(baseWebpackConfig, {
   // 指定构建环境
@@ -30,6 +33,8 @@ const config = webpackMerge(baseWebpackConfig, {
       filename: utils.resolve("./../dist/index.html"), // html模板的生成路径
       template: "index.html", //html模板
       inject: true, // true：默认值，script标签位于html文件的 body 底部
+      cdnConfig: externalConfig, // cdn配置
+      // onlyCss: true,
     }),
   ],
   // 开发环境本地启动的服务配置
