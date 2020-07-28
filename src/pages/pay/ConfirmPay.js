@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-15 16:39:54
- * @LastEditTime: 2020-07-24 17:55:23
+ * @LastEditTime: 2020-07-28 11:33:19
  */
 
 import React, { useState, useEffect } from 'react';
@@ -18,7 +18,7 @@ export default (props) => {
 
   let timer = null;
 
-  const handleSendAuthCode = async() => {
+  const handleSendAuthCode = async () => {
     try {
       setLoading(true);
       const [err, data, msg] = await sendAuthCode(telephone);
@@ -49,7 +49,7 @@ export default (props) => {
     }, 1000);
   };
 
-  const handlePay = async() => {
+  const handlePay = async () => {
     const code = inputRef.current.state.value;
     if (!code) return message.error('请输入手机验证码');
     try {
@@ -103,7 +103,11 @@ export default (props) => {
               </>
             ) : (
               <>
-                <Button type="link" style={{ padding: 0 }}>
+                <Button
+                  type="link"
+                  style={{ padding: 0 }}
+                  onClick={() => history.push('/admin/fund/recharge')}
+                >
                   充值
                 </Button>
               </>
