@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-18 17:19:33
- * @LastEditTime: 2020-07-24 19:58:37
+ * @LastEditTime: 2020-07-28 16:50:22
  */
 
 import React, { useState, useEffect } from 'react';
@@ -65,7 +65,7 @@ const CarPage = (props) => {
       okText: '确定',
       cancelText: '取消',
       centered: true,
-      onOk: async() => {
+      onOk: async () => {
         try {
           setLoading(true);
           const [err, data, msg] = await removeCarItem(itemCode);
@@ -93,7 +93,7 @@ const CarPage = (props) => {
       okText: '确定',
       cancelText: '取消',
       centered: true,
-      onOk: async() => {
+      onOk: async () => {
         try {
           setLoading(true);
           const [err, data, msg] = await removeAll();
@@ -114,7 +114,7 @@ const CarPage = (props) => {
    * @name: checkbox onChange 事件
    * @param {CheckboxChangeEvent} e
    */
-  const handleSelectAll = async(e) => {
+  const handleSelectAll = async (e) => {
     const checked =
       carData.cartItemList.length === selectedRowKeys.length ? 'N' : 'Y';
     setLoading(true);
@@ -135,7 +135,7 @@ const CarPage = (props) => {
    * @name: 更新购物车数量
    * @param
    */
-  const updateCount = async(amount, itemCode) => {
+  const updateCount = async (amount, itemCode) => {
     try {
       setLoading(true);
       const paramsData = {
@@ -157,7 +157,7 @@ const CarPage = (props) => {
   /**
    * @name: 列表加载
    */
-  const initTraceList = async() => {
+  const initTraceList = async () => {
     try {
       setConfirmLoading(true);
       const [err, data, msg] = await getCartDetail(itemCode);
@@ -171,7 +171,7 @@ const CarPage = (props) => {
    * @name: 提交订单
    * @param {type}
    */
-  const submitOrder = async() => {
+  const submitOrder = async () => {
     try {
       setLoading(true);
       const [err, data, msg] = await addOrder();
@@ -228,16 +228,19 @@ const CarPage = (props) => {
     {
       title: '数量',
       align: 'center',
-      render: (record) => (
-        <span>
-          <InputNumber
-            min={1}
-            max={record.goods.singleBuyLimit}
-            defaultValue={record.amount}
-            onChange={(v) => updateCount(v, record.code)}
-          />
-        </span>
-      ),
+      render: (record) => {
+        if (record.productType === PRODUCT_TYPE_4) return record.amount;
+        return (
+          <span>
+            <InputNumber
+              min={1}
+              max={record.goods.singleBuyLimit}
+              defaultValue={record.amount}
+              onChange={(v) => updateCount(v, record.code)}
+            />
+          </span>
+        );
+      },
       width: '25%',
     },
     {
@@ -310,7 +313,7 @@ const CarPage = (props) => {
       </span>
     ),
     hideDefaultSelections: true,
-    onSelect: async(record, selected) => {
+    onSelect: async (record, selected) => {
       try {
         setLoading(true);
         const paramsData = {
@@ -445,7 +448,12 @@ const CarPage = (props) => {
                   )}
                 </span>
               </span>
-              <Button loading={loading} type="primary" onClick={submitOrder}>
+              <Button
+                loading={loading}
+                type="primary"
+                disabled={selectedRowKeys.length === 0}
+                onClick={submitOrder}
+              >
                 提交订单
               </Button>
             </span>

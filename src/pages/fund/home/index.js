@@ -1,13 +1,13 @@
 /*
  * @Date: 2020-07-22 20:19:58
- * @LastEditTime: 2020-07-24 19:05:54
+ * @LastEditTime: 2020-07-28 14:39:44
  */
 
 import React, { useState, useEffect } from 'react';
 import JINBI from '@/assets/images/fund/jinbi.png';
 import { Row, Col, Tag, Button, Tabs, Table } from 'antd';
 import Charts from './charts';
-import { getTimeDistance, getFloat } from '@/utils';
+import { getTimeDistance, getFloat, formateTime } from '@/utils';
 import { searchAccountTrace, getUnpaidOrderNum } from '@/services/home';
 import { createHashHistory } from 'history';
 import { connect } from 'dva';
@@ -73,7 +73,7 @@ const home = ({ list: { amount, frozeAmount } }) => {
   };
 
   /** 获取收支记录 */
-  const getAccountTrace = async() => {
+  const getAccountTrace = async () => {
     const obj = { currPage: 1, pageSize: 50, type: tabKey };
     try {
       const [err, data, msg] = await searchAccountTrace(obj);
@@ -82,7 +82,7 @@ const home = ({ list: { amount, frozeAmount } }) => {
   };
 
   /** 获取待支付订单 */
-  const getPayOrder = async() => {
+  const getPayOrder = async () => {
     try {
       const [err, data, msg] = await getUnpaidOrderNum();
       if (!err) setPayOrder(data);
@@ -97,7 +97,7 @@ const home = ({ list: { amount, frozeAmount } }) => {
       align: 'center',
       width: '18%',
       render: (createTime) => {
-        return <div>{getDate(createTime)}</div>;
+        return <div>{formateTime(createTime)}</div>;
       },
     },
     {
@@ -141,7 +141,7 @@ const home = ({ list: { amount, frozeAmount } }) => {
       render: (changeAmount) => {
         return (
           <div className="money">
-            {getFloat(changeAmount?.price / TRANSTEMP, PRECISION)}
+            {getFloat(changeAmount / TRANSTEMP, PRECISION)}
           </div>
         );
       },
@@ -153,7 +153,7 @@ const home = ({ list: { amount, frozeAmount } }) => {
       render: (amount) => {
         return (
           <div className="money">
-            {getFloat(amount?.price / TRANSTEMP, PRECISION)}
+            {getFloat(amount / TRANSTEMP, PRECISION)}
           </div>
         );
       },
@@ -176,11 +176,13 @@ const home = ({ list: { amount, frozeAmount } }) => {
               <span>账户可用余额(元)</span>
               <Tag className="home-left--tag">
                 冻结￥
-                {frozeAmount ? getFloat(frozeAmount / TRANSTEMP, PRECISION) : 0.00}
+                {frozeAmount
+                  ? getFloat(frozeAmount / TRANSTEMP, PRECISION)
+                  : 0.0}
               </Tag>
             </div>
             <div className="home-left--money">
-              ￥{amount ? getFloat(amount / TRANSTEMP, PRECISION) : 0.00}
+              ￥{amount ? getFloat(amount / TRANSTEMP, PRECISION) : 0.0}
             </div>
             <Button
               className="home-left--btn"

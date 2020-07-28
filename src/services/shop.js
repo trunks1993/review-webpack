@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-04 09:49:04
- * @LastEditTime: 2020-07-21 12:08:52
+ * @LastEditTime: 2020-07-28 15:26:12
  */
 import request from '@/utils/request';
 
@@ -134,5 +134,12 @@ export async function getCartDetail(itemCode) {
 export async function addOrder() {
   return request('/order/addOrder', {
     method: 'POST',
+  });
+}
+
+export async function rebuy(data) {
+  return request('/order/rebuy', {
+    method: 'POST',
+    data,
   });
 }

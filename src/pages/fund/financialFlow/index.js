@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-22 16:33:56
- * @LastEditTime: 2020-07-24 12:53:11
+ * @LastEditTime: 2020-07-28 15:01:49
  */
 
 import React, { useState, useEffect } from 'react';
@@ -107,8 +107,8 @@ const FinancialFlow = (props) => {
       title: '收支类型',
       align: 'center',
       render: (record) => (
-        <span style={{ color: colorMaps[record.billType] }}>
-          {financialFlowBillTypes[record.billType]}
+        <span style={{ color: colorMaps[record.type] }}>
+          {financialFlowBillTypes[record.type]}
         </span>
       ),
       width: '10%',
@@ -155,7 +155,7 @@ const FinancialFlow = (props) => {
               <CstInput
                 labelCol={{ span: 9 }}
                 wrapperCol={{ span: 15 }}
-                name="code"
+                name="orderNo"
                 label="交易订单号"
                 customProps={{
                   placeholder: '输入订单号',

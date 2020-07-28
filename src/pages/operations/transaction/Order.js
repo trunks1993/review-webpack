@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 14:20:06
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-28 11:35:02
+ * @LastEditTime: 2020-07-28 15:57:39
  */
 import React, { useState, useEffect } from 'react';
 import MapForm from '@/components/MapForm';
@@ -91,16 +91,14 @@ const Order = ({ dispatch, list, total, loading }) => {
       align: 'center',
       width: 140,
       dataIndex: 'totalPay',
-      render: (totalPay) => {
-        getFloat(totalPay / TRANSTEMP, PRECISION);
-      },
+      render: (totalPay) => getFloat(totalPay / TRANSTEMP, PRECISION),
     },
     {
       title: '交易类型',
       align: 'center',
       dataIndex: 'bizType',
       width: 100,
-      render: (bizTypes) => TransaStatus[bizTypes],
+      render: (bizTypes) => TransactionTypes[bizTypes],
     },
     {
       title: '商品',

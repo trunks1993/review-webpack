@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-16 16:48:10
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-24 16:48:44
+ * @LastEditTime: 2020-07-28 15:54:57
  */
 import React, { useState, useEffect } from 'react';
 import MapForm from '@/components/MapForm';
@@ -199,7 +199,7 @@ const modifyApp = () => {
               className="modifyApp-but filter_button--blue"
               onClick={modifyApp}
             >
-              {modifyAppType ? '创建应用' : '修改应用'}
+              {modifyAppType ? '创建应用' : '确定修改'}
             </Button>
           </Form.Item>
         </MapForm>

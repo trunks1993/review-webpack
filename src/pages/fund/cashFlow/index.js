@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-22 11:01:06
- * @LastEditTime: 2020-07-24 12:53:01
+ * @LastEditTime: 2020-07-28 17:05:35
  */
 
 import React, { useState, useEffect } from 'react';
@@ -119,7 +119,7 @@ const CashFlow = (props) => {
   /**
    * @name: 列表加载
    */
-  const initList = async() => {
+  const initList = async () => {
     try {
       const filterData = filterForm?.getFieldsValue();
       const queryParams = {
@@ -140,7 +140,7 @@ const CashFlow = (props) => {
   /**
    * @name: 详情
    */
-  const _getInfo = async() => {
+  const _getInfo = async () => {
     try {
       const [err, data, msg] = await getInfo(itemId);
       if (!err) {
@@ -172,7 +172,7 @@ const CashFlow = (props) => {
    * @param {type}
    */
   const handleUploadSubmit = () => {
-    uploadForm?.validateFields(async(err, value) => {
+    uploadForm?.validateFields(async (err, value) => {
       if (!err) {
         try {
           setUploadLoading(true);
@@ -477,6 +477,7 @@ const CashFlow = (props) => {
               className: 'cash-flow_uploader',
               Content,
             }}
+            rules={[{ required: true, message: '请上传回单图片' }]}
           />
         </MapForm>
       </GlobalModal>

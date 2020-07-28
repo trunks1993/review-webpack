@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 19:32:18
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-27 16:43:27
+ * @LastEditTime: 2020-07-28 17:21:52
  */
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Table, Pagination, Icon, Row, Col } from 'antd';
@@ -43,8 +43,12 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
       queryParams: {
         currPage,
         pageSize,
-        createTime: moment(data.CreateTime?.[0]).format('YYYY-MM-DD HH:MM:SS'),
-        endTime: moment(data.CreateTime?.[1]).format('YYYY-MM-DD HH:MM:SS'),
+        beginCreateTime: moment(data.CreateTime?.[0]).format(
+          'YYYY-MM-DD HH:MM:SS'
+        ),
+        endCreateTime: moment(data.CreateTime?.[1]).format(
+          'YYYY-MM-DD HH:MM:SS'
+        ),
         ...data,
       },
     });

@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 19:32:18
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-27 16:45:42
+ * @LastEditTime: 2020-07-28 17:20:39
  */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
@@ -42,8 +42,6 @@ const account = ({ dispatch, list, total, loading }) => {
       queryParams: {
         currPage,
         pageSize,
-        createTime: moment(data.CreateTime?.[0]).format('YYYY-MM-DD HH:MM:SS'),
-        endTime: moment(data.CreateTime?.[1]).format('YYYY-MM-DD HH:MM:SS'),
         ...data,
       },
     });
@@ -52,9 +50,8 @@ const account = ({ dispatch, list, total, loading }) => {
   /** 表头 */
   const columns = [
     {
-      title: '登陆账号',
+      title: '登录账号',
       dataIndex: 'act',
-      className: 'jiaoyiTime',
       width: '16%',
       editable: true,
     },
@@ -83,7 +80,7 @@ const account = ({ dispatch, list, total, loading }) => {
       editable: true,
     },
     {
-      title: '上次登陆时间',
+      title: '上次登录时间',
       dataIndex: 'lastTime',
       width: '16%',
       editable: true,
@@ -166,7 +163,7 @@ const account = ({ dispatch, list, total, loading }) => {
             </Button>
           </div>
           <Table
-            dataSource={list}
+            // dataSource={list}
             columns={columns}
             pagination={false}
             scroll={{ x: 1300, y: 'calc(100vh - 480px)' }}
