@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-17 20:59:45
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-28 09:24:58
+ * @LastEditTime: 2020-07-28 09:42:23
  */
 
 import React, { useState, useEffect } from 'react';
@@ -189,12 +189,13 @@ const certification = () => {
           >
             <Tabs.TabPane tab={'企业认证'} disabled={disabled} key="2">
               <div style={{ margin: '30px 0px' }}>
-                {type ? (
-                  <Success
-                    title={'企业认证信息提交成功！'}
-                    desc={'企业认证信息已提交成功，平台正在进行审核……'}
-                  />
-                ) : (
+                {/* {loading ? (
+                  // <Success
+                  //   title={'企业认证信息提交成功！'}
+                  //   desc={'企业认证信息已提交成功，平台正在进行审核……'}
+                  // />
+                  <Spin />
+                ) : ( */}
                   <MapForm
                     className="global-form global-edit-form"
                     onCreate={(form) => setForm(form)}
@@ -336,7 +337,7 @@ const certification = () => {
                       ''
                     )}
                   </MapForm>
-                )}
+                )
               </div>
             </Tabs.TabPane>
             <Tabs.TabPane tab={'个人认证'} disabled={disabled} key="1">
