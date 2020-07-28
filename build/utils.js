@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-05-29 14:30:17
- * @LastEditTime: 2020-07-28 10:57:15
+ * @LastEditTime: 2020-07-28 15:47:51
  */
 
 const path = require("path");
@@ -24,6 +24,36 @@ exports.externalConfig = [
       process.env.NODE_ENV === "development"
         ? "react-dom.development.min.js"
         : "react-dom.production.min.js",
+  },
+  {
+    name: "redux",
+    scope: "Redux",
+    js: "redux.min.js",
+  },
+  {
+    name: "bizcharts",
+    scope: "BizCharts",
+    baseHttp: "https://gw.alipayobjects.com/os/lib/",
+    module: "umd",
+    js: "BizCharts.js",
+  },
+  {
+    name: "lodash.js",
+    scope: "_",
+    js: "lodash.min.js",
+  },
+  {
+    name: "moment.js",
+    scope: "moment",
+    js: "moment.min.js",
+  },
+  {
+    name: "immer",
+    scope: "immer",
+    js:
+      process.env.NODE_ENV === "development"
+        ? "immer.umd.development.min.js"
+        : "immer.umd.production.min.js",
   },
 ];
 
@@ -50,22 +80,26 @@ exports.getExternalModules = (config) => {
 
   config = config || this.externalConfig; // 默认使用utils下的配置
   config.forEach((item) => {
+    const hasPoint = item.name.indexOf(".") > 0;
+    const spliteName = item.name.split(".")[0];
     // 遍历配置
-    if (item.name in dependencieModules) {
-      let version = dependencieModules[item.name];
+    if (item.name in dependencieModules || spliteName in dependencieModules) {
+      let version =
+        dependencieModules[item.name] || dependencieModules[spliteName];
       // 拼接css 和 js 完整链接
       // item.css = item.css && [this.cdnBaseHttp, version, item.css].join("/");
       item.js =
         item.js &&
-        `${this.cdnBaseHttp}/${item.name}/${version}/${
+        `${item.baseHttp || this.cdnBaseHttp}/${item.name}/${version}/${
           item.module ? item.module + "/" + item.js : item.js
         }`;
-      externals[item.name] = item.scope; // 为打包时准备
+      externals[hasPoint ? spliteName : item.name] = item.scope; // 为打包时准备
     } else {
       throw new Error("相关依赖未安装，请先执行npm install " + item.name);
     }
   });
 
+  console.log("exports.getExternalModules -> externals", externals);
   return externals;
 };
 
