@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 14:20:06
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-27 16:44:42
+ * @LastEditTime: 2020-07-28 11:35:02
  */
 import React, { useState, useEffect } from 'react';
 import MapForm from '@/components/MapForm';
@@ -100,7 +100,7 @@ const Order = ({ dispatch, list, total, loading }) => {
       align: 'center',
       dataIndex: 'bizType',
       width: 100,
-      render: (bizTypes) => ORDER_TYPE_ALL[bizTypes],
+      render: (bizTypes) => TransaStatus[bizTypes],
     },
     {
       title: '商品',
