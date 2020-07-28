@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 20:14:20
- * @LastEditTime: 2020-07-24 12:49:25
+ * @LastEditTime: 2020-07-28 16:21:42
  */
 import React, { useState, useEffect } from 'react';
 import {
@@ -16,7 +16,12 @@ import {
   Icon,
   Table,
 } from 'antd';
-import { getPurchaseOrder, cancelOrder, queryListTrace } from '@/services/shop';
+import {
+  getPurchaseOrder,
+  cancelOrder,
+  queryListTrace,
+  rebuy,
+} from '@/services/shop';
 import {
   OrderStatus,
   ORDER_STATUS_1,
@@ -34,6 +39,9 @@ import {
 } from '@/const';
 import GlobalModal from '@/components/GlobalModal';
 import noOrder from '@/assets/images/shop/no-order.png';
+
+import { createHashHistory } from 'history';
+const history = createHashHistory();
 
 import moment from 'moment';
 import { getToken } from '@/utils/auth';
@@ -97,7 +105,7 @@ export default (props) => {
     }
   };
 
-  const initPurchaseOrder = async() => {
+  const initPurchaseOrder = async () => {
     try {
       setLoading(true);
       const [err, data, msg] = await getPurchaseOrder(filterParams);
@@ -113,7 +121,7 @@ export default (props) => {
   /**
    * @name: 列表加载
    */
-  const initTraceList = async() => {
+  const initTraceList = async () => {
     setConfirmLoading(true);
     try {
       const [err, data, msg] = await queryListTrace({
@@ -138,7 +146,7 @@ export default (props) => {
       okText: '确定',
       cancelText: '取消',
       centered: true,
-      onOk: async() => {
+      onOk: async () => {
         try {
           const [err, data, msg] = await cancelOrder(id);
           if (!err) message.success('操作成功');
@@ -150,16 +158,28 @@ export default (props) => {
     });
   };
 
+  /**
+   * @name 再次购买
+   * @param {number} id
+   */
+  const buyAgain = async(orderId) => {
+    try {
+      const [err, data, msg] = await rebuy({orderId});
+      if (!err) history.push('/admin/car');
+    } catch (error) {}
+  };
+
   const ToolMap = {
     [ORDER_STATUS_1]: (item) => (
       <>
         <Button
           type="primary"
-          onClick={() => history.push({
-            pathname: '/admin/pay',
-            search: `?orderId=${item.orderId}`,
-            state: { from: location.pathname },
-          })
+          onClick={() =>
+            history.push({
+              pathname: '/admin/pay',
+              search: `?orderId=${item.orderId}`,
+              state: { from: location.pathname },
+            })
           }
           // "/admin/pay?orderId=" + item.orderId
         >
@@ -177,27 +197,30 @@ export default (props) => {
     [ORDER_STATUS_3]: (item) => <>-</>,
     [ORDER_STATUS_4]: (item) => (
       <>
-        <Button type="primary">再次购买</Button>
+        <Button type="primary" onClick={() => buyAgain(item.orderId)}>
+          再次购买
+        </Button>
       </>
     ),
     [ORDER_STATUS_5]: (item) => <>-</>,
   };
 
   const TypeBtnMap = {
-    [PRODUCT_TYPE_1]: (item) => item.status === ORDER_STATUS_4 && (
-      <span
-        className="purchase-order_trace-btn"
-        onClick={() => {
-          window.open(
-            `${
-              process.env.BASE_API + '/order/cardExtract'
-            }?token=${getToken()}&itemCode=${item.code}`
-          );
-        }}
-      >
+    [PRODUCT_TYPE_1]: (item) =>
+      item.status === ORDER_STATUS_4 && (
+        <span
+          className="purchase-order_trace-btn"
+          onClick={() => {
+            window.open(
+              `${
+                process.env.BASE_API + '/order/cardExtract'
+              }?token=${getToken()}&itemCode=${item.code}`
+            );
+          }}
+        >
           提取
-      </span>
-    ),
+        </span>
+      ),
     [PRODUCT_TYPE_4]: (item) => (
       <span
         className="purchase-order_trace-btn"
@@ -206,7 +229,7 @@ export default (props) => {
           setModalTitle(item.productSubName);
         }}
       >
-        直冲明细
+        直充明细
       </span>
     ),
   };
@@ -256,10 +279,11 @@ export default (props) => {
     >
       <div className="purchase-order_header">星权益 / 采购订单</div>
       <TabsPanel
-        onChange={(status) => setFilterParams({
-          ...filterParams,
-          status,
-        })
+        onChange={(status) =>
+          setFilterParams({
+            ...filterParams,
+            status,
+          })
         }
       >
         <div>

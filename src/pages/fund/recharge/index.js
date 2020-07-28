@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-24 08:57:48
- * @LastEditTime: 2020-07-24 17:48:23
+ * @LastEditTime: 2020-07-28 15:59:06
  */
 
 import React, { useState, useEffect } from 'react';
@@ -85,6 +85,7 @@ const Recharge = (props) => {
               <InputNumber
                 precision={0}
                 min={1}
+                max={1000000}
                 defaultValue={1}
                 formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                 }
@@ -102,6 +103,7 @@ const Recharge = (props) => {
                 <li
                   key={item.id}
                   className={selectItemCode === item.code ? 'active' : ''}
+                  onClick={()=> setSelectItemCode(item.code)}
                 >
                   <div className="item-img-box">
                     <img src={process.env.FILE_URL + item.bankIcon} />

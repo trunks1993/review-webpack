@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-14 15:37:18
- * @LastEditTime: 2020-07-24 20:13:15
+ * @LastEditTime: 2020-07-28 16:12:05
  */
 
 import React, { useEffect, useState } from 'react';
@@ -23,6 +23,9 @@ const Pay = (props) => {
   useEffect(() => {
     initStep();
     initOrderInfo();
+    return () => {
+      setStepCookie(2);
+    };
   }, []);
 
   const initStep = () => {
@@ -30,11 +33,11 @@ const Pay = (props) => {
       setStepCookie(step);
     } else {
       const stepCookie = getStepCookie();
-      setStep(parseInt(stepCookie));
+      if (stepCookie) setStep(parseInt(stepCookie));
     }
   };
 
-  const initOrderInfo = async() => {
+  const initOrderInfo = async () => {
     try {
       const orderId = getQueryVariable('orderId');
       const [err, data, msg] = await getOrderInfo(orderId);

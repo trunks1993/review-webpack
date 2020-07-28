@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-22 17:33:29
- * @LastEditTime: 2020-07-22 21:27:50
+ * @LastEditTime: 2020-07-28 14:56:25
  */
 
 import React, { useState, useEffect } from 'react';
@@ -131,7 +131,7 @@ const FinancialFlow = (props) => {
             size="small"
             type="primary"
             ghost
-            onClick={() => dispatchInit()}
+            onClick={() => initList()}
           >
             刷新
           </Button>

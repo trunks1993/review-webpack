@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-15 16:39:54
- * @LastEditTime: 2020-07-28 11:33:19
+ * @LastEditTime: 2020-07-28 16:26:44
  */
 
 import React, { useState, useEffect } from 'react';
@@ -71,6 +71,7 @@ export default (props) => {
         提交订单成功，请确认付款信息
       </div>
       <div className="page-pay_confirm-pay-warn">
+        免责声明:
         付款前，请务必仔细核对订单详情，避免重复充值、误充等情况。如有发生，需自行承担损失。
       </div>
       <ul className="page-pay_confirm-pay-content">
