@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 20:14:20
- * @LastEditTime: 2020-07-28 16:21:42
+ * @LastEditTime: 2020-07-29 15:53:19
  */
 import React, { useState, useEffect } from 'react';
 import {
@@ -30,6 +30,8 @@ import {
   ORDER_STATUS_4,
   ORDER_STATUS_5,
   PRODUCT_TYPE_1,
+  PRODUCT_TYPE_2,
+  PRODUCT_TYPE_3,
   PRODUCT_TYPE_4,
   TraceStatus,
   TRACE_STATUS_5,
@@ -162,9 +164,9 @@ export default (props) => {
    * @name 再次购买
    * @param {number} id
    */
-  const buyAgain = async(orderId) => {
+  const buyAgain = async (orderId) => {
     try {
-      const [err, data, msg] = await rebuy({orderId});
+      const [err, data, msg] = await rebuy({ orderId });
       if (!err) history.push('/admin/car');
     } catch (error) {}
   };
@@ -207,6 +209,36 @@ export default (props) => {
 
   const TypeBtnMap = {
     [PRODUCT_TYPE_1]: (item) =>
+      item.status === ORDER_STATUS_4 && (
+        <span
+          className="purchase-order_trace-btn"
+          onClick={() => {
+            window.open(
+              `${
+                process.env.BASE_API + '/order/cardExtract'
+              }?token=${getToken()}&itemCode=${item.code}`
+            );
+          }}
+        >
+          提取
+        </span>
+      ),
+    [PRODUCT_TYPE_2]: (item) =>
+      item.status === ORDER_STATUS_4 && (
+        <span
+          className="purchase-order_trace-btn"
+          onClick={() => {
+            window.open(
+              `${
+                process.env.BASE_API + '/order/cardExtract'
+              }?token=${getToken()}&itemCode=${item.code}`
+            );
+          }}
+        >
+          提取
+        </span>
+      ),
+    [PRODUCT_TYPE_3]: (item) =>
       item.status === ORDER_STATUS_4 && (
         <span
           className="purchase-order_trace-btn"
@@ -295,11 +327,12 @@ export default (props) => {
             }
             style={{ marginBottom: '20px' }}
           >
-            <Col span={4}>最近三个月订单</Col>
-            <Col span={10}>订单详情</Col>
-            <Col span={2}>总金额</Col>
+            <Col span={5}>最近三个月订单</Col>
+            <Col span={6}>订单详情</Col>
+            <Col span={2}>单价</Col>
+            <Col span={3} offset={1}>总金额(元)</Col>
             <Col span={2}>状态</Col>
-            <Col span={6}>操作</Col>
+            <Col span={5}>操作</Col>
           </Row>
           {fixed && <div style={{ marginBottom: '20px' }} />}
 

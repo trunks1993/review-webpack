@@ -200,7 +200,11 @@ export default () => {
             />
             <Form.Item label=" " colon={false}>
               <div className="fbc">
-                <Checkbox ref={checkboxRef} checked={agree}>
+                <Checkbox
+                  ref={checkboxRef}
+                  checked={agree}
+                  onChange={() => setAgree(!agree)}
+                >
                   我已阅读并同意
                   <Button type="link" onClick={() => setVisible(true)}>
                     《用户服务协议》

@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 19:32:18
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-29 09:34:21
+ * @LastEditTime: 2020-07-29 17:12:46
  */
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Table, Pagination, Icon, Row, Col } from 'antd';
@@ -61,7 +61,7 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
       align: 'center',
       width: 200,
       dataIndex: 'modifyTime',
-      render: (modifyTime) => moment(modifyTime).format('YYYY-MM-DD HH:mm:ss'),
+      render: (modifyTime) => !modifyTime ? null:moment(modifyTime).format('YYYY-MM-DD HH:mm:ss'),
     },
     {
       title: '标题',

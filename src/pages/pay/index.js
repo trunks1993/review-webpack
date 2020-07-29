@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-14 15:37:18
- * @LastEditTime: 2020-07-28 16:12:05
+ * @LastEditTime: 2020-07-29 15:45:39
  */
 
 import React, { useEffect, useState } from 'react';
@@ -68,7 +68,7 @@ const Pay = (props) => {
   return (
     <div className="page-pay">
       <div style={{ border: '1px solid #e6e6e6' }}>
-        <div className="page-pay_header">星权益 / 采购订单</div>
+        <div className="shop-item_header">星权益 / 采购订单</div>
         <Step step={step} />
         {StepMap[step](orderInfo, (step) => {
           setStep(step);

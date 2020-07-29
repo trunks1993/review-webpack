@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-22 16:33:56
- * @LastEditTime: 2020-07-28 15:01:49
+ * @LastEditTime: 2020-07-29 15:56:15
  */
 
 import React, { useState, useEffect } from 'react';
@@ -92,9 +92,9 @@ const FinancialFlow = (props) => {
       align: 'center',
     },
     {
-      title: '业务订单号',
+      title: '交易订单号',
       align: 'center',
-      render: (record) => record.code,
+      render: (record) => record.orderNo,
       width: '15%',
     },
     {

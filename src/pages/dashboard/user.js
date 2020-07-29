@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-14 16:26:54
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-27 18:08:17
+ * @LastEditTime: 2020-07-29 15:27:24
  */
 import React from 'react';
 
@@ -39,20 +39,22 @@ const user = ({ list }) => {
           <Col span={7}> 认证状态: </Col>{' '}
           <Col span={17}> {MerchantStatus[list?.identityState]} </Col>
           <Col span={7}> 最近登录: </Col>{' '}
-          <Col span={13}> {list?.lastAccessTime} </Col>
+          <Col span={13}>
+            {moment(list?.lastAccessTime).format('YYYY-MM-DD HH:MM:SS')}
+          </Col>
         </Row>
         <Button
           type="primary"
           className="user-desc--left"
-          onClick={() => history.push('/admin/operations/businessInfo/certification')
+          onClick={() =>
+            history.push('/admin/operations/businessInfo/certification')
           }
         >
           实名认证
         </Button>
         <Button
           className="user-desc--right"
-          onClick={() => history.push('/admin/operations/businessInfo/account')
-          }
+          onClick={() => history.push('/admin/operations/businessInfo/account')}
         >
           账号管理
         </Button>

@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-15 09:41:09
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-21 20:30:47
+ * @LastEditTime: 2020-07-29 16:31:52
  */
 import request from '@/utils/request';
 
@@ -110,5 +110,16 @@ export async function getMerchantBaseInfo() {
 export async function getLatestIdentifyWorkorder() {
   return request('/user/getLatestIdentifyWorkorder', {
     method: 'POST',
+  });
+}
+
+/**
+ * @name: 发送验证码
+ * @param {data}
+ */
+export async function sendAppSecretValidateCode(data) {
+  return request('/application/sendAppSecretValidateCode', {
+    method: 'POST',
+    data,
   });
 }

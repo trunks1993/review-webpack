@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-14 17:23:44
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-27 14:15:37
+ * @LastEditTime: 2020-07-29 15:54:23
  */
 import React from 'react';
 import { Icon } from 'antd';
@@ -25,6 +25,7 @@ const platform = () => {
       </div>
       <div className="content-sj">
         <img src={UNXX} alt="" />
+        <div className="content-sj--data">暂无消息</div>
       </div>
     </div>
   );
