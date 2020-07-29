@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 19:32:18
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-28 17:20:39
+ * @LastEditTime: 2020-07-29 10:04:37
  */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
@@ -110,7 +110,7 @@ const account = ({ dispatch, list, total, loading }) => {
                   labelCol={{ span: 8 }}
                   wrapperCol={{ span: 16 }}
                   customProps={{
-                    placeholder: '请输入标题',
+                    placeholder: '请输入登录账号',
                     size: 'large',
                   }}
                 />

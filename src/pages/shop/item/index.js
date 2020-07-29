@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-16 19:17:35
- * @LastEditTime: 2020-07-23 14:33:58
+ * @LastEditTime: 2020-07-29 11:01:22
  */
 
 import React, { useEffect, useState } from 'react';
@@ -31,6 +31,7 @@ const ShopItem = (props) => {
   const [productListLoading, setProductListLoading] = useState(false);
   const [skuLoading, setSkuLoading] = useState(false);
   const [submitOrderLoading, setSubmitOrderLoading] = useState(false);
+  const [submitCarLoading, setSubmitCarLoading] = useState(false);
 
   const [productList, setProductList] = useState([]);
   const [skuList, setSkuList] = useState([]);
@@ -49,7 +50,8 @@ const ShopItem = (props) => {
   }, []);
 
   useEffect(() => {
-    if (productList && productList.length) setProductCodeSelect(productCode || productList[0].productCode);
+    if (productList && productList.length)
+      setProductCodeSelect(productCode || productList[0].productCode);
   }, [productList]);
 
   useEffect(() => {
@@ -68,7 +70,7 @@ const ShopItem = (props) => {
    * @name: 获取品牌下对应的商品列表
    * @param {type}
    */
-  const _getProductList = async() => {
+  const _getProductList = async () => {
     try {
       setGoodsLoading(true);
       setProductListLoading(true);
@@ -90,7 +92,7 @@ const ShopItem = (props) => {
    * @name: 获取sku
    * @param {type}
    */
-  const _getGoodsSku = async(productCode) => {
+  const _getGoodsSku = async (productCode) => {
     const cacheObj = skuCaches[productCode];
     if (!_.isUndefined(cacheObj)) return setSkuList(cacheObj);
     try {
@@ -113,7 +115,7 @@ const ShopItem = (props) => {
    * @name: 通过sku code 获取商品信息
    * @param {type}
    */
-  const _getGoodsInfo = async(productSubCode) => {
+  const _getGoodsInfo = async (productSubCode) => {
     try {
       const cacheObj = goodsInfoCaches[productSubCode];
       if (!_.isUndefined(cacheObj)) return setGoodsInfo(cacheObj);
@@ -141,10 +143,11 @@ const ShopItem = (props) => {
    * @name: 立即购买 | 加入购物车
    * @param {type}
    */
-  const _submitOrder = async(isBuy) => {
+  const _submitOrder = async (isBuy) => {
     try {
       const productType = parseInt(goodsInfo?.productTypeCode);
-      if (productType === PRODUCT_TYPE_4 && !fileList.length) return message.error('请上传充值账号');
+      if (productType === PRODUCT_TYPE_4 && !fileList.length)
+        return message.error('请上传充值账号');
 
       const paramsObj = {
         goodsCode: goodsInfo?.code,
@@ -155,14 +158,18 @@ const ShopItem = (props) => {
       };
 
       const api = isBuy ? submitOrder : addToCart;
-      setSubmitOrderLoading(true);
+      const loading = isBuy ? setSubmitOrderLoading : setSubmitCarLoading;
+
+      loading(true);
       const [err, data, msg] = await api(paramsObj);
-      setSubmitOrderLoading(false);
+      loading(false);
+
       if (!err) {
         if (isBuy) history.push(`/admin/pay?orderId=${data.orderId}`);
-        else dispatch({
-          type: 'account/setCarData',
-        });
+        else
+          dispatch({
+            type: 'account/setCarData',
+          });
       } else message.error(msg);
     } catch (error) {}
   };
@@ -263,7 +270,7 @@ const ShopItem = (props) => {
             style={{ marginLeft: '30px' }}
             disabled={count > goodsInfo?.singleBuyLimit}
             onClick={() => _submitOrder(false)}
-            loading={submitOrderLoading}
+            loading={submitCarLoading}
           >
             加入购物车
           </Button>

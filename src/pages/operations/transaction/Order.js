@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 14:20:06
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-28 15:57:39
+ * @LastEditTime: 2020-07-29 09:35:49
  */
 import React, { useState, useEffect } from 'react';
 import MapForm from '@/components/MapForm';
@@ -148,7 +148,7 @@ const Order = ({ dispatch, list, total, loading }) => {
                 label="交易类型"
                 name="bizType"
                 customProps={{
-                  placeholder: '请输入交易类型',
+                  placeholder: '请选择交易类型',
                   size: 'large',
                 }}
                 labelCol={{ span: 8 }}
@@ -182,7 +182,7 @@ const Order = ({ dispatch, list, total, loading }) => {
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 customProps={{
-                  placeholder: '请输入交易订单号',
+                  placeholder: '请输入外部订单号',
                   size: 'large',
                 }}
               />

@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-16 16:48:10
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-28 15:54:57
+ * @LastEditTime: 2020-07-29 10:17:57
  */
 import React, { useState, useEffect } from 'react';
 import MapForm from '@/components/MapForm';
@@ -60,35 +60,32 @@ const modifyApp = () => {
 
   // 设置应用
   const modifyApp = () => {
-    form.validateFields(async(err, value) => {
+    form.validateFields(async (err, value) => {
       if (!err) {
-        let [errs, data, msg] = '';
         try {
-          if (_.isEmpty(appId)) {
-            [errs, data, msg] = await addApplication(value);
-          } else {
-            [errs, data, msg] = await modifyApplication({ ...value, appId });
-          }
-
+          const api = appId ? modifyApplication : addApplication;
+          let [errs, data, msg] = await api(value);
           if (!errs) {
             message.success('操作成功');
             history.push('/admin/operations/businessInfo/application');
-          }
+          } else message.error(msg);
         } catch (error) {}
       }
     });
   };
 
   /** 获取应用信息 */
-  const getAppInfo = async() => {
+  const getAppInfo = async () => {
     try {
       const [err, data, msg] = await getApplication({ appId });
-      form.setFieldsValue({
-        ['iconUrl']: data?.iconUrl,
-        ['appName']: data?.appName,
-        ['resume']: data?.resume,
-        ['remark']: data?.remark,
-      });
+      if (!err) {
+        form.setFieldsValue({
+          ['iconUrl']: data?.iconUrl,
+          ['appName']: data?.appName,
+          ['resume']: data?.resume,
+          ['remark']: data?.remark,
+        });
+      } else message.error(msg);
     } catch (error) {}
   };
 

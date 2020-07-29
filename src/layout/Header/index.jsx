@@ -47,14 +47,15 @@ const Comp = (props) => {
         >
           {_.map(
             asyncRoutes,
-            (item) => !item.hidden && (
-              <Menu.Item
-                key={item.path}
-                onClick={(e) => history.push(`${item.path}`)}
-              >
-                {item.title}
-              </Menu.Item>
-            )
+            (item) =>
+              !item.hidden && (
+                <Menu.Item
+                  key={item.path}
+                  onClick={(e) => history.push(`${item.path}`)}
+                >
+                  {item.title}
+                </Menu.Item>
+              )
           )}
           <Menu.Item onClick={(e) => window.open('')}>文档中心</Menu.Item>
         </Menu>
@@ -77,7 +78,7 @@ const Comp = (props) => {
   );
 };
 
-export default connect(({ app, account }) => ({
-  carCount: app.carCount,
+export default connect(({ account }) => ({
+  carCount: account.carData.cartItemList?.length,
   user: account.user,
 }))(Comp);
