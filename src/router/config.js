@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-24 17:20:08
- * @LastEditTime: 2020-07-28 15:59:24
+ * @LastEditTime: 2020-07-29 10:03:34
  */
 
 // layout下的子模块
@@ -112,7 +112,7 @@ export const asyncRoutes = [
       {
         id: 21,
         title: '交易管理',
-        icon: 'icon-tongji',
+        icon: 'icon-qiandai',
         children: [
           {
             id: 211,

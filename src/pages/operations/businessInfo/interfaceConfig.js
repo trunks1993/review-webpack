@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-17 15:52:50
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-24 16:49:59
+ * @LastEditTime: 2020-07-29 09:24:05
  */
 
 import React, { useState, useEffect } from 'react';
@@ -70,7 +70,7 @@ const interfaceConfig = ({ jumpMonitor, loading }) => {
         form.setFieldsValue({
           ['callbackUrl']: data.callbackUrl,
           ['nologinUrl']: data.nologinUrl,
-          ['virtualRecharge']: data.virtualRecharge,
+          ['virtualChargeUrl']: data.virtualRecharge,
         });
       }
     } catch (error) {}

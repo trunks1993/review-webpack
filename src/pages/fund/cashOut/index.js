@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-24 08:58:07
- * @LastEditTime: 2020-07-24 17:53:29
+ * @LastEditTime: 2020-07-29 10:00:38
  */
 
 import React, { useState, useEffect } from 'react';
@@ -17,7 +17,7 @@ const CashOut = (props) => {
 
   const inputNumberRef = React.createRef();
 
-  const submit = async() => {
+  const submit = async () => {
     history.push({
       pathname: '/admin/fund/cashOutSuccess',
       state: { from: location.pathname },
@@ -50,7 +50,8 @@ const CashOut = (props) => {
                 precision={0}
                 min={1}
                 defaultValue={1}
-                formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                formatter={(value) =>
+                  `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                 }
                 parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
                 size="large"
@@ -89,7 +90,10 @@ const CashOut = (props) => {
           </div>
 
           <div className="fund-recharge_content-form-btn">
-            <Button type="primary" onClick={submit}>
+            <Button
+              type="primary"
+              // onClick={submit}
+            >
               提交
             </Button>
           </div>
