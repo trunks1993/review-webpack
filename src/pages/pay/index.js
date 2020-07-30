@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-14 15:37:18
- * @LastEditTime: 2020-07-28 16:12:05
+ * @LastEditTime: 2020-07-30 14:44:35
  */
 
 import React, { useEffect, useState } from 'react';
@@ -16,7 +16,7 @@ import PaySuccess from './PaySuccess';
 import { connect } from 'dva';
 
 const Pay = (props) => {
-  const { location, amount, telephone, history } = props;
+  const { location, amount, telephone, history, dispatch } = props;
   const [step, setStep] = useState(2);
   const [orderInfo, setOrderInfo] = useState({});
 
@@ -62,13 +62,13 @@ const Pay = (props) => {
         history={history}
       />
     ),
-    4: () => <PaySuccess history={history} />,
+    4: () => <PaySuccess history={history} dispatch={dispatch} />,
   };
 
   return (
     <div className="page-pay">
       <div style={{ border: '1px solid #e6e6e6' }}>
-        <div className="page-pay_header">星权益 / 采购订单</div>
+        <div className="shop-item_header">星权益 / 采购订单</div>
         <Step step={step} />
         {StepMap[step](orderInfo, (step) => {
           setStep(step);

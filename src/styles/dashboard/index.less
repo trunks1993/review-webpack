@@ -1,7 +1,6 @@
 .dashboard:extend(.f12, .base-scroll) {
   width: 1200px;
   height: 100%;
-  margin-top: 10px;
   &-left {
     width: 860px;
     margin-right: 10px;
@@ -47,7 +46,7 @@
 .title {
   background-color: @white;
   height: 40px;
-  padding: 13px 20px;
+  padding: 13px 23px;
 
   &-img {
     margin-right: 10px;
@@ -56,10 +55,11 @@
     height: 16px;
   }
 
-  &-right {
+  &-right:extend(.f14) {
     float: right;
-    color: @blue;
     cursor: pointer;
+    font-weight: 600;
+    color: @blue;
   }
 
   &-desc {
@@ -157,7 +157,7 @@
   &-but--right {
     width: 120px;
     height: 36px;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-left: 30px;
     border-radius: 4px;
     border: 1px solid @blue;
@@ -166,18 +166,32 @@
 
   &-sj {
     text-align: center;
-    margin-top: 30px;
     font-size: 13px;
+
+    &--title {
+      border-right: 1px solid @border-color1;
+    }
 
     img {
       width: 120px;
       height: 105px;
+      margin-top: 40px;
     }
 
-    div {
+    &--data {
       color: @gray1;
       margin-top: 10px;
     }
+  }
+  &-title--head:extend(.f14) {
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    color: @black1;
+  }
+  &-title--content:extend(.f24) {
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    color: @black;
   }
 }
 
@@ -238,12 +252,12 @@
   width: 320px;
   height: 240px;
   background-color: @white;
-  padding: 17px 22px;
+  padding: 16px 22px;
 
   &-title:extend(.f16) {
     font-weight: bold;
     color: @black;
-    padding: 0px 10px 17px 10px;
+    padding: 0px 10px 10px 10px;
     border-bottom: 1px solid @gray1;
     margin-top: 5px;
   }

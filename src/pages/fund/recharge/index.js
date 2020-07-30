@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-24 08:57:48
- * @LastEditTime: 2020-07-28 15:59:06
+ * @LastEditTime: 2020-07-30 14:47:19
  */
 
 import React, { useState, useEffect } from 'react';
@@ -11,7 +11,7 @@ import { InputNumber, List, message, Button } from 'antd';
 import { fetchList, addWorkorder } from '@/services/recharge';
 
 const Recharge = (props) => {
-  const { amount, history, location } = props;
+  const { amount, history, location, dispatch } = props;
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectItemCode, setSelectItemCode] = useState('');
@@ -26,7 +26,7 @@ const Recharge = (props) => {
 
   const inputNumberRef = React.createRef();
 
-  const getBankList = async() => {
+  const getBankList = async () => {
     try {
       setLoading(true);
       const [err, data, msg] = await fetchList();
@@ -37,7 +37,7 @@ const Recharge = (props) => {
     } catch (error) {}
   };
 
-  const submit = async() => {
+  const submit = async () => {
     const amount = inputNumberRef.current.inputNumberRef.state.value;
     if (!amount) return message.error('充值金额不能为空');
     const selectItem = _.find(list, (item) => item.code === selectItemCode);
@@ -50,6 +50,7 @@ const Recharge = (props) => {
         bankName,
       });
       if (!err) {
+        dispatch({ type: 'account/setAmount' });
         history.push({
           pathname: '/admin/fund/rechargeSuccess',
           state: { from: location.pathname },
@@ -87,7 +88,8 @@ const Recharge = (props) => {
                 min={1}
                 max={1000000}
                 defaultValue={1}
-                formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                formatter={(value) =>
+                  `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                 }
                 parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
                 size="large"
@@ -103,7 +105,7 @@ const Recharge = (props) => {
                 <li
                   key={item.id}
                   className={selectItemCode === item.code ? 'active' : ''}
-                  onClick={()=> setSelectItemCode(item.code)}
+                  onClick={() => setSelectItemCode(item.code)}
                 >
                   <div className="item-img-box">
                     <img src={process.env.FILE_URL + item.bankIcon} />

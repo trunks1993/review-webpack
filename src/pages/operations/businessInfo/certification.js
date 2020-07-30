@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-17 20:59:45
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-28 09:42:23
+ * @LastEditTime: 2020-07-29 17:07:58
  */
 
 import React, { useState, useEffect } from 'react';
@@ -36,13 +36,16 @@ const certification = () => {
   const [disabled, setDisabled] = useState(true);
   const [Inputdisabled, setInputdisabled] = useState(false);
   const [butVisible, setButVisible] = useState(true);
-  const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({});
   const [helpMsg, setHelpMsg] = useState(
-    '需清晰展示五官和文字信息， 支持2M以内的PNG、JPEG、GIF格式'
+    <div style={{ fontSize: 12 }}>
+      需清晰展示五官和文字信息， 支持2M以内的PNG、JPEG、GIF格式
+    </div>
   );
   const [rejectText, setRejectText] = useState(
-    '您尚未完成实名认证，请根据实际情况选择填写。'
+    <div style={{ fontSize: 12 }}>
+      您尚未完成实名认证，请根据实际情况选择填写。
+    </div>
   );
   const [rejectTextType, setRejectTextType] = useState(false);
   const [helpMsag, setHelpMsag] = useState();
@@ -51,16 +54,16 @@ const certification = () => {
 
   useEffect(() => {
     if (_.isEmpty(form)) return;
-    const data = JSON.parse(stateData.data);
-    console.log(data);
-    form.setFieldsValue({ ...data });
-  }, [loading]);
-
-  useEffect(() => {
-    if (_.isEmpty(form)) return;
     if (typeData?.identityState === 0) form.setFieldsValue();
     form.resetFields();
   }, [tabKey]);
+
+  useEffect(() => {
+    if (!_.isEmpty(form)) {
+      const data = JSON.parse(stateData.data);
+      form.setFieldsValue({ ...data });
+    }
+  }, [form]);
 
   useEffect(() => {
     getMerchantBase();
@@ -75,9 +78,6 @@ const certification = () => {
     if (_.isEmpty(stateData)) return;
     setTabKey(stateData?.identifyType.toString());
     ToolMap[typeData.identityState](stateData);
-    // setInterval(() => {
-    setLoading(false);
-    // }, 2000);
   }, [stateData]);
 
   // 提交
@@ -189,13 +189,12 @@ const certification = () => {
           >
             <Tabs.TabPane tab={'企业认证'} disabled={disabled} key="2">
               <div style={{ margin: '30px 0px' }}>
-                {/* {loading ? (
-                  // <Success
-                  //   title={'企业认证信息提交成功！'}
-                  //   desc={'企业认证信息已提交成功，平台正在进行审核……'}
-                  // />
-                  <Spin />
-                ) : ( */}
+                {type ? (
+                  <Success
+                    title={'企业认证信息提交成功！'}
+                    desc={'企业认证信息已提交成功，平台正在进行审核……'}
+                  />
+                ) : (
                   <MapForm
                     className="global-form global-edit-form"
                     onCreate={(form) => setForm(form)}
@@ -337,7 +336,7 @@ const certification = () => {
                       ''
                     )}
                   </MapForm>
-                )
+                )}
               </div>
             </Tabs.TabPane>
             <Tabs.TabPane tab={'个人认证'} disabled={disabled} key="1">
@@ -362,7 +361,7 @@ const certification = () => {
                       <Col span={10} push={2}>
                         <CstUpload
                           name="idCardFront"
-                          label="应用logo:"
+                          label="身份证:"
                           help={helpMsg}
                           labelCol={{ span: 5 }}
                           wrapperCol={{ span: 17 }}

@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-22 20:19:58
- * @LastEditTime: 2020-07-28 14:39:44
+ * @LastEditTime: 2020-07-30 11:11:19
  */
 
 import React, { useState, useEffect } from 'react';
@@ -95,30 +95,27 @@ const home = ({ list: { amount, frozeAmount } }) => {
       title: '交易时间',
       dataIndex: 'createTime',
       align: 'center',
-      width: '18%',
-      render: (createTime) => {
-        return <div>{formateTime(createTime)}</div>;
-      },
+      width: 200,
+      render: (createTime) => formateTime(createTime),
     },
     {
       title: '交易订单号',
       align: 'center',
+      width: 120,
       dataIndex: 'orderNo',
     },
     {
       title: '交易类型',
       align: 'center',
-      width: '10%',
       dataIndex: 'bizType',
-      render: (bizType) => {
-        return <div>{financialFlowBizTypes[bizType]}</div>;
-      },
+      width: 110,
+      render: (bizType) => financialFlowBizTypes[bizType],
     },
     {
       title: '收支类型',
       align: 'center',
-      width: '10%',
       dataIndex: 'type',
+      width: 110,
       render: (val) => {
         if (val === 1) {
           return (
@@ -137,6 +134,7 @@ const home = ({ list: { amount, frozeAmount } }) => {
     {
       title: '金额(元)',
       align: 'center',
+      width: 110,
       dataIndex: 'changeAmount',
       render: (changeAmount) => {
         return (
@@ -149,17 +147,17 @@ const home = ({ list: { amount, frozeAmount } }) => {
     {
       title: '余额(元)',
       align: 'center',
+      width: 110,
       dataIndex: 'amount',
       render: (amount) => {
         return (
-          <div className="money">
-            {getFloat(amount / TRANSTEMP, PRECISION)}
-          </div>
+          <div className="money">{getFloat(amount / TRANSTEMP, PRECISION)}</div>
         );
       },
     },
     {
       title: '备注',
+      width: 110,
       align: 'center',
       dataIndex: 'remark',
     },

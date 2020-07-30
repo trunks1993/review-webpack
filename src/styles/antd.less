@@ -24,12 +24,9 @@
   }
 }
 
-.ant-input {
-  &::-webkit-input-placeholder:extend(.f12) {
-  }
+.ant-input :extend(.f12) {
 }
-.ant-select-selection__placeholder {
-  font-size: 12px;
+.ant-select-selection :extend(.f12) {
 }
 
 .ant-popover-inner-content {
@@ -186,10 +183,10 @@
     border-bottom: none;
     background: #f2f2f2;
     border-bottom: 1px solid #e6e6e6;
-    user-select:none;
+    user-select: none;
   }
   .ant-tabs-content {
-    padding: 30px 50px;
+    padding: 20px 50px;
   }
 
   .ant-tabs-tab {
@@ -266,5 +263,11 @@
         margin-right: 12px;
       }
     }
+  }
+}
+/** dashboard */
+.content {
+  .ant-tabs-nav .ant-tabs-tab {
+    padding: 6px 0px 16px 0px;
   }
 }

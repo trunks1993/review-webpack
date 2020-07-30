@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-15 16:40:01
- * @LastEditTime: 2020-07-24 13:14:46
+ * @LastEditTime: 2020-07-30 14:43:27
  */
 
 import React, { useState, useEffect } from 'react';
@@ -29,10 +29,14 @@ export default (props) => {
     else setTraceList([]);
   }, [orderItemCode]);
 
+  useEffect(() => {
+    // dispatch({ type: 'account/setAmount' });
+  }, []);
+
   /**
    * @name: 列表加载
    */
-  const initTraceList = async() => {
+  const initTraceList = async () => {
     setConfirmLoading(true);
     try {
       const [err, data, msg] = await queryListTrace({

@@ -44,7 +44,7 @@ const DropMenu = ({ user, dispatch }) => {
    * @param {type}
    */
   const handlePwdSubmit = () => {
-    pwdForm.validateFields(async(err, value) => {
+    pwdForm.validateFields(async (err, value) => {
       if (!err) {
         try {
           setPwdLoading(true);
@@ -64,7 +64,7 @@ const DropMenu = ({ user, dispatch }) => {
    * @param {type}
    */
   const handleInfoSubmit = () => {
-    infoForm.validateFields(async(err, value) => {
+    infoForm.validateFields(async (err, value) => {
       if (!err) {
         try {
           setInfoLoading(true);
@@ -190,7 +190,7 @@ const DropMenu = ({ user, dispatch }) => {
         confirmLoading={pwdLoading}
         title={
           <div style={{ textAlign: 'center', fontWeight: 'bold' }}>
-            修改密码
+            修改密码-{user.telephone}
           </div>
         }
         onOk={handlePwdSubmit}

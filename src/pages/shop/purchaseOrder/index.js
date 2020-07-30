@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 20:14:20
- * @LastEditTime: 2020-07-28 16:21:42
+ * @LastEditTime: 2020-07-30 15:03:26
  */
 import React, { useState, useEffect } from 'react';
 import {
@@ -30,6 +30,8 @@ import {
   ORDER_STATUS_4,
   ORDER_STATUS_5,
   PRODUCT_TYPE_1,
+  PRODUCT_TYPE_2,
+  PRODUCT_TYPE_3,
   PRODUCT_TYPE_4,
   TraceStatus,
   TRACE_STATUS_5,
@@ -42,6 +44,8 @@ import noOrder from '@/assets/images/shop/no-order.png';
 
 import { createHashHistory } from 'history';
 const history = createHashHistory();
+
+import { connect } from 'dva';
 
 import moment from 'moment';
 import { getToken } from '@/utils/auth';
@@ -71,9 +75,8 @@ const TabsPanel = (props) => {
   );
 };
 
-export default (props) => {
-  const { history, location } = props;
-
+const purchase = (props) => {
+  const { location, dispatch } = props;
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [fixed, setFixed] = useState(false);
@@ -162,10 +165,15 @@ export default (props) => {
    * @name 再次购买
    * @param {number} id
    */
-  const buyAgain = async(orderId) => {
+  const buyAgain = async (orderId) => {
     try {
-      const [err, data, msg] = await rebuy({orderId});
-      if (!err) history.push('/admin/car');
+      const [err, data, msg] = await rebuy({ orderId });
+      if (!err) {
+        dispatch({ type: 'account/setCarData' });
+        history.push('/admin/car');
+      } else {
+        message.error(msg);
+      }
     } catch (error) {}
   };
 
@@ -207,6 +215,36 @@ export default (props) => {
 
   const TypeBtnMap = {
     [PRODUCT_TYPE_1]: (item) =>
+      item.status === ORDER_STATUS_4 && (
+        <span
+          className="purchase-order_trace-btn"
+          onClick={() => {
+            window.open(
+              `${
+                process.env.BASE_API + '/order/cardExtract'
+              }?token=${getToken()}&itemCode=${item.code}`
+            );
+          }}
+        >
+          提取
+        </span>
+      ),
+    [PRODUCT_TYPE_2]: (item) =>
+      item.status === ORDER_STATUS_4 && (
+        <span
+          className="purchase-order_trace-btn"
+          onClick={() => {
+            window.open(
+              `${
+                process.env.BASE_API + '/order/cardExtract'
+              }?token=${getToken()}&itemCode=${item.code}`
+            );
+          }}
+        >
+          提取
+        </span>
+      ),
+    [PRODUCT_TYPE_3]: (item) =>
       item.status === ORDER_STATUS_4 && (
         <span
           className="purchase-order_trace-btn"
@@ -272,210 +310,221 @@ export default (props) => {
   ];
 
   return (
-    <div
-      className="purchase-order"
-      style={{ height: list.length > 0 ? 'auto' : '100%' }}
-      onScroll={pageScroll}
-    >
-      <div className="purchase-order_header">星权益 / 采购订单</div>
-      <TabsPanel
-        onChange={(status) =>
-          setFilterParams({
-            ...filterParams,
-            status,
-          })
-        }
+    <>
+      <div className="purchase-order_header" style={{ marginBottom: 10 }}>
+        星权益 {'>'} 采购订单
+      </div>
+      <div
+        className="purchase-order"
+        style={{ height: list.length > 0 ? 'auto' : '100%' }}
+        onScroll={pageScroll}
       >
-        <div>
-          <Row
-            className={
-              fixed
-                ? 'purchase-order_table-header--fixed'
-                : 'purchase-order_table-header'
-            }
-            style={{ marginBottom: '20px' }}
-          >
-            <Col span={4}>最近三个月订单</Col>
-            <Col span={10}>订单详情</Col>
-            <Col span={2}>总金额</Col>
-            <Col span={2}>状态</Col>
-            <Col span={6}>操作</Col>
-          </Row>
-          {fixed && <div style={{ marginBottom: '20px' }} />}
+        <TabsPanel
+          onChange={(status) =>
+            setFilterParams({
+              ...filterParams,
+              status,
+            })
+          }
+        >
+          <div>
+            <Row
+              className={
+                fixed
+                  ? 'purchase-order_table-header--fixed'
+                  : 'purchase-order_table-header'
+              }
+              style={{ marginBottom: '20px' }}
+            >
+              <Col span={5}>最近三个月订单</Col>
+              <Col span={6}>订单详情</Col>
+              <Col span={2}>单价</Col>
+              <Col span={3} offset={1}>
+                总金额(元)
+              </Col>
+              <Col span={2}>状态</Col>
+              <Col span={5}>操作</Col>
+            </Row>
+            {fixed && <div style={{ marginBottom: '20px' }} />}
 
-          <Skeleton
-            loading={loading}
-            active
-            title={false}
-            avatar={false}
-            paragraph={{ rows: 10 }}
-          >
-            {list && list.length > 0 ? (
-              _.map(list, (item) => (
-                <Row key={item.id}>
-                  <Col span={24} className="purchase-order_table-title">
-                    <span>
-                      {moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')}
-                    </span>
-                    <span style={{ marginLeft: '48px' }}>
-                      订单号：{item.orderId}
-                    </span>
-                  </Col>
-                  {_.map(item.orderItemList, (v, index) => (
-                    <span key={index} className="purchase-order_table-item">
-                      <Col span={6}>
-                        <div style={{ width: '80%' }}>
-                          <List.Item.Meta
-                            avatar={
-                              <Avatar
-                                shape="square"
-                                size={60}
-                                src={`/file${v.iconUrl}`}
-                              />
-                            }
-                            title={
-                              <>
-                                <span
-                                  title={v.brandName}
-                                  className="purchase-order_product-title"
-                                >
-                                  {v.brandName}
+            <Skeleton
+              loading={loading}
+              active
+              title={false}
+              avatar={false}
+              paragraph={{ rows: 10 }}
+            >
+              {list && list.length > 0 ? (
+                _.map(list, (item) => (
+                  <Row key={item.id}>
+                    <Col span={24} className="purchase-order_table-title">
+                      <span>
+                        {moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')}
+                      </span>
+                      <span style={{ marginLeft: '48px' }}>
+                        订单号：{item.orderId}
+                      </span>
+                    </Col>
+                    {_.map(item.orderItemList, (v, index) => (
+                      <span key={index} className="purchase-order_table-item">
+                        <Col span={6}>
+                          <div style={{ width: '80%' }}>
+                            <List.Item.Meta
+                              avatar={
+                                <Avatar
+                                  shape="square"
+                                  size={60}
+                                  src={`/file${v.iconUrl}`}
+                                />
+                              }
+                              title={
+                                <>
+                                  <span
+                                    title={v.brandName}
+                                    className="purchase-order_product-title"
+                                  >
+                                    {v.brandName}
+                                  </span>
+                                  {TypeBtnMap[v.productTypeCode] &&
+                                    TypeBtnMap[v.productTypeCode](v)}
+                                </>
+                              }
+                              description={
+                                <span title={v.productSubName}>
+                                  {v.productSubName}
                                 </span>
-                                {TypeBtnMap[v.productTypeCode] &&
-                                  TypeBtnMap[v.productTypeCode](v)}
-                              </>
-                            }
-                            description={
-                              <span title={v.productSubName}>
-                                {v.productSubName}
-                              </span>
-                            }
-                          />
-                        </div>
-                      </Col>
-                      <Col span={2}>{v.detailCount}</Col>
-                      <Col span={2}>{v.typeLabel}</Col>
-                      <Col span={4}>
-                        ￥{getFloat(v.price / TRANSTEMP, PRECISION)}
-                      </Col>
-                      {index === 0 ? (
-                        <>
-                          <Col
-                            span={2}
-                            style={{ fontWeight: 'bold', color: '#333333' }}
-                          >
-                            ￥
-                            {getFloat(item.realTotalPay / TRANSTEMP, PRECISION)}
-                          </Col>
-                          <Col span={2}>{OrderStatus[item.status]}</Col>
-                          <Col span={6}>{ToolMap[item.status](item)}</Col>
-                        </>
-                      ) : (
-                        <>
-                          <Col span={10} />
-                        </>
-                      )}
-                    </span>
-                  ))}
-                </Row>
-              ))
-            ) : (
-              <div style={{ textAlign: 'center', paddingTop: '65px' }}>
-                <div>
-                  <img width="224px" height="133" src={noOrder} />
+                              }
+                            />
+                          </div>
+                        </Col>
+                        <Col span={2}>{v.detailCount}</Col>
+                        <Col span={2}>{v.typeLabel}</Col>
+                        <Col span={4}>
+                          ￥{getFloat(v.price / TRANSTEMP, PRECISION)}
+                        </Col>
+                        {index === 0 ? (
+                          <>
+                            <Col
+                              span={2}
+                              style={{ fontWeight: 'bold', color: '#333333' }}
+                            >
+                              ￥
+                              {getFloat(
+                                item.realTotalPay / TRANSTEMP,
+                                PRECISION
+                              )}
+                            </Col>
+                            <Col span={2}>{OrderStatus[item.status]}</Col>
+                            <Col span={6}>{ToolMap[item.status](item)}</Col>
+                          </>
+                        ) : (
+                          <>
+                            <Col span={10} />
+                          </>
+                        )}
+                      </span>
+                    ))}
+                  </Row>
+                ))
+              ) : (
+                <div style={{ textAlign: 'center', paddingTop: '65px' }}>
+                  <div>
+                    <img width="224px" height="133" src={noOrder} />
+                  </div>
+                  <span style={{ color: '#999999' }}>
+                    暂无订单，
+                    <Button
+                      type="link"
+                      style={{ padding: '0' }}
+                      onClick={() => history.push('/admin/shop')}
+                    >
+                      去购买{' '}
+                    </Button>
+                  </span>
                 </div>
-                <span style={{ color: '#999999' }}>
-                  暂无订单，
-                  <Button
-                    type="link"
-                    style={{ padding: '0' }}
-                    onClick={() => history.push('/admin/shop')}
-                  >
-                    去购买{' '}
-                  </Button>
-                </span>
-              </div>
-            )}
-          </Skeleton>
-        </div>
-      </TabsPanel>
+              )}
+            </Skeleton>
+          </div>
+        </TabsPanel>
 
-      <GlobalModal
-        modalVisible={!!orderItemCode}
-        title={
-          <div
-            style={{ textAlign: 'center', fontWeight: 'bold' }}
-          >{`${modalTitle}-直充明细`}</div>
-        }
-        cancelText={
-          <>
-            <span style={{ color: '#333333' }}>
-              充值账号
-              <span
-                style={{
-                  color: '#1A61DC',
-                  fontWeight: 'bold',
-                  margin: '0 5px',
-                }}
-              >
-                {traceList.length}
+        <GlobalModal
+          modalVisible={!!orderItemCode}
+          title={
+            <div
+              style={{ textAlign: 'center', fontWeight: 'bold' }}
+            >{`${modalTitle}-直充明细`}</div>
+          }
+          cancelText={
+            <>
+              <span style={{ color: '#333333' }}>
+                充值账号
+                <span
+                  style={{
+                    color: '#1A61DC',
+                    fontWeight: 'bold',
+                    margin: '0 5px',
+                  }}
+                >
+                  {traceList.length}
+                </span>
+                个
               </span>
-              个
-            </span>
-            <span style={{ color: '#333333', marginLeft: '10px' }}>
-              充值成功
-              <span
-                style={{
-                  color: '#1A61DC',
-                  fontWeight: 'bold',
-                  margin: '0 5px',
-                }}
-              >
-                {_.map(
-                  traceList,
-                  (item) => item.status === TRACE_STATUS_5 && item.amount
-                ).reduce((total, pre) => total + pre, 0)}
+              <span style={{ color: '#333333', marginLeft: '10px' }}>
+                充值成功
+                <span
+                  style={{
+                    color: '#1A61DC',
+                    fontWeight: 'bold',
+                    margin: '0 5px',
+                  }}
+                >
+                  {_.map(
+                    traceList,
+                    (item) => item.status === TRACE_STATUS_5 && item.amount
+                  ).reduce((total, pre) => total + pre, 0)}
+                </span>
+                件
               </span>
-              件
-            </span>
-            <span style={{ color: '#333333', marginLeft: '10px' }}>
-              充值失败
-              <span
-                style={{
-                  color: '#DD0000',
-                  fontWeight: 'bold',
-                  margin: '0 5px',
-                }}
-              >
-                {_.map(
-                  traceList,
-                  (item) => item.status === TRACE_STATUS_6 && item.amount
-                ).reduce((total, pre) => total + pre, 0)}
+              <span style={{ color: '#333333', marginLeft: '10px' }}>
+                充值失败
+                <span
+                  style={{
+                    color: '#DD0000',
+                    fontWeight: 'bold',
+                    margin: '0 5px',
+                  }}
+                >
+                  {_.map(
+                    traceList,
+                    (item) => item.status === TRACE_STATUS_6 && item.amount
+                  ).reduce((total, pre) => total + pre, 0)}
+                </span>
+                件
               </span>
-              件
-            </span>
-          </>
-        }
-        onOk={() => setOrderItemCode('')}
-        onCancel={() => setOrderItemCode('')}
-        cancelButtonProps={{
-          className: 'global-modal-btn-cancel',
-          type: 'link',
-          style: { position: 'absolute', left: 0 },
-          disabled: true,
-        }}
-        width={560}
-      >
-        <Table
-          className="global-table"
-          loading={confirmLoading}
-          columns={columns}
-          pagination={false}
-          dataSource={traceList}
-          scroll={{ y: 200 }}
-          rowKey={(record, index) => record.id}
-        />
-      </GlobalModal>
-    </div>
+            </>
+          }
+          onOk={() => setOrderItemCode('')}
+          onCancel={() => setOrderItemCode('')}
+          cancelButtonProps={{
+            className: 'global-modal-btn-cancel',
+            type: 'link',
+            style: { position: 'absolute', left: 0 },
+            disabled: true,
+          }}
+          width={560}
+        >
+          <Table
+            className="global-table"
+            loading={confirmLoading}
+            columns={columns}
+            pagination={false}
+            dataSource={traceList}
+            scroll={{ y: 200 }}
+            rowKey={(record, index) => record.id}
+          />
+        </GlobalModal>
+      </div>
+    </>
   );
 };
+export default connect()(purchase);

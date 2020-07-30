@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 14:20:06
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-29 09:35:49
+ * @LastEditTime: 2020-07-30 11:13:15
  */
 import React, { useState, useEffect } from 'react';
 import MapForm from '@/components/MapForm';
@@ -127,7 +127,7 @@ const Order = ({ dispatch, list, total, loading }) => {
 
   return (
     <div className="order">
-      <div className="shop-item_header">交易管理 / 交易订单</div>
+      <div className="shop-item_header">{'交易管理 > 交易订单'}</div>
       <div className="order-info">
         <MapForm layout="horizontal" onCreate={(form) => setForm(form)}>
           <Row>

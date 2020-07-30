@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-18 17:19:33
- * @LastEditTime: 2020-07-28 16:50:22
+ * @LastEditTime: 2020-07-29 15:36:58
  */
 
 import React, { useState, useEffect } from 'react';
@@ -212,13 +212,13 @@ const CarPage = (props) => {
       width: '25%',
     },
     {
-      title: '类型',
+      title: '商品类型',
       align: 'center',
       render: (record) => ProductTypes[record.productType],
       width: '10%',
     },
     {
-      title: '单价',
+      title: '单价(元)',
       align: 'center',
       render: (record) => (
         <span>￥{getFloat(record.goods.price / TRANSTEMP, PRECISION)}</span>
@@ -226,7 +226,7 @@ const CarPage = (props) => {
       width: '10%',
     },
     {
-      title: '数量',
+      title: '数量(件)',
       align: 'center',
       render: (record) => {
         if (record.productType === PRODUCT_TYPE_4) return record.amount;
@@ -244,7 +244,7 @@ const CarPage = (props) => {
       width: '25%',
     },
     {
-      title: '总价',
+      title: '总价(元)',
       align: 'center',
       render: (record) => (
         <span>
@@ -272,7 +272,7 @@ const CarPage = (props) => {
                 style={{ position: 'relative', top: '1px' }}
                 type="delete"
               />
-              <span>删除</span>
+              <span style={{ fontSize:12 }}>删除</span>
             </span>
           </Button>
           {record.productType === PRODUCT_TYPE_4 ? (
@@ -284,6 +284,7 @@ const CarPage = (props) => {
                   setItemCode(record.code);
                   setModalTitle(record.goods.productSubName);
                 }}
+                style={{ fontSize:12 }}
               >
                 查看明细
               </Button>

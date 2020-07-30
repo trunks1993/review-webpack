@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-17 15:52:50
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-29 09:24:05
+ * @LastEditTime: 2020-07-29 16:57:37
  */
 
 import React, { useState, useEffect } from 'react';
@@ -16,22 +16,22 @@ const history = createHashHistory();
 
 const { CstInput } = MapForm;
 const HELP_MSG_UNLOGIN = (
-  <>
+  <div style={{ fontSize:12 }}>
     该接口开放给客户端，通过生成免登录URL与平台同步信息，查看
     <a style={{ color: '#1a61dc' }}>技术文档</a>
-  </>
+  </div>
 );
 const HELP_MSG_CALLBACKURL = (
-  <>
+  <div style={{ fontSize:12 }}>
     该接口用来向您的服务器反馈交易结果，查看
     <a style={{ color: '#1a61dc' }}>技术文档</a>
-  </>
+  </div>
 );
 const HELO_MSG_VIRTUAL = (
-  <>
+  <div style={{ fontSize:12 }}>
     该接口用来向您的服务器发起虚拟商品充值请求，查看
     <a style={{ color: '#1a61dc' }}>技术文档</a>
-  </>
+  </div>
 );
 
 const interfaceConfig = ({ jumpMonitor, loading }) => {

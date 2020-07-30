@@ -46,21 +46,30 @@ export default () => {
           },
         ]}
       />
-      <CstPassword
-        label="密码"
-        name="password"
-        customProps={{
-          placeholder: '请输入密码',
-          size: 'large',
-        }}
-        rules={[
-          {
-            required: true,
-            message: '密码不能为空',
-            whitespace: true,
-          },
-        ]}
-      />
+      <Context.Consumer>
+        {(handleLogin) => (
+          <CstPassword
+            label="密码"
+            name="password"
+            customProps={{
+              placeholder: '请输入密码',
+              size: 'large',
+              onPressEnter: () => {
+                handleLogin(form, () => {
+                  history.push('/');
+                });
+              },
+            }}
+            rules={[
+              {
+                required: true,
+                message: '密码不能为空',
+                whitespace: true,
+              },
+            ]}
+          />
+        )}
+      </Context.Consumer>
       <Form.Item label=" " colon={false}>
         <div className="fbc">
           <Checkbox>自动登录</Checkbox>
@@ -77,9 +86,10 @@ export default () => {
                   block
                   loading={loading}
                   size="large"
-                  onClick={() => handleLogin(form, () => {
-                    history.push('/');
-                  })
+                  onClick={() =>
+                    handleLogin(form, () => {
+                      history.push('/');
+                    })
                   }
                 >
                   登录

@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-22 11:01:06
- * @LastEditTime: 2020-07-28 17:05:35
+ * @LastEditTime: 2020-07-30 10:57:06
  */
 
 import React, { useState, useEffect } from 'react';
@@ -337,7 +337,7 @@ const CashFlow = (props) => {
                   size="large"
                   onClick={() => dispatchInit()}
                 >
-                  筛选
+                  查询
                 </Button>
                 <Button
                   icon="undo"

@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-21 16:03:40
- * @LastEditTime: 2020-07-22 17:08:21
+ * @LastEditTime: 2020-07-30 15:47:24
  */
 
 import React, { useState } from 'react';
@@ -10,7 +10,7 @@ export const FILE_ERROR_TYPE = '0';
 export const FILE_ERROR_SIZE = '1';
 
 const FormUpLoad = (props) => {
-  const { onChange, value, action, data, method, Content, className } = props;
+  const { onChange, value, action, data, method, Content, className, disabled } = props;
 
   const [loading, setLoading] = useState(false);
 
@@ -62,6 +62,7 @@ const FormUpLoad = (props) => {
       data={data}
       beforeUpload={beforeUpload}
       onChange={handleChangeChecked}
+      disabled={disabled}
     >
       <Content value={value} />
     </Upload>

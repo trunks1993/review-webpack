@@ -63,7 +63,7 @@ const Comp = (props) => {
         <Menu theme="dark" mode="horizontal" style={{ lineHeight: '60px' }}>
           <Menu.Item onClick={(e) => history.push('/admin/message')}>
             <img className="layout_header-icon" src={icon2} />
-            <span>消息(2)</span>
+            <span>消息</span>
           </Menu.Item>
           <Menu.Item onClick={(e) => history.push('/admin/car')}>
             <Badge dot={!!carCount}>

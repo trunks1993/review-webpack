@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-14 10:16:03
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-27 14:14:51
+ * @LastEditTime: 2020-07-29 17:15:30
  */
 import React, { useState } from 'react';
 import EYE from '@/assets/images/dashboard/eye.png';
@@ -10,14 +10,19 @@ import UNEYE from '@/assets/images/dashboard/Uneye.png';
 import GET from '@/assets/images/dashboard/get.png';
 import SET from '@/assets/images/dashboard/set.png';
 import UNSJ from '@/assets/images/dashboard/Unsj.png';
-import { Icon, Tooltip, Button, Tabs } from 'antd';
+import { getFloat } from '@/utils';
+import { TRANSTEMP, PRECISION } from '@/const';
+import { Icon, Tooltip, Button, Tabs, Row, Col, Divider } from 'antd';
 import { createHashHistory } from 'history';
 const history = createHashHistory();
 
 const text1 = <span className="content-text">当前账户可用余额</span>;
 const text2 = <span className="content-text">当前账户冻结金额</span>;
 const operations = (
-  <span className="content-left--right" onClick={() => history.push('/admin/operations/transaction/order')}>
+  <span
+    className="content-left--right"
+    onClick={() => history.push('/admin/operations/transaction/order')}
+  >
     更多交易
     <Icon type="right-circle" style={{ marginLeft: 5 }} />
   </span>
@@ -59,7 +64,10 @@ const content = ({ list }) => {
                 </Tooltip>
               </div>
               <span className="content-balance--money">
-                ￥{visible ? list?.amount : '*****'}
+                ￥
+                {visible
+                  ? getFloat(list?.amount / TRANSTEMP, PRECISION)
+                  : '*****'}
               </span>
             </div>
           </div>
@@ -109,8 +117,22 @@ const content = ({ list }) => {
             key="1"
           >
             <div className="content-sj">
+              <Row>
+                <Col span={8} className="content-sj--title">
+                  <div className="content-title--head">成功交易金额(元)</div>
+                  <div className="content-title--content">0.0000</div>
+                </Col>
+                <Col span={8} className="content-sj--title">
+                  <div className="content-title--head">交易成功率</div>
+                  <div className="content-title--content">100%</div>
+                </Col>
+                <Col span={8}>
+                  <div className="content-title--head">成功交易笔数</div>
+                  <div className="content-title--content">0</div>
+                </Col>
+              </Row>
               <img src={UNSJ} alt="" />
-              <div>暂无数据</div>
+              <div className="content-sj--data">暂无数据</div>
             </div>
           </Tabs.TabPane>
           <Tabs.TabPane
@@ -118,6 +140,16 @@ const content = ({ list }) => {
             key="2"
           >
             <div className="content-sj">
+              <Row>
+                <Col span={12} className="content-sj--title">
+                  <div className="content-title--head">收入(元)</div>
+                  <div className="content-title--content">0.0000</div>
+                </Col>
+                <Col span={12}>
+                  <div className="content-title--head">支出(元)</div>
+                  <div className="content-title--content">0.0000</div>
+                </Col>
+              </Row>
               <img src={UNSJ} alt="" />
               <div>暂无数据</div>
             </div>
