@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-22 17:33:29
- * @LastEditTime: 2020-07-28 14:56:25
+ * @LastEditTime: 2020-07-30 09:50:25
  */
 
 import React, { useState, useEffect } from 'react';
@@ -51,7 +51,7 @@ const FinancialFlow = (props) => {
   /**
    * @name: 列表加载
    */
-  const initList = async() => {
+  const initList = async () => {
     try {
       const filterData = filterForm?.getFieldsValue();
       const queryParams = {
@@ -119,31 +119,36 @@ const FinancialFlow = (props) => {
       title: '创建时间',
       key: 'id',
       align: 'center',
-      render: (record) => formateTime(record.createTime, 'MM/DD HH:mm:ss'),
+      render: (record) =>
+        moment(record.createTime).format('YYYY-MM-DD HH:MM:SS'),
       width: '15%',
     },
     {
       title: '操作',
-      align: 'left',
+      align: 'center',
       render: (record) => (
         <>
-          <Button
-            size="small"
-            type="primary"
-            ghost
-            onClick={() => initList()}
-          >
-            刷新
-          </Button>
+          {!record.status === FINANCIAL_REC_STATUS_2 ? (
+            <Button
+              size="small"
+              type="primary"
+              ghost
+              onClick={() => initList()}
+            >
+              <Icon type="reload" />
+              刷新
+            </Button>
+          ) : null}
           {record.status === FINANCIAL_REC_STATUS_2 ? (
             <Button
               style={{ marginLeft: '10px' }}
               size="small"
               type="primary"
               ghost
-              onClick={() => window.open(
-                `${process.env.FILE_URL + record.checkFileList[0].fileUrl}`
-              )
+              onClick={() =>
+                window.open(
+                  `${process.env.FILE_URL + record.checkFileList[0].fileUrl}`
+                )
               }
             >
               <Icon type="vertical-align-bottom" />
@@ -204,7 +209,7 @@ const FinancialFlow = (props) => {
                   size="large"
                   onClick={() => dispatchInit()}
                 >
-                  筛选
+                  查询
                 </Button>
                 <Button
                   icon="undo"

@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-22 16:33:56
- * @LastEditTime: 2020-07-29 15:56:15
+ * @LastEditTime: 2020-07-30 09:51:13
  */
 
 import React, { useState, useEffect } from 'react';
@@ -56,7 +56,7 @@ const FinancialFlow = (props) => {
   /**
    * @name: 列表加载
    */
-  const initList = async() => {
+  const initList = async () => {
     try {
       const filterData = filterForm?.getFieldsValue();
       const queryParams = {
@@ -87,7 +87,8 @@ const FinancialFlow = (props) => {
     {
       title: '交易时间',
       key: 'id',
-      render: (record) => formateTime(record.createTime),
+      render: (record) =>
+        moment(record.createTime).format('YYYY-MM-DD HH:MM:SS'),
       width: '20%',
       align: 'center',
     },
@@ -189,7 +190,7 @@ const FinancialFlow = (props) => {
                   size="large"
                   onClick={() => dispatchInit()}
                 >
-                  筛选
+                  查询
                 </Button>
                 <Button
                   icon="undo"

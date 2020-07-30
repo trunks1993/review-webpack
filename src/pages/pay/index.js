@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-14 15:37:18
- * @LastEditTime: 2020-07-29 15:45:39
+ * @LastEditTime: 2020-07-30 14:44:35
  */
 
 import React, { useEffect, useState } from 'react';
@@ -16,7 +16,7 @@ import PaySuccess from './PaySuccess';
 import { connect } from 'dva';
 
 const Pay = (props) => {
-  const { location, amount, telephone, history } = props;
+  const { location, amount, telephone, history, dispatch } = props;
   const [step, setStep] = useState(2);
   const [orderInfo, setOrderInfo] = useState({});
 
@@ -62,7 +62,7 @@ const Pay = (props) => {
         history={history}
       />
     ),
-    4: () => <PaySuccess history={history} />,
+    4: () => <PaySuccess history={history} dispatch={dispatch} />,
   };
 
   return (

@@ -1,14 +1,17 @@
 /*
  * @Date: 2020-07-15 16:39:42
- * @LastEditTime: 2020-07-16 15:09:36
+ * @LastEditTime: 2020-07-30 14:45:28
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'antd';
 import success from '@/assets/images/pay/success.png';
 
 export default (props) => {
-  const { history } = props;
+  const { history, dispatch } = props;
+  useEffect(() => {
+    dispatch({ type: 'account/setAmount' });
+  }, []);
   return (
     <div className="page-pay_pay-success">
       <div className="page-pay_pay-success-title">恭喜您购买成功！</div>

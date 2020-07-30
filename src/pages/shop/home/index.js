@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 19:14:16
- * @LastEditTime: 2020-07-28 16:40:08
+ * @LastEditTime: 2020-07-30 15:38:03
  */
 
 import React, { useEffect, useState } from 'react';
@@ -49,7 +49,11 @@ export default (props) => {
   }, [filterParams]);
 
   useEffect(() => {
-    if (brandList.length) initProductMap();
+    if (brandList.length) {
+      initProductMap();
+    } else {
+      setList([]);
+    }
   }, [brandList]);
 
   const onFilterChange = (categoryCode, productTypeCode) => {
@@ -63,7 +67,7 @@ export default (props) => {
     }
   };
 
-  const initCategoryList = async() => {
+  const initCategoryList = async () => {
     try {
       setCategoryLoading(true);
       const [err, data, msg] = await getCategoryList();
@@ -76,7 +80,7 @@ export default (props) => {
     } catch (error) {}
   };
 
-  const initProductTypeList = async() => {
+  const initProductTypeList = async () => {
     try {
       setProductTypeLoading(true);
       const [err, data, msg] = await getProductTypeList();
@@ -89,11 +93,12 @@ export default (props) => {
     } catch (error) {}
   };
 
-  const initList = async() => {
+  const initList = async () => {
     try {
       setLoading(true);
       const [err, data, msg] = await getBrandList(filterParams);
       setLoading(false);
+
       if (!err) {
         setBrandList(data.list);
         setTotal(data.totalRecords);
@@ -103,7 +108,7 @@ export default (props) => {
     } catch (error) {}
   };
 
-  const initProductMap = async() => {
+  const initProductMap = async () => {
     try {
       setLoading(true);
       const [err, data, msg] = await getProductMap({
@@ -123,7 +128,6 @@ export default (props) => {
       }
     } catch (error) {}
   };
-
   return (
     <div className="shop-home">
       <img width="1010px" height="180px" src={shopHomeBg} />
@@ -183,10 +187,11 @@ export default (props) => {
         <Pagination
           disabled={loading}
           current={filterParams.currPage}
-          onChange={(currPage) => setFilterParams({
-            ...filterParams,
-            currPage,
-          })
+          onChange={(currPage) =>
+            setFilterParams({
+              ...filterParams,
+              currPage,
+            })
           }
           defaultPageSize={6}
           total={total}

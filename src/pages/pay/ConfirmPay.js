@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-15 16:39:54
- * @LastEditTime: 2020-07-28 16:26:44
+ * @LastEditTime: 2020-07-30 14:38:56
  */
 
 import React, { useState, useEffect } from 'react';
@@ -10,7 +10,7 @@ import { TRANSTEMP, PRECISION } from '@/const';
 import { getFloat } from '@/utils';
 
 export default (props) => {
-  const { amount, telephone, orderInfo, changeStep, history } = props;
+  const { amount, telephone, orderInfo, changeStep, history, dispatch } = props;
   const [loading, setLoading] = useState(false);
   const [timing, setTiming] = useState(false);
   const [time, setTime] = useState(60);
