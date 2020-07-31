@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-24 08:58:07
- * @LastEditTime: 2020-07-29 10:00:38
+ * @LastEditTime: 2020-07-31 17:37:50
  */
 
 import React, { useState, useEffect } from 'react';
@@ -10,10 +10,14 @@ import { TRANSTEMP, PRECISION } from '@/const';
 import { InputNumber, List, message, Button } from 'antd';
 
 const CashOut = (props) => {
-  const { amount, history, location } = props;
+  const { amount, history, location, dispatch } = props;
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectItemCode, setSelectItemCode] = useState('');
+
+  useEffect(() => {
+    dispatch({ type: 'account/setAmount' });
+  }, []);
 
   const inputNumberRef = React.createRef();
 

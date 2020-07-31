@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-14 16:26:54
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-31 11:28:22
+ * @LastEditTime: 2020-07-31 15:47:06
  */
 import React from 'react';
 
@@ -10,6 +10,7 @@ import UNHEAD from '@/assets/images/dashboard/Unhead.png';
 import { Row, Col, Button } from 'antd';
 import { MerchantStatus, UserTypes } from '@/const';
 import { createHashHistory } from 'history';
+import { formateTime } from '@/utils';
 const history = createHashHistory();
 
 const user = ({ list }) => {
@@ -19,7 +20,11 @@ const user = ({ list }) => {
         <Row>
           <Col span={8}>
             <img
-              src={list?.headIcon ? process.env.IMG_PREFIX + list?.headIcon : UNHEAD}
+              src={
+                list?.headIcon
+                  ? process.env.IMG_PREFIX + list?.headIcon
+                  : UNHEAD
+              }
               alt=""
             />
           </Col>
@@ -39,9 +44,7 @@ const user = ({ list }) => {
           <Col span={7}> 认证状态: </Col>{' '}
           <Col span={17}> {MerchantStatus[list?.identityState]} </Col>
           <Col span={7}> 最近登录: </Col>{' '}
-          <Col span={13}>
-            {moment(list?.lastAccessTime).format('YYYY-MM-DD HH:MM:SS')}
-          </Col>
+          <Col span={13}>{formateTime(list?.lastAccessTime)}</Col>
         </Row>
         <Button
           type="primary"

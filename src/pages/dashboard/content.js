@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-14 10:16:03
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-29 17:15:30
+ * @LastEditTime: 2020-07-31 16:40:42
  */
 import React, { useState } from 'react';
 import EYE from '@/assets/images/dashboard/eye.png';
@@ -151,7 +151,7 @@ const content = ({ list }) => {
                 </Col>
               </Row>
               <img src={UNSJ} alt="" />
-              <div>暂无数据</div>
+              <div className="content-sj--data">暂无数据</div>
             </div>
           </Tabs.TabPane>
         </Tabs>

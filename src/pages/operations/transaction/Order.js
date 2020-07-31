@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 14:20:06
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-30 11:13:15
+ * @LastEditTime: 2020-07-31 17:40:34
  */
 import React, { useState, useEffect } from 'react';
 import MapForm from '@/components/MapForm';
@@ -45,10 +45,10 @@ const Order = ({ dispatch, list, total, loading }) => {
     const data = form?.getFieldsValue();
     const time = {
       beginCreateTime: data.CreateTime?.[0]
-        ? moment(data.CreateTime?.[0]).format('YYYY-MM-DD HH:MM:SS')
+        ? moment(data.CreateTime?.[0]).format('YYYY-MM-DD 00:00:00')
         : undefined,
       endCreateTime: data.CreateTime?.[0]
-        ? moment(data.CreateTime?.[1]).format('YYYY-MM-DD HH:MM:SS')
+        ? moment(data.CreateTime?.[1]).format('YYYY-MM-DD 23:59:59')
         : undefined,
     };
     dispatch({

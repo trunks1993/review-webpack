@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-17 20:59:45
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-29 17:07:58
+ * @LastEditTime: 2020-07-31 17:42:40
  */
 
 import React, { useState, useEffect } from 'react';
@@ -59,8 +59,8 @@ const certification = () => {
   }, [tabKey]);
 
   useEffect(() => {
-    if (!_.isEmpty(form)) {
-      const data = JSON.parse(stateData.data);
+    if (!_.isEmpty(form) && !_.isEmpty(stateData)) {
+      const data = JSON.parse(stateData?.data);
       form.setFieldsValue({ ...data });
     }
   }, [form]);
@@ -83,7 +83,6 @@ const certification = () => {
   // 提交
   const handleSubmit = () => {
     form.validateFields(async (err, value) => {
-      console.log(value);
       if (!err) {
         const [errs, datas, msg] = await addIdentifyWorkorder({
           ...value,
@@ -110,13 +109,19 @@ const certification = () => {
   const getLatestIdentify = async () => {
     try {
       const [err, data, msg] = await getLatestIdentifyWorkorder();
-      if (!err) setStateData(data);
-      if (_.isEmpty(data)) setTabKey('2');
+      if (!err) {
+        if (_.isEmpty(data)) {
+          setTabKey('2');
+          setDisabled(false);
+        }
+        setStateData(data);
+      }
     } catch (error) {}
   };
 
   const ToolMap = {
     [MERCHANT_STATUS_0]: () => {
+      console.log(1);
       setRejectTextType(0);
       setDisabled(false);
       setTabKey('2');
@@ -148,16 +153,16 @@ const certification = () => {
       <img
         src={process.env.FILE_URL + value}
         alt="avatar"
-        style={{ height: 136 }}
+        style={{ height: 136, width: 220 }}
       />
     ) : (
       uploadButton
     );
   };
-
+  console.log(disabled);
   return (
     <>
-      <div className="shop-item_header">业务管理 / 实名认证</div>
+      <div className="shop-item_header">业务管理 {'>'} 实名认证</div>
       <div className="certification">
         {rejectTextType === 0 ? (
           <div className="certification-title" style={{ color: '#fbbb66' }}>
@@ -207,7 +212,7 @@ const certification = () => {
                     />
                     <CstInput
                       label="企业名称:"
-                      name="appname"
+                      name="businessName"
                       labelCol={{ span: 4 }}
                       wrapperCol={{ span: 7 }}
                       customProps={{
@@ -226,7 +231,7 @@ const certification = () => {
                     />
                     <CstInput
                       label="统一社会信用代码:"
-                      name="desc"
+                      name="creditCode"
                       labelCol={{ span: 4 }}
                       wrapperCol={{ span: 7 }}
                       customProps={{
@@ -239,7 +244,7 @@ const certification = () => {
                       ]}
                     />
                     <CstUpload
-                      name="img"
+                      name="identityPhoto"
                       label="企业证件图片:"
                       help={helpMsg}
                       labelCol={{ span: 4 }}
@@ -281,7 +286,7 @@ const certification = () => {
                     />
                     <CstInput
                       label="联系人:"
-                      name="userName"
+                      name="contactName"
                       labelCol={{ span: 4 }}
                       wrapperCol={{ span: 7 }}
                       customProps={{
@@ -300,7 +305,7 @@ const certification = () => {
                     />
                     <CstInput
                       label="联系电话:"
-                      name="mobile"
+                      name="contactTelephone"
                       labelCol={{ span: 4 }}
                       wrapperCol={{ span: 7 }}
                       customProps={{
@@ -459,7 +464,7 @@ const certification = () => {
                     </Row>
                     <CstInput
                       label="姓名:"
-                      name="userName"
+                      name="realName"
                       labelCol={{ span: 4 }}
                       wrapperCol={{ span: 7 }}
                       customProps={{
@@ -478,7 +483,7 @@ const certification = () => {
                     />
                     <CstInput
                       label="身份证号码:"
-                      name="userId"
+                      name="idCard"
                       labelCol={{ span: 4 }}
                       wrapperCol={{ span: 7 }}
                       customProps={{

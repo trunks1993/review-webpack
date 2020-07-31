@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-22 20:19:58
- * @LastEditTime: 2020-07-30 11:11:19
+ * @LastEditTime: 2020-07-31 17:36:24
  */
 
 import React, { useState, useEffect } from 'react';
@@ -33,18 +33,22 @@ const salesData = [
   { x: '11月', y: 25 },
   { x: '12月', y: 30 },
 ];
-const home = ({ list: { amount, frozeAmount } }) => {
+const home = (props) => {
   const [rangePickerValue, setRangePickerValue] = useState('');
   const [tabKey, setTabKey] = useState('2');
   const [payOrder, setPayOrder] = useState('');
   const [financeList, setFinanceList] = useState();
-
+  const {
+    list: { amount, frozeAmount },
+    dispatch,
+  } = props;
   useEffect(() => {
     getAccountTrace();
   }, [tabKey]);
 
   useEffect(() => {
     getPayOrder();
+    dispatch({ type: 'account/setAmount' });
   }, []);
 
   /** 更新时间 */

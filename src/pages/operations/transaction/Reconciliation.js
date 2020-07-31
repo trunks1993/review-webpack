@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 19:32:18
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-29 17:12:46
+ * @LastEditTime: 2020-07-31 16:36:49
  */
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Table, Pagination, Icon, Row, Col } from 'antd';
@@ -11,6 +11,7 @@ import { ReconStatus } from '@/const';
 import MapForm from '@/components/MapForm';
 import moment from 'moment';
 import _ from 'lodash';
+import { formateTime } from '@/utils';
 import Delete from '@/assets/images/operations/delete.png';
 import noData from '@/assets/images/operations/unData.png';
 
@@ -44,10 +45,10 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
         currPage,
         pageSize,
         beginCreateTime: data.CreateTime?.[0]
-          ? moment(data.CreateTime?.[0]).format('YYYY-MM-DD HH:MM:SS')
+          ? formateTime(data.CreateTime?.[0], 'YYYY-MM-DD 00:00:00')
           : undefined,
         endCreateTime: data.CreateTime?.[1]
-          ? moment(data.CreateTime?.[1]).format('YYYY-MM-DD HH:MM:SS')
+          ? formateTime(data.CreateTime?.[1], 'YYYY-MM-DD 00:00:00')
           : undefined,
         ...data,
       },
@@ -61,7 +62,7 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
       align: 'center',
       width: 200,
       dataIndex: 'modifyTime',
-      render: (modifyTime) => !modifyTime ? null:moment(modifyTime).format('YYYY-MM-DD HH:mm:ss'),
+      render: (modifyTime) => (!modifyTime ? null : formateTime(modifyTime)),
     },
     {
       title: '标题',
@@ -131,7 +132,7 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
 
   return (
     <div className="reconciliation">
-      <div className="shop-item_header">交易管理 / 交易对账</div>
+      <div className="shop-item_header">交易管理 {'>'} 交易对账</div>
       <div className="reconciliation-Info">
         <MapForm
           onCreate={(form) => setForm(form)}
@@ -212,18 +213,32 @@ const Reconciliation = ({ dispatch, reconList, reconTotal, loading }) => {
           loading={loading}
         />
         {_.isEmpty(reconList) ? null : (
-          <div className="cash-flow_pagination">
-            <Pagination
-              disabled={loading}
-              current={currPage}
-              onChange={(currPage) => setCurrPage(currPage)}
-              defaultPageSize={pageSize}
-              total={reconTotal}
-            />
-            <span style={{ color: '#CCCCCC', marginLeft: '10px' }}>
-              共 {reconTotal} 条 ,每页 {pageSize} 条
-            </span>
-          </div>
+          <>
+            <div
+              style={{
+                color: '#999999',
+                fontSize: '12px',
+                float: 'left',
+                padding: 30,
+                marginTop: 8,
+              }}
+            >
+              说明：1、如需自动生成对账文件，请开启相关配置。
+              2、已生成的对账单只保留7天，请您及时下载查收。
+            </div>
+            <div className="cash-flow_pagination">
+              <Pagination
+                disabled={loading}
+                current={currPage}
+                onChange={(currPage) => setCurrPage(currPage)}
+                defaultPageSize={pageSize}
+                total={reconTotal}
+              />
+              <span style={{ color: '#CCCCCC', marginLeft: '10px' }}>
+                共 {reconTotal} 条 ,每页 {pageSize} 条
+              </span>
+            </div>
+          </>
         )}
       </div>
     </div>
