@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-14 16:26:54
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-29 15:27:24
+ * @LastEditTime: 2020-07-31 11:28:22
  */
 import React from 'react';
 
@@ -19,7 +19,7 @@ const user = ({ list }) => {
         <Row>
           <Col span={8}>
             <img
-              src={list?.headIcon ? process.env.IMG_PREFIX + headIcon : UNHEAD}
+              src={list?.headIcon ? process.env.IMG_PREFIX + list?.headIcon : UNHEAD}
               alt=""
             />
           </Col>
