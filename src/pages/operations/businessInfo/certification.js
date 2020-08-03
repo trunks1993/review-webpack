@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-17 20:59:45
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-31 17:42:40
+ * @LastEditTime: 2020-08-03 10:46:56
  */
 
 import React, { useState, useEffect } from 'react';
@@ -27,10 +27,11 @@ import {
   MERCHANT_STATUS_2,
   MERCHANT_STATUS_3,
 } from '@/const';
+import { connect } from 'dva';
 
 const { CstInput, CstUpload } = MapForm;
 
-const certification = () => {
+const certification = (props) => {
   const [tabKey, setTabKey] = useState();
   const [type, setType] = useState(false);
   const [disabled, setDisabled] = useState(true);
@@ -51,7 +52,7 @@ const certification = () => {
   const [helpMsag, setHelpMsag] = useState();
   const [typeData, setTypeData] = useState({});
   const [stateData, setStateData] = useState({});
-
+  const { dispatch } = props;
   useEffect(() => {
     if (_.isEmpty(form)) return;
     if (typeData?.identityState === 0) form.setFieldsValue();
@@ -92,6 +93,7 @@ const certification = () => {
         });
         message.success('实名认证信息已提交成功');
         setType(true);
+        dispatch({ type: 'account/setUser' });
         setRejectTextType(false);
       }
     });
@@ -528,4 +530,4 @@ const certification = () => {
     </>
   );
 };
-export default certification;
+export default connect()(certification);
