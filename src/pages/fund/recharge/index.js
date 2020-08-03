@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-24 08:57:48
- * @LastEditTime: 2020-08-03 11:20:38
+ * @LastEditTime: 2020-08-03 11:24:48
  */
 
 import React, { useState, useEffect } from 'react';
@@ -115,7 +115,6 @@ const Recharge = (props) => {
                     <div className="item-info-box">
                       <span className="item-info-box_item">
                         开户银行: {item.bankName}
-                        {item.bankName}
                       </span>
                       <span className="item-info-box_item">
                         开户名称: {item.accountName}
