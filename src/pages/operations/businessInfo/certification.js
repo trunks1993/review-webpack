@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-17 20:59:45
  * @LastEditors: Dad
- * @LastEditTime: 2020-08-03 10:46:56
+ * @LastEditTime: 2020-08-13 17:38:37
  */
 
 import React, { useState, useEffect } from 'react';
@@ -10,7 +10,12 @@ import { Tabs, Form, Button, Row, Col, Icon, message, Spin } from 'antd';
 import MapForm from '@/components/MapForm';
 import Head from '@/assets/images/operations/head.png';
 import Mian from '@/assets/images/operations/mian.png';
-import { patternIdCard, patternName, patternPhone } from '@/rules';
+import {
+  patternIdCard,
+  patternName,
+  patternPhone,
+  patternBussiness,
+} from '@/rules';
 import { FILE_ERROR_SIZE, FILE_ERROR_TYPE } from '@/components/GlobalUpload';
 import {
   addIdentifyWorkorder,
@@ -161,7 +166,6 @@ const certification = (props) => {
       uploadButton
     );
   };
-  console.log(disabled);
   return (
     <>
       <div className="shop-item_header">业务管理 {'>'} 实名认证</div>
@@ -226,7 +230,7 @@ const certification = (props) => {
                       rules={[
                         { required: true, message: '企业名称不能为空' },
                         {
-                          pattern: new RegExp(patternName),
+                          pattern: new RegExp(patternBussiness),
                           message: '数据格式错误',
                         },
                       ]}

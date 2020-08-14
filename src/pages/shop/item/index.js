@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-16 19:17:35
- * @LastEditTime: 2020-07-31 16:36:56
+ * @LastEditTime: 2020-08-07 14:51:53
  */
 
 import React, { useEffect, useState } from 'react';
@@ -282,10 +282,10 @@ const ShopItem = (props) => {
             {goodsInfo?.purchaseNotes}
           </TabPane>
           <TabPane tab="使用说明" key="2">
-            {goodsInfo?.usageIllustration}
-            {/* <div
+            <div
               dangerouslySetInnerHTML={{ __html: goodsInfo?.usageIllustration }}
-            /> */}
+              className="editor"
+            />
           </TabPane>
         </Tabs>
       </div>

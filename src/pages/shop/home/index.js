@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 19:14:16
- * @LastEditTime: 2020-07-30 15:38:03
+ * @LastEditTime: 2020-08-13 18:07:02
  */
 
 import React, { useEffect, useState } from 'react';
@@ -118,8 +118,12 @@ export default (props) => {
       setLoading(false);
       if (!err) {
         setList(
-          _.map(brandList, (item) => {
+          _.map(brandList, (item, index) => {
             item.productList = data[item.brandCode];
+            /** 爱奇艺tag太长了  只显示两个 */
+            if (item.productList[0]?.productCode === 100076) {
+              item.productList = data[item.brandCode].slice(0, 2);
+            }
             return item;
           })
         );

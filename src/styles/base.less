@@ -131,16 +131,37 @@ ol,
 ul {
   list-style: none;
 }
-/* 来自yahoo，让标题都自定义，适应多个系统应用 */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: 100%;
-  font-weight: 500;
+/** 富文本的ol li样式 */
+.editor {
+  ul {
+    list-style-type: disc;
+  }
+  ol {
+    li {
+      list-style-type: decimal;
+    }
+  }
+  h1 {
+      font-size: 24px !important;
+  }
+  h2 {
+      font-size: 22px !important;
+  }
+  h3 {
+    font-size: 18px !important;
+  }
 }
+
+/* 来自yahoo，让标题都自定义，适应多个系统应用 */
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//   font-size: 100%;
+//   font-weight: 500;
+// }
 
 *,
 *:before,
