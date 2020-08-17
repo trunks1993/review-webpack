@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-16 19:17:35
- * @LastEditTime: 2020-07-30 10:56:38
+ * @LastEditTime: 2020-08-07 14:51:53
  */
 
 import React, { useEffect, useState } from 'react';
@@ -177,7 +177,7 @@ const ShopItem = (props) => {
   return (
     <div className="shop-item">
       <div className="shop-item_product-info">
-        <div className="shop-item_header">权益商城 / 商品详情</div>
+        <div className="shop-item_header">权益商城 {'>'} 商品详情</div>
         <div
           style={{
             marginLeft: '50px',
@@ -282,10 +282,10 @@ const ShopItem = (props) => {
             {goodsInfo?.purchaseNotes}
           </TabPane>
           <TabPane tab="使用说明" key="2">
-            {goodsInfo?.usageIllustration}
-            {/* <div
+            <div
               dangerouslySetInnerHTML={{ __html: goodsInfo?.usageIllustration }}
-            /> */}
+              className="editor"
+            />
           </TabPane>
         </Tabs>
       </div>

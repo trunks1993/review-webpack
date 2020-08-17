@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-24 08:57:48
- * @LastEditTime: 2020-07-30 14:47:19
+ * @LastEditTime: 2020-08-03 11:24:48
  */
 
 import React, { useState, useEffect } from 'react';
@@ -18,6 +18,7 @@ const Recharge = (props) => {
 
   useEffect(() => {
     getBankList();
+    dispatch({ type: 'account/setAmount' });
   }, []);
 
   useEffect(() => {

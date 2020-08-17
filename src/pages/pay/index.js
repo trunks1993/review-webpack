@@ -68,7 +68,7 @@ const Pay = (props) => {
   return (
     <div className="page-pay">
       <div style={{ border: '1px solid #e6e6e6' }}>
-        <div className="shop-item_header">星权益 / 采购订单</div>
+        <div className="shop-item_header">星权益 {'>'} 采购订单</div>
         <Step step={step} />
         {StepMap[step](orderInfo, (step) => {
           setStep(step);

@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-15 09:57:12
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-29 16:52:02
+ * @LastEditTime: 2020-07-31 16:36:24
  */
 import React, { useState, useEffect } from 'react';
 import List from './List';
@@ -38,7 +38,7 @@ const application = ({ user }) => {
   const [form, setForm] = useState({});
   const [appId, setAppId] = useState();
   const [time, setTime] = useState(60);
-
+  let timer = null;
   useEffect(() => {
     getAppInfo();
   }, []);
@@ -141,7 +141,7 @@ const application = ({ user }) => {
 
   return (
     <>
-      <div className="shop-item_header">业务管理 / 应用信息</div>
+      <div className="shop-item_header">业务管理 {'>'} 应用信息</div>
       <div className="app">
         <div className="app-title">
           应用信息

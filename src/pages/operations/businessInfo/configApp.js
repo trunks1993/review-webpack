@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-17 14:47:27
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-29 16:56:55
+ * @LastEditTime: 2020-07-31 16:36:13
  */
 
 import React, { useState } from 'react';
@@ -19,7 +19,7 @@ const configApp = () => {
   };
   return (
     <>
-      <div className="shop-item_header">业务管理 / 应用信息 / 接口配置</div>
+      <div className="shop-item_header">业务管理 {'>'} 应用信息 {'>'} 接口配置</div>
       <div className="configApp">
         <div style={{ border: '1px solid #e6e6e6' }}>
           <Tabs

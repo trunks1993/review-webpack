@@ -6,6 +6,7 @@ import { updatePassword, updateInfo } from '@/services/account';
 import MapForm from '@/components/MapForm';
 import { removeToken } from '@/utils/auth';
 import noHead from '@/assets/images/global/no-head.png';
+import { connect } from 'dva';
 
 const { CstInput, CstPassword, CstUpload } = MapForm;
 
@@ -267,4 +268,4 @@ const DropMenu = ({ user, dispatch }) => {
   );
 };
 
-export default DropMenu;
+export default connect()(DropMenu);

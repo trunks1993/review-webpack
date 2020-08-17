@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-13 19:32:18
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-29 10:04:37
+ * @LastEditTime: 2020-07-31 16:45:16
  */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
@@ -93,7 +93,7 @@ const account = ({ dispatch, list, total, loading }) => {
 
   return (
     <>
-      <div className="shop-item_header">业务管理 / 账号信息</div>
+      <div className="shop-item_header">业务管理 {'>'} 账号信息</div>
 
       <div className="reconciliation">
         <div className="reconciliation-Info">

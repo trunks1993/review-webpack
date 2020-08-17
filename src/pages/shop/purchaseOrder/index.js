@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-07-02 20:14:20
- * @LastEditTime: 2020-07-30 15:03:26
+ * @LastEditTime: 2020-07-31 15:14:02
  */
 import React, { useState, useEffect } from 'react';
 import {
@@ -338,7 +338,7 @@ const purchase = (props) => {
             >
               <Col span={5}>最近三个月订单</Col>
               <Col span={6}>订单详情</Col>
-              <Col span={2}>单价</Col>
+              <Col span={2}>单价(元)</Col>
               <Col span={3} offset={1}>
                 总金额(元)
               </Col>

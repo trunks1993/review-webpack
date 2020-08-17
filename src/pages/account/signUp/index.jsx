@@ -36,7 +36,7 @@ export default () => {
   const [visible, setVisible] = useState(false);
 
   const checkboxRef = React.createRef();
-
+  let timer = null;
   const handleSendAuthCode = () => {
     form.validateFields(['telephone'], async (err, value) => {
       if (!err) {
@@ -111,7 +111,7 @@ export default () => {
               size="large"
               onClick={() => history.push('/admin/signIn')}
             >
-              {'去登陆>'}
+              {'去登录>'}
             </Button>
           </div>
         ) : (
@@ -196,6 +196,11 @@ export default () => {
                   required: true,
                   message: '密码不能为空',
                 },
+                {
+                  max:20,
+                  min:6,
+                  message: '密码长度请在6-20位之间',
+                }
               ]}
             />
             <Form.Item label=" " colon={false}>

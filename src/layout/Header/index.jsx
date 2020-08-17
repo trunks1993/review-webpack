@@ -57,7 +57,7 @@ const Comp = (props) => {
                 </Menu.Item>
               )
           )}
-          <Menu.Item onClick={(e) => window.open('')}>文档中心</Menu.Item>
+          <Menu.Item onClick={(e) => window.open('http://www.yunjinshuke.com/file.html')}>文档中心</Menu.Item>
         </Menu>
 
         <Menu theme="dark" mode="horizontal" style={{ lineHeight: '60px' }}>

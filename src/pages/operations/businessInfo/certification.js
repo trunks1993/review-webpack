@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-17 20:59:45
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-29 17:07:58
+ * @LastEditTime: 2020-08-13 17:38:37
  */
 
 import React, { useState, useEffect } from 'react';
@@ -10,7 +10,12 @@ import { Tabs, Form, Button, Row, Col, Icon, message, Spin } from 'antd';
 import MapForm from '@/components/MapForm';
 import Head from '@/assets/images/operations/head.png';
 import Mian from '@/assets/images/operations/mian.png';
-import { patternIdCard, patternName, patternPhone } from '@/rules';
+import {
+  patternIdCard,
+  patternName,
+  patternPhone,
+  patternBussiness,
+} from '@/rules';
 import { FILE_ERROR_SIZE, FILE_ERROR_TYPE } from '@/components/GlobalUpload';
 import {
   addIdentifyWorkorder,
@@ -27,10 +32,11 @@ import {
   MERCHANT_STATUS_2,
   MERCHANT_STATUS_3,
 } from '@/const';
+import { connect } from 'dva';
 
 const { CstInput, CstUpload } = MapForm;
 
-const certification = () => {
+const certification = (props) => {
   const [tabKey, setTabKey] = useState();
   const [type, setType] = useState(false);
   const [disabled, setDisabled] = useState(true);
@@ -51,7 +57,7 @@ const certification = () => {
   const [helpMsag, setHelpMsag] = useState();
   const [typeData, setTypeData] = useState({});
   const [stateData, setStateData] = useState({});
-
+  const { dispatch } = props;
   useEffect(() => {
     if (_.isEmpty(form)) return;
     if (typeData?.identityState === 0) form.setFieldsValue();
@@ -59,8 +65,8 @@ const certification = () => {
   }, [tabKey]);
 
   useEffect(() => {
-    if (!_.isEmpty(form)) {
-      const data = JSON.parse(stateData.data);
+    if (!_.isEmpty(form) && !_.isEmpty(stateData)) {
+      const data = JSON.parse(stateData?.data);
       form.setFieldsValue({ ...data });
     }
   }, [form]);
@@ -83,7 +89,6 @@ const certification = () => {
   // 提交
   const handleSubmit = () => {
     form.validateFields(async (err, value) => {
-      console.log(value);
       if (!err) {
         const [errs, datas, msg] = await addIdentifyWorkorder({
           ...value,
@@ -93,6 +98,7 @@ const certification = () => {
         });
         message.success('实名认证信息已提交成功');
         setType(true);
+        dispatch({ type: 'account/setUser' });
         setRejectTextType(false);
       }
     });
@@ -110,13 +116,19 @@ const certification = () => {
   const getLatestIdentify = async () => {
     try {
       const [err, data, msg] = await getLatestIdentifyWorkorder();
-      if (!err) setStateData(data);
-      if (_.isEmpty(data)) setTabKey('2');
+      if (!err) {
+        if (_.isEmpty(data)) {
+          setTabKey('2');
+          setDisabled(false);
+        }
+        setStateData(data);
+      }
     } catch (error) {}
   };
 
   const ToolMap = {
     [MERCHANT_STATUS_0]: () => {
+      console.log(1);
       setRejectTextType(0);
       setDisabled(false);
       setTabKey('2');
@@ -148,16 +160,15 @@ const certification = () => {
       <img
         src={process.env.FILE_URL + value}
         alt="avatar"
-        style={{ height: 136 }}
+        style={{ height: 136, width: 220 }}
       />
     ) : (
       uploadButton
     );
   };
-
   return (
     <>
-      <div className="shop-item_header">业务管理 / 实名认证</div>
+      <div className="shop-item_header">业务管理 {'>'} 实名认证</div>
       <div className="certification">
         {rejectTextType === 0 ? (
           <div className="certification-title" style={{ color: '#fbbb66' }}>
@@ -207,7 +218,7 @@ const certification = () => {
                     />
                     <CstInput
                       label="企业名称:"
-                      name="appname"
+                      name="businessName"
                       labelCol={{ span: 4 }}
                       wrapperCol={{ span: 7 }}
                       customProps={{
@@ -219,14 +230,14 @@ const certification = () => {
                       rules={[
                         { required: true, message: '企业名称不能为空' },
                         {
-                          pattern: new RegExp(patternName),
+                          pattern: new RegExp(patternBussiness),
                           message: '数据格式错误',
                         },
                       ]}
                     />
                     <CstInput
                       label="统一社会信用代码:"
-                      name="desc"
+                      name="creditCode"
                       labelCol={{ span: 4 }}
                       wrapperCol={{ span: 7 }}
                       customProps={{
@@ -239,7 +250,7 @@ const certification = () => {
                       ]}
                     />
                     <CstUpload
-                      name="img"
+                      name="identityPhoto"
                       label="企业证件图片:"
                       help={helpMsg}
                       labelCol={{ span: 4 }}
@@ -281,7 +292,7 @@ const certification = () => {
                     />
                     <CstInput
                       label="联系人:"
-                      name="userName"
+                      name="contactName"
                       labelCol={{ span: 4 }}
                       wrapperCol={{ span: 7 }}
                       customProps={{
@@ -300,7 +311,7 @@ const certification = () => {
                     />
                     <CstInput
                       label="联系电话:"
-                      name="mobile"
+                      name="contactTelephone"
                       labelCol={{ span: 4 }}
                       wrapperCol={{ span: 7 }}
                       customProps={{
@@ -459,7 +470,7 @@ const certification = () => {
                     </Row>
                     <CstInput
                       label="姓名:"
-                      name="userName"
+                      name="realName"
                       labelCol={{ span: 4 }}
                       wrapperCol={{ span: 7 }}
                       customProps={{
@@ -478,7 +489,7 @@ const certification = () => {
                     />
                     <CstInput
                       label="身份证号码:"
-                      name="userId"
+                      name="idCard"
                       labelCol={{ span: 4 }}
                       wrapperCol={{ span: 7 }}
                       customProps={{
@@ -523,4 +534,4 @@ const certification = () => {
     </>
   );
 };
-export default certification;
+export default connect()(certification);

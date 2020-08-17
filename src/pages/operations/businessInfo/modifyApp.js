@@ -2,7 +2,7 @@
  * @Author: Dad
  * @Date: 2020-07-16 16:48:10
  * @LastEditors: Dad
- * @LastEditTime: 2020-07-29 10:17:57
+ * @LastEditTime: 2020-07-31 16:36:42
  */
 import React, { useState, useEffect } from 'react';
 import MapForm from '@/components/MapForm';
@@ -55,7 +55,7 @@ const modifyApp = () => {
 
   // 更新form表单内容
   useEffect(() => {
-    if (!_.isEmpty(form)) getAppInfo();
+    if (!_.isEmpty(form) && !_.isEmpty(getQueryVariable('appId'))) getAppInfo();
   }, [form]);
 
   // 设置应用
@@ -110,7 +110,7 @@ const modifyApp = () => {
   return (
     <>
       <div className="shop-item_header">
-        业务管理 / {modifyAppType ? '创建应用' : '修改应用'}
+        业务管理 {'>'} {modifyAppType ? '创建应用' : '修改应用'}
       </div>
       <div className="modifyApp">
         <div className="modifyApp-title">

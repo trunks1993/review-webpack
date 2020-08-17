@@ -1,60 +1,60 @@
 /*
  * @Date: 2020-05-29 14:30:17
- * @LastEditTime: 2020-07-28 15:47:51
+ * @LastEditTime: 2020-07-31 12:35:07
  */
 
-const path = require("path");
+const path = require('path');
 
-exports.cdnBaseHttp = "https://cdn.bootcdn.net/ajax/libs";
+exports.cdnBaseHttp = 'https://cdn.bootcdn.net/ajax/libs';
 exports.externalConfig = [
   {
-    name: "react",
-    scope: "React",
-    module: "umd",
-    js:
-      process.env.NODE_ENV === "development"
-        ? "react.development.js"
-        : "react.production.min.js",
-  },
-  {
-    name: "react-dom",
-    scope: "ReactDOM",
-    module: "umd",
-    js:
-      process.env.NODE_ENV === "development"
-        ? "react-dom.development.min.js"
-        : "react-dom.production.min.js",
-  },
-  {
-    name: "redux",
-    scope: "Redux",
-    js: "redux.min.js",
-  },
-  {
-    name: "bizcharts",
-    scope: "BizCharts",
-    baseHttp: "https://gw.alipayobjects.com/os/lib/",
-    module: "umd",
-    js: "BizCharts.js",
-  },
-  {
-    name: "lodash.js",
-    scope: "_",
-    js: "lodash.min.js",
-  },
-  {
-    name: "moment.js",
-    scope: "moment",
-    js: "moment.min.js",
-  },
-  {
-    name: "immer",
-    scope: "immer",
-    js:
-      process.env.NODE_ENV === "development"
-        ? "immer.umd.development.min.js"
-        : "immer.umd.production.min.js",
-  },
+    name: "react",
+    scope: "React",
+    module: "umd",
+    js:
+      process.env.NODE_ENV === "development"
+        ? "react.development.js"
+        : "react.production.min.js",
+  },
+  {
+    name: "react-dom",
+    scope: "ReactDOM",
+    module: "umd",
+    js:
+      process.env.NODE_ENV === "development"
+        ? "react-dom.development.min.js"
+        : "react-dom.production.min.js",
+  },
+  {
+    name: "redux",
+    scope: "Redux",
+    js: "redux.min.js",
+  },
+  {
+    name: "bizcharts",
+    scope: "BizCharts",
+    baseHttp: "https://gw.alipayobjects.com/os/lib/",
+    module: "umd",
+    js: "BizCharts.js",
+  },
+  {
+    name: "lodash.js",
+    scope: "_",
+    js: "lodash.min.js",
+  },
+  {
+    name: "moment.js",
+    scope: "moment",
+    js: "moment.min.js",
+  },
+  {
+    name: "immer",
+    scope: "immer",
+    js:
+      process.env.NODE_ENV === "development"
+        ? "immer.umd.development.min.js"
+        : "immer.umd.production.min.js",
+  },
 ];
 
 exports.getModulesVersion = () => {
@@ -65,9 +65,9 @@ exports.getModulesVersion = () => {
     if (regexp.test(m)) {
       // 匹配模块
       // 获取到模块版本号
-      mvs[m.replace(regexp, "").replace(/_/g, "-")] = process.env[m].replace(
+      mvs[m.replace(regexp, '').replace(/_/g, '-')] = process.env[m].replace(
         /(~|\^)/g,
-        ""
+        ''
       );
     }
   }
@@ -80,8 +80,8 @@ exports.getExternalModules = (config) => {
 
   config = config || this.externalConfig; // 默认使用utils下的配置
   config.forEach((item) => {
-    const hasPoint = item.name.indexOf(".") > 0;
-    const spliteName = item.name.split(".")[0];
+    const hasPoint = item.name.indexOf('.') > 0;
+    const spliteName = item.name.split('.')[0];
     // 遍历配置
     if (item.name in dependencieModules || spliteName in dependencieModules) {
       let version =
@@ -91,15 +91,15 @@ exports.getExternalModules = (config) => {
       item.js =
         item.js &&
         `${item.baseHttp || this.cdnBaseHttp}/${item.name}/${version}/${
-          item.module ? item.module + "/" + item.js : item.js
+          item.module ? item.module + '/' + item.js : item.js
         }`;
       externals[hasPoint ? spliteName : item.name] = item.scope; // 为打包时准备
     } else {
-      throw new Error("相关依赖未安装，请先执行npm install " + item.name);
+      throw new Error('相关依赖未安装，请先执行npm install ' + item.name);
     }
   });
 
-  console.log("exports.getExternalModules -> externals", externals);
+  console.log('exports.getExternalModules -> externals', externals);
   return externals;
 };
 
